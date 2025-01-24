@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://dbi430hooexen"]
+
+[ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_2n2td"]
+[ext_resource type="Script" path="res://src/main_scenes/player.gd" id="1_8i65o"]
+
+[sub_resource type="Gradient" id="Gradient_txnav"]
+offsets = PackedFloat32Array(0, 0.694805, 0.993506, 1)
+colors = PackedColorArray(0.72, 0.1296, 0.1296, 1, 0.103896, 0.103896, 0.103896, 1, 0.69, 0.69, 0.69, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2sdle"]
+gradient = SubResource("Gradient_txnav")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4duc"]
+radius = 24.0
+
+[node name="Test" type="Node"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(192, 192)
+metadata/_edit_group_ = true
+
+[node name="Map" type="TextureRect" parent="Node2D"]
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = SubResource("GradientTexture2D_2sdle")
+
+[node name="Player1" type="RigidBody2D" parent="Node2D"]
+position = Vector2(128, 0)
+rotation = -1.5708
+freeze = true
+script = ExtResource("1_8i65o")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Player1"]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("1_2n2td")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Player1"]
+shape = SubResource("CircleShape2D_p4duc")
