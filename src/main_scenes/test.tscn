@@ -1,9 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://dbi430hooexen"]
+[gd_scene load_steps=5 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="PackedScene" uid="uid://dcfxxbn8njgkj" path="res://src/player/player_scene.tscn" id="1_sbjp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8jwm"]
 size = Vector2(384, 384)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pop4g"]
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_un1dl"]
+radius = 25.2982
 
 [node name="Test" type="Node"]
 
@@ -29,3 +35,12 @@ gravity = -10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/PlayerGravity"]
 shape = SubResource("RectangleShape2D_p8jwm")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Node2D"]
+position = Vector2(64, 120)
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_pop4g")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/RigidBody2D"]
+shape = SubResource("CircleShape2D_un1dl")

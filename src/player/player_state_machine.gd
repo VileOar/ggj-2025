@@ -12,3 +12,8 @@ func _ready() -> void:
 
 func rigidbody() -> RigidBody2D:
 	return _rigid_body
+
+
+## Called by the RigidBody's _integrate_forces method
+func integrate_forces(ph_state: PhysicsDirectBodyState2D) -> void:
+	current_state().integrate_forces(ph_state)

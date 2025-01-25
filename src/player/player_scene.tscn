@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=8 format=3 uid="uid://dcfxxbn8njgkj"]
 
 [ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_1xywr"]
+[ext_resource type="Script" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" path="res://src/player/player_state_machine.gd" id="2_036d8"]
 [ext_resource type="Script" path="res://src/player/player_states/walk_state.gd" id="3_3ry0h"]
 [ext_resource type="Script" path="res://src/player/player_states/float_state.gd" id="4_7k5ks"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
+bounce = 0.7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_piu2a"]
 size = Vector2(64, 48)
@@ -11,8 +15,11 @@ size = Vector2(64, 48)
 [node name="PlayerScene" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 7
-freeze = true
+physics_material_override = SubResource("PhysicsMaterial_vyeeb")
 freeze_mode = 1
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_q1xob")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -30,3 +37,10 @@ script = ExtResource("3_3ry0h")
 
 [node name="FloatState" type="Node" parent="Controller"]
 script = ExtResource("4_7k5ks")
+
+[node name="Timer" type="Timer" parent="Controller/FloatState"]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="body_entered" from="." to="Controller/WalkState" method="_on_player_scene_body_entered"]
+[connection signal="timeout" from="Controller/FloatState/Timer" to="Controller/FloatState" method="_on_timer_timeout"]
