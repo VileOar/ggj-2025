@@ -1,10 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://ck0kxlxtpq7wk"]
+[gd_scene load_steps=4 format=3 uid="uid://ck0kxlxtpq7wk"]
 
 [ext_resource type="Script" path="res://src/bubble/bubble.gd" id="1_0kru2"]
 [ext_resource type="Texture2D" uid="uid://b8goc4anlcd4y" path="res://icon_ball.png" id="2_xd8dt"]
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_44sl2"]
-bounce = 0.7
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hsqk6"]
 radius = 48.28
@@ -13,7 +10,6 @@ radius = 48.28
 position = Vector2(980, 360)
 collision_layer = 4
 collision_mask = 7
-physics_material_override = SubResource("PhysicsMaterial_44sl2")
 script = ExtResource("1_0kru2")
 
 [node name="bubble" type="Sprite2D" parent="."]
