@@ -30,14 +30,6 @@ var _max_strength_threshold = 1.2
 var _meter_overlap_strength = 140
 
 
-var _acceleration = 0.0
-var _velo = 0.0
-@export var _friction = -0.3
-@export var _overlap_speed = 0.1
-@export var _minimizer = 0.01
-@export var _max_rot = 1 + PI/2
-
-
 func _physics_process(delta: float) -> void:
 	var mov_amount = 0
 	mov_amount += Input.get_action_strength("mov_right")
@@ -79,19 +71,4 @@ func spawn_bubble():
 	#TODO: actually spawn bubble
 	_strength_percent = 0.0
 	_holding_button = false
-
-
-func overlapping_meter(move_force : float):
-	_acceleration = 0.0
-	_acceleration = -move_force * _minimizer
-	if move_force == 0:
-		pass
-
-	_acceleration += self._velo * _friction
-	_velo += _acceleration
-
-	_aim_meter.rotation += (_velo + _acceleration * _overlap_speed)
-	_aim_meter.rotation = clamp(_aim_meter.rotation, -2.4, -0.7)
-
-
 	
