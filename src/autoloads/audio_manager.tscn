@@ -1,0 +1,113 @@
+[gd_scene load_steps=17 format=3 uid="uid://vnjk3m0lopu1"]
+
+[ext_resource type="Script" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
+[ext_resource type="AudioStream" uid="uid://bolso7kn3wjf2" path="res://assets/Audio/ui/ButtonHover.wav" id="1_krhah"]
+[ext_resource type="AudioStream" uid="uid://gi0x3qcnuw43" path="res://assets/Audio/ui/ButtonPress.wav" id="2_6kj28"]
+[ext_resource type="AudioStream" uid="uid://bg2qm7jdxvdbl" path="res://assets/Audio/creatures/Dying.wav" id="4_nel7w"]
+[ext_resource type="AudioStream" uid="uid://qi4uely7ig21" path="res://assets/Audio/creatures/Infect.wav" id="5_efc23"]
+[ext_resource type="AudioStream" uid="uid://djpcy6imvmlpc" path="res://assets/Audio/creatures/Scream.wav" id="7_dujt0"]
+[ext_resource type="AudioStream" uid="uid://7g8mt10c3o15" path="res://assets/Audio/creatures/Yippee.wav" id="9_ym5b7"]
+[ext_resource type="AudioStream" uid="uid://bv0bmiihn4km" path="res://assets/Audio/godzilla/Demolition.wav" id="10_4fa5v"]
+[ext_resource type="AudioStream" uid="uid://psvc1j2eqjcv" path="res://assets/Audio/godzilla/FireBreath.wav" id="11_irqod"]
+[ext_resource type="AudioStream" uid="uid://7xi1x6ybk6rx" path="res://assets/Audio/godzilla/Good_Soup.wav" id="12_vqrwy"]
+[ext_resource type="AudioStream" uid="uid://dtli26m5gi821" path="res://assets/Audio/godzilla/Roar.wav" id="13_r0fbn"]
+[ext_resource type="AudioStream" uid="uid://dhe36kaltygsb" path="res://assets/Audio/godzilla/soup_slurp.wav" id="14_12t8x"]
+[ext_resource type="AudioStream" uid="uid://d28w1t764rb6a" path="res://assets/Audio/godzilla/Stomp.wav" id="15_bg4nw"]
+[ext_resource type="AudioStream" uid="uid://bfgbj2vpqt41j" path="res://assets/Audio/godzilla/Throw.wav" id="16_ivv08"]
+[ext_resource type="AudioStream" uid="uid://bd1rroxrgkro4" path="res://assets/Audio/godzilla/vomit.wav" id="17_m1why"]
+[ext_resource type="AudioStream" uid="uid://c2ax0ccnew4xq" path="res://assets/Audio/Music/music1.ogg" id="18_07pbu"]
+
+[node name="AudioManager" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_asmxu")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource("1_krhah")
+volume_db = -13.0
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource("2_6kj28")
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Creatures" type="Node" parent="."]
+
+[node name="Dying" type="AudioStreamPlayer" parent="Creatures"]
+stream = ExtResource("4_nel7w")
+bus = &"Sound Effects"
+
+[node name="Infect" type="AudioStreamPlayer" parent="Creatures"]
+stream = ExtResource("5_efc23")
+volume_db = -20.0
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Scream" type="AudioStreamPlayer" parent="Creatures"]
+stream = ExtResource("7_dujt0")
+volume_db = -30.0
+pitch_scale = 1.39
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Yippee" type="AudioStreamPlayer" parent="Creatures"]
+stream = ExtResource("9_ym5b7")
+volume_db = -10.0
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Godzilla" type="Node" parent="."]
+
+[node name="Demolition" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("10_4fa5v")
+volume_db = -10.0
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="FireBreath" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("11_irqod")
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="GoodSoup" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("12_vqrwy")
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Roar" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("13_r0fbn")
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="SoupSlurp" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("14_12t8x")
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Stomp" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("15_bg4nw")
+volume_db = -2.0
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Throw" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("16_ivv08")
+volume_db = -10.0
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Vomit" type="AudioStreamPlayer" parent="Godzilla"]
+stream = ExtResource("17_m1why")
+max_polyphony = 10
+bus = &"Sound Effects"
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Music1" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("18_07pbu")
+volume_db = -20.0
+autoplay = true
+bus = &"Music"
