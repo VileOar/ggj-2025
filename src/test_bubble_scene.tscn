@@ -1,14 +1,16 @@
 [gd_scene load_steps=5 format=3 uid="uid://b3oe0mcu5rl5"]
 
-[ext_resource type="Script" path="res://src/test_bubble_scene.gd" id="1_e57h6"]
 [ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_f1230"]
 [ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/Bubble.tscn" id="3_6vv4r"]
+[ext_resource type="Script" path="res://src/game_controller.gd" id="3_n475p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks355"]
 size = Vector2(128, 128)
 
 [node name="TestBubbleScene" type="Node2D"]
-script = ExtResource("1_e57h6")
+
+[node name="GameController" type="Node2D" parent="."]
+script = ExtResource("3_n475p")
 BUBBLE = ExtResource("3_6vv4r")
 
 [node name="left" type="Sprite2D" parent="."]
@@ -60,7 +62,3 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="top/StaticBody2D"]
 shape = SubResource("RectangleShape2D_ks355")
-
-[node name="bubble3" parent="." instance=ExtResource("3_6vv4r")]
-
-[node name="bubble4" parent="." instance=ExtResource("3_6vv4r")]
