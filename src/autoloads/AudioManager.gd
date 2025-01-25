@@ -13,20 +13,13 @@ func _ready():
 	#add the sounds
 	add_to_sound_player_dictionary("ButtonHover", $UI/ButtonHover)
 	add_to_sound_player_dictionary("ButtonPress", $UI/ButtonPress)
-	#creatures
-	add_to_sound_player_dictionary("Dying", $Creatures/Dying)
-	add_to_sound_player_dictionary("Infect", $Creatures/Infect)
-	add_to_sound_player_dictionary("Scream", $Creatures/Scream)	
-	add_to_sound_player_dictionary("Yippee", $Creatures/Yippee)	
-	#Godzilla
-	add_to_sound_player_dictionary("Demolition", $Godzilla/Demolition)	
-	add_to_sound_player_dictionary("FireBreath", $Godzilla/FireBreath)
-	add_to_sound_player_dictionary("GoodSoup", $Godzilla/GoodSoup)
-	add_to_sound_player_dictionary("Roar", $Godzilla/Roar)			
-	add_to_sound_player_dictionary("SoupSlurp", $Godzilla/SoupSlurp)
-	add_to_sound_player_dictionary("Stomp", $Godzilla/Stomp)		
-	add_to_sound_player_dictionary("Throw", $Godzilla/Throw)	
-	add_to_sound_player_dictionary("Vomit", $Godzilla/Vomit)	
+	
+	# Buble
+	add_to_sound_player_dictionary("Pop", $Bubble/Pop)
+
+	# Player
+	add_to_sound_player_dictionary("Charge", $Player/Charge)	
+	
 	#Music
 	add_to_sound_player_dictionary("Music1", $Music/Music1)
 	
@@ -57,6 +50,7 @@ func play_audio_Restricted(audio_name):
 		# If audio_node exists and is not playing already, play audio
 		if !audio_node.is_playing():
 			audio_node.play()
+
 
 func add_to_sound_player_dictionary(node_name, node):
 	# Add the node to the sound player dictionary
