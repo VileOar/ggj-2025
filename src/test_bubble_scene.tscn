@@ -1,16 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3oe0mcu5rl5"]
+[gd_scene load_steps=5 format=3 uid="uid://b3oe0mcu5rl5"]
 
 [ext_resource type="Script" path="res://src/test_bubble_scene.gd" id="1_e57h6"]
 [ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_f1230"]
-[ext_resource type="Script" path="res://src/bubble/bubble.gd" id="2_wwkc3"]
-[ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="3_6vv4r"]
-[ext_resource type="Texture2D" uid="uid://dsmw5srrt8vxi" path="res://assets/bubbles/dvd.png" id="3_scqd6"]
+[ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/Bubble.tscn" id="3_6vv4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ks355"]
 size = Vector2(128, 128)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_hsqk6"]
-radius = 48.28
 
 [node name="TestBubbleScene" type="Node2D"]
 script = ExtResource("1_e57h6")
@@ -68,17 +63,4 @@ shape = SubResource("RectangleShape2D_ks355")
 
 [node name="bubble3" parent="." instance=ExtResource("3_6vv4r")]
 
-[node name="bubble2" type="RigidBody2D" parent="."]
-position = Vector2(353, 365)
-collision_layer = 6
-collision_mask = 7
-script = ExtResource("2_wwkc3")
-
-[node name="bubble" type="Sprite2D" parent="bubble2"]
-scale = Vector2(0.495, 0.495)
-texture = ExtResource("3_scqd6")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bubble2"]
-shape = SubResource("CircleShape2D_hsqk6")
-
-[connection signal="body_entered" from="bubble2" to="bubble2" method="_on_body_entered"]
+[node name="bubble4" parent="." instance=ExtResource("3_6vv4r")]

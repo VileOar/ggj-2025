@@ -2,16 +2,29 @@ extends RigidBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -400.0
-const RESISTANCE = 0.9
+const SPEED_STOP_THRESHOLD = 5
+
+const DRAG_RESISTANCE = 0.9999
+const ON_COLLISION_DIRECTION_VARIATION = 0.25
 
 var velocity
 var rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
+	# To detect collisions between objects
 	set_contact_monitor(true)
 	max_contacts_reported = 5
+	
+	# applies random spawn direction
+	_apply_random_start_direction()
+	
+	# apply velocity	
+	#velocity = Vector2(SPEED * x_direction, - SPEED * y_direction)
+
+
+## TEMP, DELETE
+func _apply_random_start_direction() -> void: 
 	var x_direction = rng.randf_range(-1, 1)
 	var y_direction = rng.randf_range(-1, 1)
 	velocity = Vector2(SPEED * x_direction, - SPEED * y_direction)
@@ -19,64 +32,40 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	var collision_info = move_and_collide(velocity * delta)
+	_apply_drag()
+	
+	# ON collision detection, changes direction with slight variable 
 	if collision_info:
 		_change_direction_slighly(collision_info)
-		velocity.x *= RESISTANCE
-		velocity.y *= RESISTANCE
-		#if velocity.bounce() == true:
-			#print("bounce") 
+		
 	
-	#for collider_index in get_contact_count():
-		#var collider := get_contact_collider_object(collider_index)
-		#print(collider_index) 
-	
-	#for i in get_contact_count():
-		#var c = get_colliding_bodies()
+func _apply_drag() -> void:
+#	stop speed after threshold
+	if abs(velocity.x) < SPEED_STOP_THRESHOLD && abs(velocity.y) < SPEED_STOP_THRESHOLD:
+		velocity.x = 0
+		velocity.y = 0
+	else:
+#		apply drag normally
+		velocity.x *= DRAG_RESISTANCE
+		velocity.y *= DRAG_RESISTANCE
 	
 	
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var velocity := state.get_linear_velocity()
 		
 	for collider_index in state.get_contact_count():
-		#print("hello")
 		var collider := state.get_contact_collider_object(collider_index)
 		var collision_normal := state.get_contact_local_normal(collider_index)
 	
 
 func _change_direction_slighly(collision_info) -> void:
 	var new_bounce_vector = collision_info.get_normal()
-	print("x normal = ", new_bounce_vector.x)
-	new_bounce_vector.x += rng.randf_range(-0.25, 0.25)
-	print("new x normal = ", new_bounce_vector.x)
-	new_bounce_vector.y += rng.randf_range(-0.25, 0.25)
+	new_bounce_vector.x += rng.randf_range(-ON_COLLISION_DIRECTION_VARIATION, ON_COLLISION_DIRECTION_VARIATION)
+	new_bounce_vector.y += rng.randf_range(-ON_COLLISION_DIRECTION_VARIATION, ON_COLLISION_DIRECTION_VARIATION)
 	velocity = velocity.bounce(new_bounce_vector.normalized())
-	
-	print("direction changed normal = ", collision_info.get_collider_velocity())
-	print("direction changed normal = ", collision_info.get_normal())
-	#velocity = velocity.bounce(collision_info.get_normal())
 
-
-	
+#	TODO work
 func _on_body_entered(body: Node2D) -> void:
 	print(body.name)
-	velocity.x *= 0.5
-	velocity.y *= 0.5
-	
-	
-	# Add the gravity.
-	#if not is_on_floor():
-		#velocity += get_gravity() * delta
-
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		#velocity.y = JUMP_VELOCITY
-#
-	## Get the input direction and handle the movement/deceleration.
-	## As good practice, you should replace UI actions with custom gameplay actions.
-	#var direction := Input.get_axis("ui_left", "ui_right")
-	#if direction:
-		#velocity.x = direction * SPEED
-	#else:
-		#velocity.x = move_toward(velocity.x, 0, SPEED)
-#
-	#move_and_slide()
+	#velocity.x *= 0.5
+	#velocity.y *= 0.5
