@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbi430hooexen"]
+[gd_scene load_steps=12 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_2n2td"]
 [ext_resource type="Script" path="res://src/main_scenes/player.gd" id="1_8i65o"]
+[ext_resource type="Shader" path="res://assets/shaders/strength_indicator.gdshader" id="2_lxl26"]
 
 [sub_resource type="Gradient" id="Gradient_txnav"]
 offsets = PackedFloat32Array(0, 0.694805, 0.993506, 1)
@@ -12,6 +13,24 @@ gradient = SubResource("Gradient_txnav")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwwsl"]
+shader = ExtResource("2_lxl26")
+shader_parameter/percent = 0.0
+shader_parameter/low_alpha = 0.3
+
+[sub_resource type="Gradient" id="Gradient_opkrk"]
+offsets = PackedFloat32Array(0, 0.994253)
+colors = PackedColorArray(1, 0.966667, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0rt7u"]
+gradient = SubResource("Gradient_opkrk")
+
+[sub_resource type="Gradient" id="Gradient_kdtn3"]
+colors = PackedColorArray(0.560784, 0.129412, 0.0117647, 1, 0.56, 0.130107, 0.0112, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2bdfq"]
+gradient = SubResource("Gradient_kdtn3")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p4duc"]
 radius = 24.0
@@ -35,6 +54,22 @@ rotation = -1.5708
 freeze = true
 script = ExtResource("1_8i65o")
 metadata/_edit_group_ = true
+
+[node name="AimMeter" type="Sprite2D" parent="Node2D/Player1"]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_gwwsl")
+rotation = -1.57079
+scale = Vector2(0.36, 18.4)
+texture = SubResource("GradientTexture1D_0rt7u")
+offset = Vector2(192, 0)
+
+[node name="AimMeterBg" type="Sprite2D" parent="Node2D/Player1"]
+rotation = -1.5708
+scale = Vector2(0.36, 18.4)
+skew = 0.000113487
+texture = SubResource("GradientTexture1D_2bdfq")
+offset = Vector2(192, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/Player1"]
 scale = Vector2(0.375, 0.375)
