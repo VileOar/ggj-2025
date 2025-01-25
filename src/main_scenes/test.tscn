@@ -1,0 +1,132 @@
+[gd_scene load_steps=16 format=3 uid="uid://dbi430hooexen"]
+
+[ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_2n2td"]
+[ext_resource type="Script" path="res://src/main_scenes/player.gd" id="1_8i65o"]
+[ext_resource type="Shader" path="res://assets/shaders/strength_indicator.gdshader" id="2_lxl26"]
+[ext_resource type="Texture2D" uid="uid://dntox7r8c2427" path="res://assets/crab.png" id="4_bfhrs"]
+
+[sub_resource type="Gradient" id="Gradient_txnav"]
+offsets = PackedFloat32Array(0, 0.694805, 0.993506, 1)
+colors = PackedColorArray(0.72, 0.1296, 0.1296, 1, 0.103896, 0.103896, 0.103896, 1, 0.69, 0.69, 0.69, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2sdle"]
+gradient = SubResource("Gradient_txnav")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g7adb"]
+radius = 114.634
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gwwsl"]
+shader = ExtResource("2_lxl26")
+shader_parameter/percent = 0.0
+shader_parameter/low_alpha = 0.3
+
+[sub_resource type="Gradient" id="Gradient_opkrk"]
+offsets = PackedFloat32Array(0, 0.994253)
+colors = PackedColorArray(1, 0.966667, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0rt7u"]
+gradient = SubResource("Gradient_opkrk")
+
+[sub_resource type="Gradient" id="Gradient_kdtn3"]
+colors = PackedColorArray(0.560784, 0.129412, 0.0117647, 1, 0.56, 0.130107, 0.0112, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_2bdfq"]
+gradient = SubResource("Gradient_kdtn3")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p4duc"]
+radius = 24.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q51l8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t72k8"]
+size = Vector2(86, 20)
+
+[node name="Test" type="Node"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(192, 192)
+metadata/_edit_group_ = true
+
+[node name="Map" type="TextureRect" parent="Node2D"]
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = SubResource("GradientTexture2D_2sdle")
+
+[node name="GravityArea" type="Area2D" parent="Node2D"]
+collision_layer = 2
+collision_mask = 2
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector2(0, 0)
+gravity_direction = Vector2(0, 0)
+gravity = 300.0
+angular_damp_space_override = 1
+angular_damp = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/GravityArea"]
+shape = SubResource("CircleShape2D_g7adb")
+
+[node name="Player1" type="RigidBody2D" parent="Node2D"]
+position = Vector2(128, 0)
+rotation = -1.5708
+freeze = true
+script = ExtResource("1_8i65o")
+_friction = -0.1
+metadata/_edit_group_ = true
+
+[node name="AimMeter" type="Sprite2D" parent="Node2D/Player1"]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_gwwsl")
+rotation = -1.57079
+scale = Vector2(0.36, 18.4)
+texture = SubResource("GradientTexture1D_0rt7u")
+offset = Vector2(192, 0)
+
+[node name="AimMeterBg" type="Sprite2D" parent="Node2D/Player1/AimMeter"]
+z_index = -1
+scale = Vector2(1, 1.00001)
+skew = 0.0052948
+texture = SubResource("GradientTexture1D_2bdfq")
+offset = Vector2(192, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Player1"]
+scale = Vector2(0.375, 0.375)
+texture = ExtResource("1_2n2td")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Player1"]
+shape = SubResource("CircleShape2D_p4duc")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D/Player1"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Player1/StaticBody2D"]
+position = Vector2(6.51598e-05, -18)
+shape = SubResource("RectangleShape2D_q51l8")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="Node2D/Player1"]
+position = Vector2(7.40447e-05, -22)
+rotation = 1.5708
+node_a = NodePath("../StaticBody2D")
+node_b = NodePath("../MeterRB")
+bias = 0.9
+
+[node name="MeterRB" type="RigidBody2D" parent="Node2D/Player1"]
+unique_name_in_owner = true
+position = Vector2(0.000403925, -110)
+rotation = 1.5708
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Player1/MeterRB"]
+position = Vector2(38, 0)
+shape = SubResource("RectangleShape2D_t72k8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Player1/MeterRB"]
+position = Vector2(33.9561, 0)
+scale = Vector2(0.359718, 0.0944363)
+texture = ExtResource("4_bfhrs")
