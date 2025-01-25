@@ -12,8 +12,6 @@ var _angular_speed = 60
 
 
 func enter() -> void:
-	# disable rigidbody physics
-	#rigidbody().sleeping = true
 	# setup angle_position
 	_setup_angle_position()
 	start_state_cooldown()
@@ -30,7 +28,6 @@ func _physics_process(delta: float) -> void:
 
 
 func integrate_forces(ph_state: PhysicsDirectBodyState2D) -> void:
-	print_debug(ph_state.linear_velocity)
 	if ph_state.get_contact_count():
 		return
 	ph_state.linear_velocity = Vector2.ZERO
