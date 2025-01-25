@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GGJ2025"
-run/main_scene="res://src/main_scenes/test.tscn"
+run/main_scene="res://src/main_scenes/stage.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://assets/crab.png"
 
@@ -45,7 +45,5 @@ shoot={
 }
 
 [physics]
-
-2d/default_gravity=0.0
 
 2d/default_gravity_vector=Vector2(0, 0)
