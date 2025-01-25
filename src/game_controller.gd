@@ -1,10 +1,9 @@
 class_name GameController
 extends Node2D
 
-
 @export var BUBBLE: PackedScene
 
-var rng = RandomNumberGenerator.new()
+var _rng = RandomNumberGenerator.new()
 
 
 func _ready() -> void:
@@ -13,7 +12,7 @@ func _ready() -> void:
 	spawn_bubble()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 #	SPAWN BUBBLE
 	if Input.is_action_just_pressed("launch_bubble"):
 		spawn_bubble()
