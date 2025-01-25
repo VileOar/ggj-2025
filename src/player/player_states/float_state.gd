@@ -5,25 +5,20 @@ extends PlayerState
 const SNAP_SPEED_THRESH = 20
 const BORDER_DISTANCE_THRES = 4
 
-@onready var _timer: Timer = %Timer
-
-# whether the player can snap to ground (has a delay when entering this state, before it can snap)
-var _can_snap = true
-
 
 func enter() -> void:
-	# enable rigidbody physics
-	_can_snap = false
-	_timer.start()
+	start_state_cooldown()
 
 
 func _physics_process(delta: float) -> void:
 	# whether moving at low speed
 	var low_speed = rigidbody().linear_velocity.length() <= SNAP_SPEED_THRESH
 	# whether position is close to stage border
-	var close_to_ground = abs(Global.STAGE_RADIUS - rigidbody().position.length()) <= BORDER_DISTANCE_THRES
+	var close_to_ground = Global.STAGE_RADIUS - rigidbody().position.length() <= BORDER_DISTANCE_THRES
 	
-	if _can_snap and low_speed and close_to_ground:
+	print_debug(rigidbody().linear_velocity.length())
+	
+	if can_change_state() and low_speed and close_to_ground:
 		replace_state("WalkState")
 
 
@@ -44,7 +39,3 @@ func integrate_forces(ph_state: PhysicsDirectBodyState2D) -> void:
 	#ph_state.transform = xform
 	
 	#fsm().rigidbody().apply_torque_impulse(-angle_delta)
-
-
-func _on_timer_timeout() -> void:
-	_can_snap = true

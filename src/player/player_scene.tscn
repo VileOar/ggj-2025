@@ -38,9 +38,4 @@ script = ExtResource("3_3ry0h")
 [node name="FloatState" type="Node" parent="Controller"]
 script = ExtResource("4_7k5ks")
 
-[node name="Timer" type="Timer" parent="Controller/FloatState"]
-unique_name_in_owner = true
-one_shot = true
-
 [connection signal="body_entered" from="." to="Controller/WalkState" method="_on_player_scene_body_entered"]
-[connection signal="timeout" from="Controller/FloatState/Timer" to="Controller/FloatState" method="_on_timer_timeout"]
