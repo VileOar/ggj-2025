@@ -9,7 +9,7 @@ extends Node
 ## functionality should be implemented by extending this class.[br]
 ## NOTE: This class does NOT remove nodes from scene tree to disable them, as they might still need
 ## to be processed, even if they are not at the top of the stack
-# v1.2 (2025-01-20)
+# v1.2.1 (2025-01-20)
 
 ## Emitted after a pop operation leaves the machine empty.
 signal stack_emptied
@@ -29,9 +29,9 @@ var _state_stack: Array[String] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var states_holder = get_node(_states_nodepath)
-	if states_holder == null: # if no path was passed (default), use this machine itself, instead
-		states_holder = self
+	var states_holder = self
+	if has_node(_states_nodepath): # if no path was passed (default), use this machine itself, instead
+		states_holder = get_node(_states_nodepath)
 	
 	for child in states_holder.get_children():
 		if child is StackState:
