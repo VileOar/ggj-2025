@@ -1,16 +1,40 @@
-[gd_scene load_steps=8 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=16 format=3 uid="uid://dcfxxbn8njgkj"]
 
 [ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_1xywr"]
 [ext_resource type="Script" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" path="res://src/player/player_state_machine.gd" id="2_036d8"]
 [ext_resource type="Script" path="res://src/player/player_states/walk_state.gd" id="3_3ry0h"]
 [ext_resource type="Script" path="res://src/player/player_states/float_state.gd" id="4_7k5ks"]
+[ext_resource type="Shader" path="res://assets/shaders/strength_indicator.gdshader" id="6_pxgoi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
 bounce = 0.7
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_piu2a"]
 size = Vector2(64, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k4l5k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32vq0"]
+size = Vector2(86, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2cquc"]
+shader = ExtResource("6_pxgoi")
+shader_parameter/percent = 0.0
+shader_parameter/low_alpha = 0.3
+
+[sub_resource type="Gradient" id="Gradient_opkrk"]
+offsets = PackedFloat32Array(0, 0.994253)
+colors = PackedColorArray(1, 0.966667, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ch7h8"]
+gradient = SubResource("Gradient_opkrk")
+
+[sub_resource type="Gradient" id="Gradient_kdtn3"]
+colors = PackedColorArray(0.560784, 0.129412, 0.0117647, 1, 0.56, 0.130107, 0.0112, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0evkm"]
+gradient = SubResource("Gradient_kdtn3")
 
 [node name="PlayerScene" type="RigidBody2D"]
 collision_layer = 2
@@ -37,5 +61,48 @@ script = ExtResource("3_3ry0h")
 
 [node name="FloatState" type="Node" parent="Controller"]
 script = ExtResource("4_7k5ks")
+
+[node name="StaticBodyPin" type="StaticBody2D" parent="."]
+position = Vector2(0, -13)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyPin"]
+shape = SubResource("RectangleShape2D_k4l5k")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(7.40447e-05, -24)
+rotation = 1.5708
+node_a = NodePath("../StaticBodyPin")
+node_b = NodePath("../MeterRB")
+bias = 0.9
+
+[node name="MeterRB" type="RigidBody2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0.000403925, -110)
+rotation = 1.5708
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeterRB"]
+position = Vector2(38, 0)
+shape = SubResource("RectangleShape2D_32vq0")
+
+[node name="AimMeter" type="Sprite2D" parent="MeterRB"]
+unique_name_in_owner = true
+z_index = 1
+material = SubResource("ShaderMaterial_2cquc")
+position = Vector2(110, 0)
+rotation = -3.14159
+scale = Vector2(0.36, 18.4)
+texture = SubResource("GradientTexture1D_ch7h8")
+offset = Vector2(192, 0)
+
+[node name="AimMeterBg" type="Sprite2D" parent="MeterRB/AimMeter"]
+z_index = -1
+scale = Vector2(1, 1.00001)
+skew = 0.0052948
+texture = SubResource("GradientTexture1D_0evkm")
+offset = Vector2(192, 0)
 
 [connection signal="body_entered" from="." to="Controller/WalkState" method="_on_player_scene_body_entered"]
