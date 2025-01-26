@@ -1,8 +1,11 @@
-[gd_scene load_steps=23 format=3 uid="uid://ck0kxlxtpq7wk"]
+[gd_scene load_steps=26 format=3 uid="uid://ck0kxlxtpq7wk"]
 
 [ext_resource type="Script" path="res://src/bubble/bubble.gd" id="1_0kru2"]
 [ext_resource type="PackedScene" uid="uid://cmdducucqdn0e" path="res://src/bubble/bubble_burst.tscn" id="2_5kfs1"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_8d1jj"]
+[ext_resource type="Material" uid="uid://dqkscowue6kdv" path="res://src/bubble/VFX/blink_intensity.tres" id="3_4jc6o"]
+[ext_resource type="PackedScene" uid="uid://74i7775f1mqv" path="res://src/bubble/VFX/BUBBLE_TRACE.tscn" id="3_imspv"]
+[ext_resource type="Script" path="res://src/bubble/vfx_effects.gd" id="4_c374c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_44sl2"]
 bounce = 0.7
@@ -157,16 +160,19 @@ collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_44sl2")
 script = ExtResource("1_0kru2")
 BURST = ExtResource("2_5kfs1")
+BUBBLE_TRACE = ExtResource("3_imspv")
 
 [node name="bubble" type="Node2D" parent="."]
 
 [node name="AnimProxy" type="Node2D" parent="bubble"]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bubble/AnimProxy"]
+material = ExtResource("3_4jc6o")
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_i5yeh")
 animation = &"burst"
 autoplay = "default"
+script = ExtResource("4_c374c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hsqk6")
@@ -178,5 +184,9 @@ libraries = {
 
 [node name="Lifespan" type="Timer" parent="."]
 
+[node name="TraceTimer" type="Timer" parent="."]
+wait_time = 0.3
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
+[connection signal="timeout" from="TraceTimer" to="." method="_on_timer_timeout"]

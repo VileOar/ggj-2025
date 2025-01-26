@@ -4,6 +4,7 @@ extends RigidBody2D
 signal big_bubble_collision
 
 @export var BURST: PackedScene
+@export var BUBBLE_TRACE: PackedScene
 
 const MAX_SCALE_LIMIT = 1.6
 const MIN_SCALE_LIMIT = 0.2
@@ -31,6 +32,7 @@ const LIFESPAN_TIME = 5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $bubble/AnimProxy/AnimatedSprite2D
 @onready var lifespan: Timer = $Lifespan
+@onready var trace_timer: Timer = $TraceTimer
 
 
 var _bubble_scale : Vector2 = Vector2(1.0, 1.0)
@@ -73,11 +75,20 @@ func setup_bubble(impulse: Vector2, _scale_percent: float) -> void:
 	
 	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * _scale_percent
 	
-	#if is_bubble_dangerous():
-		#animated_sprite_2d.activate_vfx_shine()
+	if is_bubble_dangerous():
+		print("activate")
+		animated_sprite_2d.activate_vfx_shine()
+		trace_timer.start()
 	
 	if _scale_percent < LIFESPAN_PERCENT_THRESH:
 		lifespan.start(LIFESPAN_TIME)
+
+
+func _create_trace_effect() -> void:
+	var bubble_trace = BUBBLE_TRACE.instantiate()
+	bubble_trace.position = position
+	bubble_trace.scale = _bubble_sprite.scale
+	get_parent().add_child(bubble_trace)
 
 
 func get_mass_percentage() -> float:
@@ -182,7 +193,12 @@ func _on_lifespan_timeout() -> void:
 
 
 func is_bubble_dangerous() -> bool:
-	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and !_is_slow_collision():
+	#if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and !_is_slow_collision():
+	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
 		return true
 	else:
 		return false
+
+
+func _on_timer_timeout() -> void:
+	_create_trace_effect()

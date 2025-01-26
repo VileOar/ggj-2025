@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://cvb4i5gf5lie6"]
+[gd_scene load_steps=17 format=3 uid="uid://dbwsnceyywlo7"]
 
 [ext_resource type="Shader" path="res://src/bubble/shinny_bubble.gdshader" id="1_ajvl2"]
 [ext_resource type="Texture2D" uid="uid://byd6oryrraxws" path="res://assets/bubbles/spritesheet_bubble_iddle_walk_and_taunt.png" id="2_6c32u"]
 [ext_resource type="Script" path="res://src/bubble/shinny_bubble.gd" id="3_vl0in"]
-[ext_resource type="PackedScene" uid="uid://cuynpbc8imfmo" path="res://src/bubble/VFX/shadow_bubble.tscn" id="4_eiywr"]
+[ext_resource type="PackedScene" uid="uid://bw3wlq5rpsaa7" path="res://src/bubble/VFX/shadow_bubble.tscn" id="4_eiywr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oula5"]
 shader = ExtResource("1_ajvl2")
