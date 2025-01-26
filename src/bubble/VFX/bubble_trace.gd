@@ -15,7 +15,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	current_alfa -= alfa_to_remove
 	color_alfa = Color(color, current_alfa)
 	modulate = color_alfa
