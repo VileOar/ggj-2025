@@ -67,6 +67,8 @@ func _physics_process(delta: float) -> void:
 		
 		if mov_amount != 0:
 			fsm().play_anim("walk")
+		elif Input.get_action_strength("taunt"):
+			fsm().play_anim("taunt")
 		else:
 			fsm().play_anim("idle")
 

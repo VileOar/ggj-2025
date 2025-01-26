@@ -4,9 +4,12 @@ extends RigidBody2D
 signal big_bubble_collision
 
 const MAX_SCALE_LIMIT = 1.6
-const MIN_SCALE_LIMIT = 0.5
+const MIN_SCALE_LIMIT = 0.2
 const MAX_MASS = 20.0
 const MIN_MASS = 1.0
+
+const MAX_HEALTH = 5
+const MIN_HEALTH = 2
 
 
 @export var SPEED = 300.0
@@ -36,6 +39,9 @@ var _is_bubble_ready_to_scale = false
 var new_scale = Vector2(MAX_SCALE_LIMIT, MAX_SCALE_LIMIT)
 var new_mass = 1.0
 
+# num of hits before bursting
+var health = 1
+
 
 func _ready() -> void:
 	# To detect collisions between objects
@@ -54,6 +60,8 @@ func setup_bubble(impulse: Vector2, scale_percent: float) -> void:
 	bubble.mass = mass_tmp
 	_bubble_sprite.scale = _bubble_scale
 	collision_shape_2d.scale = _bubble_scale
+	
+	health = int(lerp(MIN_HEALTH, MAX_HEALTH, scale_percent))
 
 
 func get_mass_percentage() -> float:
@@ -76,7 +84,9 @@ func _update_size(new_body_scale) -> void:
 	
 	if new_mass >= MAX_MASS:
 		new_mass = MAX_MASS
-		
+	
+	health = int(lerp(MIN_HEALTH, MAX_HEALTH, percentage))
+	
 	# Apply scale to children
 	time = 0
 	_is_bubble_ready_to_scale = true
@@ -119,6 +129,7 @@ func _is_scale_difference_small(body) -> bool:
 
 func _on_body_entered(body: Node2D) -> void:
 	animation_player.play("bounce")
+	health -= 1
 	if body is Bubble:
 		
 		if _is_slow_collision() or _is_scale_difference_small(body):
@@ -128,11 +139,11 @@ func _on_body_entered(body: Node2D) -> void:
 			## PLAY ANIMATION 
 			_update_size(body)
 		else:
-			print("DELETE BUBBLE")
 			## PLAY ANIMATION 
 			queue_free()
 	
-	elif body is Player:
+	# bursting
+	if body is Player or health <= 0:
 		## PLAY ANIMATION 
 		animation_player.stop()
 		animated_sprite_2d.play("burst")

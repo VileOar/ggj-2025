@@ -85,11 +85,17 @@ animations = [{
 "texture": SubResource("AtlasTexture_e6k3v")
 }, {
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_e6k3v")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_eqbsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnmcx")
 }],
 "loop": true,
 "name": &"taunt",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -143,8 +149,9 @@ script = ExtResource("1_q1xob")
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_dcqy8")
-animation = &"charge"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.279551
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_piu2a")

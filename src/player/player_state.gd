@@ -1,6 +1,7 @@
 class_name PlayerState
 extends StackState
 
+const STATE_CHANGE_COOLDOWN = 0.5
 
 # min impulse magnitude when bouncing off of bubbles
 const MIN_BUBBLE_BOUNCE = 0
@@ -26,7 +27,7 @@ func apply_uncentred_impulse(impulse: Vector2):
 
 func start_state_cooldown() -> void:
 	_can_change_state = false
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(STATE_CHANGE_COOLDOWN).timeout
 	_can_change_state = true
 
 
