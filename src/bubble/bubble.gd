@@ -15,12 +15,15 @@ const MIN_MASS = 1.0
 @export var COLLISION_SCALE_PERCENTAGE_THRESHOLD = 0.25
 @export var ON_JOIN_SCALE_DIVISION_FACTOR = 3
 
-@onready var _bubble_sprite: Sprite2D = $bubble
+@onready var _bubble_sprite: Node2D = $bubble
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var bubble: Bubble = $"."
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animated_sprite_2d: AnimatedSprite2D = $bubble/AnimProxy/AnimatedSprite2D
 
 
 var _bubble_scale : Vector2 = Vector2(1.0, 1.0)
+@warning_ignore("unused_private_class_variable")
 var _rng = RandomNumberGenerator.new()
 
 # variables to change sizes
@@ -115,14 +118,12 @@ func _is_scale_difference_small(body) -> bool:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	animation_player.play("bounce")
 	if body is Bubble:
 		
-		if _is_slow_collision():
+		if _is_slow_collision() or _is_scale_difference_small(body):
 			return
 		
-		if _is_scale_difference_small(body):
-			return
-			
 		if _bubble_scale.x >= body._bubble_scale.x:
 			## PLAY ANIMATION 
 			_update_size(body)
@@ -132,6 +133,8 @@ func _on_body_entered(body: Node2D) -> void:
 			queue_free()
 	
 	elif body is Player:
-		print("DELETE BUBBLE")
 		## PLAY ANIMATION 
+		animation_player.stop()
+		animated_sprite_2d.play("burst")
+		# TODO: NOT LIKE THIS: instead, delete this node immediately and spawn a collision-less animated sprite of the burst animation that deletes itself in the end (to avoid collision during the burst animation)
 		queue_free()

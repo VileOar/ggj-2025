@@ -64,6 +64,11 @@ func _physics_process(delta: float) -> void:
 	if !_holding_button:
 		mov_amount -= Input.get_action_strength("mov_right")
 		mov_amount += Input.get_action_strength("mov_left")
+		
+		if mov_amount != 0:
+			fsm().play_anim("walk")
+		else:
+			fsm().play_anim("idle")
 
 	# amplify joint2d/drag effect by adding additional force
 	if mov_amount != 0:
@@ -116,6 +121,7 @@ func on_collision(body: Node) -> void:
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
 		_holding_button = true
+		fsm().play_anim("charge")
 	if event.is_action_released("shoot"):
 		spawn_bubble()
 

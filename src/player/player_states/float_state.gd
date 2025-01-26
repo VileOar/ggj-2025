@@ -9,6 +9,7 @@ const MAX_FLOAT_SPEED = 240
 
 func enter() -> void:
 	start_state_cooldown()
+	fsm().play_anim("idle")
 
 
 func _physics_process(_delta: float) -> void:

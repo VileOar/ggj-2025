@@ -3,9 +3,9 @@ extends StackState
 
 
 # min impulse magnitude when bouncing off of bubbles
-const MIN_BUBBLE_BOUNCE = 40
+const MIN_BUBBLE_BOUNCE = 0
 # max impulse magnitude when bouncing off of bubbles
-const MAX_BUBBLE_BOUNCE = 16000
+const MAX_BUBBLE_BOUNCE = 10000
 
 # whether the player can change states
 var _can_change_state = true
@@ -34,5 +34,5 @@ func can_change_state() -> bool:
 	return _can_change_state
 
 
-func on_collision(body: Node) -> void:
+func on_collision(_body: Node) -> void:
 	pass
