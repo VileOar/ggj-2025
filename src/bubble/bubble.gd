@@ -4,6 +4,7 @@ extends RigidBody2D
 signal big_bubble_collision
 
 @export var BURST: PackedScene
+@export var BUBBLE_TRACE: PackedScene
 
 const MAX_SCALE_LIMIT = 1.6
 const MIN_SCALE_LIMIT = 0.2
@@ -21,7 +22,7 @@ const LIFESPAN_TIME = 5
 
 @export var SPEED = 300.0
 
-@export var COLLISION_VELOCITY_THRESHOLD = 60.0
+@export var COLLISION_VELOCITY_THRESHOLD = 100.0
 @export var COLLISION_SCALE_PERCENTAGE_THRESHOLD = 0.25
 @export var ON_JOIN_SCALE_DIVISION_FACTOR = 3
 @export var BUBBLE_IS_DANGEROUS_PERCENTAGE = 0.4
@@ -32,6 +33,9 @@ const LIFESPAN_TIME = 5
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $bubble/AnimProxy/AnimatedSprite2D
 @onready var lifespan: Timer = $Lifespan
+@onready var trace_timer: Timer = $TraceTimer
+
+var _can_trace = false
 
 
 var _bubble_scale : Vector2 = Vector2(1.0, 1.0)
@@ -80,10 +84,19 @@ func setup_bubble(impulse: Vector2, _scale_percent: float) -> void:
 	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * _scale_percent
 	
 	#if is_bubble_dangerous():
+		#print("activate")
 		#animated_sprite_2d.activate_vfx_shine()
+		#trace_timer.start()
 	
 	if _scale_percent < LIFESPAN_PERCENT_THRESH:
 		lifespan.start(LIFESPAN_TIME)
+
+
+func _create_trace_effect() -> void:
+	var bubble_trace = BUBBLE_TRACE.instantiate()
+	bubble_trace.position = position
+	bubble_trace.scale = _bubble_sprite.scale * 0.5
+	get_parent().add_child(bubble_trace)
 
 
 func get_mass_percentage() -> float:
@@ -92,7 +105,7 @@ func get_mass_percentage() -> float:
 
 func _update_size(new_body_scale) -> void: 
 #	Gets percentage based on the current percentage of the the enemy
-	var percentage = ((new_body_scale.mass - MIN_MASS) / _total_percentage_mass)
+	var percentage = (max(0, new_body_scale.mass - MIN_MASS) / _total_percentage_mass)
 #	Adds 1/3 of the mass to the current bubble
 	percentage = percentage / ON_JOIN_SCALE_DIVISION_FACTOR
 	
@@ -131,6 +144,8 @@ func _physics_process(delta: float) -> void:
 	
 	if position.length() >= Global.STAGE_RADIUS + 48:
 		queue_free()
+	
+	_can_trace = is_bubble_dangerous()
 
 
 func _is_slow_collision() -> bool:
@@ -193,6 +208,7 @@ func _on_lifespan_timeout() -> void:
 
 func is_bubble_dangerous() -> bool:
 	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and !_is_slow_collision():
+	#if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
 		return true
 	else:
 		return false
@@ -202,3 +218,8 @@ func play_audio(audio_name):
 	var audio_node : AudioStreamPlayer2D = _sound_by_name.get(audio_name)
 	if audio_node != null:
 			audio_node.play()
+
+
+func _on_timer_timeout() -> void:
+	if _can_trace:
+		_create_trace_effect()

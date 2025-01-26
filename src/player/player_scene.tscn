@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=34 format=3 uid="uid://dcfxxbn8njgkj"]
 
 [ext_resource type="Script" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" path="res://src/player/player_state_machine.gd" id="2_036d8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://src/player/player_states/lose_state.gd" id="6_rps7g"]
 [ext_resource type="AudioStream" uid="uid://d2gs55jhb72uk" path="res://assets/audio/sfx/crab_walk.mp3" id="7_lj2gh"]
 [ext_resource type="AudioStream" uid="uid://b5klgo75mvhgh" path="res://assets/audio/sfx/crab_taunt.mp3" id="9_0mpk8"]
+[ext_resource type="Texture2D" uid="uid://c58e05yiie8ir" path="res://assets/meter.png" id="8_1xndb"]
 [ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="9_i7ama"]
 [ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="10_i3f16"]
 [ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="12_j4nyf"]
@@ -27,6 +28,26 @@ region = Rect2(400, 1600, 400, 400)
 [sub_resource type="AtlasTexture" id="AtlasTexture_2uxlm"]
 atlas = ExtResource("2_a4hdj")
 region = Rect2(800, 1600, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pagh"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(0, 2800, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3stk5"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(0, 2400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a2pjj"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(400, 2400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ewby"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(800, 2400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fylq"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(1200, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uugtc"]
 atlas = ExtResource("2_a4hdj")
@@ -57,6 +78,7 @@ atlas = ExtResource("2_a4hdj")
 region = Rect2(400, 800, 400, 400)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dcqy8"]
+resource_local_to_scene = true
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -71,6 +93,31 @@ animations = [{
 "loop": false,
 "name": &"charge",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pagh")
+}],
+"loop": false,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3stk5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a2pjj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ewby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fylq")
+}],
+"loop": true,
+"name": &"float",
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -112,7 +159,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"walk",
-"speed": 5.0
+"speed": 12.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_piu2a"]
@@ -129,19 +176,6 @@ shader = ExtResource("6_pxgoi")
 shader_parameter/percent = 0.0
 shader_parameter/low_alpha = 0.3
 
-[sub_resource type="Gradient" id="Gradient_opkrk"]
-offsets = PackedFloat32Array(0, 0.994253)
-colors = PackedColorArray(1, 0.966667, 0, 1, 1, 0, 0, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_ch7h8"]
-gradient = SubResource("Gradient_opkrk")
-
-[sub_resource type="Gradient" id="Gradient_kdtn3"]
-colors = PackedColorArray(0.560784, 0.129412, 0.0117647, 1, 0.56, 0.130107, 0.0112, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_0evkm"]
-gradient = SubResource("Gradient_kdtn3")
-
 [node name="PlayerScene" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 7
@@ -156,9 +190,8 @@ script = ExtResource("1_q1xob")
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_dcqy8")
-animation = &"idle"
+animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.279551
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_piu2a")
@@ -206,17 +239,17 @@ shape = SubResource("RectangleShape2D_32vq0")
 unique_name_in_owner = true
 z_index = 1
 material = SubResource("ShaderMaterial_2cquc")
-position = Vector2(110, 0)
+position = Vector2(226, 0)
 rotation = -3.14159
-scale = Vector2(0.36, 18.4)
-texture = SubResource("GradientTexture1D_ch7h8")
+texture = ExtResource("8_1xndb")
 offset = Vector2(192, 0)
 
 [node name="AimMeterBg" type="Sprite2D" parent="MeterRB/AimMeter"]
+modulate = Color(0.7, 0.7, 0.7, 1)
 z_index = -1
 scale = Vector2(1, 1.00001)
 skew = 0.0052948
-texture = SubResource("GradientTexture1D_0evkm")
+texture = ExtResource("8_1xndb")
 offset = Vector2(192, 0)
 
 [node name="WalkStream" type="AudioStreamPlayer2D" parent="."]

@@ -14,8 +14,8 @@ var _can_bubble = true
 
 func enter() -> void:
 	start_state_cooldown()
-	fsm().play_anim("idle")
 	fsm().play_audio("flail", true)
+	fsm().play_anim("float")
 
 
 func exit() -> void:
