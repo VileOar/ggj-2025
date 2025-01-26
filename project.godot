@@ -44,6 +44,12 @@ shoot={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="walls"
+2d_physics/layer_2="crabs"
+2d_physics/layer_3="bubbles"
+
 [physics]
 
 2d/default_gravity_vector=Vector2(0, 0)

@@ -1,6 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="PackedScene" uid="uid://dcfxxbn8njgkj" path="res://src/player/player_scene.tscn" id="1_1q1cn"]
+[ext_resource type="Script" path="res://src/main_scenes/stage.gd" id="1_luwh6"]
+[ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="2_e7vcn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8jwm"]
 size = Vector2(384, 384)
@@ -8,16 +10,15 @@ size = Vector2(384, 384)
 [sub_resource type="CircleShape2D" id="CircleShape2D_8h1qn"]
 radius = 150.0
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pop4g"]
-bounce = 1.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_un1dl"]
-radius = 25.2982
-
 [node name="Stage" type="Node"]
+script = ExtResource("1_luwh6")
+BUBBLE = ExtResource("2_e7vcn")
 
 [node name="StageHolder" type="Node2D" parent="."]
 position = Vector2(256, 192)
+
+[node name="BubbleHolder" type="Node2D" parent="StageHolder"]
+unique_name_in_owner = true
 
 [node name="PlayerScene" parent="StageHolder" instance=ExtResource("1_1q1cn")]
 position = Vector2(128, 0)
@@ -34,7 +35,7 @@ collision_layer = 0
 collision_mask = 2
 gravity_space_override = 3
 gravity_point = true
-gravity = -10.0
+gravity = -50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/PlayerGravity"]
 shape = SubResource("RectangleShape2D_p8jwm")
@@ -52,12 +53,3 @@ angular_damp = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/MeterGravity"]
 shape = SubResource("CircleShape2D_8h1qn")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="StageHolder"]
-position = Vector2(64, 120)
-collision_mask = 3
-physics_material_override = SubResource("PhysicsMaterial_pop4g")
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/RigidBody2D"]
-shape = SubResource("CircleShape2D_un1dl")

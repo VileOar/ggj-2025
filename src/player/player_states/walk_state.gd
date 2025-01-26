@@ -1,6 +1,12 @@
 class_name WalkState
 extends PlayerState
 
+# the max percentage of the max bubble size that the player can achieve with a charge
+const MAX_BUBBLE_SCALE_PERCENT = 0.6
+
+# max speed at which to launch the bubbles
+const BUBBLE_LAUNCH_SPEED = 100
+
 ## ref to the strength indicator sprite
 @onready var _aim_meter: Sprite2D = %AimMeter
 ## ref to the strength indicator rigidbody
@@ -24,10 +30,10 @@ var _strength_percent = 0.0:
 		_aim_meter.material.set("shader_parameter/percent", _strength_percent)
 
 ## strength increment speed while pressing to shoot
-var _strength_inc_speed = 0.6
+var _strength_inc_speed = 0.5
 
 ## maximum strength after which shoot action is forced
-var _max_strength_threshold = 1.2
+var _max_strength_threshold = 1.0
 
 ## strength at which the meter rigidbody is pushed in the opposite direction of player movement
 var _meter_overlap_strength = 230
@@ -37,6 +43,11 @@ func enter() -> void:
 	# setup angle_position
 	_setup_angle_position()
 	start_state_cooldown()
+	_meter_rb.show()
+
+
+func exit() -> void:
+	_meter_rb.hide()
 
 
 func _process(delta: float) -> void:
@@ -50,8 +61,9 @@ func _physics_process(delta: float) -> void:
 	_last_position = rigidbody().position
 	
 	var mov_amount = 0
-	mov_amount -= Input.get_action_strength("mov_right")
-	mov_amount += Input.get_action_strength("mov_left")
+	if !_holding_button:
+		mov_amount -= Input.get_action_strength("mov_right")
+		mov_amount += Input.get_action_strength("mov_left")
 
 	# amplify joint2d/drag effect by adding additional force
 	if mov_amount != 0:
@@ -65,8 +77,6 @@ func integrate_forces(ph_state: PhysicsDirectBodyState2D) -> void:
 		return
 	ph_state.linear_velocity = Vector2.ZERO
 	ph_state.angular_velocity = 0.0
-
-	
 	
 	_update_transform(ph_state)
 
@@ -91,15 +101,16 @@ func _setup_angle_position():
 func _bounce_off(bounce_impulse: Vector2):
 	replace_state("FloatState") # todo: add delay to raycast
 	await get_tree().physics_frame
-	rigidbody().apply_central_impulse(bounce_impulse)
+	apply_uncentred_impulse(bounce_impulse)
 
 
-func _on_player_scene_body_entered(body: Node) -> void:
+func on_collision(body: Node) -> void:
 	if can_change_state() and not body is StaticBody2D:
-		var vec = rigidbody().transform.x
-		if _last_position != null:
-			vec = rigidbody().position - _last_position
-		_bounce_off(vec * (-100))
+		var vec = body.position - rigidbody().position
+		
+		if body is Bubble:
+			var mag = body.get_mass_percentage() * (MAX_BUBBLE_BOUNCE - MIN_BUBBLE_BOUNCE) + MIN_BUBBLE_BOUNCE
+			_bounce_off(-vec.normalized() * mag)
 
 
 func _unhandled_input(event):
@@ -110,6 +121,10 @@ func _unhandled_input(event):
 
 
 func spawn_bubble():
-	#TODO: actually spawn bubble
+	var pos = _meter_rb.global_position - rigidbody().get_parent().global_position
+	var impulse = -Vector2.from_angle(_meter_rb.global_rotation) * BUBBLE_LAUNCH_SPEED
+	var bubble_scale_percent = MAX_BUBBLE_SCALE_PERCENT * _strength_percent
+	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
+	
 	_strength_percent = 0.0
 	_holding_button = false
