@@ -15,6 +15,11 @@ var _can_bubble = true
 func enter() -> void:
 	start_state_cooldown()
 	fsm().play_anim("idle")
+	fsm().play_audio("flail", true)
+
+
+func exit() -> void:
+	fsm().play_audio("flail", false)
 
 
 func _physics_process(_delta: float) -> void:
@@ -51,3 +56,4 @@ func spawn_bubble():
 	var impulse = Vector2.from_angle(rigidbody().global_rotation) * 100
 	var bubble_scale_percent = 0
 	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
+	AudioManager.play_shoot_delay(0.07)

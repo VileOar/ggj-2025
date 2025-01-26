@@ -9,6 +9,7 @@ const MAX_SCALE_LIMIT = 1.6
 const MIN_SCALE_LIMIT = 0.2
 const MAX_MASS = 20.0
 const MIN_MASS = 1.0
+const BOUNCE_SOUND_DELAY = 0.2
 
 const MAX_HEALTH = 10
 const MIN_HEALTH = 2
@@ -51,11 +52,16 @@ var new_mass = 1.0
 var health = 1
 var scale_percent
 
+var _sound_by_name : Dictionary = {}
+
 
 func _ready() -> void:
 	# To detect collisions between objects
 	set_contact_monitor(true)
 	max_contacts_reported = 5
+
+	_sound_by_name["bounce"] = %BounceStream
+	_sound_by_name["thwop"] = %ThwopStream
 
 
 func setup_bubble(impulse: Vector2, _scale_percent: float) -> void:
@@ -155,11 +161,13 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Bubble:
 		
 		if _is_scale_difference_small(body):
+			AudioManager.play_bounce_delay(BOUNCE_SOUND_DELAY)
 			return
 		
 		if _bubble_scale.x >= body._bubble_scale.x:
 			## PLAY ANIMATION 
 			_update_size(body)
+			play_audio("thwop")
 		else:
 			## PLAY ANIMATION 
 			queue_free()
@@ -175,6 +183,8 @@ func _on_body_entered(body: Node2D) -> void:
 		burst.scale = _bubble_sprite.scale
 		get_parent().add_child(burst)
 		queue_free()
+	else:
+		play_audio("bounce")
 
 
 func _on_lifespan_timeout() -> void:
@@ -186,3 +196,9 @@ func is_bubble_dangerous() -> bool:
 		return true
 	else:
 		return false
+
+
+func play_audio(audio_name):
+	var audio_node : AudioStreamPlayer2D = _sound_by_name.get(audio_name)
+	if audio_node != null:
+			audio_node.play()

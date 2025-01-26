@@ -1,8 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://ck0kxlxtpq7wk"]
+[gd_scene load_steps=25 format=3 uid="uid://ck0kxlxtpq7wk"]
 
 [ext_resource type="Script" path="res://src/bubble/bubble.gd" id="1_0kru2"]
 [ext_resource type="PackedScene" uid="uid://cmdducucqdn0e" path="res://src/bubble/bubble_burst.tscn" id="2_5kfs1"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_8d1jj"]
+[ext_resource type="AudioStream" uid="uid://bmsjpuvlwfa8m" path="res://assets/audio/sfx/bubble_bounce.wav" id="4_vgtea"]
+[ext_resource type="AudioStream" uid="uid://8e5p5aknx574" path="res://assets/audio/sfx/bubble_merge.wav" id="6_ly8rw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_44sl2"]
 bounce = 0.7
@@ -177,6 +179,16 @@ libraries = {
 }
 
 [node name="Lifespan" type="Timer" parent="."]
+
+[node name="BounceStream" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_vgtea")
+bus = &"Bubbles"
+
+[node name="ThwopStream" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_ly8rw")
+bus = &"Bubbles"
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]

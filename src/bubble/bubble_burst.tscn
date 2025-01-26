@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmdducucqdn0e"]
+[gd_scene load_steps=8 format=3 uid="uid://cmdducucqdn0e"]
 
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="1_bbyfk"]
 [ext_resource type="Script" path="res://src/bubble/bubble_burst.gd" id="2_xh7b3"]
+[ext_resource type="AudioStream" uid="uid://cebve8gd1u3c1" path="res://assets/audio/sfx/bubble_pop.wav" id="3_waum2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87wcr"]
 atlas = ExtResource("1_bbyfk")
@@ -37,5 +38,10 @@ sprite_frames = SubResource("SpriteFrames_gg8m3")
 autoplay = "default"
 frame_progress = 0.209505
 script = ExtResource("2_xh7b3")
+
+[node name="PopStream" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_waum2")
+autoplay = true
+bus = &"Bubbles"
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

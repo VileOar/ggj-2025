@@ -1,12 +1,14 @@
 extends Node2D
 
-# Dictionary to store each SoundPlayer nodes by its name
-var _sound_player_by_name : Dictionary = {}
-
-var queues_by_name : Dictionary = {}
-
 # Reference to the itself, ensuring only one exists
 var instance : Node
+
+# Dictionary to store each SoundPlayer nodes by its name
+var _sound_player_by_name : Dictionary = {}
+var queues_by_name : Dictionary = {}
+
+var shoot_is_cooldown = false
+var bounce_is_cooldown = false
 
 func _ready():
 	# Store itself to be avaiable in instance. this is used to call functions
@@ -39,6 +41,7 @@ func _ready():
 	add_to_sound_player_dictionary("Menu", $Music/Menu)
 
 	queues_by_name["shoot"] = $ShootAudioQueue
+	queues_by_name["bounce"] = $BounceAudioQueue
 	
 	
 func play_audio(audio_name):
@@ -57,6 +60,26 @@ func play_audio_queue(audio_name):
 	var audio_queue : AudioQueue = queues_by_name.get(audio_name)	
 	if audio_queue != null:
 			audio_queue.play_sound()
+
+
+func play_shoot_delay(delay:float):
+	if !shoot_is_cooldown:
+		shoot_is_cooldown = true
+		var audio_queue : AudioQueue = queues_by_name.get("shoot")	
+		if audio_queue != null:
+			audio_queue.play_sound()
+			await get_tree().create_timer(delay).timeout
+			shoot_is_cooldown = false
+
+
+func play_bounce_delay(delay:float):
+	if !bounce_is_cooldown:
+		bounce_is_cooldown = true
+		var audio_queue : AudioQueue = queues_by_name.get("bounce")	
+		if audio_queue != null:
+			audio_queue.play_sound()
+			await get_tree().create_timer(delay).timeout
+			bounce_is_cooldown = false
 
 
 func stop_audio(audio_name):
