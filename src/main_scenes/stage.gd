@@ -3,6 +3,7 @@ extends Node
 @export var BUBBLE: PackedScene
 
 @onready var _bubble_holder: Node2D = %BubbleHolder
+@onready var _stage_audio_stream: Node2D = %StageAudioStream
 
 
 func _ready() -> void:

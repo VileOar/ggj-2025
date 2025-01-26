@@ -38,6 +38,12 @@ var _max_strength_threshold = 1.0
 ## strength at which the meter rigidbody is pushed in the opposite direction of player movement
 var _meter_overlap_strength = 230
 
+## used to know when walk state changes
+var _was_walking = false
+
+## used to know when taunt state changes
+var _is_taunting = false
+
 
 func enter() -> void:
 	# setup angle_position
@@ -61,18 +67,30 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	_last_position = rigidbody().position
-	
 	var mov_amount = 0
-	if !_holding_button:
+
+	if Input.get_action_strength(get_action("taunt")):
+		_is_taunting = true
+		fsm().play_anim("taunt")
+		fsm().play_audio("taunt", true)
+	else:
+		_is_taunting = false
+	
+	if !_holding_button and !_is_taunting:
 		mov_amount -= Input.get_action_strength(get_action("mov_right"))
 		mov_amount += Input.get_action_strength(get_action("mov_left"))
 		
 		if mov_amount != 0:
 			fsm().play_anim("walk")
-		elif Input.get_action_strength(get_action("taunt")):
-			fsm().play_anim("taunt")
+			if _was_walking == false:
+				fsm().play_audio("walk", true)
+			_was_walking = true
 		else:
 			fsm().play_anim("idle")
+			_stop_walking()
+	else:
+		_stop_walking()
+		
 
 	# amplify joint2d/drag effect by adding additional force
 	if mov_amount != 0:
@@ -104,6 +122,12 @@ func _update_transform(ph_state: PhysicsDirectBodyState2D):
 # manipulate angle_position variable to correspond to the current angle to centre
 func _setup_angle_position():
 	_angle_pos = rad_to_deg(rigidbody().position.angle())
+
+
+func _stop_walking():
+	if _was_walking:
+		fsm().play_audio("walk", false)
+		_was_walking = false
 
 
 # Change to rigid body state
@@ -139,6 +163,8 @@ func spawn_bubble():
 	var impulse = -Vector2.from_angle(_meter_rb.global_rotation) * BUBBLE_LAUNCH_SPEED
 	var bubble_scale_percent = MAX_BUBBLE_SCALE_PERCENT * _strength_percent
 	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
+
+	AudioManager.play_audio_queue("shoot")
 	
 	_strength_percent = 0.0
 	_holding_button = false

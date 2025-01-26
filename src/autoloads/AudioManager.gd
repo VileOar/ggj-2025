@@ -3,6 +3,8 @@ extends Node2D
 # Dictionary to store each SoundPlayer nodes by its name
 var _sound_player_by_name : Dictionary = {}
 
+var queues_by_name : Dictionary = {}
+
 # Reference to the itself, ensuring only one exists
 var instance : Node
 
@@ -35,6 +37,8 @@ func _ready():
 	add_to_sound_player_dictionary("EndGamee", $Music/EndGame)
 	add_to_sound_player_dictionary("Arena", $Music/Arena)
 	add_to_sound_player_dictionary("Menu", $Music/Menu)
+
+	queues_by_name["shoot"] = $ShootAudioQueue
 	
 	
 func play_audio(audio_name):
@@ -47,6 +51,12 @@ func play_audio(audio_name):
 	
 	if audio_node != null:
 			audio_node.play()
+
+
+func play_audio_queue(audio_name):
+	var audio_queue : AudioQueue = queues_by_name.get(audio_name)	
+	if audio_queue != null:
+			audio_queue.play_sound()
 
 
 func stop_audio(audio_name):

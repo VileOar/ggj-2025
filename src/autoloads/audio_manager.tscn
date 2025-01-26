@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://djwk13ndrtnof"]
+[gd_scene load_steps=16 format=3 uid="uid://djwk13ndrtnof"]
 
 [ext_resource type="Script" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
 [ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/UI_accept.wav" id="2_1dq0b"]
@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://f10i6va7y17y" path="res://assets/audio/sfx/final_impact.wav" id="12_no3yj"]
 [ext_resource type="AudioStream" uid="uid://cniff4iegi6ws" path="res://assets/audio/sfx/shoot_big.wav" id="13_ofb10"]
 [ext_resource type="AudioStream" uid="uid://brvkr6xjsn6ns" path="res://assets/audio/sfx/shoot_small.wav" id="14_b1mw7"]
+[ext_resource type="Script" path="res://src/tools/audio_queue.gd" id="15_oram0"]
 
 [node name="AudioManager" type="Node2D"]
 process_mode = 3
@@ -106,3 +107,11 @@ autoplay = true
 [node name="Menu" type="AudioStreamPlayer" parent="Music"]
 volume_db = -20.0
 autoplay = true
+
+[node name="ShootAudioQueue" type="Node" parent="."]
+script = ExtResource("15_oram0")
+count = 9
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="ShootAudioQueue"]
+stream = ExtResource("14_b1mw7")
+bus = &"SFX"
