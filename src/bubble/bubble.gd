@@ -150,7 +150,7 @@ func _physics_process(delta: float) -> void:
 
 func _is_slow_collision() -> bool:
 #	Detects if FASTER than threshold
-	if abs(linear_velocity.x) > COLLISION_VELOCITY_THRESHOLD || abs(linear_velocity.y) > COLLISION_VELOCITY_THRESHOLD:
+	if abs(linear_velocity.length()) > COLLISION_VELOCITY_THRESHOLD:
 		return false
 	else:
 		return true

@@ -5,6 +5,8 @@ const STAGE_RADIUS = 232
 
 var _rng := RandomNumberGenerator.new()
 
+var winner = -1
+
 ## LOCATOR VARIABLES
 
 # the "service" node that is responsible for spawning bubbles (see the ready func in stage.gd)
