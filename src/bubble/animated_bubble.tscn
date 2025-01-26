@@ -1,6 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://t5wrbthnswom"]
+[gd_scene load_steps=16 format=3 uid="uid://cvb4i5gf5lie6"]
 
 [ext_resource type="Texture2D" uid="uid://byd6oryrraxws" path="res://assets/bubbles/spritesheet_bubble_iddle_walk_and_taunt.png" id="1_re2m5"]
+[ext_resource type="Shader" path="res://src/bubble/shinny_bubble.gdshader" id="1_tcod4"]
+[ext_resource type="Script" path="res://src/bubble/shinny_bubble.gd" id="3_r1gau"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oula5"]
+shader = ExtResource("1_tcod4")
+shader_parameter/blink_color = Color(1, 1, 1, 1)
+shader_parameter/blink_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aiuop"]
 atlas = ExtResource("1_re2m5")
@@ -81,7 +88,8 @@ animations = [{
 }]
 
 [node name="AnimatedBubble" type="AnimatedSprite2D"]
-visible = false
-position = Vector2(-925, -445)
+material = SubResource("ShaderMaterial_oula5")
+position = Vector2(568, 350)
 sprite_frames = SubResource("SpriteFrames_0ox3o")
 frame_progress = 0.962641
+script = ExtResource("3_r1gau")
