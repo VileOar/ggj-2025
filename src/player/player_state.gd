@@ -12,7 +12,7 @@ const MAX_BUBBLE_BOUNCE = 10000
 var _can_change_state = true
 
 
-func rigidbody() -> RigidBody2D:
+func rigidbody() -> Player:
 	return fsm().rigidbody()
 
 
@@ -37,3 +37,7 @@ func can_change_state() -> bool:
 
 func on_collision(_body: Node) -> void:
 	pass
+
+
+func get_action(action_name: String):
+	return action_name + "_" + str(rigidbody().player_index)

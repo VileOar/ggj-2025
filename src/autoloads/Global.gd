@@ -1,7 +1,7 @@
 extends Node
 
 ## Radius of the stage circle (px).
-const STAGE_RADIUS = 128
+const STAGE_RADIUS = 232
 
 var _rng := RandomNumberGenerator.new()
 

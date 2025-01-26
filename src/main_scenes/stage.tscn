@@ -1,34 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://dbi430hooexen"]
+[gd_scene load_steps=7 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="PackedScene" uid="uid://dcfxxbn8njgkj" path="res://src/player/player_scene.tscn" id="1_1q1cn"]
 [ext_resource type="Script" path="res://src/main_scenes/stage.gd" id="1_luwh6"]
 [ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="2_e7vcn"]
+[ext_resource type="Texture2D" uid="uid://dop0xojtu8rq7" path="res://assets/background.png" id="3_2kop5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8jwm"]
-size = Vector2(384, 384)
+size = Vector2(544, 544)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8h1qn"]
-radius = 150.0
+radius = 272.118
 
 [node name="Stage" type="Node"]
 script = ExtResource("1_luwh6")
 BUBBLE = ExtResource("2_e7vcn")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_2kop5")
+
 [node name="StageHolder" type="Node2D" parent="."]
-position = Vector2(256, 192)
+position = Vector2(24, 32)
 
 [node name="BubbleHolder" type="Node2D" parent="StageHolder"]
 unique_name_in_owner = true
 
-[node name="PlayerScene" parent="StageHolder" instance=ExtResource("1_1q1cn")]
-position = Vector2(128, 0)
+[node name="Player1" parent="StageHolder" instance=ExtResource("1_1q1cn")]
+position = Vector2(232, 0)
+player_index = 1
+metadata/_edit_group_ = true
+
+[node name="Player2" parent="StageHolder" instance=ExtResource("1_1q1cn")]
+position = Vector2(-232, 0)
+player_index = 2
+metadata/_edit_group_ = true
 
 [node name="walls" type="StaticBody2D" parent="StageHolder"]
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StageHolder/walls"]
-scale = Vector2(1.5, 1.5)
-polygon = PackedVector2Array(-126.8, -128, -127.8, -124, -128, -11.2, -127, -9.7, -127, -8.3, -123.2, -7, -115.7, -7, -112.7, -9, -111.2, -9, -109, -17.9, -109, -24, -105, -34.8, -105, -37.7, -95, -56.8, -95, -58.6, -88, -66.6, -88, -68.5, -84, -71.5, -84, -73.6, -73, -83.6, -71.6, -84, -68, -87.6, -66.6, -88, -64, -90.6, -64, -91.4, -58, -94.4, -58, -95.4, -42, -102.3, -42, -103.2, -27, -107.2, -27, -108, -23, -108, -23, -109.1, -10, -110.1, -10, -111, 10.7, -111, 17.9, -109, 23.8, -109, 30.8, -106, 34.8, -106, 56.8, -95, 58.5, -95, 66.6, -88, 68.5, -88, 71.5, -84, 73.6, -84, 83.6, -73, 84, -71.6, 87.6, -68, 88, -66.6, 90.6, -64, 91.4, -64, 94.4, -58, 95.4, -58, 102.3, -42, 103.2, -42, 104.2, -37, 105.2, -37, 111, -10.8, 111, 11, 108, 23.9, 108, 27.8, 105, 34.8, 105, 37.6, 103, 39.6, 103, 42.6, 95, 56.7, 95, 58.5, 88, 66.6, 88, 68.5, 84, 71.5, 84, 73.5, 73, 83.6, 71.6, 84, 68, 87.6, 66.6, 88, 64, 90.6, 64, 91.4, 58, 94.4, 58, 95.3, 42, 102.3, 42, 103.1, 37, 104.2, 37, 105.1, 10.8, 111, -10.8, 111, -23.9, 108, -27.8, 108, -34.8, 105, -37.6, 105, -39.6, 103, -42.7, 103, -56.7, 95, -58.5, 95, -66.6, 88, -68.5, 88, -71.5, 84, -73.6, 84, -83.6, 73, -84, 71.6, -87.6, 68, -88, 66.6, -90.6, 64, -91.4, 64, -94.4, 58, -95.4, 58, -102.3, 42, -103.2, 42, -104.2, 37, -105.2, 37, -111, 12.8, -111, 9.2, -115, 8.2, -115, 6.8, -123.1, 8, -126.8, 8, -127.8, 12, -128, 126.6, -125.2, 128, 124.8, 128, 126.3, 127, 128, 127, 128, -126.8, 124, -127.8)
+position = Vector2(7.82013e-05, -8.15392e-05)
+scale = Vector2(2.43164, 2.43164)
+polygon = PackedVector2Array(-170.667, -170.667, -170.667, -0.666664, -112, -0.666664, -110.667, -14, -109, -24, -105, -37.7, -95, -58.6, -88, -68.5, -84, -73.6, -73.3333, -84, -68.6667, -88, -64, -91.4, -58, -95.4, -42, -103.2, -23, -109.1, -10, -111, 10.7, -111, 23.8, -109, 34.8, -106, 58.5, -95, 68.5, -88, 73.6, -84, 83.6, -73, 91.4, -64, 95.4, -58, 103.2, -42, 105.2, -37, 111, -10.8, 111, 11, 108, 27.8, 103, 42.6, 95, 58.5, 88, 68.5, 84, 73.5, 73, 83.6, 64, 91.4, 58, 95.3, 37, 105.1, 10.8, 111, -10.8, 111, -27.8, 108, -42.7, 103, -58.5, 95, -68.5, 88, -73.6, 84, -83.6, 73, -87.6, 68, -91.4, 64, -95.4, 58, -105.2, 37, -111, 12.8, -112, 0, -170.667, 0, -170.667, 170.667, 170.667, 170.667, 170.667, -170.667)
 
 [node name="PlayerGravity" type="Area2D" parent="StageHolder"]
 collision_layer = 0

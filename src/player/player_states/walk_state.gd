@@ -48,6 +48,8 @@ func enter() -> void:
 
 func exit() -> void:
 	_meter_rb.hide()
+	_holding_button = false
+	_strength_percent = 0
 
 
 func _process(delta: float) -> void:
@@ -62,12 +64,12 @@ func _physics_process(delta: float) -> void:
 	
 	var mov_amount = 0
 	if !_holding_button:
-		mov_amount -= Input.get_action_strength("mov_right")
-		mov_amount += Input.get_action_strength("mov_left")
+		mov_amount -= Input.get_action_strength(get_action("mov_right"))
+		mov_amount += Input.get_action_strength(get_action("mov_left"))
 		
 		if mov_amount != 0:
 			fsm().play_anim("walk")
-		elif Input.get_action_strength("taunt"):
+		elif Input.get_action_strength(get_action("taunt")):
 			fsm().play_anim("taunt")
 		else:
 			fsm().play_anim("idle")
@@ -118,14 +120,18 @@ func on_collision(body: Node) -> void:
 		if body is Bubble:
 			var mag = body.get_mass_percentage() * (MAX_BUBBLE_BOUNCE - MIN_BUBBLE_BOUNCE) + MIN_BUBBLE_BOUNCE
 			_bounce_off(-vec.normalized() * mag)
+		elif body is Player:
+			var mag = randf_range(MIN_BUBBLE_BOUNCE, MAX_BUBBLE_BOUNCE)
+			_bounce_off(-vec.normalized() * mag)
 
 
 func _unhandled_input(event):
-	if event.is_action_pressed("shoot"):
+	if event.is_action_pressed(get_action("shoot")):
 		_holding_button = true
 		fsm().play_anim("charge")
-	if event.is_action_released("shoot"):
-		spawn_bubble()
+	if event.is_action_released(get_action("shoot")):
+		if _holding_button:
+			spawn_bubble()
 
 
 func spawn_bubble():
