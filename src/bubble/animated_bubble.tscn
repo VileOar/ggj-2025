@@ -1,0 +1,87 @@
+[gd_scene load_steps=13 format=3 uid="uid://t5wrbthnswom"]
+
+[ext_resource type="Texture2D" uid="uid://byd6oryrraxws" path="res://assets/bubbles/spritesheet_bubble_iddle_walk_and_taunt.png" id="1_re2m5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aiuop"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(0, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2ijw"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(400, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib4df"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(800, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fogi8"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(1200, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uslj"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(1600, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_krx77"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(2000, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2sie"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(2400, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nylcm"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(2800, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnij0"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(3200, 0, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytot8"]
+atlas = ExtResource("1_re2m5")
+region = Rect2(3600, 0, 400, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ox3o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aiuop")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2ijw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib4df")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fogi8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uslj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_krx77")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2sie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nylcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnij0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytot8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AnimatedBubble" type="AnimatedSprite2D"]
+visible = false
+position = Vector2(-925, -445)
+sprite_frames = SubResource("SpriteFrames_0ox3o")
+frame_progress = 0.962641
