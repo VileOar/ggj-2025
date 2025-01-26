@@ -118,6 +118,7 @@ size = Vector2(64, 48)
 size = Vector2(86, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cquc"]
+resource_local_to_scene = true
 shader = ExtResource("6_pxgoi")
 shader_parameter/percent = 0.0
 shader_parameter/low_alpha = 0.3

@@ -1,6 +1,7 @@
 class_name Player
 extends RigidBody2D
 
+@export var player_index := 0
 
 @onready var controller: PlayerFSM = %Controller
 

@@ -8,7 +8,7 @@ const MIN_SCALE_LIMIT = 0.2
 const MAX_MASS = 20.0
 const MIN_MASS = 1.0
 
-const MAX_HEALTH = 5
+const MAX_HEALTH = 10
 const MIN_HEALTH = 2
 
 
@@ -61,7 +61,7 @@ func setup_bubble(impulse: Vector2, scale_percent: float) -> void:
 	_bubble_sprite.scale = _bubble_scale
 	collision_shape_2d.scale = _bubble_scale
 	
-	health = int(lerp(MIN_HEALTH, MAX_HEALTH, scale_percent))
+	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * scale_percent
 
 
 func get_mass_percentage() -> float:
@@ -85,7 +85,7 @@ func _update_size(new_body_scale) -> void:
 	if new_mass >= MAX_MASS:
 		new_mass = MAX_MASS
 	
-	health = int(lerp(MIN_HEALTH, MAX_HEALTH, percentage))
+	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * percentage
 	
 	# Apply scale to children
 	time = 0
@@ -103,6 +103,9 @@ func _physics_process(delta: float) -> void:
 		#print("new mass=", bubble.mass)
 		if _bubble_sprite.scale == new_scale:
 			_is_bubble_ready_to_scale = false
+	
+	if position.length() >= Global.STAGE_RADIUS + 48:
+		queue_free()
 
 
 func _is_slow_collision() -> bool:
@@ -129,7 +132,6 @@ func _is_scale_difference_small(body) -> bool:
 
 func _on_body_entered(body: Node2D) -> void:
 	animation_player.play("bounce")
-	health -= 1
 	if body is Bubble:
 		
 		if _is_slow_collision() or _is_scale_difference_small(body):
@@ -141,6 +143,8 @@ func _on_body_entered(body: Node2D) -> void:
 		else:
 			## PLAY ANIMATION 
 			queue_free()
+	
+	health -= 1
 	
 	# bursting
 	if body is Player or health <= 0:

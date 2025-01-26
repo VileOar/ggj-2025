@@ -27,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 		replace_state("WalkState")
 	
 	# panic stray attack
-	if Input.get_action_strength("shoot"):
+	if Input.get_action_strength(get_action("shoot")):
 		spawn_bubble()
 		_can_bubble = false
 		await get_tree().create_timer(BUBBLE_COOLDOWN).timeout
