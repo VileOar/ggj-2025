@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="GGJ2025"
-run/main_scene="res://src/main_scenes/stage.tscn"
+run/main_scene="res://src/menus/MainMenu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
+boot_splash/image="res://assets/capa.png"
 config/icon="res://assets/crab.png"
 
 [autoload]

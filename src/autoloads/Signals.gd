@@ -7,4 +7,4 @@ extends Node
 
 ## Simply declare signal and add warning ignore.
 @warning_ignore("unused_signal")
-signal _example
+signal crab_lose(player_index)

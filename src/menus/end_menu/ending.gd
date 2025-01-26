@@ -12,6 +12,7 @@ var main_menu_scene : PackedScene
 func _ready():
 	main_menu_scene = load("res://src/menus/MainMenu.tscn")
 	menu_button.button_down.connect(_on_menu_pressed)
+	set_winner(Global.winner != 1)
 
 func set_winner(is_orange_winner: bool) -> void:
 	yellow_background.visible = !is_orange_winner
