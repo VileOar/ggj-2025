@@ -23,7 +23,7 @@ const LIFESPAN_TIME = 5
 @export var COLLISION_VELOCITY_THRESHOLD = 60.0
 @export var COLLISION_SCALE_PERCENTAGE_THRESHOLD = 0.25
 @export var ON_JOIN_SCALE_DIVISION_FACTOR = 3
-@export var BUBBLE_IS_DANGEROUS_PERCENTAGE = 0.6
+@export var BUBBLE_IS_DANGEROUS_PERCENTAGE = 0.4
 
 @onready var _bubble_sprite: Node2D = $bubble
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -182,7 +182,7 @@ func _on_lifespan_timeout() -> void:
 
 
 func is_bubble_dangerous() -> bool:
-	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
+	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and !_is_slow_collision():
 		return true
 	else:
 		return false

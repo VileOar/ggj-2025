@@ -6,7 +6,7 @@ const SNAP_SPEED_THRESH = 20
 const BORDER_DISTANCE_THRES = 4
 const MAX_FLOAT_SPEED = 240
 
-const BUBBLE_COOLDOWN = 0.6
+const BUBBLE_COOLDOWN = 0.03
 
 
 var _can_bubble = true
@@ -27,7 +27,7 @@ func _physics_process(_delta: float) -> void:
 		replace_state("WalkState")
 	
 	# panic stray attack
-	if Input.get_action_strength(get_action("shoot")):
+	if Input.get_action_strength(get_action("shoot")) and _can_bubble:
 		spawn_bubble()
 		_can_bubble = false
 		await get_tree().create_timer(BUBBLE_COOLDOWN).timeout
