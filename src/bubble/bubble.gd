@@ -173,3 +173,8 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_lifespan_timeout() -> void:
 	queue_free()
+
+
+# TODO: remove
+func is_bubble_dangerous():
+	return false
