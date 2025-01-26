@@ -1,6 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://djwk13ndrtnof"]
+[gd_scene load_steps=15 format=3 uid="uid://djwk13ndrtnof"]
 
 [ext_resource type="Script" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
+[ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/UI_accept.wav" id="2_1dq0b"]
+[ext_resource type="AudioStream" uid="uid://pko3vu5mkndb" path="res://assets/audio/sfx/ui/UI_decline.wav" id="3_5qf1k"]
+[ext_resource type="AudioStream" uid="uid://bmsjpuvlwfa8m" path="res://assets/audio/sfx/bubble_bounce.wav" id="4_3uo64"]
+[ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="5_1lysb"]
+[ext_resource type="AudioStream" uid="uid://8e5p5aknx574" path="res://assets/audio/sfx/bubble_merge.wav" id="6_7id7o"]
+[ext_resource type="AudioStream" uid="uid://cebve8gd1u3c1" path="res://assets/audio/sfx/bubble_pop.wav" id="7_hhjsi"]
+[ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="8_jlj8f"]
+[ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="9_1ei4r"]
+[ext_resource type="AudioStream" uid="uid://cfmu3e1d1eoc6" path="res://assets/audio/sfx/crab_taunt.wav" id="10_n3cfj"]
+[ext_resource type="AudioStream" uid="uid://d2gs55jhb72uk" path="res://assets/audio/sfx/crab_walk.mp3" id="11_fu2gy"]
+[ext_resource type="AudioStream" uid="uid://f10i6va7y17y" path="res://assets/audio/sfx/final_impact.wav" id="12_no3yj"]
+[ext_resource type="AudioStream" uid="uid://cniff4iegi6ws" path="res://assets/audio/sfx/shoot_big.wav" id="13_ofb10"]
+[ext_resource type="AudioStream" uid="uid://brvkr6xjsn6ns" path="res://assets/audio/sfx/shoot_small.wav" id="14_b1mw7"]
 
 [node name="AudioManager" type="Node2D"]
 process_mode = 3
@@ -8,25 +21,88 @@ script = ExtResource("1_asmxu")
 
 [node name="UI" type="Node" parent="."]
 
-[node name="ButtonHover" type="AudioStreamPlayer" parent="UI"]
-volume_db = -13.0
+[node name="ButtonAccept" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource("2_1dq0b")
+volume_db = -10.0
 max_polyphony = 10
 
-[node name="ButtonPress" type="AudioStreamPlayer" parent="UI"]
+[node name="ButtonDecline" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource("3_5qf1k")
+volume_db = -10.0
 max_polyphony = 10
 
 [node name="Bubble" type="Node" parent="."]
 
+[node name="Bounce" type="AudioStreamPlayer" parent="Bubble"]
+stream = ExtResource("4_3uo64")
+volume_db = -5.0
+
+[node name="Charge" type="AudioStreamPlayer" parent="Bubble"]
+stream = ExtResource("5_1lysb")
+volume_db = -5.0
+
+[node name="Merge" type="AudioStreamPlayer" parent="Bubble"]
+stream = ExtResource("6_7id7o")
+
 [node name="Pop" type="AudioStreamPlayer" parent="Bubble"]
+stream = ExtResource("7_hhjsi")
+volume_db = -5.0
 
-[node name="Player" type="Node" parent="."]
+[node name="Crab" type="Node" parent="."]
 
-[node name="Charge" type="AudioStreamPlayer" parent="Player"]
+[node name="Death" type="AudioStreamPlayer" parent="Crab"]
+stream = ExtResource("8_jlj8f")
+volume_db = -5.0
+max_polyphony = 10
+
+[node name="Flailing" type="AudioStreamPlayer" parent="Crab"]
+stream = ExtResource("9_1ei4r")
 volume_db = -10.0
+max_polyphony = 10
+
+[node name="Taunt" type="AudioStreamPlayer" parent="Crab"]
+stream = ExtResource("10_n3cfj")
+volume_db = -10.0
+max_polyphony = 10
+
+[node name="Walk" type="AudioStreamPlayer" parent="Crab"]
+stream = ExtResource("11_fu2gy")
+volume_db = -10.0
+max_polyphony = 10
+
+[node name="FinalImpact" type="AudioStreamPlayer" parent="Crab"]
+stream = ExtResource("12_no3yj")
+volume_db = -5.0
+max_polyphony = 10
+
+[node name="ShootBig" type="AudioStreamPlayer" parent="Crab"]
+stream = ExtResource("13_ofb10")
+volume_db = -5.0
+max_polyphony = 10
+
+[node name="ShootSmall" type="AudioStreamPlayer" parent="Crab"]
+stream = ExtResource("14_b1mw7")
+volume_db = -5.0
 max_polyphony = 10
 
 [node name="Music" type="Node" parent="."]
 
-[node name="Music1" type="AudioStreamPlayer" parent="Music"]
+[node name="EndRound" type="AudioStreamPlayer" parent="Music"]
+volume_db = -20.0
+autoplay = true
+
+[node name="Ambiance" type="AudioStreamPlayer" parent="Music"]
+volume_db = -20.0
+autoplay = true
+
+[node name="EndGame" type="AudioStreamPlayer" parent="Music"]
+volume_db = -20.0
+autoplay = true
+
+[node name="Arena" type="AudioStreamPlayer" parent="Music"]
+volume_db = -20.0
+autoplay = true
+
+[node name="Menu" type="AudioStreamPlayer" parent="Music"]
 volume_db = -20.0
 autoplay = true

@@ -11,17 +11,30 @@ func _ready():
 	# of the script
 	instance = self
 	#add the sounds
-	add_to_sound_player_dictionary("ButtonHover", $UI/ButtonHover)
-	add_to_sound_player_dictionary("ButtonPress", $UI/ButtonPress)
+	add_to_sound_player_dictionary("ButtonAccept", $UI/ButtonAccept)
+	add_to_sound_player_dictionary("ButtonDecline", $UI/ButtonDecline)
 	
 	# Buble
+	add_to_sound_player_dictionary("Bounce", $Bubble/Bounce)
+	add_to_sound_player_dictionary("Charge", $Bubble/Charge)
+	add_to_sound_player_dictionary("Merge", $Bubble/Merge)
 	add_to_sound_player_dictionary("Pop", $Bubble/Pop)
 
-	# Player
-	add_to_sound_player_dictionary("Charge", $Player/Charge)	
+	# Crab
+	add_to_sound_player_dictionary("Death", $Crab/Death)	
+	add_to_sound_player_dictionary("Flailing", $Crab/Flailing)	
+	add_to_sound_player_dictionary("Taunt", $Crab/Taunt)	
+	add_to_sound_player_dictionary("Walk", $Crab/Walk)	
+	add_to_sound_player_dictionary("FinalImpact", $Crab/FinalImpact)	
+	add_to_sound_player_dictionary("ShootBig", $Crab/ShootBig)	
+	add_to_sound_player_dictionary("ShootSmall", $Crab/ShootSmall)	
 	
-	#Music
-	add_to_sound_player_dictionary("Music1", $Music/Music1)
+	# Music
+	add_to_sound_player_dictionary("EndRound", $Music/EndRound)
+	add_to_sound_player_dictionary("Ambiance", $Music/Ambiance)
+	add_to_sound_player_dictionary("EndGamee", $Music/EndGame)
+	add_to_sound_player_dictionary("Arena", $Music/Arena)
+	add_to_sound_player_dictionary("Menu", $Music/Menu)
 	
 	
 func play_audio(audio_name):
