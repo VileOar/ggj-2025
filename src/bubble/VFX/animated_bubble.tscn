@@ -1,52 +1,53 @@
-[gd_scene load_steps=16 format=3 uid="uid://cvb4i5gf5lie6"]
+[gd_scene load_steps=17 format=3 uid="uid://cvb4i5gf5lie6"]
 
-[ext_resource type="Texture2D" uid="uid://byd6oryrraxws" path="res://assets/bubbles/spritesheet_bubble_iddle_walk_and_taunt.png" id="1_re2m5"]
-[ext_resource type="Shader" path="res://src/bubble/shinny_bubble.gdshader" id="1_tcod4"]
-[ext_resource type="Script" path="res://src/bubble/shinny_bubble.gd" id="3_r1gau"]
+[ext_resource type="Shader" path="res://src/bubble/shinny_bubble.gdshader" id="1_ajvl2"]
+[ext_resource type="Texture2D" uid="uid://byd6oryrraxws" path="res://assets/bubbles/spritesheet_bubble_iddle_walk_and_taunt.png" id="2_6c32u"]
+[ext_resource type="Script" path="res://src/bubble/shinny_bubble.gd" id="3_vl0in"]
+[ext_resource type="PackedScene" uid="uid://cuynpbc8imfmo" path="res://src/bubble/VFX/shadow_bubble.tscn" id="4_eiywr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oula5"]
-shader = ExtResource("1_tcod4")
+shader = ExtResource("1_ajvl2")
 shader_parameter/blink_color = Color(1, 1, 1, 1)
 shader_parameter/blink_intensity = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aiuop"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(0, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j2ijw"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(400, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ib4df"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(800, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fogi8"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(1200, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5uslj"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(1600, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_krx77"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(2000, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d2sie"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(2400, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nylcm"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(2800, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nnij0"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(3200, 0, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ytot8"]
-atlas = ExtResource("1_re2m5")
+atlas = ExtResource("2_6c32u")
 region = Rect2(3600, 0, 400, 400)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0ox3o"]
@@ -92,4 +93,7 @@ material = SubResource("ShaderMaterial_oula5")
 position = Vector2(568, 350)
 sprite_frames = SubResource("SpriteFrames_0ox3o")
 frame_progress = 0.962641
-script = ExtResource("3_r1gau")
+script = ExtResource("3_vl0in")
+
+[node name="ShadowBubble" parent="." instance=ExtResource("4_eiywr")]
+modulate = Color(1, 1, 1, 1)
