@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_8d1jj"]
 [ext_resource type="Material" uid="uid://dqkscowue6kdv" path="res://src/bubble/VFX/blink_intensity.tres" id="3_4jc6o"]
 [ext_resource type="PackedScene" uid="uid://74i7775f1mqv" path="res://src/bubble/VFX/BUBBLE_TRACE.tscn" id="3_imspv"]
-[ext_resource type="Script" path="res://src/bubble/vfx_effects.gd" id="4_c374c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_44sl2"]
 bounce = 0.7
@@ -114,6 +113,35 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="GDScript" id="GDScript_p3aqt"]
+script/source = "extends AnimatedSprite2D
+
+@onready var animated_bubble: AnimatedSprite2D = $\".\"
+
+var _tween
+var _is_vfx_active = false
+
+
+func _shine(new_value : float):
+	animated_bubble.material.set_shader_parameter(\"blink_intensity\", new_value)
+
+
+func activate_vfx_shine() -> void:
+##	Create Tween
+	#_tween = get_tree().create_tween()
+##	Loops infinitly
+	#_tween.set_loops()
+	#
+	#if !_is_vfx_active:
+		#_tween = get_tree().create_tween()
+	##	Loops infinitly
+		#_tween.set_loops()
+		#_tween.tween_method(_shine, 0.25, 0.8, 1)
+		#_tween.tween_method(_shine, 0.8, 0.25, 1)
+		#_is_vfx_active = true
+	pass
+"
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_hsqk6"]
 radius = 48.28
 
@@ -172,7 +200,7 @@ scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_i5yeh")
 animation = &"burst"
 autoplay = "default"
-script = ExtResource("4_c374c")
+script = SubResource("GDScript_p3aqt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hsqk6")

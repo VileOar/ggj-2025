@@ -4,8 +4,7 @@
 [ext_resource type="Script" path="res://src/bubble/VFX/bubble_trace.gd" id="2_nyv5d"]
 
 [node name="BubbleTrace" type="Sprite2D"]
-z_index = -1
+z_as_relative = false
 position = Vector2(624, 265)
-scale = Vector2(0.6, 0.6)
 texture = ExtResource("1_qlb3s")
 script = ExtResource("2_nyv5d")
