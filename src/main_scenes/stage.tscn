@@ -21,10 +21,8 @@ BUBBLE = ExtResource("2_e7vcn")
 texture = ExtResource("3_2kop5")
 
 [node name="StageHolder" type="Node2D" parent="."]
-position = Vector2(24, 32)
-
-[node name="BubbleHolder" type="Node2D" parent="StageHolder"]
-unique_name_in_owner = true
+position = Vector2(0, 32)
+metadata/_edit_group_ = true
 
 [node name="Player1" parent="StageHolder" instance=ExtResource("1_1q1cn")]
 position = Vector2(232, 0)
@@ -35,6 +33,9 @@ metadata/_edit_group_ = true
 position = Vector2(-232, 0)
 player_index = 2
 metadata/_edit_group_ = true
+
+[node name="BubbleHolder" type="Node2D" parent="StageHolder"]
+unique_name_in_owner = true
 
 [node name="walls" type="StaticBody2D" parent="StageHolder"]
 collision_mask = 0
