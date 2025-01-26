@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://ck0kxlxtpq7wk"]
+[gd_scene load_steps=23 format=3 uid="uid://ck0kxlxtpq7wk"]
 
 [ext_resource type="Script" path="res://src/bubble/bubble.gd" id="1_0kru2"]
+[ext_resource type="PackedScene" uid="uid://cmdducucqdn0e" path="res://src/bubble/bubble_burst.tscn" id="2_5kfs1"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_8d1jj"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_44sl2"]
@@ -151,11 +152,11 @@ _data = {
 }
 
 [node name="Bubble" type="RigidBody2D"]
-position = Vector2(980, 360)
 collision_layer = 4
 collision_mask = 7
 physics_material_override = SubResource("PhysicsMaterial_44sl2")
 script = ExtResource("1_0kru2")
+BURST = ExtResource("2_5kfs1")
 
 [node name="bubble" type="Node2D" parent="."]
 
@@ -175,4 +176,7 @@ libraries = {
 "": SubResource("AnimationLibrary_vftgc")
 }
 
+[node name="Lifespan" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
