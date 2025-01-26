@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=32 format=3 uid="uid://dcfxxbn8njgkj"]
 
 [ext_resource type="Script" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" path="res://src/player/player_state_machine.gd" id="2_036d8"]
@@ -6,11 +6,11 @@
 [ext_resource type="Script" path="res://src/player/player_states/walk_state.gd" id="3_3ry0h"]
 [ext_resource type="Script" path="res://src/player/player_states/float_state.gd" id="4_7k5ks"]
 [ext_resource type="Shader" path="res://assets/shaders/strength_indicator.gdshader" id="6_pxgoi"]
+[ext_resource type="Script" path="res://src/player/player_states/lose_state.gd" id="6_rps7g"]
 [ext_resource type="AudioStream" uid="uid://d2gs55jhb72uk" path="res://assets/audio/sfx/crab_walk.mp3" id="7_lj2gh"]
 [ext_resource type="AudioStream" uid="uid://cfmu3e1d1eoc6" path="res://assets/audio/sfx/crab_taunt.wav" id="8_xw0ln"]
 [ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="9_i7ama"]
 [ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="10_i3f16"]
-[ext_resource type="Script" path="res://src/player/player_states/lose_state.gd" id="6_rps7g"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
 bounce = 0.7
