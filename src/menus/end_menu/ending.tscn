@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bejtoe3wwm5hr"]
+[gd_scene load_steps=12 format=3 uid="uid://bejtoe3wwm5hr"]
 
 [ext_resource type="Script" path="res://src/menus/end_menu/ending.gd" id="1_7u1o0"]
+[ext_resource type="Texture2D" uid="uid://c1tanjtlt2pwn" path="res://assets/buttons/back.png" id="2_5t8i2"]
+[ext_resource type="Texture2D" uid="uid://ddnkr6nevptpv" path="res://assets/bubbles/bubble_single.png" id="3_u6uql"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5w1fm"]
 
@@ -12,6 +14,33 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4gwtt"]
 
+[sub_resource type="Curve" id="Curve_i3jke"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m5hqa"]
+curve = SubResource("Curve_i3jke")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b4egk"]
+lifetime_randomness = 0.52
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 60.0
+angle_min = 90.0
+angle_max = 90.0
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, -98, 0)
+linear_accel_max = 10.0
+radial_accel_max = 10.0
+tangential_accel_min = 5.0
+tangential_accel_max = 15.0
+scale_min = 0.4
+scale_max = 0.7
+color = Color(1, 1, 1, 0.823529)
+alpha_curve = SubResource("CurveTexture_m5hqa")
+
 [node name="Ending" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -21,8 +50,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7u1o0")
 
-[node name="Background" type="PanelContainer" parent="."]
+[node name="OrangeBackground" type="PanelContainer" parent="."]
 layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_5w1fm")
+
+[node name="YellowBackground" type="PanelContainer" parent="."]
 offset_right = 1280.0
 offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_5w1fm")
@@ -64,7 +98,6 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_ncfh2")
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 113
-text = "Aww!"
 
 [node name="HorizontalContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
@@ -85,13 +118,11 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_2fh43")
 [node name="Label" type="Label" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
-text = "The cat ran away so
-the summoning failed :("
 horizontal_alignment = 1
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
-theme_override_constants/separation = 145
+theme_override_constants/separation = 350
 theme_override_styles/separator = SubResource("StyleBoxEmpty_2fh43")
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
@@ -99,7 +130,7 @@ layout_mode = 2
 
 [node name="MenuButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CenterContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 64)
+custom_minimum_size = Vector2(400, 128)
 layout_mode = 2
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
@@ -107,6 +138,49 @@ theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
+theme_override_colors/icon_hover_pressed_color = Color(1, 0.654902, 0.741176, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_4612w")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_4gwtt")
-text = "Back to Main Menu"
+icon = ExtResource("2_5t8i2")
+icon_alignment = 1
+
+[node name="Effects" type="Control" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Bubble2" type="GPUParticles2D" parent="MarginContainer/Effects"]
+position = Vector2(111, 671)
+amount = 3
+amount_ratio = 0.5
+process_material = SubResource("ParticleProcessMaterial_b4egk")
+texture = ExtResource("3_u6uql")
+lifetime = 5.0
+randomness = 0.6
+
+[node name="Bubble" type="GPUParticles2D" parent="MarginContainer/Effects"]
+position = Vector2(1118, 695)
+amount = 3
+amount_ratio = 0.5
+process_material = SubResource("ParticleProcessMaterial_b4egk")
+texture = ExtResource("3_u6uql")
+lifetime = 5.0
+randomness = 0.6
+
+[node name="Bubble3" type="GPUParticles2D" parent="MarginContainer/Effects"]
+position = Vector2(123, 218)
+amount = 3
+amount_ratio = 0.5
+process_material = SubResource("ParticleProcessMaterial_b4egk")
+texture = ExtResource("3_u6uql")
+lifetime = 5.0
+randomness = 0.6
+
+[node name="Bubble4" type="GPUParticles2D" parent="MarginContainer/Effects"]
+position = Vector2(1130, 242)
+amount = 3
+amount_ratio = 0.5
+process_material = SubResource("ParticleProcessMaterial_b4egk")
+texture = ExtResource("3_u6uql")
+lifetime = 5.0
+randomness = 0.6
