@@ -4,8 +4,9 @@ extends PlayerState
 # the max percentage of the max bubble size that the player can achieve with a charge
 const MAX_BUBBLE_SCALE_PERCENT = 0.6
 
-# max speed at which to launch the bubbles
-const BUBBLE_LAUNCH_SPEED = 100
+# speed at which to launch the bubbles
+const MIN_BUBBLE_LAUNCH_SPEED = 100
+const MAX_BUBBLE_LAUNCH_SPEED = 400
 
 ## ref to the strength indicator sprite
 @onready var _aim_meter: Sprite2D = %AimMeter
@@ -159,8 +160,10 @@ func _unhandled_input(event):
 
 
 func spawn_bubble():
+	var launch_speed = MIN_BUBBLE_LAUNCH_SPEED + (MAX_BUBBLE_LAUNCH_SPEED - MIN_BUBBLE_LAUNCH_SPEED) * _strength_percent
+	
 	var pos = _meter_rb.global_position - rigidbody().get_parent().global_position
-	var impulse = -Vector2.from_angle(_meter_rb.global_rotation) * BUBBLE_LAUNCH_SPEED
+	var impulse = -Vector2.from_angle(_meter_rb.global_rotation) * launch_speed
 	var bubble_scale_percent = MAX_BUBBLE_SCALE_PERCENT * _strength_percent
 	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
 

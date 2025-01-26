@@ -14,7 +14,7 @@ var _can_bubble = true
 
 func enter() -> void:
 	start_state_cooldown()
-	fsm().play_anim("idle")
+	fsm().play_anim("float")
 
 
 func _physics_process(_delta: float) -> void:

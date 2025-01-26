@@ -86,7 +86,7 @@ func get_mass_percentage() -> float:
 
 func _update_size(new_body_scale) -> void: 
 #	Gets percentage based on the current percentage of the the enemy
-	var percentage = ((new_body_scale.mass - MIN_MASS) / _total_percentage_mass)
+	var percentage = (max(0, new_body_scale.mass - MIN_MASS) / _total_percentage_mass)
 #	Adds 1/3 of the mass to the current bubble
 	percentage = percentage / ON_JOIN_SCALE_DIVISION_FACTOR
 	
