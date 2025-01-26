@@ -23,6 +23,7 @@ const LIFESPAN_TIME = 5
 @export var COLLISION_VELOCITY_THRESHOLD = 60.0
 @export var COLLISION_SCALE_PERCENTAGE_THRESHOLD = 0.25
 @export var ON_JOIN_SCALE_DIVISION_FACTOR = 3
+@export var BUBBLE_IS_DANGEROUS_PERCENTAGE = 0.6
 
 @onready var _bubble_sprite: Node2D = $bubble
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
@@ -48,6 +49,7 @@ var new_mass = 1.0
 
 # num of hits before bursting
 var health = 1
+var scale_percent
 
 
 func _ready() -> void:
@@ -56,11 +58,12 @@ func _ready() -> void:
 	max_contacts_reported = 5
 
 
-func setup_bubble(impulse: Vector2, scale_percent: float) -> void:
+func setup_bubble(impulse: Vector2, _scale_percent: float) -> void:
 	apply_impulse(impulse)
+	scale_percent = _scale_percent
 	
-	var scale_tmp = MIN_SCALE_LIMIT + (_total_percentage_scale * scale_percent)
-	var mass_tmp = MIN_MASS + (_total_percentage_mass * scale_percent)
+	var scale_tmp = MIN_SCALE_LIMIT + (_total_percentage_scale * _scale_percent)
+	var mass_tmp = MIN_MASS + (_total_percentage_mass * _scale_percent)
 	_bubble_scale = Vector2(scale_tmp, scale_tmp)
 	
 	# Apply scale and mass to children
@@ -68,9 +71,12 @@ func setup_bubble(impulse: Vector2, scale_percent: float) -> void:
 	_bubble_sprite.scale = _bubble_scale
 	collision_shape_2d.scale = _bubble_scale
 	
-	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * scale_percent
+	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * _scale_percent
 	
-	if scale_percent < LIFESPAN_PERCENT_THRESH:
+	#if is_bubble_dangerous():
+		#animated_sprite_2d.activate_vfx_shine()
+	
+	if _scale_percent < LIFESPAN_PERCENT_THRESH:
 		lifespan.start(LIFESPAN_TIME)
 
 
@@ -175,6 +181,8 @@ func _on_lifespan_timeout() -> void:
 	queue_free()
 
 
-# TODO: remove
-func is_bubble_dangerous():
-	return false
+func is_bubble_dangerous() -> bool:
+	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
+		return true
+	else:
+		return false
