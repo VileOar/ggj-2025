@@ -3,6 +3,8 @@ extends RigidBody2D
 
 signal big_bubble_collision
 
+@export var BURST: PackedScene
+
 const MAX_SCALE_LIMIT = 1.6
 const MIN_SCALE_LIMIT = 0.2
 const MAX_MASS = 20.0
@@ -10,6 +12,10 @@ const MIN_MASS = 1.0
 
 const MAX_HEALTH = 10
 const MIN_HEALTH = 2
+
+# percentage of size; under this value, bubbles will have lifespan
+const LIFESPAN_PERCENT_THRESH = 0.2
+const LIFESPAN_TIME = 5
 
 
 @export var SPEED = 300.0
@@ -23,6 +29,7 @@ const MIN_HEALTH = 2
 @onready var bubble: Bubble = $"."
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animated_sprite_2d: AnimatedSprite2D = $bubble/AnimProxy/AnimatedSprite2D
+@onready var lifespan: Timer = $Lifespan
 
 
 var _bubble_scale : Vector2 = Vector2(1.0, 1.0)
@@ -62,6 +69,9 @@ func setup_bubble(impulse: Vector2, scale_percent: float) -> void:
 	collision_shape_2d.scale = _bubble_scale
 	
 	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * scale_percent
+	
+	if scale_percent < LIFESPAN_PERCENT_THRESH:
+		lifespan.start(LIFESPAN_TIME)
 
 
 func get_mass_percentage() -> float:
@@ -86,6 +96,9 @@ func _update_size(new_body_scale) -> void:
 		new_mass = MAX_MASS
 	
 	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * percentage
+	
+	if percentage < LIFESPAN_PERCENT_THRESH:
+		lifespan.start(LIFESPAN_TIME)
 	
 	# Apply scale to children
 	time = 0
@@ -131,10 +144,11 @@ func _is_scale_difference_small(body) -> bool:
 
 
 func _on_body_entered(body: Node2D) -> void:
+	lifespan.start(LIFESPAN_TIME)
 	animation_player.play("bounce")
 	if body is Bubble:
 		
-		if _is_slow_collision() or _is_scale_difference_small(body):
+		if _is_scale_difference_small(body):
 			return
 		
 		if _bubble_scale.x >= body._bubble_scale.x:
@@ -150,6 +164,17 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Player or health <= 0:
 		## PLAY ANIMATION 
 		animation_player.stop()
-		animated_sprite_2d.play("burst")
-		# TODO: NOT LIKE THIS: instead, delete this node immediately and spawn a collision-less animated sprite of the burst animation that deletes itself in the end (to avoid collision during the burst animation)
+		var burst = BURST.instantiate()
+		burst.position = position
+		burst.scale = _bubble_sprite.scale
+		get_parent().add_child(burst)
 		queue_free()
+
+
+func _on_lifespan_timeout() -> void:
+	queue_free()
+
+
+# TODO: remove
+func is_bubble_dangerous():
+	return false

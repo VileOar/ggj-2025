@@ -39,8 +39,11 @@ func on_collision(body: Node) -> void:
 		var vec = body.position - rigidbody().position
 		
 		if body is Bubble:
-			var mag = body.get_mass_percentage() * (MAX_BUBBLE_BOUNCE - MIN_BUBBLE_BOUNCE) + MIN_BUBBLE_BOUNCE
-			apply_uncentred_impulse(-vec.normalized() * mag)
+			if body.is_bubble_dangerous():
+				replace_state("LoseState")
+			else:
+				var mag = body.get_mass_percentage() * (MAX_BUBBLE_BOUNCE - MIN_BUBBLE_BOUNCE) + MIN_BUBBLE_BOUNCE
+				apply_uncentred_impulse(-vec.normalized() * mag)
 
 
 func spawn_bubble():
