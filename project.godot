@@ -19,6 +19,7 @@ config/icon="res://assets/crab.png"
 
 Signals="*res://src/autoloads/Signals.gd"
 Global="*res://src/autoloads/Global.gd"
+AudioManager="*res://src/autoloads/audio_manager.tscn"
 
 [display]
 
