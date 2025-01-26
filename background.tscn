@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://07vgjejin8jn"]
+
+[ext_resource type="Texture2D" uid="uid://b40qgpivtksif" path="res://assets/backgrounds/background_game_2.png" id="1_dlw5w"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36kx8"]
+texture = ExtResource("1_dlw5w")
+
+[node name="Background" type="PanelContainer"]
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_36kx8")
