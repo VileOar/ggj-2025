@@ -1,12 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://ck0kxlxtpq7wk"]
+[gd_scene load_steps=28 format=3 uid="uid://ck0kxlxtpq7wk"]
 
 [ext_resource type="Script" path="res://src/bubble/bubble.gd" id="1_0kru2"]
 [ext_resource type="PackedScene" uid="uid://cmdducucqdn0e" path="res://src/bubble/bubble_burst.tscn" id="2_5kfs1"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_8d1jj"]
-[ext_resource type="AudioStream" uid="uid://bmsjpuvlwfa8m" path="res://assets/audio/sfx/bubble_bounce.wav" id="4_vgtea"]
-[ext_resource type="AudioStream" uid="uid://8e5p5aknx574" path="res://assets/audio/sfx/bubble_merge.wav" id="6_ly8rw"]
 [ext_resource type="Material" uid="uid://dqkscowue6kdv" path="res://src/bubble/VFX/blink_intensity.tres" id="3_4jc6o"]
 [ext_resource type="PackedScene" uid="uid://74i7775f1mqv" path="res://src/bubble/VFX/BUBBLE_TRACE.tscn" id="3_imspv"]
+[ext_resource type="AudioStream" uid="uid://bmsjpuvlwfa8m" path="res://assets/audio/sfx/bubble_bounce.wav" id="4_vgtea"]
+[ext_resource type="AudioStream" uid="uid://8e5p5aknx574" path="res://assets/audio/sfx/bubble_merge.wav" id="6_ly8rw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_44sl2"]
 bounce = 0.7
