@@ -47,11 +47,6 @@ func _ready():
 func play_audio(audio_name):
 	# Get the "audio_name" node if it exists and is an AudioStreamPlayer
 	var audio_node = _sound_player_by_name.get(audio_name)
-	if audio_name == "ButtonHover":
-		audio_node.pitch_scale = randf_range(0.98,1.02)
-	else:
-		audio_node.pitch_scale = randf_range(0.9,1.1)
-	
 	if audio_node != null:
 			audio_node.play()
 

@@ -18,14 +18,15 @@ func _ready():
 
 
 func _play_click_sfx() -> void:
-	#SoundManager.instance.play_click_sfx()
-	pass
+	AudioManager.play_audio("ButtonAccept")
 
+
+func _play_hover_sfx() -> void:
+	AudioManager.play_audio("ButtonDecline")
 
 # Starts game
 func _on_start_pressed() -> void:
 	_play_click_sfx()
-	#SoundManager.instance.play_correct_sfx()
 	get_tree().change_scene_to_packed(game_scene)
 
 
@@ -38,3 +39,13 @@ func _on_credits_button_pressed():
 func _on_exit_pressed() -> void:
 	_play_click_sfx()
 	get_tree().quit()
+
+
+func _on_credits_button_mouse_entered():
+	_play_hover_sfx()
+
+func _on_play_button_mouse_entered():
+	_play_hover_sfx()
+
+func _on_exit_button_mouse_entered():
+	_play_hover_sfx()

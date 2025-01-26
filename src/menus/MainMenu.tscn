@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://gkb307hkjv4f"]
+[gd_scene load_steps=17 format=3 uid="uid://gkb307hkjv4f"]
 
 [ext_resource type="Script" path="res://src/menus/main_menu.gd" id="1_7kxne"]
 [ext_resource type="Texture2D" uid="uid://ddnkr6nevptpv" path="res://assets/bubbles/bubble_single.png" id="1_cq0gi"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://barm7xfkp7xa" path="res://assets/buttons/credits.png" id="4_onhry"]
 [ext_resource type="PackedScene" uid="uid://dxt4jp5jeoqvf" path="res://src/menus/credits/credits.tscn" id="5_3hhuv"]
 [ext_resource type="Texture2D" uid="uid://cjwg20o58mj40" path="res://assets/buttons/exit.png" id="5_h0u7a"]
+[ext_resource type="AudioStream" uid="uid://bdre7sga84ltw" path="res://assets/audio/music/menu_theme.mp3" id="8_wkx6m"]
+[ext_resource type="AudioStream" uid="uid://bxf2nf2yxxbxb" path="res://assets/audio/music/ambiance.mp3" id="9_farmm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36kx8"]
 texture = ExtResource("2_wihnr")
@@ -191,4 +193,19 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="MusicBackground" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_wkx6m")
+volume_db = 4.0
+autoplay = true
+bus = &"Music"
+
+[node name="AmbientBackground" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_farmm")
+volume_db = -14.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/ExitButton" to="." method="_on_exit_button_mouse_entered"]
