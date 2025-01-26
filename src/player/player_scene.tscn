@@ -1,14 +1,113 @@
-[gd_scene load_steps=16 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=27 format=3 uid="uid://dcfxxbn8njgkj"]
 
-[ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_1xywr"]
 [ext_resource type="Script" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" path="res://src/player/player_state_machine.gd" id="2_036d8"]
+[ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_a4hdj"]
 [ext_resource type="Script" path="res://src/player/player_states/walk_state.gd" id="3_3ry0h"]
 [ext_resource type="Script" path="res://src/player/player_states/float_state.gd" id="4_7k5ks"]
 [ext_resource type="Shader" path="res://assets/shaders/strength_indicator.gdshader" id="6_pxgoi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
 bounce = 0.7
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ngw4"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(0, 1600, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4dyf"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(400, 1600, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2uxlm"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(800, 1600, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uugtc"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(0, 400, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnmcx"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(0, 1200, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ra11"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(400, 1200, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6k3v"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(800, 1200, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eqbsb"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(1200, 1200, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ka7te"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(0, 800, 400, 400)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76ccf"]
+atlas = ExtResource("2_a4hdj")
+region = Rect2(400, 800, 400, 400)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dcqy8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ngw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4dyf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2uxlm")
+}],
+"loop": false,
+"name": &"charge",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uugtc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnmcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ra11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6k3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6k3v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eqbsb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnmcx")
+}],
+"loop": true,
+"name": &"taunt",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ka7te")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76ccf")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_piu2a"]
 size = Vector2(64, 48)
@@ -19,6 +118,7 @@ size = Vector2(64, 48)
 size = Vector2(86, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cquc"]
+resource_local_to_scene = true
 shader = ExtResource("6_pxgoi")
 shader_parameter/percent = 0.0
 shader_parameter/low_alpha = 0.3
@@ -39,15 +139,20 @@ gradient = SubResource("Gradient_kdtn3")
 [node name="PlayerScene" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 7
+mass = 15.0
 physics_material_override = SubResource("PhysicsMaterial_vyeeb")
 freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("1_q1xob")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_1xywr")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_dcqy8")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.279551
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_piu2a")
@@ -105,4 +210,4 @@ skew = 0.0052948
 texture = SubResource("GradientTexture1D_0evkm")
 offset = Vector2(192, 0)
 
-[connection signal="body_entered" from="." to="Controller/WalkState" method="_on_player_scene_body_entered"]
+[connection signal="body_entered" from="." to="Controller" method="_on_player_scene_body_entered"]

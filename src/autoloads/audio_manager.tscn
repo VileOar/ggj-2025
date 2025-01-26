@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://djwk13ndrtnof"]
+
+[ext_resource type="Script" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
+
+[node name="AudioManager" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_asmxu")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="ButtonHover" type="AudioStreamPlayer" parent="UI"]
+volume_db = -13.0
+max_polyphony = 10
+
+[node name="ButtonPress" type="AudioStreamPlayer" parent="UI"]
+max_polyphony = 10
+
+[node name="Bubble" type="Node" parent="."]
+
+[node name="Pop" type="AudioStreamPlayer" parent="Bubble"]
+
+[node name="Player" type="Node" parent="."]
+
+[node name="Charge" type="AudioStreamPlayer" parent="Player"]
+volume_db = -10.0
+max_polyphony = 10
+
+[node name="Music" type="Node" parent="."]
+
+[node name="Music1" type="AudioStreamPlayer" parent="Music"]
+volume_db = -20.0
+autoplay = true
