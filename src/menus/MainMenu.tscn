@@ -1,19 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://gkb307hkjv4f"]
+[gd_scene load_steps=15 format=3 uid="uid://gkb307hkjv4f"]
 
-[ext_resource type="Texture2D" uid="uid://b6gp1whfnpxpo" path="res://assets/backgrounds/background_game_1.png" id="1_6drxx"]
 [ext_resource type="Script" path="res://src/menus/main_menu.gd" id="1_7kxne"]
 [ext_resource type="Texture2D" uid="uid://ddnkr6nevptpv" path="res://assets/bubbles/bubble_single.png" id="1_cq0gi"]
-[ext_resource type="PackedScene" uid="uid://ci5dx05toechq" path="res://src/menus/how_to_play/HowToPlay.tscn" id="4_jasvq"]
+[ext_resource type="Texture2D" uid="uid://c8gfxhk4cbamt" path="res://assets/backgrounds/main_menu.png" id="2_wihnr"]
+[ext_resource type="Texture2D" uid="uid://i7j8i4a8b8xa" path="res://assets/buttons/play.png" id="3_kcouq"]
+[ext_resource type="Texture2D" uid="uid://barm7xfkp7xa" path="res://assets/buttons/credits.png" id="4_onhry"]
 [ext_resource type="PackedScene" uid="uid://dxt4jp5jeoqvf" path="res://src/menus/credits/credits.tscn" id="5_3hhuv"]
+[ext_resource type="Texture2D" uid="uid://cjwg20o58mj40" path="res://assets/buttons/exit.png" id="5_h0u7a"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36kx8"]
-texture = ExtResource("1_6drxx")
+texture = ExtResource("2_wihnr")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_twdcm"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oo7in"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67424"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oo7in"]
 
 [sub_resource type="Curve" id="Curve_22gla"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -67,32 +69,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ForDummies"]
-layout_mode = 2
-
-[node name="HSeparator" type="HSeparator" parent="ForDummies/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 50
-theme_override_styles/separator = SubResource("StyleBoxEmpty_twdcm")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ForDummies/VBoxContainer"]
-layout_mode = 2
-
-[node name="VSeparator" type="VSeparator" parent="ForDummies/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 448
-theme_override_styles/separator = SubResource("StyleBoxEmpty_twdcm")
-
-[node name="Title2" type="Label" parent="ForDummies/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 60
-text = "Ultimate Crab Arena"
-
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-offset_right = 1920.0
-offset_bottom = 1080.0
+offset_right = 1280.0
+offset_bottom = 720.0
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
@@ -103,29 +83,15 @@ layout_mode = 2
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 223
+theme_override_constants/separation = 368
 theme_override_styles/separator = SubResource("StyleBoxEmpty_twdcm")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 78
-theme_override_styles/separator = SubResource("StyleBoxEmpty_twdcm")
-
-[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "       How to
-Summon a Cat"
 
 [node name="HorizontalContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HorizontalContainer"]
 layout_mode = 2
-theme_override_constants/margin_left = 76
 
 [node name="VButtonsContainer" type="VBoxContainer" parent="MarginContainer/HorizontalContainer/MarginContainer"]
 layout_mode = 2
@@ -134,7 +100,7 @@ alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 215
 theme_override_styles/separator = SubResource("StyleBoxEmpty_twdcm")
 
 [node name="PlayButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
@@ -149,31 +115,10 @@ theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_oo7in")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
-text = "Play
-"
-flat = true
-alignment = 0
-
-[node name="HowToPlayButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 64)
-layout_mode = 2
-focus_neighbor_top = NodePath("../PlayButton")
-focus_neighbor_bottom = NodePath("../CreditsButton")
-focus_next = NodePath("../CreditsButton")
-focus_previous = NodePath("../PlayButton")
-theme_type_variation = &"FlatButton"
-theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_67424")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
-text = "How to play"
-alignment = 0
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
+icon = ExtResource("3_kcouq")
+icon_alignment = 1
 
 [node name="CreditsButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
@@ -187,10 +132,12 @@ theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_67424")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
-text = "Credits"
-alignment = 0
+icon = ExtResource("4_onhry")
+icon_alignment = 1
 
 [node name="ExitButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
@@ -206,10 +153,12 @@ theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_67424")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
-text = "Quit"
-alignment = 0
+icon = ExtResource("5_h0u7a")
+icon_alignment = 1
 
 [node name="Effects" type="Control" parent="."]
 layout_mode = 3
@@ -219,8 +168,8 @@ offset_top = 837.0
 offset_right = 1706.0
 offset_bottom = 877.0
 
-[node name="Bubble" type="GPUParticles2D" parent="Effects"]
-position = Vector2(-771, -358)
+[node name="Bubble2" type="GPUParticles2D" parent="Effects"]
+position = Vector2(-1546, -72)
 amount = 3
 amount_ratio = 0.5
 process_material = SubResource("ParticleProcessMaterial_6f4xo")
@@ -228,20 +177,18 @@ texture = ExtResource("1_cq0gi")
 lifetime = 5.0
 randomness = 0.6
 
-[node name="HowToPlay" parent="." instance=ExtResource("4_jasvq")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-grow_horizontal = 1
-grow_vertical = 1
+[node name="Bubble" type="GPUParticles2D" parent="Effects"]
+position = Vector2(-539, -48)
+amount = 3
+amount_ratio = 0.5
+process_material = SubResource("ParticleProcessMaterial_6f4xo")
+texture = ExtResource("1_cq0gi")
+lifetime = 5.0
+randomness = 0.6
 
 [node name="Credits" parent="." instance=ExtResource("5_3hhuv")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CreditsButton" to="." method="_on_credits_button_pressed"]

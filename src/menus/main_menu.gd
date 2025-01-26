@@ -5,7 +5,6 @@ extends Control
 #@onready var credits = %CreditsButton
 #@onready var how_to_play = %HowToPlayButton
 @onready var exit_button : Button = %ExitButton
-@onready var how_to_play: Control = %HowToPlay
 @onready var credits: Control = %Credits
 
 @onready var game_scene : PackedScene = preload("res://src/main_scenes/stage.tscn")
@@ -28,11 +27,6 @@ func _on_start_pressed() -> void:
 	_play_click_sfx()
 	#SoundManager.instance.play_correct_sfx()
 	get_tree().change_scene_to_packed(game_scene)
-
-
-func _on_how_to_play_button_pressed():
-	_play_click_sfx()
-	how_to_play.visible = true
 
 
 func _on_credits_button_pressed():
