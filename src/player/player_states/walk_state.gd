@@ -58,6 +58,8 @@ func exit() -> void:
 	_holding_button = false
 	_strength_percent = 0
 
+	_stop_sounds()
+
 
 func _process(delta: float) -> void:
 	if _holding_button:
@@ -71,11 +73,14 @@ func _physics_process(delta: float) -> void:
 	var mov_amount = 0
 
 	if Input.get_action_strength(get_action("taunt")):
-		_is_taunting = true
-		fsm().play_anim("taunt")
-		fsm().play_audio("taunt", true)
+		if !_is_taunting and !_holding_button:
+			_is_taunting = true
+			fsm().play_anim("taunt")
+			fsm().play_audio("taunt", true)
 	else:
-		_is_taunting = false
+		if _is_taunting:
+			_is_taunting = false
+			fsm().play_audio("taunt", false)
 	
 	if !_holding_button and !_is_taunting:
 		mov_amount -= Input.get_action_strength(get_action("mov_right"))
@@ -131,9 +136,16 @@ func _stop_walking():
 		_was_walking = false
 
 
+func _stop_sounds():
+	fsm().play_audio("walk", false)
+	fsm().play_audio("charge", false)
+	fsm().play_audio("taunt", false)
+
+
 # Change to rigid body state
 func _bounce_off(bounce_impulse: Vector2):
 	replace_state("FloatState") # todo: add delay to raycast
+	fsm().play_audio("walk", false)
 	await get_tree().physics_frame
 	apply_uncentred_impulse(bounce_impulse)
 
@@ -152,8 +164,10 @@ func on_collision(body: Node) -> void:
 
 func _unhandled_input(event):
 	if event.is_action_pressed(get_action("shoot")):
-		_holding_button = true
-		fsm().play_anim("charge")
+		if !_is_taunting:
+			_holding_button = true
+			fsm().play_anim("charge")
+			fsm().play_audio("charge", true)
 	if event.is_action_released(get_action("shoot")):
 		if _holding_button:
 			spawn_bubble()
@@ -167,6 +181,7 @@ func spawn_bubble():
 	var bubble_scale_percent = MAX_BUBBLE_SCALE_PERCENT * _strength_percent
 	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
 
+	fsm().play_audio("charge", false)
 	AudioManager.play_audio_queue("shoot")
 	
 	_strength_percent = 0.0

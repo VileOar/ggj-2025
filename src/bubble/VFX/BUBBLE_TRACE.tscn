@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://src/bubble/VFX/bubble_trace.gd" id="2_nyv5d"]
 
 [node name="BubbleTrace" type="Sprite2D"]
+self_modulate = Color(0.729682, 0.475802, 0.707791, 1)
+z_index = 5
 z_as_relative = false
 position = Vector2(624, 265)
 texture = ExtResource("1_qlb3s")

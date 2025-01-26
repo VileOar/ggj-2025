@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=35 format=3 uid="uid://dcfxxbn8njgkj"]
 
 [ext_resource type="Script" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" path="res://src/player/player_state_machine.gd" id="2_036d8"]
@@ -9,9 +9,10 @@
 [ext_resource type="Script" path="res://src/player/player_states/lose_state.gd" id="6_rps7g"]
 [ext_resource type="AudioStream" uid="uid://d2gs55jhb72uk" path="res://assets/audio/sfx/crab_walk.mp3" id="7_lj2gh"]
 [ext_resource type="Texture2D" uid="uid://c58e05yiie8ir" path="res://assets/meter.png" id="8_1xndb"]
-[ext_resource type="AudioStream" uid="uid://cfmu3e1d1eoc6" path="res://assets/audio/sfx/crab_taunt.wav" id="8_xw0ln"]
+[ext_resource type="AudioStream" uid="uid://b5klgo75mvhgh" path="res://assets/audio/sfx/crab_taunt.mp3" id="9_0mpk8"]
 [ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="9_i7ama"]
 [ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="10_i3f16"]
+[ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="12_j4nyf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
 bounce = 0.7
@@ -259,7 +260,7 @@ parameters/looping = true
 
 [node name="TauntStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("8_xw0ln")
+stream = ExtResource("9_0mpk8")
 bus = &"SFX"
 
 [node name="DeathStream" type="AudioStreamPlayer2D" parent="."]
@@ -271,5 +272,10 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("10_i3f16")
 bus = &"SFX"
+
+[node name="ChargeStream" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("12_j4nyf")
+bus = &"Music"
 
 [connection signal="body_entered" from="." to="Controller" method="_on_player_scene_body_entered"]
