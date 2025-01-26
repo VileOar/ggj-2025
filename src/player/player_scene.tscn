@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://cfmu3e1d1eoc6" path="res://assets/audio/sfx/crab_taunt.wav" id="8_xw0ln"]
 [ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="9_i7ama"]
 [ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="10_i3f16"]
+[ext_resource type="Script" path="res://src/player/player_states/lose_state.gd" id="6_rps7g"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
 bounce = 0.7
@@ -170,6 +171,9 @@ script = ExtResource("3_3ry0h")
 
 [node name="FloatState" type="Node" parent="Controller"]
 script = ExtResource("4_7k5ks")
+
+[node name="LoseState" type="Node" parent="Controller"]
+script = ExtResource("6_rps7g")
 
 [node name="StaticBodyPin" type="StaticBody2D" parent="."]
 position = Vector2(0, -13)

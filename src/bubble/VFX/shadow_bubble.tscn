@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuynpbc8imfmo"]
+
+[ext_resource type="Texture2D" uid="uid://ddnkr6nevptpv" path="res://assets/bubbles/bubble_single.png" id="1_16ufw"]
+[ext_resource type="Script" path="res://src/bubble/shadow_bubble.gd" id="2_dl45q"]
+
+[sub_resource type="Animation" id="Animation_m6vfh"]
+resource_name = "BubbleShadow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShadowBubble:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0666667, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.588235), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ShadowBubble")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"destroy_bubble"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1rmqb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShadowBubble:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_crj4d"]
+_data = {
+"BubbleShadow": SubResource("Animation_m6vfh"),
+"RESET": SubResource("Animation_1rmqb")
+}
+
+[node name="ShadowBubble" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(43, 40)
+texture = ExtResource("1_16ufw")
+script = ExtResource("2_dl45q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_crj4d")
+}
