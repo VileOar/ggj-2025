@@ -207,5 +207,4 @@ bus = &"Music"
 
 [connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
-[connection signal="pressed" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/ExitButton" to="." method="_on_exit_button_mouse_entered"]
