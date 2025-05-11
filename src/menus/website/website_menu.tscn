@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwn1vyvw5r00p"]
+
+[ext_resource type="Texture2D" uid="uid://cmylhvursvbvd" path="res://assets/website/website_background_v6.jpg" id="1_biw8p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vi6t4"]
+texture = ExtResource("1_biw8p")
+
+[node name="WebsiteMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="PanelContainer" parent="."]
+offset_right = 1920.0
+offset_bottom = 1707.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_vi6t4")
