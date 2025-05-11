@@ -2,20 +2,20 @@
 
 [ext_resource type="Script" uid="uid://l1cpccddp2hl" path="res://src/menus/website/path_follow_2d.gd" id="1_3we01"]
 [ext_resource type="Texture2D" uid="uid://cmylhvursvbvd" path="res://assets/website/website_background_v6.jpg" id="1_biw8p"]
-[ext_resource type="Texture2D" uid="uid://dmq7pgyq0tgvy" path="res://assets/website/horizontal right/wave_trial1_v1.png" id="2_1ltgn"]
+[ext_resource type="Texture2D" uid="uid://byl77a3lnpqj" path="res://assets/website/horizontal right/wave_trial1_v1.png" id="2_1ltgn"]
 [ext_resource type="Script" uid="uid://dp4fqubb6vicw" path="res://src/menus/website/website_animations.gd" id="2_fibrk"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_p6hy0"]
 [ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/spritesheet2.png" id="3_fibrk"]
 [ext_resource type="Material" uid="uid://c560d1m0k3hai" path="res://assets/shaders/wave_particle_effect_horizontal.tres" id="3_m1n73"]
-[ext_resource type="Texture2D" uid="uid://cru3qsv6aed1l" path="res://assets/website/horizontal right/wave_trial2.png" id="4_icteq"]
-[ext_resource type="Texture2D" uid="uid://c5x4y7sqiei08" path="res://assets/website/horizontal right/wave_trial3_v2.png" id="5_0x0tc"]
-[ext_resource type="Texture2D" uid="uid://b2middkexahtm" path="res://assets/website/horizontal right/wave_trial3_v3.png" id="6_cf15q"]
-[ext_resource type="Texture2D" uid="uid://pg51ie2bc14j" path="res://assets/website/horizontal right/wave_trial4_v1.png" id="7_utv6a"]
-[ext_resource type="Texture2D" uid="uid://d1nbwbxkkvgs1" path="res://assets/website/horizontal right/wave_trial4_v2.png" id="8_gbgyq"]
-[ext_resource type="Texture2D" uid="uid://bklpd6kxpepu4" path="res://assets/website/horizontal right/wave_trial1.png" id="9_3b64x"]
-[ext_resource type="Texture2D" uid="uid://bbq85l53608tc" path="res://assets/website/horizontal right/wave_trial6.png" id="10_xgvut"]
+[ext_resource type="Texture2D" uid="uid://qiv74a21h4il" path="res://assets/website/horizontal right/wave_trial2.png" id="4_icteq"]
+[ext_resource type="Texture2D" uid="uid://c0yit0y5th6dl" path="res://assets/website/horizontal right/wave_trial3_v2.png" id="5_0x0tc"]
+[ext_resource type="Texture2D" uid="uid://cnbn3wiy0exd" path="res://assets/website/horizontal right/wave_trial3_v3.png" id="6_cf15q"]
+[ext_resource type="Texture2D" uid="uid://b31sxukckh721" path="res://assets/website/horizontal right/wave_trial4_v1.png" id="7_utv6a"]
+[ext_resource type="Texture2D" uid="uid://dw1cd7d3w35uh" path="res://assets/website/horizontal right/wave_trial4_v2.png" id="8_gbgyq"]
+[ext_resource type="Texture2D" uid="uid://stnlb5vfxbtk" path="res://assets/website/horizontal right/wave_trial6.png" id="10_xgvut"]
 [ext_resource type="Texture2D" uid="uid://dmq7pgyq0tgvy" path="res://assets/website/horizontal left/wave_trial1_v1.png" id="11_5j65q"]
 [ext_resource type="Material" uid="uid://du334ff7snux8" path="res://assets/shaders/L_wave_particle_effect_horizontal.tres" id="12_c334o"]
+[ext_resource type="Texture2D" uid="uid://d1u52iq2tisw0" path="res://assets/website/horizontal right/wave_trial5.png" id="13_3we01"]
 [ext_resource type="Texture2D" uid="uid://cru3qsv6aed1l" path="res://assets/website/horizontal left/wave_trial2.png" id="13_p6hy0"]
 [ext_resource type="Texture2D" uid="uid://c5x4y7sqiei08" path="res://assets/website/horizontal left/wave_trial3_v2.png" id="14_fibrk"]
 [ext_resource type="Texture2D" uid="uid://b2middkexahtm" path="res://assets/website/horizontal left/wave_trial3_v3.png" id="15_3we01"]
@@ -33,7 +33,7 @@ length = 6.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("%Player1Ani2Walk:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -45,7 +45,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "method"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -62,8 +62,8 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%Player1Ani3Float:rotation")
+tracks/2/enabled = false
+tracks/2/path = NodePath("Player1Ani3Float:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -74,7 +74,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("%Player2Ani3Walk:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -86,7 +86,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "method"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -106,7 +106,7 @@ tracks/4/keys = {
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
-tracks/0/enabled = true
+tracks/0/enabled = false
 tracks/0/path = NodePath("%Player1Ani2Walk:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
@@ -118,8 +118,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("%Player1Ani3Float:rotation")
+tracks/1/enabled = false
+tracks/1/path = NodePath("Player1Ani3Float:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -130,7 +130,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("%Player2Ani3Walk:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -448,6 +448,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1080.0
+offset_bottom = -1080.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -469,16 +471,35 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_3we01")
 animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.70627
+frame_progress = 0.823734
 
 [node name="Player1Ani2Walk" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
-position = Vector2(2017, 810)
+position = Vector2(1430, 706)
+rotation = 0.196107
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_3we01")
-animation = &"walk"
+animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.777574
+frame_progress = 0.804738
+
+[node name="Player1Ani3Float" type="AnimatedSprite2D" parent="Background"]
+unique_name_in_owner = true
+position = Vector2(342, 1413)
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_3we01")
+animation = &"float"
+autoplay = "idle"
+frame_progress = 0.82754
+
+[node name="Player1Ani5" type="AnimatedSprite2D" parent="Background"]
+unique_name_in_owner = true
+position = Vector2(1533, 1521)
+rotation = 0.318622
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_3we01")
+animation = &"dead"
+autoplay = "idle"
 
 [node name="Player2Ani1" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
@@ -501,12 +522,13 @@ frame_progress = 1.0
 
 [node name="Player2Ani3Walk" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
-position = Vector2(-78, 994)
+position = Vector2(343, 931)
+rotation = -0.380506
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_8gg1i")
-animation = &"walk"
+animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.388665
+frame_progress = 0.552912
 
 [node name="Player2Ani4" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
@@ -515,26 +537,21 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_8gg1i")
 animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.984464
+frame_progress = 0.101968
 
 [node name="Path2D" type="Path2D" parent="Background"]
+visible = false
 position = Vector2(13, -14)
 curve = SubResource("Curve2D_fibrk")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Background/Path2D"]
+visible = false
 position = Vector2(332, 1251)
 rotates = false
 script = ExtResource("1_3we01")
 
-[node name="Player1Ani3Float" type="AnimatedSprite2D" parent="Background/Path2D/PathFollow2D"]
-unique_name_in_owner = true
-scale = Vector2(0.4, 0.4)
-sprite_frames = SubResource("SpriteFrames_3we01")
-animation = &"float"
-autoplay = "idle"
-frame_progress = 0.041192
-
 [node name="WaveFXRight" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -561,7 +578,7 @@ process_material = ExtResource("3_m1n73")
 [node name="WaveFX3" type="GPUParticles2D" parent="WaveFXRight"]
 position = Vector2(-156, 741)
 amount = 1
-texture = ExtResource("5_0x0tc")
+texture = ExtResource("6_cf15q")
 lifetime = 4.0
 randomness = 1.0
 visibility_rect = Rect2(-100, -100, 300, 300)
@@ -570,7 +587,7 @@ process_material = ExtResource("3_m1n73")
 [node name="WaveFX3_v2" type="GPUParticles2D" parent="WaveFXRight"]
 position = Vector2(-156, 740)
 amount = 1
-texture = ExtResource("6_cf15q")
+texture = ExtResource("5_0x0tc")
 lifetime = 4.0
 randomness = 1.0
 visibility_rect = Rect2(-100, -100, 300, 300)
@@ -597,7 +614,7 @@ process_material = ExtResource("3_m1n73")
 [node name="WaveFX5" type="GPUParticles2D" parent="WaveFXRight"]
 position = Vector2(-156, 1299)
 amount = 1
-texture = ExtResource("9_3b64x")
+texture = ExtResource("13_3we01")
 lifetime = 4.0
 randomness = 1.0
 visibility_rect = Rect2(-100, -100, 300, 300)
@@ -613,6 +630,7 @@ visibility_rect = Rect2(-100, -100, 300, 300)
 process_material = ExtResource("3_m1n73")
 
 [node name="WaveFXLeft" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2199.0
