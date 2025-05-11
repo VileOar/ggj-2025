@@ -471,7 +471,7 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_3we01")
 animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.823734
+frame_progress = 0.723894
 
 [node name="Player1Ani2Walk" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
@@ -481,7 +481,7 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_3we01")
 animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.804738
+frame_progress = 0.704939
 
 [node name="Player1Ani3Float" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
@@ -490,7 +490,7 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_3we01")
 animation = &"float"
 autoplay = "idle"
-frame_progress = 0.82754
+frame_progress = 0.0761356
 
 [node name="Player1Ani5" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
@@ -528,7 +528,7 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_8gg1i")
 animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.552912
+frame_progress = 0.453077
 
 [node name="Player2Ani4" type="AnimatedSprite2D" parent="Background"]
 unique_name_in_owner = true
@@ -537,7 +537,7 @@ scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_8gg1i")
 animation = &"taunt"
 autoplay = "idle"
-frame_progress = 0.101968
+frame_progress = 0.00234971
 
 [node name="Path2D" type="Path2D" parent="Background"]
 visible = false
@@ -551,7 +551,6 @@ rotates = false
 script = ExtResource("1_3we01")
 
 [node name="WaveFXRight" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -630,7 +629,6 @@ visibility_rect = Rect2(-100, -100, 300, 300)
 process_material = ExtResource("3_m1n73")
 
 [node name="WaveFXLeft" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_left = 2199.0
