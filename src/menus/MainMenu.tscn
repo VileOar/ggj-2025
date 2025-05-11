@@ -28,7 +28,7 @@ texture = ExtResource("2_wihnr")
 offsets = PackedFloat32Array(0, 0.436364, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.881818, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_wh0ly"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_taltk"]
 gradient = SubResource("Gradient_nusui")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vl68a"]
@@ -41,7 +41,7 @@ initial_velocity_max = 10.0
 gravity = Vector3(0, 25, 0)
 linear_accel_min = -2.23517e-06
 linear_accel_max = 11.49
-color_ramp = SubResource("GradientTexture1D_wh0ly")
+color_ramp = SubResource("GradientTexture1D_taltk")
 turbulence_noise_strength = 0.1
 turbulence_noise_scale = 0.1
 
