@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="Texture2D" uid="uid://bnx0iuuu7ufm1" path="res://icon.svg" id="1_2n2td"]
-[ext_resource type="Script" path="res://src/main_scenes/player.gd" id="1_8i65o"]
-[ext_resource type="Shader" path="res://assets/shaders/strength_indicator.gdshader" id="2_lxl26"]
+[ext_resource type="Script" uid="uid://cgei7ehcnkq3w" path="res://src/main_scenes/player.gd" id="1_8i65o"]
+[ext_resource type="Shader" uid="uid://b1vc4fbpiff4c" path="res://assets/shaders/strength_indicator.gdshader" id="2_lxl26"]
 [ext_resource type="Texture2D" uid="uid://dntox7r8c2427" path="res://assets/crab.png" id="4_bfhrs"]
 
 [sub_resource type="Gradient" id="Gradient_txnav"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=3 uid="uid://djwk13ndrtnof"]
 
-[ext_resource type="Script" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
+[ext_resource type="Script" uid="uid://dsptk602sergs" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
 [ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/UI_accept.wav" id="2_1dq0b"]
 [ext_resource type="AudioStream" uid="uid://pko3vu5mkndb" path="res://assets/audio/sfx/ui/UI_decline.wav" id="3_5qf1k"]
 [ext_resource type="AudioStream" uid="uid://bmsjpuvlwfa8m" path="res://assets/audio/sfx/bubble_bounce.wav" id="4_3uo64"]
@@ -14,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://f10i6va7y17y" path="res://assets/audio/sfx/final_impact.wav" id="12_no3yj"]
 [ext_resource type="AudioStream" uid="uid://cniff4iegi6ws" path="res://assets/audio/sfx/shoot_big.wav" id="13_ofb10"]
 [ext_resource type="AudioStream" uid="uid://brvkr6xjsn6ns" path="res://assets/audio/sfx/shoot_small.wav" id="14_b1mw7"]
-[ext_resource type="Script" path="res://src/tools/audio_queue.gd" id="15_oram0"]
+[ext_resource type="Script" uid="uid://dujyy4t68bwgx" path="res://src/tools/audio_queue.gd" id="15_oram0"]
 
 [node name="AudioManager" type="Node2D"]
 process_mode = 3

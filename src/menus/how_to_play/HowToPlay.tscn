@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://ci5dx05toechq"]
 
-[ext_resource type="Script" path="res://src/menus/how_to_play/HowToPlay.gd" id="1_70j21"]
+[ext_resource type="Script" uid="uid://ca1fws5d8ck5d" path="res://src/menus/how_to_play/HowToPlay.gd" id="1_70j21"]
 [ext_resource type="Texture2D" uid="uid://b6wpp4xa3eart" path="res://assets/backgrounds/screen_how_to_play.png" id="2_7ot4i"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l0gy3"]

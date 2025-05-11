@@ -1,12 +1,19 @@
-[gd_scene load_steps=15 format=3 uid="uid://gkb307hkjv4f"]
+[gd_scene load_steps=25 format=3 uid="uid://gkb307hkjv4f"]
 
-[ext_resource type="Script" path="res://src/menus/main_menu.gd" id="1_7kxne"]
+[ext_resource type="Script" uid="uid://dvc7e0lyhw22r" path="res://src/menus/main_menu.gd" id="1_7kxne"]
 [ext_resource type="Texture2D" uid="uid://ddnkr6nevptpv" path="res://assets/bubbles/bubble_single.png" id="1_cq0gi"]
 [ext_resource type="Texture2D" uid="uid://c8gfxhk4cbamt" path="res://assets/backgrounds/main_menu.png" id="2_wihnr"]
 [ext_resource type="Texture2D" uid="uid://i7j8i4a8b8xa" path="res://assets/buttons/play.png" id="3_kcouq"]
 [ext_resource type="Texture2D" uid="uid://barm7xfkp7xa" path="res://assets/buttons/credits.png" id="4_onhry"]
 [ext_resource type="PackedScene" uid="uid://dxt4jp5jeoqvf" path="res://src/menus/credits/credits.tscn" id="5_3hhuv"]
 [ext_resource type="Texture2D" uid="uid://cjwg20o58mj40" path="res://assets/buttons/exit.png" id="5_h0u7a"]
+[ext_resource type="Texture2D" uid="uid://5fn2ab5y0wk4" path="res://assets/website/wave_trial1.png" id="6_uai78"]
+[ext_resource type="Texture2D" uid="uid://ctj7sw7rnkmuk" path="res://assets/website/wave_trial1_v1.png" id="6_wh0ly"]
+[ext_resource type="Material" uid="uid://ds4qajaim64e1" path="res://assets/shaders/wave_particle_effect.tres" id="7_nusui"]
+[ext_resource type="Texture2D" uid="uid://d24noajmst8x0" path="res://assets/website/wave_trial3_v3.png" id="9_nelm4"]
+[ext_resource type="Texture2D" uid="uid://cbplfw5qkvhb6" path="res://assets/website/wave_trial3_v2.png" id="10_n67r5"]
+[ext_resource type="Texture2D" uid="uid://ddh21m7rbsqd2" path="res://assets/website/wave_trial4_v1.png" id="11_taltk"]
+[ext_resource type="Texture2D" uid="uid://q68m40tlrmm4" path="res://assets/website/wave_trial4_v2.png" id="12_s53xe"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36kx8"]
 texture = ExtResource("2_wihnr")
@@ -16,6 +23,27 @@ texture = ExtResource("2_wihnr")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67424"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oo7in"]
+
+[sub_resource type="Gradient" id="Gradient_nusui"]
+offsets = PackedFloat32Array(0, 0.436364, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.881818, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wh0ly"]
+gradient = SubResource("Gradient_nusui")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vl68a"]
+lifetime_randomness = 0.27
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+direction = Vector3(1, 10, 0)
+initial_velocity_min = 2.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 25, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = 11.49
+color_ramp = SubResource("GradientTexture1D_wh0ly")
+turbulence_noise_strength = 0.1
+turbulence_noise_scale = 0.1
 
 [sub_resource type="Curve" id="Curve_22gla"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -112,11 +140,11 @@ focus_previous = NodePath(".")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
 theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
 icon = ExtResource("3_kcouq")
 icon_alignment = 1
 
@@ -129,11 +157,11 @@ focus_next = NodePath("../ExitButton")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
 theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_67424")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
 icon = ExtResource("4_onhry")
@@ -150,15 +178,83 @@ focus_previous = NodePath("../CreditsButton")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
 theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_67424")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
 icon = ExtResource("5_h0u7a")
 icon_alignment = 1
+
+[node name="WaveFX" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WaveFX" type="GPUParticles2D" parent="WaveFX"]
+position = Vector2(134, -156)
+amount = 1
+texture = ExtResource("6_wh0ly")
+lifetime = 4.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 400, 400)
+process_material = ExtResource("7_nusui")
+
+[node name="WaveFX2" type="GPUParticles2D" parent="WaveFX"]
+position = Vector2(340, -156)
+amount = 1
+texture = ExtResource("6_uai78")
+lifetime = 4.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_vl68a")
+
+[node name="WaveFX3" type="GPUParticles2D" parent="WaveFX"]
+position = Vector2(630, -159)
+amount = 1
+texture = ExtResource("9_nelm4")
+lifetime = 4.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_vl68a")
+
+[node name="WaveFX3_v2" type="GPUParticles2D" parent="WaveFX"]
+position = Vector2(630, -159)
+amount = 1
+texture = ExtResource("10_n67r5")
+lifetime = 4.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_vl68a")
+
+[node name="WaveFX4_v1" type="GPUParticles2D" parent="WaveFX"]
+position = Vector2(940, -159)
+amount = 1
+texture = ExtResource("11_taltk")
+lifetime = 4.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_vl68a")
+
+[node name="WaveFX4_v2" type="GPUParticles2D" parent="WaveFX"]
+position = Vector2(940, -159)
+amount = 1
+texture = ExtResource("12_s53xe")
+lifetime = 4.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_vl68a")
+
+[node name="WaveFX5" type="GPUParticles2D" parent="WaveFX"]
+position = Vector2(1186, -159)
+amount = 1
+texture = ExtResource("6_uai78")
+lifetime = 4.0
+randomness = 1.0
+visibility_rect = Rect2(-100, -100, 400, 400)
+process_material = SubResource("ParticleProcessMaterial_vl68a")
 
 [node name="Effects" type="Control" parent="."]
 layout_mode = 3
@@ -172,19 +268,19 @@ offset_bottom = 877.0
 position = Vector2(-1546, -72)
 amount = 3
 amount_ratio = 0.5
-process_material = SubResource("ParticleProcessMaterial_6f4xo")
 texture = ExtResource("1_cq0gi")
 lifetime = 5.0
 randomness = 0.6
+process_material = SubResource("ParticleProcessMaterial_6f4xo")
 
 [node name="Bubble" type="GPUParticles2D" parent="Effects"]
 position = Vector2(-539, -48)
 amount = 3
 amount_ratio = 0.5
-process_material = SubResource("ParticleProcessMaterial_6f4xo")
 texture = ExtResource("1_cq0gi")
 lifetime = 5.0
 randomness = 0.6
+process_material = SubResource("ParticleProcessMaterial_6f4xo")
 
 [node name="Credits" parent="." instance=ExtResource("5_3hhuv")]
 unique_name_in_owner = true
