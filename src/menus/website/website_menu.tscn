@@ -454,6 +454,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background" type="PanelContainer" parent="."]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1707.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_vi6t4")

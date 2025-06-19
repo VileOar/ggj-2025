@@ -1,0 +1,112 @@
+[gd_scene load_steps=10 format=3 uid="uid://8sarmt6q4r3t"]
+
+[ext_resource type="Script" uid="uid://xvf1xd74rwo5" path="res://src/menus/multiplayer/multiplayer.gd" id="1_fa3m2"]
+[ext_resource type="Texture2D" uid="uid://c8gfxhk4cbamt" path="res://assets/backgrounds/main_menu.png" id="1_w28u2"]
+[ext_resource type="Theme" uid="uid://djo64ekc4dsbg" path="res://assets/themes/button_theme.tres" id="3_f1mdj"]
+[ext_resource type="FontFile" uid="uid://b1xmf2do5acuy" path="res://assets/fonts/Poppins/Poppins-Medium.ttf" id="5_f183n"]
+[ext_resource type="Texture2D" uid="uid://vkbh5dkmeeco" path="res://assets/buttons/empty.png" id="6_f1mdj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7tudw"]
+texture = ExtResource("1_w28u2")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f1mdj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_duykc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_brn6b"]
+
+[node name="MultiplayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fa3m2")
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_7tudw")
+
+[node name="MarginContainer" type="MarginContainer" parent="Background"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Background/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 368
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1mdj")
+
+[node name="HorizontalContainer" type="HBoxContainer" parent="Background/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/HorizontalContainer"]
+layout_mode = 2
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="Background/MarginContainer/HorizontalContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = -6
+alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 215
+theme_override_styles/separator = SubResource("StyleBoxEmpty_f1mdj")
+
+[node name="HostButton" type="Button" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+focus_neighbor_top = NodePath("../BackButton")
+focus_previous = NodePath(".")
+theme = ExtResource("3_f1mdj")
+theme_type_variation = &"FlatButton"
+text = "Host"
+icon_alignment = 1
+
+[node name="JoinButton" type="Button" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../BackButton")
+focus_next = NodePath("../BackButton")
+theme = ExtResource("3_f1mdj")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_duykc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_brn6b")
+text = "Join"
+icon_alignment = 1
+
+[node name="BackButton" type="Button" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+focus_neighbor_top = NodePath("../JoinButton")
+focus_neighbor_bottom = NodePath("../HostButton")
+focus_next = NodePath("../HostButton")
+focus_previous = NodePath("../JoinButton")
+theme_type_variation = &"FlatButton"
+theme_override_colors/font_hover_pressed_color = Color(0.211765, 0.309804, 0.54902, 1)
+theme_override_colors/font_hover_color = Color(0.211765, 0.309804, 0.54902, 1)
+theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
+theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
+theme_override_colors/font_color = Color(0.211765, 0.47451, 0.741176, 1)
+theme_override_colors/font_focus_color = Color(0.211765, 0.309804, 0.54902, 1)
+theme_override_colors/font_pressed_color = Color(0.211765, 0.309804, 0.54902, 1)
+theme_override_fonts/font = ExtResource("5_f183n")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/focus = SubResource("StyleBoxEmpty_duykc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_brn6b")
+text = "Back"
+icon = ExtResource("6_f1mdj")
+icon_alignment = 1
