@@ -7,7 +7,7 @@ extends Node
 # GODOT MULTIPLAYER
 @export var player_scene : PackedScene
 
-
+@onready var _stage_holder: Node2D = $StageHolder
 @onready var _bubble_holder: Node2D = %BubbleHolder
 @onready var _stage_audio_stream: Node2D = %StageAudioStream
 
@@ -23,13 +23,24 @@ func _create_peer_to_peer_server():
 #	When signal peer_connected received, calls add player
 	multiplayer.peer_connected.connect(_add_player)
 #	adds own player
+	_tmp_mp()
 	_add_player()
+	
+func _tmp_mp() -> void:
+	$StageHolder/Player1.queue_free()
+	$StageHolder/Player2.queue_free()
 
+
+func _join_peer_to_peer_server():
+	_peer_server = ENetMultiplayerPeer.new()
+	_peer_server.create_client("localhost", 135)
+	multiplayer.multiplayer_peer = _peer_server
+	
 	
 func _add_player(id = 1) -> void:
 	var player = player_scene.instantiate()
 	player.name = str(id)
-	call_deferred("add_child", player)
+	_stage_holder.call_deferred("add_child", player)
 	
 
 func _ready() -> void:
@@ -37,6 +48,8 @@ func _ready() -> void:
 	Global.winner = -1
 	if Global.multiplayer_status == 1:
 		_create_peer_to_peer_server()
+	elif Global.multiplayer_status == 2:
+		_join_peer_to_peer_server()
 	
 	Signals.crab_lose.connect(_on_crab_lose)
 
