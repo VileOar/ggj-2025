@@ -76,7 +76,6 @@ position = Vector2(128, 0)
 rotation = -1.5708
 freeze = true
 script = ExtResource("1_8i65o")
-_friction = -0.1
 metadata/_edit_group_ = true
 
 [node name="AimMeter" type="Sprite2D" parent="Node2D/Player1"]

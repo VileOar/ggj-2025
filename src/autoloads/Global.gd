@@ -10,8 +10,9 @@ var winner = -1
 ## MULTIPLAYER VARIABLES
 # -1 -> not definied
 # 0 -> local
-# 1 -> multiplayer from godot
-# 2 -> steam Api
+# 1 -> host multiplayer from godot
+# 2 -> client multiplayer from godot
+# 3 -> steam Api
 var multiplayer_status : int = -1
 
 
