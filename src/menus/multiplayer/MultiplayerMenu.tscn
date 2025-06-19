@@ -45,24 +45,24 @@ layout_mode = 2
 theme_override_constants/separation = 368
 theme_override_styles/separator = SubResource("StyleBoxEmpty_f1mdj")
 
-[node name="HorizontalContainer" type="HBoxContainer" parent="Background/MarginContainer"]
+[node name="MultiplayerContainer" type="HBoxContainer" parent="Background/MarginContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/HorizontalContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/MultiplayerContainer"]
 layout_mode = 2
 
-[node name="VButtonsContainer" type="VBoxContainer" parent="Background/MarginContainer/HorizontalContainer/MarginContainer"]
+[node name="VButtonsContainer" type="VBoxContainer" parent="Background/MarginContainer/MultiplayerContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+[node name="HSeparator" type="HSeparator" parent="Background/MarginContainer/MultiplayerContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
 theme_override_constants/separation = 215
 theme_override_styles/separator = SubResource("StyleBoxEmpty_f1mdj")
 
-[node name="HostButton" type="Button" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+[node name="HostButton" type="Button" parent="Background/MarginContainer/MultiplayerContainer/MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 64)
 layout_mode = 2
@@ -73,7 +73,7 @@ theme_type_variation = &"FlatButton"
 text = "Host"
 icon_alignment = 1
 
-[node name="JoinButton" type="Button" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+[node name="JoinButton" type="Button" parent="Background/MarginContainer/MultiplayerContainer/MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 64)
 layout_mode = 2
@@ -87,7 +87,7 @@ theme_override_styles/pressed = SubResource("StyleBoxEmpty_brn6b")
 text = "Join"
 icon_alignment = 1
 
-[node name="BackButton" type="Button" parent="Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+[node name="BackButton" type="Button" parent="Background/MarginContainer/MultiplayerContainer/MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 64)
 layout_mode = 2

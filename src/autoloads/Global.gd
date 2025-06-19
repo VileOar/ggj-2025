@@ -7,6 +7,14 @@ var _rng := RandomNumberGenerator.new()
 
 var winner = -1
 
+## MULTIPLAYER VARIABLES
+# -1 -> not definied
+# 0 -> local
+# 1 -> multiplayer from godot
+# 2 -> steam Api
+var multiplayer_status : int = -1
+
+
 ## LOCATOR VARIABLES
 
 # the "service" node that is responsible for spawning bubbles (see the ready func in stage.gd)
