@@ -14,6 +14,8 @@ extends Node
 @onready var win_interval: Timer = $WinInterval
 
 var _peer_server
+var _number_of_players = 0
+var _client_player = -1
 
 func _create_peer_to_peer_server():
 	_peer_server = ENetMultiplayerPeer.new()
@@ -22,6 +24,7 @@ func _create_peer_to_peer_server():
 	multiplayer.multiplayer_peer = _peer_server
 #	When signal peer_connected received, calls add player
 	multiplayer.peer_connected.connect(_add_player)
+	multiplayer.peer_disconnected.connect(_remove_player)
 #	adds own player
 	_tmp_mp()
 	_add_player()
@@ -39,9 +42,19 @@ func _join_peer_to_peer_server():
 	
 func _add_player(id = 1) -> void:
 	var player = player_scene.instantiate()
-	player.name = str(id)
+	if _number_of_players == 0:
+		player.name = str(id)
+	elif _number_of_players == 1:
+		player.name = str(2)
+		_client_player = player
+		
 	_stage_holder.call_deferred("add_child", player)
-	
+	_number_of_players += 1
+
+func _remove_player() -> void:
+	_client_player.call_deferred("queue_free")
+	print("removed player")
+	_number_of_players -= 1
 
 func _ready() -> void:
 	Global.bubble_spawner = self
