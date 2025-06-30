@@ -1,15 +1,20 @@
 extends Control
 
-@onready var hosting_indicator: Label = $Background/MarginContainer/MultiplayerContainer/MarginContainer/VButtonsContainer/HostingIndicator
-@onready var player_1: AnimatedSprite2D = %Player1
-@onready var player_2: AnimatedSprite2D = %Player2
-
-var peer
-var _compression_type = ENetConnection.COMPRESS_RANGE_CODER
 @export var Address = "127.0.0.1"
 @export var port = 8910
 @export var max_players = 2
 @export var player_scene : PackedScene
+
+@onready var hosting_indicator: Label = $Background/MarginContainer/MultiplayerContainer/MarginContainer/VButtonsContainer/HostingIndicator
+@onready var player_1: AnimatedSprite2D = %Player1
+@onready var player_2: AnimatedSprite2D = %Player2
+@onready var start_game_button: Button = %StartGameButton
+@onready var join_button: Button = %JoinButton
+
+var peer
+var number_of_players_connected : int = 0
+var _compression_type = ENetConnection.COMPRESS_RANGE_CODER
+
 
 func _ready() -> void:
 	#	When signal peer_connected received, calls add player
@@ -17,6 +22,8 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_peer_disconnected)
 	multiplayer.connected_to_server.connect(_connected_to_server)
 	multiplayer.connection_failed.connect(_connection_failed)
+	start_game_button.hide()
+	join_button.show()
 
 func _on_host_button_pressed():
 	peer = ENetMultiplayerPeer.new()
@@ -30,13 +37,21 @@ func _on_host_button_pressed():
 	peer.get_host().compress(_compression_type)
 	
 	multiplayer.set_multiplayer_peer(peer)
-	print("Waiting for players!")
-	hosting_indicator.start_hosting()
-	player_1.show()
+	_start_hosting()
 	
-	Global.multiplayer_status = 1
 #	adds own player
 	_peer_connected()
+
+
+func _start_hosting() -> void:
+	Global.multiplayer_status = 1
+	print("Waiting for players!")
+#	TODO Separate into function
+	hosting_indicator.start_hosting()
+	player_1.show()
+	start_game_button.show()
+	join_button.hide()
+
 
 func _on_join_button_pressed() -> void:
 	peer = ENetMultiplayerPeer.new()
@@ -44,17 +59,34 @@ func _on_join_button_pressed() -> void:
 	peer.get_host().compress(_compression_type)
 	multiplayer.set_multiplayer_peer(peer)
 	
-	pass # Replace with function body.
+	
+func _on_start_game_button_pressed() -> void:
+#	this function is going to work on a remote procedure call, clal everyone
+	start_game.rpc()
+	print("Start_Dame_Button on Host with " + str(number_of_players_connected) + " players.")
+	
+#	any peer, everyone will call this rpc
+# call local, localling calling this function
+@rpc("any_peer","call_local")
+func start_game() -> void:
+	print("Game Start with " + str(number_of_players_connected) + " players.")
+	
 	
 # Gets called on the server and clients, when someone connects
 func _peer_connected(id = 1) -> void:
 	print("Player Connected " + str(id))
+	number_of_players_connected += 1
+	
 	if id != 1: 
 		player_2.show()
 		
 # Gets called on the server and clients, when someone disconnects
 func _peer_disconnected(id) -> void:
 	print("Player Disconnected " + str(id))
+	number_of_players_connected -= 1
+	
+	if id != 1: 
+		player_2.hide()
 	
 # Gets fired only from client
 func _connected_to_server() -> void:
