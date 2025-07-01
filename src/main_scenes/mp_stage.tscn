@@ -185,6 +185,12 @@ texture = ExtResource("6_pm8vh")
 position = Vector2(0, 32)
 metadata/_edit_group_ = true
 
+[node name="Player1Spawn" type="Node2D" parent="StageHolder"]
+position = Vector2(-232, 0)
+
+[node name="Player2Spawn" type="Node2D" parent="StageHolder"]
+position = Vector2(232, 0)
+
 [node name="Player1" parent="StageHolder" instance=ExtResource("4_vb3q0")]
 position = Vector2(-232, 0)
 player_index = 1
@@ -197,6 +203,7 @@ metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" parent="StageHolder/Player2" index="0"]
 sprite_frames = SubResource("SpriteFrames_cdshu")
+animation = &"idle"
 
 [node name="AimMeter" parent="StageHolder/Player2/MeterRB" index="1"]
 material = SubResource("ShaderMaterial_wbday")

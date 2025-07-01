@@ -277,5 +277,3 @@ bus = &"SFX"
 unique_name_in_owner = true
 stream = ExtResource("12_j4nyf")
 bus = &"Music"
-
-[connection signal="body_entered" from="." to="Controller" method="_on_player_scene_body_entered"]

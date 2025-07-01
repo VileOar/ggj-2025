@@ -171,12 +171,6 @@ radius = 272.118
 script = ExtResource("1_luwh6")
 BUBBLE = ExtResource("2_e7vcn")
 end_scene = ExtResource("3_0k0jp")
-player_scene = ExtResource("1_1q1cn")
-
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://dcfxxbn8njgkj", "uid://dcfxxbn8njgkj")
-spawn_path = NodePath("..")
-spawn_limit = 2
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -200,7 +194,7 @@ position = Vector2(232, 0)
 player_index = 2
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" parent="StageHolder/Player2" index="1"]
+[node name="AnimatedSprite2D" parent="StageHolder/Player2" index="0"]
 sprite_frames = SubResource("SpriteFrames_cdshu")
 
 [node name="AimMeter" parent="StageHolder/Player2/MeterRB" index="1"]

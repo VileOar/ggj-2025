@@ -28,7 +28,6 @@ func _play_click_sfx() -> void:
 # Starts game
 func _on_start_pressed() -> void:
 	_play_click_sfx()
-	Global.multiplayer_status = 0
 	#SoundManager.instance.play_correct_sfx()
 	get_tree().change_scene_to_packed(game_scene)
 
