@@ -2,6 +2,7 @@ extends Control
 
 @export var Address = "127.0.0.1"
 @export var port = 8910
+# TODO put to const
 @export var max_players = 2
 @export var player_scene : PackedScene
 
@@ -51,6 +52,10 @@ func _on_host_button_pressed():
 
 
 func _on_join_button_pressed() -> void:
+	if MpGameManager.mp_players.size() == max_players:
+		print("Max players are connected!")
+		return
+		
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(Address, port)
 	peer.get_host().compress(_compression_type)
@@ -68,6 +73,12 @@ func _on_start_game_button_pressed() -> void:
 	start_game.rpc()
 	print("Start_Dame_Button on Host with " + str(number_of_players_connected) + " players.")
 	
+	
+func _on_back_button_pressed() -> void:
+	hide()
+	get_parent().get_parent().start_menu_container.show()
+	# TODO disconnect peer
+	
 #endregion
 
 #region ActionsDone
@@ -82,6 +93,7 @@ func _start_hosting() -> void:
 	start_game_button.show()
 	join_button.hide()
 	_peer_connected()
+
 
 func _update_client_ui_information() -> void:
 	if MpGameManager.mp_players.has(1):
@@ -126,6 +138,7 @@ func _peer_connected(id = 1) -> void:
 	if id != 1: 
 		player_2.show()
 		
+		
 # Gets called on the server and clients, when someone disconnects
 func _peer_disconnected(id) -> void:
 	print("Player Disconnected " + str(id))
@@ -134,6 +147,7 @@ func _peer_disconnected(id) -> void:
 	if id != 1: 
 		player_2.hide()
 	
+	
 # Gets fired only from client
 func _connected_to_server() -> void:
 	# Send information to server here
@@ -141,13 +155,9 @@ func _connected_to_server() -> void:
 	# Keep track of everyone who is in the server
 	send_player_information.rpc_id(1, "", multiplayer.get_unique_id())
 
+
 # Gets fired only from client	
 func _connection_failed() -> void:
 	print("Could not connect!")
 
 #endregion
-
-
-func _on_back_button_pressed() -> void:
-	hide()
-	get_parent().get_parent().start_menu_container.show()
