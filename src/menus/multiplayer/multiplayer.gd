@@ -12,6 +12,7 @@ extends Control
 @onready var start_game_button: Button = %StartGameButton
 @onready var host_button: Button = %HostButton
 @onready var join_button: Button = %JoinButton
+@onready var back_button: Button = %BackButton
 
 var peer
 var number_of_players_connected : int = 0
@@ -145,3 +146,8 @@ func _connection_failed() -> void:
 	print("Could not connect!")
 
 #endregion
+
+
+func _on_back_button_pressed() -> void:
+	hide()
+	get_parent().get_parent().start_menu_container.show()

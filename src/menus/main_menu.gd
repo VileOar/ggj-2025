@@ -50,6 +50,7 @@ func _on_join_button_pressed() -> void:
 	MpGameManager.multiplayer_status = 2
 	#get_tree().change_scene_to_packed(game_scene)
 	
+	
 func _on_back_button_pressed() -> void:
 	_play_click_sfx()
 	start_menu_container.visible = true
