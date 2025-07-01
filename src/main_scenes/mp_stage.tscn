@@ -1,163 +1,13 @@
-[gd_scene load_steps=27 format=3 uid="uid://cfqp5hv2iny6d"]
+[gd_scene load_steps=11 format=3 uid="uid://cfqp5hv2iny6d"]
 
 [ext_resource type="Script" uid="uid://ca0hkjsp76skj" path="res://src/main_scenes/mp_stage.gd" id="1_bpds7"]
+[ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="2_010ql"]
+[ext_resource type="PackedScene" uid="uid://bejtoe3wwm5hr" path="res://src/menus/end_menu/ending.tscn" id="3_s0rxj"]
+[ext_resource type="PackedScene" uid="uid://bi8i8k4ufbt1l" path="res://src/player/player_scene_2.tscn" id="4_bpds7"]
 [ext_resource type="PackedScene" uid="uid://dcfxxbn8njgkj" path="res://src/player/player_scene.tscn" id="4_vb3q0"]
 [ext_resource type="Texture2D" uid="uid://dop0xojtu8rq7" path="res://assets/background.png" id="5_hir2g"]
 [ext_resource type="Texture2D" uid="uid://batu2wgel67j8" path="res://assets/instructions.png" id="6_pm8vh"]
-[ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/spritesheet2.png" id="7_j41n2"]
-[ext_resource type="Shader" uid="uid://b1vc4fbpiff4c" path="res://assets/shaders/strength_indicator.gdshader" id="8_36sw0"]
 [ext_resource type="AudioStream" uid="uid://j3pl3wiefrhb" path="res://assets/audio/music/fight_loop.mp3" id="9_wcwij"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6l58f"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(0, 1600, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rygof"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(400, 1600, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5f00t"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(800, 1600, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7d8yf"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(0, 2800, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jcw8d"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(0, 2400, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_sniyg"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(400, 2400, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ec7c2"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(800, 2400, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4k7mq"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(1200, 2400, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_knbph"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(0, 400, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_87igq"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(0, 1200, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2xi8j"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(400, 1200, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_m6r63"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(800, 1200, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6bg50"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(1200, 1200, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_rdlnl"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(0, 800, 400, 400)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lyj02"]
-atlas = ExtResource("7_j41n2")
-region = Rect2(400, 800, 400, 400)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_cdshu"]
-resource_local_to_scene = true
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6l58f")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rygof")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5f00t")
-}],
-"loop": false,
-"name": &"charge",
-"speed": 12.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7d8yf")
-}],
-"loop": false,
-"name": &"dead",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jcw8d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_sniyg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ec7c2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4k7mq")
-}],
-"loop": true,
-"name": &"float",
-"speed": 20.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_knbph")
-}],
-"loop": true,
-"name": &"idle",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_87igq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2xi8j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m6r63")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_m6r63")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6bg50")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_87igq")
-}],
-"loop": true,
-"name": &"taunt",
-"speed": 8.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rdlnl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lyj02")
-}],
-"loop": true,
-"name": &"walk",
-"speed": 12.0
-}]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbday"]
-resource_local_to_scene = true
-shader = ExtResource("8_36sw0")
-shader_parameter/percent = 0.0
-shader_parameter/low_alpha = 0.3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8jwm"]
 size = Vector2(544, 544)
@@ -167,6 +17,10 @@ radius = 272.118
 
 [node name="MpStage" type="Node"]
 script = ExtResource("1_bpds7")
+BUBBLE = ExtResource("2_010ql")
+end_scene = ExtResource("3_s0rxj")
+player_1_scene = ExtResource("4_vb3q0")
+player_2_scene = ExtResource("4_bpds7")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://dcfxxbn8njgkj", "uid://dcfxxbn8njgkj")
@@ -190,23 +44,6 @@ position = Vector2(-232, 0)
 
 [node name="Player2Spawn" type="Node2D" parent="StageHolder"]
 position = Vector2(232, 0)
-
-[node name="Player1" parent="StageHolder" instance=ExtResource("4_vb3q0")]
-position = Vector2(-232, 0)
-player_index = 1
-metadata/_edit_group_ = true
-
-[node name="Player2" parent="StageHolder" instance=ExtResource("4_vb3q0")]
-position = Vector2(232, 0)
-player_index = 2
-metadata/_edit_group_ = true
-
-[node name="AnimatedSprite2D" parent="StageHolder/Player2" index="0"]
-sprite_frames = SubResource("SpriteFrames_cdshu")
-animation = &"idle"
-
-[node name="AimMeter" parent="StageHolder/Player2/MeterRB" index="1"]
-material = SubResource("ShaderMaterial_wbday")
 
 [node name="BubbleHolder" type="Node2D" parent="StageHolder"]
 unique_name_in_owner = true
@@ -256,5 +93,3 @@ parameters/looping = true
 [node name="WinInterval" type="Timer" parent="."]
 
 [connection signal="timeout" from="WinInterval" to="." method="_on_win_interval_timeout"]
-
-[editable path="StageHolder/Player2"]

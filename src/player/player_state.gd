@@ -40,4 +40,5 @@ func on_collision(_body: Node) -> void:
 
 
 func get_action(action_name: String):
+	print("get_action = " + str(rigidbody().player_index))
 	return action_name + "_" + str(rigidbody().player_index)

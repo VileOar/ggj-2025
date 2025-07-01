@@ -18,6 +18,7 @@ func _ready():
 	#start_game_button.grab_focus()
 	start_game_button.button_down.connect(_on_start_pressed)
 	exit_button.button_down.connect(_on_exit_pressed)
+	multiplayer_container.hide()
 
 
 func _play_click_sfx() -> void:
@@ -40,13 +41,14 @@ func _on_multiplayer_button_pressed() -> void:
 
 func _on_host_button_pressed() -> void:
 	_play_click_sfx()
-	Global.multiplayer_status = 1
-	get_tree().change_scene_to_packed(game_scene)
+	MpGameManager.multiplayer_status = 1
+	#get_tree().change_scene_to_packed(game_scene)
+	
 	
 func _on_join_button_pressed() -> void:
 	_play_click_sfx()
-	Global.multiplayer_status = 2
-	get_tree().change_scene_to_packed(game_scene)
+	MpGameManager.multiplayer_status = 2
+	#get_tree().change_scene_to_packed(game_scene)
 	
 func _on_back_button_pressed() -> void:
 	_play_click_sfx()

@@ -5,9 +5,12 @@ extends Node
 @export var end_scene: PackedScene
 
 # GODOT MULTIPLAYER
-@export var player_scene : PackedScene
+@export var player_1_scene : PackedScene
+@export var player_2_scene : PackedScene
 
 @onready var _stage_holder: Node2D = $StageHolder
+@onready var player_1_spawn: Node2D = $StageHolder/Player1Spawn
+@onready var player_2_spawn: Node2D = $StageHolder/Player2Spawn
 @onready var _bubble_holder: Node2D = %BubbleHolder
 @onready var _stage_audio_stream: Node2D = %StageAudioStream
 
@@ -17,54 +20,35 @@ var _peer_server
 var _number_of_players = 0
 var _client_player = -1
 
-func _create_peer_to_peer_server():
-	_peer_server = ENetMultiplayerPeer.new()
-	# Por open on windows by default, check open ports with netstat -aon
-	_peer_server.create_server(135)
-	multiplayer.multiplayer_peer = _peer_server
-#	When signal peer_connected received, calls add player
-	multiplayer.peer_connected.connect(_add_player)
-	multiplayer.peer_disconnected.connect(_remove_player)
-#	adds own player
-	_tmp_mp()
-	_add_player()
+func _ready() -> void:
+	Global.bubble_spawner = self
+	Global.winner = -1
+	_add_mp_players()
 	
-func _tmp_mp() -> void:
-	$StageHolder/Player1.queue_free()
-	$StageHolder/Player2.queue_free()
-
-
-func _join_peer_to_peer_server():
-	_peer_server = ENetMultiplayerPeer.new()
-	_peer_server.create_client("localhost", 135)
-	multiplayer.multiplayer_peer = _peer_server
+	Signals.crab_lose.connect(_on_crab_lose)
 	
 	
-func _add_player(id = 1) -> void:
-	var player = player_scene.instantiate()
-	if _number_of_players == 0:
-		player.name = str(id)
-	elif _number_of_players == 1:
-		player.name = str(2)
-		_client_player = player
+func _add_mp_players() -> void:
+	# Note: not scalable like this, because shit code
+	if !MpGameManager.mp_players.size() == 2:
+		print("ERROR - Not enough players connected")
+		return
 		
-	_stage_holder.call_deferred("add_child", player)
+	_add_player(player_1_scene, player_1_spawn)
+	_add_player(player_2_scene, player_2_spawn)
+	
+	
+func _add_player(player : PackedScene, spawn_location : Node2D):
+	var current_player = player.instantiate()
+	current_player.name = "Player" + str(_number_of_players + 1)
+	spawn_location.add_child(current_player)
 	_number_of_players += 1
+	
 
 func _remove_player() -> void:
 	_client_player.call_deferred("queue_free")
 	print("removed player")
 	_number_of_players -= 1
-
-func _ready() -> void:
-	Global.bubble_spawner = self
-	Global.winner = -1
-	if Global.multiplayer_status == 1:
-		_create_peer_to_peer_server()
-	elif Global.multiplayer_status == 2:
-		_join_peer_to_peer_server()
-	
-	Signals.crab_lose.connect(_on_crab_lose)
 
 
 func _notification(what: int) -> void:

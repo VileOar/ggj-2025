@@ -5,10 +5,12 @@ extends Control
 @export var max_players = 2
 @export var player_scene : PackedScene
 
-@onready var hosting_indicator: Label = $Background/MarginContainer/MultiplayerContainer/MarginContainer/VButtonsContainer/HostingIndicator
+@onready var game_scene : PackedScene = preload("res://src/main_scenes/mp_stage.tscn")
+@onready var hosting_indicator: Label = %HostingIndicator
 @onready var player_1: AnimatedSprite2D = %Player1
 @onready var player_2: AnimatedSprite2D = %Player2
 @onready var start_game_button: Button = %StartGameButton
+@onready var host_button: Button = %HostButton
 @onready var join_button: Button = %JoinButton
 
 var peer
@@ -22,6 +24,7 @@ func _ready() -> void:
 	multiplayer.peer_disconnected.connect(_peer_disconnected)
 	multiplayer.connected_to_server.connect(_connected_to_server)
 	multiplayer.connection_failed.connect(_connection_failed)
+	
 	start_game_button.hide()
 	join_button.show()
 
@@ -43,7 +46,7 @@ func _on_host_button_pressed():
 	
 #	adds own player
 	send_player_information("", multiplayer.get_unique_id())
-	#_peer_connected()
+	
 
 
 func _on_join_button_pressed() -> void:
@@ -54,6 +57,12 @@ func _on_join_button_pressed() -> void:
 	
 	
 func _on_start_game_button_pressed() -> void:
+#	If game doesn't have two players, doen't start
+	if not number_of_players_connected == max_players:
+		print("Not Enough Players")
+		return
+	# Display error message in UI
+	
 #	this function is going to work on a remote procedure call, clal everyone
 	start_game.rpc()
 	print("Start_Dame_Button on Host with " + str(number_of_players_connected) + " players.")
@@ -61,6 +70,7 @@ func _on_start_game_button_pressed() -> void:
 #endregion
 
 #region ActionsDone
+
 
 func _start_hosting() -> void:
 	MpGameManager.multiplayer_status = 1
@@ -70,6 +80,16 @@ func _start_hosting() -> void:
 	player_1.show()
 	start_game_button.show()
 	join_button.hide()
+	_peer_connected()
+
+func _update_client_ui_information() -> void:
+	if MpGameManager.mp_players.has(1):
+		player_1.show()
+	if MpGameManager.mp_players.size() > 1:
+		player_2.show()
+	host_button.disabled = true
+	start_game_button.disabled = true
+
 
 @rpc("any_peer")
 func send_player_information(name, id) -> void:
@@ -79,16 +99,20 @@ func send_player_information(name, id) -> void:
 			"id" : id,
 			"score" : 0
 		}
+		
 	if multiplayer.is_server():
 		for i in MpGameManager.mp_players:
 			send_player_information.rpc(MpGameManager.mp_players[i].name, i)
+	else:
+		_update_client_ui_information()
 
-#	any peer, everyone will call this rpc
+# any peer, everyone will call this rpc
 # call local, localling calling this function
 @rpc("any_peer","call_local")
 func start_game() -> void:
 	print("Game Start with " + str(number_of_players_connected) + " players.")
-	
+	get_tree().change_scene_to_packed(game_scene)
+
 #endregion
 
 #region NetworkingCalls

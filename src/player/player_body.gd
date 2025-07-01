@@ -12,13 +12,14 @@ func _ready() -> void:
 
 # GODOT MULTIPLAYER
 func _enter_tree() -> void:
+	#print(MpGameManager.mp_players)
 	if MpGameManager.multiplayer_status == 1:
 		set_multiplayer_authority(name.to_int())
 		player_index = name.to_int()
 	if MpGameManager.multiplayer_status == 2:
 		set_multiplayer_authority(name.to_int())
 #		player to join in is always the second one
-		player_index = 2
+		player_index = 0
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
