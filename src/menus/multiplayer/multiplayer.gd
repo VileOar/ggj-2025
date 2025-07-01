@@ -25,6 +25,8 @@ func _ready() -> void:
 	start_game_button.hide()
 	join_button.show()
 
+#region ButtonCalls
+
 func _on_host_button_pressed():
 	peer = ENetMultiplayerPeer.new()
 	# Por open on windows by default, check open ports with netstat -aon
@@ -40,17 +42,8 @@ func _on_host_button_pressed():
 	_start_hosting()
 	
 #	adds own player
-	_peer_connected()
-
-
-func _start_hosting() -> void:
-	Global.multiplayer_status = 1
-	print("Waiting for players!")
-#	TODO Separate into function
-	hosting_indicator.start_hosting()
-	player_1.show()
-	start_game_button.show()
-	join_button.hide()
+	send_player_information("", multiplayer.get_unique_id())
+	#_peer_connected()
 
 
 func _on_join_button_pressed() -> void:
@@ -65,12 +58,40 @@ func _on_start_game_button_pressed() -> void:
 	start_game.rpc()
 	print("Start_Dame_Button on Host with " + str(number_of_players_connected) + " players.")
 	
+#endregion
+
+#region ActionsDone
+
+func _start_hosting() -> void:
+	MpGameManager.multiplayer_status = 1
+	print("Waiting for players!")
+#	TODO Separate into function
+	hosting_indicator.start_hosting()
+	player_1.show()
+	start_game_button.show()
+	join_button.hide()
+
+@rpc("any_peer")
+func send_player_information(name, id) -> void:
+	if !MpGameManager.mp_players.has(id):
+		MpGameManager.mp_players[id] = {
+			"name" : name,
+			"id" : id,
+			"score" : 0
+		}
+	if multiplayer.is_server():
+		for i in MpGameManager.mp_players:
+			send_player_information.rpc(MpGameManager.mp_players[i].name, i)
+
 #	any peer, everyone will call this rpc
 # call local, localling calling this function
 @rpc("any_peer","call_local")
 func start_game() -> void:
 	print("Game Start with " + str(number_of_players_connected) + " players.")
 	
+#endregion
+
+#region NetworkingCalls
 	
 # Gets called on the server and clients, when someone connects
 func _peer_connected(id = 1) -> void:
@@ -92,7 +113,11 @@ func _peer_disconnected(id) -> void:
 func _connected_to_server() -> void:
 	# Send information to server here
 	print("Connected to Server!")
+	# Keep track of everyone who is in the server
+	send_player_information.rpc_id(1, "", multiplayer.get_unique_id())
 
 # Gets fired only from client	
 func _connection_failed() -> void:
 	print("Could not connect!")
+
+#endregion
