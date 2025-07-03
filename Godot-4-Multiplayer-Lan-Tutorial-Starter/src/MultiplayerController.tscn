@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://8j1u3wy6p2bm"]
+
+[ext_resource type="Script" uid="uid://cv5vedoigpmvt" path="res://src/multiplayer_controller.gd" id="1_0e86i"]
+
+[node name="MultiplayerController" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0e86i")
+
+[node name="NameLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 52.0
+offset_right = 150.0
+offset_bottom = 75.0
+text = "Insert Name: "
+
+[node name="NameEdit" type="TextEdit" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 170.0
+offset_top = 45.0
+offset_right = 783.0
+offset_bottom = 85.0
+text = "Host"
+placeholder_text = "Name"
+
+[node name="HostBtn" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 25.0
+offset_top = 106.0
+offset_right = 275.0
+offset_bottom = 171.0
+text = "HOST"
+
+[node name="JoinBtn" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 280.0
+offset_top = 106.0
+offset_right = 530.0
+offset_bottom = 171.0
+text = "JOIN"
+
+[node name="StartGameBtn" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 535.0
+offset_top = 106.0
+offset_right = 785.0
+offset_bottom = 171.0
+text = "START GAME"
+
+[node name="Player1" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 106.0
+offset_top = 183.0
+offset_right = 168.0
+offset_bottom = 206.0
+text = "Player 1"
+
+[node name="Player2" type="Label" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 372.0
+offset_top = 186.0
+offset_right = 434.0
+offset_bottom = 209.0
+text = "Player 2"
+
+[connection signal="pressed" from="HostBtn" to="." method="_on_host_btn_pressed"]
+[connection signal="pressed" from="JoinBtn" to="." method="_on_join_btn_pressed"]
+[connection signal="pressed" from="StartGameBtn" to="." method="_on_start_game_btn_pressed"]
