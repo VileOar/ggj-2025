@@ -22,11 +22,6 @@ end_scene = ExtResource("3_s0rxj")
 player_1_scene = ExtResource("4_vb3q0")
 player_2_scene = ExtResource("4_bpds7")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://dcfxxbn8njgkj", "uid://dcfxxbn8njgkj")
-spawn_path = NodePath("..")
-spawn_limit = 2
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -39,17 +34,16 @@ texture = ExtResource("6_pm8vh")
 position = Vector2(0, 32)
 metadata/_edit_group_ = true
 
-[node name="Player1Spawn" type="Node2D" parent="StageHolder"]
+[node name="SpawnLocation1" type="Node2D" parent="StageHolder" groups=["PlayerSpawnPoint"]]
 position = Vector2(-232, 0)
 
-[node name="Player2Spawn" type="Node2D" parent="StageHolder"]
+[node name="SpawnLocation2" type="Node2D" parent="StageHolder" groups=["PlayerSpawnPoint"]]
 position = Vector2(232, 0)
 
 [node name="BubbleHolder" type="Node2D" parent="StageHolder"]
 unique_name_in_owner = true
 
 [node name="walls" type="StaticBody2D" parent="StageHolder"]
-visible = false
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StageHolder/walls"]

@@ -10,10 +10,3 @@ var multiplayer_status : int = -1
 
 # Keeps track of every player in multiplayer
 var mp_players = {}
-
-func _ready() -> void:
-	pass
-	
-func _process(delta: float) -> void:
-	pass
-	

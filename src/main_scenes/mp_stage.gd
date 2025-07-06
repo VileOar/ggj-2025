@@ -9,21 +9,20 @@ extends Node
 @export var player_2_scene : PackedScene
 
 @onready var _stage_holder: Node2D = $StageHolder
-@onready var player_1_spawn: Node2D = $StageHolder/Player1Spawn
-@onready var player_2_spawn: Node2D = $StageHolder/Player2Spawn
+@onready var player_1_spawn: Node2D = $StageHolder/SpawnLocation1
+@onready var player_2_spawn: Node2D = $StageHolder/SpawnLocation2
 @onready var _bubble_holder: Node2D = %BubbleHolder
-@onready var _stage_audio_stream: Node2D = %StageAudioStream
 
 @onready var win_interval: Timer = $WinInterval
 
-var _peer_server
 var _number_of_players = 0
 var _client_player = -1
 
 func _ready() -> void:
 	Global.bubble_spawner = self
 	Global.winner = -1
-	_add_mp_players()
+	if (MpGameManager.multiplayer_status == 1 || MpGameManager.multiplayer_status == 2):
+		_add_mp_players()
 	
 	Signals.crab_lose.connect(_on_crab_lose)
 	
@@ -33,15 +32,18 @@ func _add_mp_players() -> void:
 	if !MpGameManager.mp_players.size() == 2:
 		print("ERROR - Not enough players connected")
 		return
-		
+			
 	_add_player(player_1_scene, player_1_spawn)
 	_add_player(player_2_scene, player_2_spawn)
 	
 	
 func _add_player(player : PackedScene, spawn_location : Node2D):
+	print("player " + str(_number_of_players + 1) + " spawning in " + str(spawn_location.global_position))
 	var current_player = player.instantiate()
 	current_player.name = "Player" + str(_number_of_players + 1)
-	spawn_location.add_child(current_player)
+	#spawn_location.add_child(current_player)
+	_stage_holder.add_child(current_player)
+	current_player.global_position = spawn_location.global_position
 	_number_of_players += 1
 	
 

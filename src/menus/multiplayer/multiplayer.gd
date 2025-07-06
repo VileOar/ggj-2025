@@ -36,8 +36,10 @@ func _on_host_button_pressed():
 	peer = ENetMultiplayerPeer.new()
 	# Por open on windows by default, check open ports with netstat -aon
 	var error = peer.create_server(port, max_players)
+	if error == ERR_CANT_CREATE:
+		print("Error - Server already created!")
 	if error != OK:
-		print("Cannot Host: " + error)
+		print("Cannot Host: " + str(error))
 		return
 	
 	# Deal with compression types, COMPRESS_RANGE_CODER best for packet smaller than 4kb 
@@ -60,6 +62,7 @@ func _on_join_button_pressed() -> void:
 	peer.create_client(Address, port)
 	peer.get_host().compress(_compression_type)
 	multiplayer.set_multiplayer_peer(peer)
+	MpGameManager.multiplayer_status = 2
 	
 	
 func _on_start_game_button_pressed() -> void:
@@ -105,10 +108,10 @@ func _update_client_ui_information() -> void:
 
 
 @rpc("any_peer")
-func send_player_information(name, id) -> void:
+func send_player_information(player_name, id) -> void:
 	if !MpGameManager.mp_players.has(id):
 		MpGameManager.mp_players[id] = {
-			"name" : name,
+			"name" : player_name,
 			"id" : id,
 			"score" : 0
 		}

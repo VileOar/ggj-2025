@@ -4,9 +4,7 @@ extends Node
 
 @export var end_scene: PackedScene
 
-@onready var _stage_holder: Node2D = $StageHolder
 @onready var _bubble_holder: Node2D = %BubbleHolder
-@onready var _stage_audio_stream: Node2D = %StageAudioStream
 
 @onready var win_interval: Timer = $WinInterval
 
