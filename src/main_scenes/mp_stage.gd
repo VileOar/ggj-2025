@@ -38,9 +38,11 @@ func _add_mp_players() -> void:
 	
 	
 func _add_player(player : PackedScene, spawn_location : Node2D):
-	print("player " + str(_number_of_players + 1) + " spawning in " + str(spawn_location.global_position))
+	var current_index = str(_number_of_players + 1)
+	print("player " + current_index + " spawning in " + str(spawn_location.global_position))
 	var current_player = player.instantiate()
-	current_player.name = "Player" + str(_number_of_players + 1)
+	current_player.name = "Player" + current_index
+	current_player.player_id = MpGameManager.mp_players[multiplayer.get_unique_id()].id
 	#spawn_location.add_child(current_player)
 	_stage_holder.add_child(current_player)
 	current_player.global_position = spawn_location.global_position

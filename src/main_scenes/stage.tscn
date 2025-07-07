@@ -194,7 +194,7 @@ position = Vector2(232, 0)
 player_index = 2
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" parent="StageHolder/Player2" index="0"]
+[node name="AnimatedSprite2D" parent="StageHolder/Player2" index="1"]
 sprite_frames = SubResource("SpriteFrames_cdshu")
 
 [node name="AimMeter" parent="StageHolder/Player2/MeterRB" index="1"]
