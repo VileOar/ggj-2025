@@ -33,8 +33,25 @@ func _add_mp_players() -> void:
 		print("ERROR - Not enough players connected")
 		return
 			
-	_add_player(player_1_scene, player_1_spawn)
-	_add_player(player_2_scene, player_2_spawn)
+	for i in MpGameManager.mp_players:
+		var current_player
+		var spawn_location
+		if i == 1:
+			current_player = player_1_scene.instantiate()
+			spawn_location = player_1_spawn
+		else:
+			current_player = player_2_scene.instantiate()
+			spawn_location = player_2_spawn
+			
+		var current_index = str(_number_of_players + 1)
+		current_player.name = "Player" + current_index
+		current_player.peer_id = MpGameManager.mp_players[i].id
+		_stage_holder.add_child(current_player)
+		current_player.global_position = spawn_location.global_position
+		_number_of_players += 1
+		
+	#_add_player(player_1_scene, player_1_spawn)
+	#_add_player(player_2_scene, player_2_spawn)
 	
 	
 func _add_player(player : PackedScene, spawn_location : Node2D):
@@ -42,7 +59,7 @@ func _add_player(player : PackedScene, spawn_location : Node2D):
 	print("player " + current_index + " spawning in " + str(spawn_location.global_position))
 	var current_player = player.instantiate()
 	current_player.name = "Player" + current_index
-	current_player.player_id = MpGameManager.mp_players[multiplayer.get_unique_id()].id
+	current_player.peer_id = MpGameManager.mp_players[current_index].id
 	#spawn_location.add_child(current_player)
 	_stage_holder.add_child(current_player)
 	current_player.global_position = spawn_location.global_position

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bi8i8k4ufbt1l"]
+[gd_scene load_steps=36 format=3 uid="uid://bi8i8k4ufbt1l"]
 
 [ext_resource type="Script" uid="uid://bpcsf32w3iyq4" path="res://src/player/player_body.gd" id="1_ncd6t"]
 [ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/spritesheet2.png" id="2_b8y8r"]
@@ -16,6 +16,17 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
 bounce = 0.7
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ncd6t"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("AnimatedSprite2D:animation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6l58f"]
 atlas = ExtResource("2_b8y8r")
@@ -187,6 +198,11 @@ max_contacts_reported = 5
 script = ExtResource("1_ncd6t")
 player_index = 2
 metadata/_edit_group_ = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+unique_name_in_owner = true
+replication_interval = 0.016
+replication_config = SubResource("SceneReplicationConfig_ncd6t")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
