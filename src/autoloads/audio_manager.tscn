@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://djwk13ndrtnof"]
+[gd_scene load_steps=18 format=3 uid="uid://djwk13ndrtnof"]
 
 [ext_resource type="Script" uid="uid://dsptk602sergs" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
 [ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/UI_accept.wav" id="2_1dq0b"]
@@ -14,7 +14,9 @@
 [ext_resource type="AudioStream" uid="uid://f10i6va7y17y" path="res://assets/audio/sfx/final_impact.wav" id="12_no3yj"]
 [ext_resource type="AudioStream" uid="uid://cniff4iegi6ws" path="res://assets/audio/sfx/shoot_big.wav" id="13_ofb10"]
 [ext_resource type="AudioStream" uid="uid://brvkr6xjsn6ns" path="res://assets/audio/sfx/shoot_small.wav" id="14_b1mw7"]
+[ext_resource type="AudioStream" uid="uid://bdre7sga84ltw" path="res://assets/audio/music/menu_theme.mp3" id="15_jtyui"]
 [ext_resource type="Script" uid="uid://dujyy4t68bwgx" path="res://src/tools/audio_queue.gd" id="15_oram0"]
+[ext_resource type="AudioStream" uid="uid://bxf2nf2yxxbxb" path="res://assets/audio/music/ambiance.mp3" id="16_1ktcv"]
 
 [node name="AudioManager" type="Node2D"]
 process_mode = 3
@@ -30,7 +32,7 @@ bus = &"SFX"
 
 [node name="ButtonDecline" type="AudioStreamPlayer" parent="UI"]
 stream = ExtResource("3_5qf1k")
-volume_db = -10.0
+volume_db = -20.0
 max_polyphony = 10
 bus = &"SFX"
 
@@ -39,17 +41,21 @@ bus = &"SFX"
 [node name="Bounce" type="AudioStreamPlayer" parent="Bubble"]
 stream = ExtResource("4_3uo64")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="Charge" type="AudioStreamPlayer" parent="Bubble"]
 stream = ExtResource("5_1lysb")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="Merge" type="AudioStreamPlayer" parent="Bubble"]
 stream = ExtResource("6_7id7o")
+bus = &"SFX"
 
 [node name="Pop" type="AudioStreamPlayer" parent="Bubble"]
 stream = ExtResource("7_hhjsi")
 volume_db = -5.0
+bus = &"SFX"
 
 [node name="Crab" type="Node" parent="."]
 
@@ -57,58 +63,77 @@ volume_db = -5.0
 stream = ExtResource("8_jlj8f")
 volume_db = -5.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="Flailing" type="AudioStreamPlayer" parent="Crab"]
 stream = ExtResource("9_1ei4r")
 volume_db = -10.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="Taunt" type="AudioStreamPlayer" parent="Crab"]
 stream = ExtResource("10_n3cfj")
 volume_db = -10.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="Walk" type="AudioStreamPlayer" parent="Crab"]
 stream = ExtResource("11_fu2gy")
 volume_db = -10.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="FinalImpact" type="AudioStreamPlayer" parent="Crab"]
 stream = ExtResource("12_no3yj")
 volume_db = -5.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="ShootBig" type="AudioStreamPlayer" parent="Crab"]
 stream = ExtResource("13_ofb10")
 volume_db = -5.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="ShootSmall" type="AudioStreamPlayer" parent="Crab"]
 stream = ExtResource("14_b1mw7")
 volume_db = -5.0
 max_polyphony = 10
+bus = &"SFX"
+
+[node name="MainMenuMusic" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="MainMenuMusic"]
+stream = ExtResource("15_jtyui")
+volume_db = 4.0
+bus = &"Music"
+
+[node name="Ambience" type="AudioStreamPlayer" parent="MainMenuMusic"]
+stream = ExtResource("16_1ktcv")
+volume_db = -14.0
+bus = &"Music"
 
 [node name="Music" type="Node" parent="."]
 
 [node name="EndRound" type="AudioStreamPlayer" parent="Music"]
 volume_db = -20.0
-autoplay = true
+bus = &"Music"
 
 [node name="Ambiance" type="AudioStreamPlayer" parent="Music"]
 volume_db = -20.0
-autoplay = true
+bus = &"Music"
 
 [node name="EndGame" type="AudioStreamPlayer" parent="Music"]
 volume_db = -20.0
-autoplay = true
+bus = &"Music"
 
 [node name="Arena" type="AudioStreamPlayer" parent="Music"]
 volume_db = -20.0
-autoplay = true
+bus = &"Music"
 
 [node name="Menu" type="AudioStreamPlayer" parent="Music"]
 volume_db = -20.0
-autoplay = true
+bus = &"Music"
 
 [node name="ShootAudioQueue" type="Node" parent="."]
 script = ExtResource("15_oram0")

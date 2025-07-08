@@ -11,25 +11,33 @@ extends Control
 
 
 func _ready():
+	_start_main_menu_music()
+	
 	# Connects buttons to functions
 	start_game_button.button_down.connect(_on_start_pressed)
 	credits_button.button_down.connect(_on_credits_pressed)
 	exit_button.button_down.connect(_on_exit_pressed)
 
+# Audio
+func _start_main_menu_music() -> void:
+	AudioManager.instance.play_audio("Ambience")
+	AudioManager.instance.play_audio("MainMenuMusic")
+	
+func _stop_main_menu_music() -> void:
+	AudioManager.instance.stop_audio("Ambience")
+	AudioManager.instance.stop_audio("MainMenuMusic")
 
 func _play_click_sfx() -> void:
 	AudioManager.instance.play_audio("ButtonAccept")
-	AudioManager.play_audio("ButtonAccept")
-
 
 func _play_hover_sfx() -> void:
 	AudioManager.play_audio("ButtonDecline")
 
-func _play_button_decline_sfx() -> void:
-	AudioManager.instance.play_audio("ButtonDecline")
+# Button actions
 
 func _on_start_pressed() -> void:
 	_play_click_sfx()
+	_stop_main_menu_music()
 	get_tree().change_scene_to_packed(game_scene)
 
 
@@ -39,7 +47,7 @@ func _on_credits_pressed():
 	
 	
 func _on_exit_pressed() -> void:
-	_play_button_decline_sfx()
+	_play_click_sfx()
 	get_tree().quit()
 
 

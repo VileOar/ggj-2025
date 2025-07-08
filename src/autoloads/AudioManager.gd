@@ -33,6 +33,10 @@ func _ready():
 	add_to_sound_player_dictionary("ShootBig", $Crab/ShootBig)	
 	add_to_sound_player_dictionary("ShootSmall", $Crab/ShootSmall)	
 	
+	# Main Menu Music
+	add_to_sound_player_dictionary("MainMenuMusic", $MainMenuMusic/Music)
+	add_to_sound_player_dictionary("Ambience", $MainMenuMusic/Ambience)
+	
 	# Music
 	add_to_sound_player_dictionary("EndRound", $Music/EndRound)
 	add_to_sound_player_dictionary("Ambiance", $Music/Ambiance)
