@@ -211,6 +211,10 @@ sprite_frames = SubResource("SpriteFrames_cdshu")
 animation = &"idle"
 autoplay = "idle"
 
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="AnimatedSprite2D"]
+replication_interval = 0.016
+replication_config = SubResource("SceneReplicationConfig_ncd6t")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_piu2a")
 
