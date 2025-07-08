@@ -65,4 +65,5 @@ icon = ExtResource("3_plf7n")
 flat = true
 icon_alignment = 1
 
+[connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/BackMenuButton" to="." method="_on_back_menu_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/HorizontalContainer/BackMenuButton" to="." method="_on_back_menu_button_pressed"]

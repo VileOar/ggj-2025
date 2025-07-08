@@ -26,11 +26,13 @@ script = ExtResource("1_asmxu")
 stream = ExtResource("2_1dq0b")
 volume_db = -10.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="ButtonDecline" type="AudioStreamPlayer" parent="UI"]
 stream = ExtResource("3_5qf1k")
 volume_db = -10.0
 max_polyphony = 10
+bus = &"SFX"
 
 [node name="Bubble" type="Node" parent="."]
 

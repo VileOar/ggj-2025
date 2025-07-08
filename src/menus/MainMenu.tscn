@@ -14,6 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://cbplfw5qkvhb6" path="res://assets/website/wave_trial3_v2.png" id="10_n67r5"]
 [ext_resource type="Texture2D" uid="uid://ddh21m7rbsqd2" path="res://assets/website/wave_trial4_v1.png" id="11_taltk"]
 [ext_resource type="Texture2D" uid="uid://q68m40tlrmm4" path="res://assets/website/wave_trial4_v2.png" id="12_s53xe"]
+[ext_resource type="AudioStream" uid="uid://bdre7sga84ltw" path="res://assets/audio/music/menu_theme.mp3" id="8_wkx6m"]
+[ext_resource type="AudioStream" uid="uid://bxf2nf2yxxbxb" path="res://assets/audio/music/ambiance.mp3" id="9_farmm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36kx8"]
 texture = ExtResource("2_wihnr")
@@ -287,4 +289,18 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
+[node name="MusicBackground" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_wkx6m")
+volume_db = 4.0
+autoplay = true
+bus = &"Music"
+
+[node name="AmbientBackground" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_farmm")
+volume_db = -14.0
+autoplay = true
+bus = &"Music"
+
+[connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
+[connection signal="mouse_entered" from="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/ExitButton" to="." method="_on_exit_button_mouse_entered"]
