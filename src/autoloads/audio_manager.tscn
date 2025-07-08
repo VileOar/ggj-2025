@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://djwk13ndrtnof"]
+[gd_scene load_steps=20 format=3 uid="uid://djwk13ndrtnof"]
 
 [ext_resource type="Script" uid="uid://dsptk602sergs" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
 [ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/UI_accept.wav" id="2_1dq0b"]
@@ -17,6 +17,8 @@
 [ext_resource type="AudioStream" uid="uid://bdre7sga84ltw" path="res://assets/audio/music/menu_theme.mp3" id="15_jtyui"]
 [ext_resource type="Script" uid="uid://dujyy4t68bwgx" path="res://src/tools/audio_queue.gd" id="15_oram0"]
 [ext_resource type="AudioStream" uid="uid://bxf2nf2yxxbxb" path="res://assets/audio/music/ambiance.mp3" id="16_1ktcv"]
+[ext_resource type="AudioStream" uid="uid://u3qdec6cdd50" path="res://assets/audio/music/end_jingle.wav" id="17_1ktcv"]
+[ext_resource type="AudioStream" uid="uid://j3pl3wiefrhb" path="res://assets/audio/music/fight_loop.mp3" id="18_re1ed"]
 
 [node name="AudioManager" type="Node2D"]
 process_mode = 3
@@ -124,11 +126,11 @@ volume_db = -20.0
 bus = &"Music"
 
 [node name="EndGame" type="AudioStreamPlayer" parent="Music"]
-volume_db = -20.0
+stream = ExtResource("17_1ktcv")
 bus = &"Music"
 
 [node name="Arena" type="AudioStreamPlayer" parent="Music"]
-volume_db = -20.0
+stream = ExtResource("18_re1ed")
 bus = &"Music"
 
 [node name="Menu" type="AudioStreamPlayer" parent="Music"]

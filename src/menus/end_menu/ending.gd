@@ -13,6 +13,7 @@ func _ready():
 	main_menu_scene = load("res://src/menus/MainMenu.tscn")
 	menu_button.button_down.connect(_on_menu_pressed)
 	set_winner(Global.winner != 1)
+	AudioManager.instance.play_audio("EndGame")
 
 func set_winner(is_orange_winner: bool) -> void:
 	yellow_background.visible = !is_orange_winner
@@ -26,6 +27,11 @@ func yellow_wins() -> void:
 	yellow_background.visible = true
 	orange_background.visible = false
 
+# Buttons Actions
+
 func _on_menu_pressed() -> void:
-	#_play_click_sfx()
+	AudioManager.instance.play_audio("ButtonAccept")
 	get_tree().change_scene_to_packed(main_menu_scene)
+
+func _on_menu_button_mouse_entered() -> void:
+	AudioManager.instance.play_audio("ButtonDecline")

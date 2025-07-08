@@ -5,13 +5,13 @@ extends Node
 @export var end_scene: PackedScene
 
 @onready var _bubble_holder: Node2D = %BubbleHolder
-@onready var _stage_audio_stream: Node2D = %StageAudioStream
 
 @onready var win_interval: Timer = $WinInterval
 
 func _ready() -> void:
 	Global.bubble_spawner = self
 	Global.winner = -1
+	AudioManager.instance.play_audio("Arena")
 	
 	Signals.crab_lose.connect(_on_crab_lose)
 
@@ -38,4 +38,5 @@ func _on_crab_lose(player_index) -> void:
 
 
 func _on_win_interval_timeout() -> void:
+	AudioManager.instance.stop_audio("Arena")
 	get_tree().change_scene_to_packed(end_scene)

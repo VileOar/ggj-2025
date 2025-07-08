@@ -21,7 +21,6 @@ func _ready():
 
 
 func play_sound():
-	print(_next_stream_id)
 	if !_stream_players[_next_stream_id].is_playing():
 		_stream_players[_next_stream_id].play()
 		_next_stream_id += 1

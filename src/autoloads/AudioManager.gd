@@ -40,7 +40,7 @@ func _ready():
 	# Music
 	add_to_sound_player_dictionary("EndRound", $Music/EndRound)
 	add_to_sound_player_dictionary("Ambiance", $Music/Ambiance)
-	add_to_sound_player_dictionary("EndGamee", $Music/EndGame)
+	add_to_sound_player_dictionary("EndGame", $Music/EndGame)
 	add_to_sound_player_dictionary("Arena", $Music/Arena)
 	add_to_sound_player_dictionary("Menu", $Music/Menu)
 
