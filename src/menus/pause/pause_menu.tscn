@@ -1,0 +1,153 @@
+[gd_scene load_steps=9 format=3 uid="uid://comndc2e2crse"]
+
+[ext_resource type="Script" uid="uid://bv8jd1iukbyy" path="res://src/menus/pause/pause_menu.gd" id="1_8deyu"]
+[ext_resource type="Texture2D" uid="uid://cxllaxx0ujnhh" path="res://assets/backgrounds/clean_background.png" id="2_r5mlc"]
+[ext_resource type="Theme" uid="uid://bmvvasfgrxqll" path="res://assets/themes/button_theme.tres" id="3_m2q7w"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lkrvb"]
+texture = ExtResource("2_r5mlc")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_evhyb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_68c8o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qaa3k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kd8pg"]
+
+[node name="PauseMenu" type="Control"]
+process_mode = 3
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8deyu")
+
+[node name="Background" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_lkrvb")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 144
+theme_override_styles/separator = SubResource("StyleBoxEmpty_evhyb")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_m2q7w")
+theme_override_font_sizes/font_size = 62
+text = "PAUSE
+"
+
+[node name="HorizontalContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HorizontalContainer"]
+layout_mode = 2
+
+[node name="VButtonsContainer" type="VBoxContainer" parent="MarginContainer/HorizontalContainer/MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 121
+theme_override_styles/separator = SubResource("StyleBoxEmpty_evhyb")
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+theme_override_styles/separator = SubResource("StyleBoxEmpty_68c8o")
+
+[node name="ContinueButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MenuButton")
+focus_next = NodePath("../MenuButton")
+theme = ExtResource("3_m2q7w")
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 54
+text = "Continue
+"
+
+[node name="HSeparator3" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_68c8o")
+
+[node name="OptionsButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../MenuButton")
+focus_next = NodePath("../MenuButton")
+theme = ExtResource("3_m2q7w")
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qaa3k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kd8pg")
+text = "Options
+"
+
+[node name="HSeparator4" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_68c8o")
+
+[node name="MenuButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+focus_neighbor_top = NodePath("../OptionsButton")
+focus_neighbor_bottom = NodePath("../ExitButton")
+focus_next = NodePath("../ExitButton")
+focus_previous = NodePath("../OptionsButton")
+theme = ExtResource("3_m2q7w")
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 54
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qaa3k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kd8pg")
+text = "Back to Main Menu"
+
+[node name="HSeparator5" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_68c8o")
+
+[node name="ExitButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(400, 64)
+layout_mode = 2
+focus_neighbor_top = NodePath("../MenuButton")
+focus_previous = NodePath("../MenuButton")
+theme = ExtResource("3_m2q7w")
+theme_type_variation = &"FlatButton"
+theme_override_font_sizes/font_size = 54
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qaa3k")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kd8pg")
+text = "Quit Game"

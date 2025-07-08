@@ -101,3 +101,11 @@ func add_to_sound_player_dictionary(node_name, node):
 	# Add the node to the sound player dictionary
 	# This works as a list with a name to each sound, so you can get it later
 	_sound_player_by_name[node_name] = node
+	
+	
+# UI Audio
+func play_click_sfx():
+	play_audio("ButtonAccept")
+	
+func play_hover_sfx():
+	play_audio("ButtonDecline")

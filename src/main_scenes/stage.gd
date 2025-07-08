@@ -5,10 +5,12 @@ extends Node
 @export var end_scene: PackedScene
 
 @onready var _bubble_holder: Node2D = %BubbleHolder
+@onready var _pause_menu: PauseMenu = $PauseMenu
 
 @onready var win_interval: Timer = $WinInterval
 
 func _ready() -> void:
+	_pause_menu.visible = false
 	Global.bubble_spawner = self
 	Global.winner = -1
 	AudioManager.instance.play_audio("Arena")

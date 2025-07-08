@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://dbi430hooexen"]
+[gd_scene load_steps=10 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="PackedScene" uid="uid://dcfxxbn8njgkj" path="res://src/player/player_scene.tscn" id="1_1q1cn"]
 [ext_resource type="Script" uid="uid://dv1cn6be77gnn" path="res://src/main_scenes/stage.gd" id="1_luwh6"]
 [ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="2_e7vcn"]
 [ext_resource type="PackedScene" uid="uid://bejtoe3wwm5hr" path="res://src/menus/end_menu/ending.tscn" id="3_0k0jp"]
 [ext_resource type="Texture2D" uid="uid://dop0xojtu8rq7" path="res://assets/background.png" id="3_2kop5"]
+[ext_resource type="PackedScene" uid="uid://comndc2e2crse" path="res://src/menus/pause/pause_menu.tscn" id="4_a5370"]
 [ext_resource type="Texture2D" uid="uid://batu2wgel67j8" path="res://assets/instructions.png" id="4_jfn4m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8jwm"]
@@ -77,6 +78,13 @@ angular_damp = 10.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/MeterGravity"]
 shape = SubResource("CircleShape2D_8h1qn")
+
+[node name="PauseMenu" parent="." instance=ExtResource("4_a5370")]
+visible = false
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
 
 [node name="WinInterval" type="Timer" parent="."]
 
