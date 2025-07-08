@@ -3,13 +3,15 @@ extends StackStateMachine
 
 
 @onready var _rigid_body := get_parent() as Player
-@onready var _anim: AnimatedSprite2D = %AnimatedSprite2D
+@onready var _anim_player_1: AnimatedSprite2D = %Player1AnimatedSprite
+@onready var _anim_player_2: AnimatedSprite2D = %Player2AnimatedSprite
 
 var _sound_by_name : Dictionary = {}
-
+var _anim: AnimatedSprite2D
 
 func _ready() -> void:
 	super._ready()
+	_set_player_animation_sprite()
 	push_state("WalkState")
 
 	_sound_by_name["walk"] = %WalkStream
@@ -18,6 +20,18 @@ func _ready() -> void:
 	_sound_by_name["flail"] = %FlailStream
 	_sound_by_name["charge"] = %ChargeStream
 
+
+func _set_player_animation_sprite():
+	if _rigid_body.name == "Player1":
+		_anim = _anim_player_1
+		_anim_player_2.hide()
+	elif _rigid_body.name == "Player2":
+		_anim = _anim_player_2
+		_anim_player_1.hide()
+	else:
+		print("Error - Invalid player name, couldn't set animated sprite corretcly")
+		_anim = _anim_player_1
+		_anim_player_2.hide()
 
 func rigidbody() -> Player:
 	return _rigid_body
