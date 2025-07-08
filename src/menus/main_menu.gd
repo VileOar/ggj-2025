@@ -2,8 +2,6 @@ class_name MainMenu
 extends Control
 
 @onready var start_game_button : Button = %PlayButton
-#@onready var credits = %CreditsButton
-#@onready var how_to_play = %HowToPlayButton
 @onready var exit_button : Button = %ExitButton
 @onready var credits: Control = %Credits
 
@@ -18,14 +16,14 @@ func _ready():
 
 
 func _play_click_sfx() -> void:
-	#SoundManager.instance.play_click_sfx()
-	pass
+	AudioManager.instance.play_audio("ButtonAccept")
 
+func _play_button_decline_sfx() -> void:
+	AudioManager.instance.play_audio("ButtonDecline")
 
 # Starts game
 func _on_start_pressed() -> void:
 	_play_click_sfx()
-	#SoundManager.instance.play_correct_sfx()
 	get_tree().change_scene_to_packed(game_scene)
 
 
@@ -36,5 +34,5 @@ func _on_credits_button_pressed():
 	
 # Exists game
 func _on_exit_pressed() -> void:
-	_play_click_sfx()
+	_play_button_decline_sfx()
 	get_tree().quit()
