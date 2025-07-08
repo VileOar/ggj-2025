@@ -20,7 +20,7 @@ func _ready() -> void:
 	_sound_by_name["flail"] = %FlailStream
 	_sound_by_name["charge"] = %ChargeStream
 
-
+# Sets the animated sprite to be player 1 (orange) or player 2 (yellow)
 func _set_player_animation_sprite():
 	if _rigid_body.name == "Player1":
 		_anim = _anim_player_1
