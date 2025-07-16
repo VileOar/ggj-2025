@@ -2,19 +2,25 @@ class_name MainMenu
 extends Control
 
 @onready var start_game_button : Button = %PlayButton
+@onready var options_button: Button = %OptionsButton
 @onready var credits_button = %CreditsButton
 @onready var exit_button : Button = %ExitButton
 
 @onready var credits: Control = %Credits
+@onready var options_menu: OptionsMenu = %OptionsMenu
 
 @onready var game_scene : PackedScene = preload("res://src/main_scenes/stage.tscn")
 
 
 func _ready():
 	_start_main_menu_music()
+	options_menu.visible = false
+	credits.visible = false
+	
 	
 	# Connects buttons to functions
 	start_game_button.button_down.connect(_on_start_pressed)
+	options_button.button_down.connect(_on_options_pressed)
 	credits_button.button_down.connect(_on_credits_pressed)
 	exit_button.button_down.connect(_on_exit_pressed)
 
@@ -39,6 +45,12 @@ func _on_start_pressed() -> void:
 	_play_click_sfx()
 	_stop_main_menu_music()
 	get_tree().change_scene_to_packed(game_scene)
+
+
+func _on_options_pressed() -> void:
+	_play_click_sfx()
+	options_menu.visible = true
+	print("TODO Options")	
 
 
 func _on_credits_pressed():
