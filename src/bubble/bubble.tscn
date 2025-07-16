@@ -212,7 +212,7 @@ shape = SubResource("CircleShape2D_hsqk6")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_vftgc")
+&"": SubResource("AnimationLibrary_vftgc")
 }
 
 [node name="Lifespan" type="Timer" parent="."]
