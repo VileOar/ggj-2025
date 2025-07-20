@@ -1,68 +1,103 @@
 class_name OptionsMenu
 extends Control
 
-#@onready var start_game_button : Button = $Background/MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/PlayButton
-@onready var back_button : Button = $MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/BackContainer/BackButton
-@onready var resolution_dropdown_button = $MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer/ResolutionContainer/ResolutionDropdown
+@onready var back_button: Button = %BackButton
 @onready var resolution_label: Label = %ResolutionLabel
-
 @onready var resolution_left_btn: Button = %ResolutionLeftBtn
 @onready var resolution_right_btn: Button = %ResolutionRightBtn
 
 
 var _current_window_position
+var _current_resolution_key : String 
+var _current_resolution_index : int 
 
 
 func _ready():
-# Saves initial center position of primary screen so that it can add up the new position to it 
-# in the future
+	# Saves initial center position of primary screen so that it can add up the new position to it 
+	# in the future
 	_current_window_position = DisplayServer.window_get_position()
-# Connects buttons to functions
-	back_button.button_down.connect(_on_back_pressed)
-	resolution_dropdown_button.button_down.connect(_on_resolution_clicked)
-	resolution_dropdown_button.item_selected.connect(_on_resolution_selected)
+	_current_resolution_key = _get_closest_resolution_id()
+	_current_resolution_index = Constants.ordered_resolution_keys.find(_current_resolution_key)
+	resolution_label.text = _current_resolution_key
 	
-	resolution_left_btn.item_selected.connect(_on_resolution_left_btn)
-	resolution_right_btn.item_selected.connect(_on_resolution_right_btn)
-	
-	
-	# TODO remove this temp resolution setup
-	#_on_resolution_selected(6)
+	# Connects to functions
+	back_button.pressed.connect(_on_back_pressed)
+	resolution_left_btn.pressed.connect(_on_resolution_change.bind(-1))
+	resolution_right_btn.pressed.connect(_on_resolution_change.bind(1))
+
+
+## Deals with input to pause the game and show menu
+func _input(_event):
+	if Input.is_action_just_pressed("pause_game"):
+		if visible:  
+			_play_click_sfx()
+		self.visible = false
+
 
 func _play_click_sfx() -> void:
 	AudioManager.instance.play_click_sfx()
 
 
-# back to main menu
+# Back to main menu
 func _on_back_pressed() -> void:
 	_play_click_sfx()
 	self.visible = false
 
-# plays sound when clicked
-func _on_resolution_clicked() -> void:
-	_play_click_sfx()
+
+func _get_closest_resolution_id() -> String:
+	var current_resolution: Vector2i = DisplayServer.window_get_size()
+	var closest_key: String = ""
+	var smallest_distance: float = INF
+	
+	# Search for avaiable resolitions and saves vector distance
+	for key in Constants.resolutions:
+		var res: Vector2i = Constants.resolutions[key]
+		var distance: float = current_resolution.distance_to(res)
+		
+		# Stores smallest distance
+		if distance < smallest_distance:
+			smallest_distance = distance
+			closest_key = key
+	
+	return closest_key
 
 
-# resolution selected
-func _on_resolution_selected(id) -> void:
+# change resolution
+func _on_resolution_change(res_step : int) -> void:
 	_play_click_sfx()
-	#SoundManager.instance.play_correct_sfx()
-# Get resolution from Constants ids pre saved
-	#var resolutions_keys = Constants.resolutions.keys()
-	#var resolution_text = resolutions_keys[id]
-	#var resolution_size = Constants.resolutions.get(resolution_text)
-	#set_resolution(resolution_size)
+	_set_next_valid_resolution_index(res_step)
 	
+	var resolution_text = Constants.ordered_resolution_keys[_current_resolution_index]
+	resolution_label.text = resolution_text
 	
-# change screen resolution
-func set_resolution(new_resolution: Vector2):
-# gets center of the current screen size
-	#var center_window_position = Util.get_new_window_position(new_resolution)
+	var resolution_size = Constants.resolutions.get(resolution_text)
+	_set_resolution(resolution_size, resolution_text)
+
+
+func _set_next_valid_resolution_index(res_step : int) -> void:
+	var next_id = res_step + _current_resolution_index
+	# If next number is higher than the array, resets
+	# If it is smaller than 0, it is the last resolution
+	if next_id >= Constants.ordered_resolution_keys.size(): 
+		next_id = 0
+	elif next_id < 0 :
+		next_id = Constants.ordered_resolution_keys.size() - 1
 	
-# adds up screen size of center of a screen to the new position
-	#DisplayServer.window_set_position(_current_window_position + center_window_position)
+	_current_resolution_index = next_id
+
+
+# Change screen resolution and repositions Windows
+func _set_resolution(new_resolution: Vector2, resolution_text : String):
+	# adds up screen size of center of a screen to the new position
+	DisplayServer.window_set_size(new_resolution)
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	get_viewport().set_size(new_resolution) 
+	
+	# Center the Window on current screen size
+	var center_window_position = Utils.get_new_window_position(new_resolution)
+	DisplayServer.window_set_position(_current_window_position + center_window_position)
+	
+	if _current_resolution_key == resolution_text:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	#print("position = ", _current_window_position)
 	#print("position = ", center_window_position)
-	#DisplayServer.window_set_size(new_resolution)
-	#get_viewport().set_size(new_resolution) 
-	pass

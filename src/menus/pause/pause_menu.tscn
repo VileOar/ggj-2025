@@ -1,11 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://comndc2e2crse"]
+[gd_scene load_steps=12 format=3 uid="uid://comndc2e2crse"]
 
 [ext_resource type="Script" uid="uid://bv8jd1iukbyy" path="res://src/menus/pause/pause_menu.gd" id="1_8deyu"]
 [ext_resource type="Texture2D" uid="uid://cxllaxx0ujnhh" path="res://assets/backgrounds/clean_background.png" id="2_r5mlc"]
+[ext_resource type="Texture2D" uid="uid://c5l3ihd1qrhts" path="res://assets/tmp/hollow-knight-game-menu.jpg" id="3_aqhcl"]
 [ext_resource type="Theme" uid="uid://bmvvasfgrxqll" path="res://assets/themes/button_theme.tres" id="3_m2q7w"]
+[ext_resource type="PackedScene" uid="uid://wg26fathbma7" path="res://src/menus/options/options_menu.tscn" id="5_aqhcl"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lkrvb"]
 texture = ExtResource("2_r5mlc")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nulr0"]
+texture = ExtResource("3_aqhcl")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_evhyb"]
 
@@ -32,6 +37,13 @@ offset_right = 1280.0
 offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_lkrvb")
 
+[node name="BackgroundHelper" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_nulr0")
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
 offset_right = 1280.0
@@ -57,7 +69,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("3_m2q7w")
-theme_override_font_sizes/font_size = 62
+theme_override_font_sizes/font_size = 52
 text = "PAUSE
 "
 
@@ -90,9 +102,9 @@ focus_neighbor_bottom = NodePath("../MenuButton")
 focus_next = NodePath("../MenuButton")
 theme = ExtResource("3_m2q7w")
 theme_type_variation = &"FlatButton"
-theme_override_font_sizes/font_size = 54
-text = "Continue
-"
+theme_override_font_sizes/font_size = 32
+text = "Continue"
+icon_alignment = 1
 
 [node name="HSeparator3" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
@@ -101,18 +113,17 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_68c8o")
 
 [node name="OptionsButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(400, 64)
 layout_mode = 2
 focus_neighbor_bottom = NodePath("../MenuButton")
 focus_next = NodePath("../MenuButton")
 theme = ExtResource("3_m2q7w")
 theme_type_variation = &"FlatButton"
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qaa3k")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_kd8pg")
-text = "Options
-"
+text = "Options"
+icon_alignment = 1
 
 [node name="HSeparator4" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
@@ -129,10 +140,11 @@ focus_next = NodePath("../ExitButton")
 focus_previous = NodePath("../OptionsButton")
 theme = ExtResource("3_m2q7w")
 theme_type_variation = &"FlatButton"
-theme_override_font_sizes/font_size = 54
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qaa3k")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_kd8pg")
-text = "Back to Main Menu"
+text = "Main Menu"
+icon_alignment = 1
 
 [node name="HSeparator5" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
@@ -147,7 +159,12 @@ focus_neighbor_top = NodePath("../MenuButton")
 focus_previous = NodePath("../MenuButton")
 theme = ExtResource("3_m2q7w")
 theme_type_variation = &"FlatButton"
-theme_override_font_sizes/font_size = 54
+theme_override_font_sizes/font_size = 32
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qaa3k")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_kd8pg")
 text = "Quit Game"
+icon_alignment = 1
+
+[node name="OptionsMenu" parent="." instance=ExtResource("5_aqhcl")]
+unique_name_in_owner = true
+visible = false

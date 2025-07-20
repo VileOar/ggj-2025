@@ -6,15 +6,16 @@ extends Control
 @onready var menu_button : Button = %MenuButton
 @onready var exit_button : Button = %ExitButton
 
-var main_menu_scene : PackedScene 
 @onready var _pause_menu = $"."
-#@onready var options_menu_node : OptionsMenu = $OptionsMenu
+@onready var _options_menu: OptionsMenu = %OptionsMenu
+var main_menu_scene : PackedScene 
 
 
 func _ready():
 	main_menu_scene = load("res://src/menus/MainMenu.tscn")
-	#options_menu_node.visible = false
-# Connects buttons to functions
+	_options_menu.visible = false
+	
+	# Connects buttons to functions
 	continue_button.button_down.connect(_on_continue_pressed)
 	options_button.button_down.connect(_on_options_pressed)
 	menu_button.button_down.connect(_on_menu_pressed)
@@ -34,12 +35,12 @@ func _input(_event):
 func _on_continue_pressed() -> void:
 	_play_click_sfx()
 	get_tree().paused = not get_tree().paused
-	$".".visible = false
+	self.visible = false
 
 
 func _on_options_pressed() -> void:
 	_play_click_sfx()
-	#options_menu_node.visible = true
+	_options_menu.visible = true
 	
 	
 func _on_menu_pressed() -> void:

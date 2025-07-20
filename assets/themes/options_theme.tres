@@ -1,29 +1,14 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://boonq02ic5uaj"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://boonq02ic5uaj"]
 
 [ext_resource type="FontFile" uid="uid://ga5mwkclh6ey" path="res://assets/fonts/Poppins-Medium.ttf" id="1_icnja"]
-[ext_resource type="Texture2D" uid="uid://d2xko5gsjdny7" path="res://assets/UIElements/arrow2.png" id="2_nkela"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tv5yy"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkela"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ckjsd"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u01yf"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ec6w"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_icnja"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aew8p"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkela"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u01yf"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7a8n"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nm5v3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2h2ks"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oysm3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpkow"]
 
 [resource]
 Button/colors/font_color = Color(0.211765, 0.47451, 0.741176, 1)
@@ -33,29 +18,12 @@ Button/colors/font_hover_pressed_color = Color(0.211765, 0.309804, 0.54902, 1)
 Button/colors/font_pressed_color = Color(0.211765, 0.309804, 0.54902, 1)
 Button/colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
 Button/colors/icon_hover_pressed_color = Color(1, 0.486275, 0.741176, 1)
-Button/font_sizes/font_size = 32
-Button/fonts/font = null
-Button/styles/focus = SubResource("StyleBoxEmpty_tv5yy")
-Button/styles/hover = SubResource("StyleBoxEmpty_ckjsd")
-Button/styles/normal = SubResource("StyleBoxEmpty_7ec6w")
+Button/font_sizes/font_size = 42
+Button/fonts/font = ExtResource("1_icnja")
+Button/styles/focus = SubResource("StyleBoxEmpty_nkela")
+Button/styles/hover = SubResource("StyleBoxEmpty_u01yf")
+Button/styles/normal = SubResource("StyleBoxEmpty_icnja")
 Button/styles/pressed = SubResource("StyleBoxEmpty_aew8p")
 Label/colors/font_color = Color(0.211765, 0.47451, 0.741176, 1)
-Label/font_sizes/font_size = 62
+Label/font_sizes/font_size = 42
 Label/fonts/font = ExtResource("1_icnja")
-OptionButton/colors/font_color = Color(0.211765, 0.47451, 0.741176, 1)
-OptionButton/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-OptionButton/colors/font_pressed_color = Color(1, 1, 1, 1)
-OptionButton/constants/arrow_margin = -14
-OptionButton/constants/h_separation = 4
-OptionButton/constants/modulate_arrow = 0
-OptionButton/constants/outline_size = 0
-OptionButton/font_sizes/font_size = 36
-OptionButton/fonts/font = ExtResource("1_icnja")
-OptionButton/icons/arrow = ExtResource("2_nkela")
-OptionButton/styles/disabled = SubResource("StyleBoxFlat_nkela")
-OptionButton/styles/focus = SubResource("StyleBoxFlat_u01yf")
-OptionButton/styles/hover = SubResource("StyleBoxFlat_m7a8n")
-OptionButton/styles/normal = SubResource("StyleBoxFlat_nm5v3")
-OptionButton/styles/normal_mirrored = SubResource("StyleBoxFlat_2h2ks")
-OptionButton/styles/pressed = SubResource("StyleBoxFlat_oysm3")
-OptionButton/styles/pressed_mirrored = SubResource("StyleBoxFlat_tpkow")
