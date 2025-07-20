@@ -50,7 +50,6 @@ func _on_start_pressed() -> void:
 func _on_options_pressed() -> void:
 	_play_click_sfx()
 	options_menu.visible = true
-	print("TODO Options")	
 
 
 func _on_credits_pressed():
