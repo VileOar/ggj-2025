@@ -47,14 +47,14 @@ layout_mode = 2
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_constants/separation = 61
+theme_override_constants/separation = 118
 theme_override_styles/separator = SubResource("StyleBoxEmpty_jmax6")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("2_1f1pm")
-theme_override_font_sizes/font_size = 52
+theme_override_font_sizes/font_size = 58
 text = "OPTIONS"
 
 [node name="TitleSeparator" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -86,29 +86,6 @@ layout_mode = 2
 theme_override_constants/separation = 316
 theme_override_styles/separator = SubResource("StyleBoxEmpty_hry04")
 
-[node name="ResolutionDropdown" type="OptionButton" parent="MarginContainer/VBoxContainer/ResolutionContainer"]
-visible = false
-custom_minimum_size = Vector2(0, 100)
-layout_mode = 2
-theme = ExtResource("6_odmml")
-flat = true
-selected = 0
-item_count = 7
-popup/item_0/text = "1920x1080[16:9]"
-popup/item_0/id = 0
-popup/item_1/text = "1600x900[16:9]"
-popup/item_1/id = 1
-popup/item_2/text = "1366x768[16:9]"
-popup/item_2/id = 2
-popup/item_3/text = "1280x720[16:9]"
-popup/item_3/id = 3
-popup/item_4/text = "1280x1024[5:4]"
-popup/item_4/id = 4
-popup/item_5/text = "1280x960[4:3]"
-popup/item_5/id = 5
-popup/item_6/text = "1024x768[4:3]"
-popup/item_6/id = 6
-
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ResolutionContainer"]
 layout_mode = 2
 
@@ -124,7 +101,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_u4jee")
 theme_override_font_sizes/font_size = 42
-text = "Master Volume"
+text = "1920x1080[16:9]"
 
 [node name="ResolutionRightBtn" type="Button" parent="MarginContainer/VBoxContainer/ResolutionContainer/HBoxContainer"]
 unique_name_in_owner = true
@@ -159,7 +136,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jmax6")
 
 [node name="MasterSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MasterVolumeContainer/SliderContainer"]
 layout_mode = 2
-theme = ExtResource("4_u4jee")
+theme = ExtResource("6_odmml")
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -193,7 +170,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jmax6")
 
 [node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MusicVolumeContainer3/SliderContainer"]
 layout_mode = 2
-theme = ExtResource("4_u4jee")
+theme = ExtResource("6_odmml")
 max_value = 1.0
 step = 0.01
 value = 1.0
@@ -227,7 +204,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_jmax6")
 
 [node name="SoundSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SoundVolume/SliderContainer"]
 layout_mode = 2
-theme = ExtResource("4_u4jee")
+theme = ExtResource("6_odmml")
 max_value = 1.0
 step = 0.01
 value = 1.0

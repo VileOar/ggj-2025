@@ -17,7 +17,6 @@ func _ready():
 	options_menu.visible = false
 	credits.visible = false
 	
-	
 	# Connects buttons to functions
 	start_game_button.button_down.connect(_on_start_pressed)
 	options_button.button_down.connect(_on_options_pressed)
@@ -65,8 +64,10 @@ func _on_exit_pressed() -> void:
 func _on_credits_button_mouse_entered():
 	_play_hover_sfx()
 
+
 func _on_play_button_mouse_entered():
 	_play_hover_sfx()
+
 
 func _on_exit_button_mouse_entered():
 	_play_hover_sfx()

@@ -70,7 +70,7 @@ alignment = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_nulr0")
-theme_override_font_sizes/font_size = 52
+theme_override_font_sizes/font_size = 58
 text = "PAUSE
 "
 
@@ -92,7 +92,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_evhyb")
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]
 layout_mode = 2
-theme_override_constants/separation = 40
+theme_override_constants/separation = 60
 theme_override_styles/separator = SubResource("StyleBoxEmpty_68c8o")
 
 [node name="ContinueButton" type="Button" parent="MarginContainer/HorizontalContainer/MarginContainer/VButtonsContainer"]

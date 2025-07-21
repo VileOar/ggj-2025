@@ -107,12 +107,12 @@ bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="MainMenuMusic"]
 stream = ExtResource("15_jtyui")
-volume_db = 4.0
+volume_db = -10.0
 bus = &"Music"
 
 [node name="Ambience" type="AudioStreamPlayer" parent="MainMenuMusic"]
 stream = ExtResource("16_1ktcv")
-volume_db = -14.0
+volume_db = -27.0
 bus = &"Music"
 
 [node name="Music" type="Node" parent="."]
@@ -127,10 +127,12 @@ bus = &"Music"
 
 [node name="EndGame" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("17_1ktcv")
+volume_db = -13.5
 bus = &"Music"
 
 [node name="Arena" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("18_re1ed")
+volume_db = -13.5
 bus = &"Music"
 
 [node name="Menu" type="AudioStreamPlayer" parent="Music"]
