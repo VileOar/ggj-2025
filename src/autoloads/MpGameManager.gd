@@ -1,7 +1,8 @@
 extends Node
 
-const HOST_ID = 1
-const MAX_PLAYERS = 2
+const HOST_ID := 1
+const MAX_PLAYERS := 2
+const COMPRESSION_TYPE := ENetConnection.COMPRESS_RANGE_CODER
 
 
 ## MULTIPLAYER VARIABLES

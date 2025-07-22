@@ -1,7 +1,8 @@
-[gd_scene load_steps=44 format=3 uid="uid://uj0yeucmjc52"]
+[gd_scene load_steps=45 format=3 uid="uid://uj0yeucmjc52"]
 
-[ext_resource type="Script" uid="uid://dn5drjs6s8ngq" path="res://src/menus/multiplayer/multiplayer.gd" id="1_s2d3k"]
+[ext_resource type="Script" uid="uid://djgmfmhnymodf" path="res://src/menus/multiplayer/ui_multiplayer_manager.gd" id="1_r5mld"]
 [ext_resource type="Theme" uid="uid://bmvvasfgrxqll" path="res://assets/themes/button_theme.tres" id="1_tc75a"]
+[ext_resource type="Script" uid="uid://cq3qlwc1mfupm" path="res://src/menus/multiplayer/multiplayer_manager.gd" id="2_565s2"]
 [ext_resource type="Script" uid="uid://dqs50gp734ay4" path="res://src/menus/multiplayer/hosting_label.gd" id="2_s2d3k"]
 [ext_resource type="FontFile" uid="uid://ga5mwkclh6ey" path="res://assets/fonts/Poppins-Medium.ttf" id="3_r5mld"]
 [ext_resource type="Texture2D" uid="uid://da7fg57m0ccu5" path="res://assets/buttons/empty.png" id="4_565s2"]
@@ -307,7 +308,11 @@ animations = [{
 
 [node name="MultiplayerContainer" type="HBoxContainer"]
 alignment = 1
-script = ExtResource("1_s2d3k")
+script = ExtResource("1_r5mld")
+
+[node name="MultiplayerLogic" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_565s2")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
