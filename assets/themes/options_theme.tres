@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://ga5mwkclh6ey" path="res://assets/fonts/Poppins-Medium.ttf" id="1_icnja"]
 [ext_resource type="Texture2D" uid="uid://dm5r0ommyyqym" path="res://assets/UIElements/bar.png" id="2_m7a8n"]
-[ext_resource type="Texture2D" uid="uid://jaotu2mpu4l8" path="res://assets/UIElements/bar_hover.png" id="3_nm5v3"]
+[ext_resource type="Texture2D" uid="uid://dio1g4rnyngxo" path="res://assets/UIElements/bar_highlight_blue.png" id="3_m7a8n"]
 [ext_resource type="StyleBox" uid="uid://drrnsxp163hgr" path="res://assets/UIElements/slider/slider_style_box_texture.tres" id="4_2h2ks"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nkela"]
@@ -28,8 +28,8 @@ Button/styles/hover = SubResource("StyleBoxEmpty_u01yf")
 Button/styles/normal = SubResource("StyleBoxEmpty_icnja")
 Button/styles/pressed = SubResource("StyleBoxEmpty_aew8p")
 HSlider/icons/grabber = ExtResource("2_m7a8n")
-HSlider/icons/grabber_highlight = ExtResource("3_nm5v3")
-HSlider/icons/tick = ExtResource("3_nm5v3")
+HSlider/icons/grabber_highlight = ExtResource("3_m7a8n")
+HSlider/icons/tick = ExtResource("3_m7a8n")
 HSlider/styles/grabber_area = ExtResource("4_2h2ks")
 HSlider/styles/grabber_area_highlight = ExtResource("4_2h2ks")
 HSlider/styles/slider = ExtResource("4_2h2ks")

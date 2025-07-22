@@ -2,9 +2,14 @@ class_name MainMenu
 extends Control
 
 @onready var start_game_button : Button = %PlayButton
+@onready var multiplayer_button: Button = %MultiplayerButton
 @onready var options_button: Button = %OptionsButton
 @onready var credits_button = %CreditsButton
 @onready var exit_button : Button = %ExitButton
+
+@onready var start_menu_container: HBoxContainer = $MarginContainer/StartMenuContainer
+@onready var multiplayer_container: HBoxContainer = $MarginContainer/MultiplayerContainer
+
 
 @onready var credits: Control = %Credits
 @onready var options_menu: OptionsMenu = %OptionsMenu
@@ -16,14 +21,18 @@ func _ready():
 	_start_main_menu_music()
 	options_menu.visible = false
 	credits.visible = false
+	multiplayer_container.visible = false
+	
 	
 	# Connects buttons to functions
 	start_game_button.button_down.connect(_on_start_pressed)
+	multiplayer_button.button_down.connect(_on_multiplayer_pressed)
 	options_button.button_down.connect(_on_options_pressed)
 	credits_button.button_down.connect(_on_credits_pressed)
 	exit_button.button_down.connect(_on_exit_pressed)
 
-# Audio
+
+#region Audio
 func _start_main_menu_music() -> void:
 	AudioManager.instance.play_audio("Ambience")
 	AudioManager.instance.play_audio("MainMenuMusic")
@@ -38,12 +47,20 @@ func _play_click_sfx() -> void:
 func _play_hover_sfx() -> void:
 	AudioManager.play_audio("ButtonDecline")
 
-# Button actions
+#endregion
+
+#region Button_Actions
 
 func _on_start_pressed() -> void:
 	_play_click_sfx()
 	_stop_main_menu_music()
 	get_tree().change_scene_to_packed(game_scene)
+
+
+func _on_multiplayer_pressed() -> void:
+	_play_click_sfx()
+	start_menu_container.visible = false
+	multiplayer_container.visible = true
 
 
 func _on_options_pressed() -> void:
@@ -60,6 +77,7 @@ func _on_exit_pressed() -> void:
 	_play_click_sfx()
 	get_tree().quit()
 
+#endregion
 
 func _on_credits_button_mouse_entered():
 	_play_hover_sfx()

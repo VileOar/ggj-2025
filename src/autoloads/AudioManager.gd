@@ -109,3 +109,6 @@ func play_click_sfx():
 	
 func play_hover_sfx():
 	play_audio("ButtonDecline")
+	
+func play_decline_sfx():
+	play_audio("ButtonNegative")

@@ -1,7 +1,8 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://diy3brf8nv5pc"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://diy3brf8nv5pc"]
 
 [ext_resource type="FontFile" uid="uid://ga5mwkclh6ey" path="res://assets/fonts/Poppins-Medium.ttf" id="1_pujlq"]
 [ext_resource type="Texture2D" uid="uid://da7fg57m0ccu5" path="res://assets/buttons/empty.png" id="2_pujlq"]
+[ext_resource type="Texture2D" uid="uid://bsvo8jp50kh20" path="res://assets/buttons/empty_text_edit.png" id="3_l2lwm"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tv5yy"]
 
@@ -10,6 +11,9 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7ec6w"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aew8p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_td21d"]
+texture = ExtResource("3_l2lwm")
 
 [resource]
 Button/colors/font_color = Color(0.211765, 0.47451, 0.741176, 1)
@@ -29,3 +33,9 @@ Button/styles/pressed = SubResource("StyleBoxEmpty_aew8p")
 Label/colors/font_color = Color(0.211765, 0.47451, 0.741176, 1)
 Label/font_sizes/font_size = 16
 Label/fonts/font = ExtResource("1_pujlq")
+LineEdit/colors/caret_color = Color(0, 0, 0.458824, 1)
+LineEdit/colors/font_color = Color(0, 0, 0.87451, 1)
+LineEdit/colors/selection_color = Color(0, 0, 0.458824, 1)
+LineEdit/font_sizes/font_size = 32
+LineEdit/fonts/font = ExtResource("1_pujlq")
+LineEdit/styles/normal = SubResource("StyleBoxTexture_td21d")

@@ -1,9 +1,10 @@
-[gd_scene load_steps=20 format=3 uid="uid://djwk13ndrtnof"]
+[gd_scene load_steps=21 format=3 uid="uid://djwk13ndrtnof"]
 
 [ext_resource type="Script" uid="uid://dsptk602sergs" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
 [ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/UI_accept.wav" id="2_1dq0b"]
 [ext_resource type="AudioStream" uid="uid://pko3vu5mkndb" path="res://assets/audio/sfx/ui/UI_decline.wav" id="3_5qf1k"]
 [ext_resource type="AudioStream" uid="uid://bmsjpuvlwfa8m" path="res://assets/audio/sfx/bubble_bounce.wav" id="4_3uo64"]
+[ext_resource type="AudioStream" uid="uid://crdocl5twh8ww" path="res://assets/audio/sfx/ui/UI_negative.wav" id="4_6l2il"]
 [ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="5_1lysb"]
 [ext_resource type="AudioStream" uid="uid://8e5p5aknx574" path="res://assets/audio/sfx/bubble_merge.wav" id="6_7id7o"]
 [ext_resource type="AudioStream" uid="uid://cebve8gd1u3c1" path="res://assets/audio/sfx/bubble_pop.wav" id="7_hhjsi"]
@@ -35,6 +36,12 @@ bus = &"SFX"
 [node name="ButtonDecline" type="AudioStreamPlayer" parent="UI"]
 stream = ExtResource("3_5qf1k")
 volume_db = -20.0
+max_polyphony = 10
+bus = &"SFX"
+
+[node name="ButtonNegative" type="AudioStreamPlayer" parent="UI"]
+stream = ExtResource("4_6l2il")
+volume_db = -10.0
 max_polyphony = 10
 bus = &"SFX"
 

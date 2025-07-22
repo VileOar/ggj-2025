@@ -6,6 +6,10 @@ extends Control
 @onready var resolution_left_btn: Button = %ResolutionLeftBtn
 @onready var resolution_right_btn: Button = %ResolutionRightBtn
 
+@onready var master_slider: HSlider = $MarginContainer/VBoxContainer/MasterVolumeContainer/SliderContainer/MasterSlider
+@onready var music_slider: HSlider = $MarginContainer/VBoxContainer/MusicVolumeContainer3/SliderContainer/MusicSlider
+@onready var sound_slider: HSlider = $MarginContainer/VBoxContainer/SoundVolume/SliderContainer/SoundSlider
+
 
 var _current_window_position
 var _current_resolution_key : String 
@@ -24,6 +28,14 @@ func _ready():
 	back_button.pressed.connect(_on_back_pressed)
 	resolution_left_btn.pressed.connect(_on_resolution_change.bind(-1))
 	resolution_right_btn.pressed.connect(_on_resolution_change.bind(1))
+	
+	# Connects hover sfx
+	back_button.mouse_entered.connect(_on_mouse_entered)
+	resolution_left_btn.mouse_entered.connect(_on_mouse_entered)
+	resolution_right_btn.mouse_entered.connect(_on_mouse_entered)
+	master_slider.mouse_entered.connect(_on_mouse_entered)
+	music_slider.mouse_entered.connect(_on_mouse_entered)
+	sound_slider.mouse_entered.connect(_on_mouse_entered)
 
 
 ## Deals with input to pause the game and show menu
@@ -101,3 +113,7 @@ func _set_resolution(new_resolution: Vector2, resolution_text : String):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	#print("position = ", _current_window_position)
 	#print("position = ", center_window_position)
+
+
+func _on_mouse_entered() -> void:
+	AudioManager.play_hover_sfx()

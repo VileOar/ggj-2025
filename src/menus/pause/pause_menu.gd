@@ -20,6 +20,12 @@ func _ready():
 	options_button.button_down.connect(_on_options_pressed)
 	menu_button.button_down.connect(_on_menu_pressed)
 	exit_button.button_down.connect(_on_exit_pressed)
+	
+	continue_button.mouse_entered.connect(_on_mouse_entered)
+	options_button.mouse_entered.connect(_on_mouse_entered)
+	menu_button.mouse_entered.connect(_on_mouse_entered)
+	exit_button.mouse_entered.connect(_on_mouse_entered)
+	
 
 func _play_click_sfx() -> void:
 	AudioManager.instance.play_click_sfx()
@@ -54,3 +60,7 @@ func _on_menu_pressed() -> void:
 func _on_exit_pressed() -> void:
 	_play_click_sfx()
 	get_tree().quit()
+	
+	
+func _on_mouse_entered() -> void:
+	AudioManager.play_hover_sfx()
