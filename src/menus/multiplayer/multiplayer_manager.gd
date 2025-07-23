@@ -75,7 +75,18 @@ func start_hosting() -> void:
 func stop_hosting() -> void:
 	MpGameManager.multiplayer_status = -1
 	_peer_disconnected(MpGameManager.HOST_ID)
-
+	shutdown_server()
+	
+func shutdown_server() -> void:
+	if multiplayer.multiplayer_peer:
+		## Optional: Disconnect peers first
+		#if multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
+			#multiplayer.multiplayer_peer.disconnect_peer(1)  # if you manage peer IDs manually
+		
+		# Close the peer
+		multiplayer.multiplayer_peer.close()
+		multiplayer.multiplayer_peer = null
+		print("Server has been shut down.")
 
 @rpc("any_peer")
 func send_player_information(player_name, id) -> void:
