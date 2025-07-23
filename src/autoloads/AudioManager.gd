@@ -103,6 +103,10 @@ func add_to_sound_player_dictionary(node_name, node):
 	_sound_player_by_name[node_name] = node
 	
 	
+func set_master_volume(volume : float) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(volume))
+	
+	
 # UI Audio
 func play_click_sfx():
 	play_audio("ButtonAccept")

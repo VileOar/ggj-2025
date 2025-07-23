@@ -112,6 +112,7 @@ func _reset_client_ui_information() -> void:
 	host_button.disabled = false
 	start_game_button.visible = false
 
+
 func update_player_status(player_id : int, is_player_visible : bool) -> void:
 	if player_id == MpGameManager.HOST_ID:
 		player_1.visible = is_player_visible
