@@ -19,17 +19,8 @@ extends Control
 
 @onready var multiplayer_logic: Node2D = %MultiplayerLogic
 
-#var peer
-#var number_of_players_connected : int = 0
-#var _compression_type = ENetConnection.COMPRESS_RANGE_CODER
-
 
 func _ready() -> void:
-	#	When signal peer_connected received, calls add player
-	#multiplayer.peer_connected.connect(_peer_connected)
-	#multiplayer.peer_disconnected.connect(_peer_disconnected)
-	#multiplayer.connected_to_server.connect(_connected_to_server)
-	#multiplayer.connection_failed.connect(_connection_failed)
 	
 	# Multiplalyer signals connection
 	multiplayer_logic.update_connected_palyers.connect(_update_client_ui_information)
@@ -58,12 +49,14 @@ func _on_host_button_pressed():
 	print("Host result = ", result)
 	if result == OK:
 		_start_hosting()
+	else:
+		AudioManager.play_decline_sfx()
+
 
 
 func _on_join_button_pressed() -> void:
 	_update_adress_and_port()
 	var result = multiplayer_logic.try_join_client_to_server(address, port)
-
 	
 	
 func _on_start_game_button_pressed() -> void:
@@ -82,12 +75,10 @@ func _on_back_button_pressed() -> void:
 	
 #endregion
 
-#region ActionsDone
-
+#region UpdateUIInformationOnActions
 
 func _start_hosting() -> void:
 	print("Waiting for players!")
-#	TODO Separate into function
 	hosting_indicator.start_hosting()
 	player_1.show()
 	start_game_button.show()
@@ -111,71 +102,15 @@ func _update_client_ui_information() -> void:
 	host_button.disabled = true
 	start_game_button.disabled = true
 
+
 func update_player_status(player_id : int, is_visible : bool) -> void:
 	if player_id == MpGameManager.HOST_ID:
 		player_1.visible = is_visible
 	elif player_id == MpGameManager.SECOND_PLAYER:
 		player_2.visible = is_visible
 		
-
-#@rpc("any_peer")
-#func send_player_information(player_name, id) -> void:
-	#if !MpGameManager.mp_players.has(id):
-		#MpGameManager.mp_players[id] = {
-			#"name" : player_name,
-			#"id" : id,
-			#"score" : 0
-		#}
-		#
-	#if multiplayer.is_server():
-		#for i in MpGameManager.mp_players:
-			#send_player_information.rpc(MpGameManager.mp_players[i].name, i)
-	#else:
-		#_update_client_ui_information()
-
-## any peer, everyone will call this rpc
-## call local, localling calling this function
-#@rpc("any_peer","call_local")
-#func start_game() -> void:
-	#print("Game Start with " + str(number_of_players_connected) + " players.")
-	##get_tree().change_scene_to_packed(game_scene)
-	#print("TODO START GAME")
-
 #endregion
 
-#region NetworkingCalls
-	#
-## Gets called on the server and clients, when someone connects
-#func _peer_connected(id = 1) -> void:
-	#print("Player Connected " + str(id))
-	#number_of_players_connected += 1
-	#
-	#if id != 1: 
-		#player_2.show()
-		#
-		#
-## Gets called on the server and clients, when someone disconnects
-#func _peer_disconnected(id) -> void:
-	#print("Player Disconnected " + str(id))
-	#number_of_players_connected -= 1
-	#
-	#if id != 1: 
-		#player_2.hide()
-	#
-	#
-## Gets fired only from client
-#func _connected_to_server() -> void:
-	## Send information to server here
-	#print("Connected to Server!")
-	## Keep track of everyone who is in the server
-	#send_player_information.rpc_id(1, "", multiplayer.get_unique_id())
-#
-#
-## Gets fired only from client	
-#func _connection_failed() -> void:
-	#print("Could not connect!")
-
-#endregion
 
 func _on_mouse_entered() -> void:
 	AudioManager.play_hover_sfx()

@@ -18,6 +18,7 @@ extends Control
 
 
 func _ready():
+	Utils.apply_commandline_args()
 	_start_main_menu_music()
 	options_menu.visible = false
 	credits.visible = false

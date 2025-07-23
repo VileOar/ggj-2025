@@ -10,6 +10,9 @@ var number_of_players_connected : int = 0
 signal update_connected_palyers()
 signal updates_player_id_status(player_id : int, is_visible : bool)
 
+# the multiplayer ui is coupled to the logic
+# Logic is not coupled to ui
+
 func _ready() -> void:
 	#	When signal peer_connected received, calls add player
 	multiplayer.peer_connected.connect(_peer_connected)
@@ -17,6 +20,7 @@ func _ready() -> void:
 	multiplayer.connected_to_server.connect(_connected_to_server)
 	multiplayer.connection_failed.connect(_connection_failed)
 
+#region TryHostJoinStartGame
 
 func try_host_server(address : String, port : int) -> int:
 	peer = ENetMultiplayerPeer.new()
@@ -39,14 +43,12 @@ func try_host_server(address : String, port : int) -> int:
 
 func try_join_client_to_server(address : String, port : int) -> int:
 	if MpGameManager.mp_players.size() == MpGameManager.MAX_PLAYERS:
-		AudioManager.play_decline_sfx()
 		print("[Client Error] Max players are connected!")
 		return ERR_CANT_CONNECT
 		
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_client(address, port)
 	if error != OK:
-		AudioManager.play_decline_sfx()
 		print("[Client Error] Cannot Create Client: " + str(error))
 		return ERR_CANT_CONNECT 
 		
@@ -58,24 +60,26 @@ func try_join_client_to_server(address : String, port : int) -> int:
 func try_start_game() -> bool:
 	# If game doesn't have two players, doen't start
 	if not number_of_players_connected == MpGameManager.MAX_PLAYERS:
-		return false
-		AudioManager.play_decline_sfx()
 		print("Not Enough Players")
-	# TODO Display error message in UI
+		return false
 	else: 
 		# This function is going to work on a remote procedure call, call everyone
 		start_game.rpc()
 		print("Game Start on Host with " + str(number_of_players_connected) + " players.")
 		return true
 
+#endregion
+
 func start_hosting() -> void:
 	MpGameManager.multiplayer_status = 1
 	_peer_connected()
+	
 	
 func stop_hosting() -> void:
 	MpGameManager.multiplayer_status = -1
 	_peer_disconnected(MpGameManager.HOST_ID)
 	shutdown_server()
+	
 	
 func shutdown_server() -> void:
 	if multiplayer.multiplayer_peer:
@@ -87,6 +91,7 @@ func shutdown_server() -> void:
 		multiplayer.multiplayer_peer.close()
 		multiplayer.multiplayer_peer = null
 		print("Server has been shut down.")
+
 
 @rpc("any_peer")
 func send_player_information(player_name, id) -> void:
@@ -102,7 +107,7 @@ func send_player_information(player_name, id) -> void:
 			send_player_information.rpc(MpGameManager.mp_players[i].name, i)
 	else:
 		emit_signal("update_connected_palyers")
-		#_update_client_ui_information()
+
 
 # any peer, everyone will call this rpc
 # call local, localling calling this function
@@ -111,6 +116,7 @@ func start_game() -> void:
 	print("Game Start with " + str(number_of_players_connected) + " players.")
 	#get_tree().change_scene_to_packed(game_scene)
 	print("TODO START GAME")
+	
 	
 #region NetworkingCalls
 	
