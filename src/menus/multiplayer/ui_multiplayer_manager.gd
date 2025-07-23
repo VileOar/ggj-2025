@@ -23,8 +23,8 @@ extends Control
 func _ready() -> void:
 	
 	# Multiplalyer signals connection
-	multiplayer_logic.update_connected_palyers.connect(_update_client_ui_information)
-	multiplayer_logic.updates_player_id_status.connect(_update_client_ui_information)
+	multiplayer_logic.update_connected_players.connect(update_client_ui_information)
+	multiplayer_logic.updates_player_id_status.connect(update_player_status)
 	
 	start_game_button.hide()
 	join_button.show()
@@ -39,7 +39,7 @@ func _ready() -> void:
 func _update_adress_and_port():
 	address = ip_text_edit.text
 	port = int(port_text_edit.text)
-	print("IP: ", address, ":", port)
+	#print("IP: ", address, ":", port)
 
 
 #region ButtonCalls
@@ -56,7 +56,7 @@ func _on_host_button_pressed():
 
 func _on_join_button_pressed() -> void:
 	_update_adress_and_port()
-	var result = multiplayer_logic.try_join_client_to_server(address, port)
+	var _result = multiplayer_logic.try_join_client_to_server(address, port)
 	
 	
 func _on_start_game_button_pressed() -> void:
@@ -71,6 +71,7 @@ func _on_start_game_button_pressed() -> void:
 func _on_back_button_pressed() -> void:
 	hide()
 	_stop_hosting()
+	_reset_client_ui_information()
 	get_parent().get_parent().start_menu_container.show()
 	
 #endregion
@@ -82,6 +83,7 @@ func _start_hosting() -> void:
 	hosting_indicator.start_hosting()
 	player_1.show()
 	start_game_button.show()
+	start_game_button.disabled = false
 	join_button.hide()
 	multiplayer_logic.start_hosting()
 
@@ -90,11 +92,12 @@ func _stop_hosting() -> void:
 	hosting_indicator.stop_hosting()
 	player_1.hide()
 	start_game_button.hide()
+	start_game_button.disabled = true
 	join_button.show()
 	multiplayer_logic.stop_hosting()
 
 
-func _update_client_ui_information() -> void:
+func update_client_ui_information() -> void:
 	if MpGameManager.mp_players.has(1):
 		player_1.show()
 	if MpGameManager.mp_players.size() > 1:
@@ -103,11 +106,17 @@ func _update_client_ui_information() -> void:
 	start_game_button.disabled = true
 
 
-func update_player_status(player_id : int, is_visible : bool) -> void:
+func _reset_client_ui_information() -> void:
+	player_1.hide()
+	player_2.hide()
+	host_button.disabled = false
+	start_game_button.visible = false
+
+func update_player_status(player_id : int, is_player_visible : bool) -> void:
 	if player_id == MpGameManager.HOST_ID:
-		player_1.visible = is_visible
+		player_1.visible = is_player_visible
 	elif player_id == MpGameManager.SECOND_PLAYER:
-		player_2.visible = is_visible
+		player_2.visible = is_player_visible
 		
 #endregion
 

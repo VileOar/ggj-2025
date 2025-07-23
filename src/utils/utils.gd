@@ -6,7 +6,6 @@ const BUBBLE_GROUP_NAME = "Bubble"
 func get_new_window_position(new_resolution: Vector2) -> Vector2i:
 	#var base_size: Vector2 = Vector2(1920, 1080)
 	var window_size: Vector2 = DisplayServer.screen_get_size()
-	print(window_size)
 	# TODO, esta logica não faz sentido, ver se é importante mais tarde aka nunca
 	#var scale: float = min(new_resolution.x / base_size.x, window_size.y / base_size.y)
 	#var scaled_size: Vector2 = (base_size * scale)
@@ -38,7 +37,7 @@ func apply_commandline_args():
 				var width = int(parts[0])
 				var height = int(parts[1])
 				resolution = Vector2i(width, height)
-				print("Resolution set to: ", resolution)
+				#print("Resolution set to: ", resolution)
 				
 		if arg == "--position=left":
 			center_window_position = Utils.get_new_window_position(resolution)
@@ -54,6 +53,8 @@ func apply_commandline_args():
 	DisplayServer.window_set_size(resolution)
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	#DisplayServer.window_set_position(center_window_position)
+	center_window_position.y = 1000
+	print(center_window_position)
 	center_window_on_screen(0, center_window_position)
 	
 # Returns the top-left position to center a window with the given resolution
