@@ -1,6 +1,7 @@
 extends Node
 
 const HOST_ID := 1
+const SECOND_PLAYER := 2
 const MAX_PLAYERS := 2
 const COMPRESSION_TYPE := ENetConnection.COMPRESS_RANGE_CODER
 

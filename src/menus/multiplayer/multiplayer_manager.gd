@@ -1,9 +1,14 @@
 extends Node2D
 
+const VISIBLE := true
+const HIDDEN := false
+
 var peer
 var number_of_players_connected : int = 0
 # MpGameManager.COMPRESSION_TYPE
 
+signal update_connected_palyers()
+signal updates_player_id_status(player_id : int, is_visible : bool)
 
 func _ready() -> void:
 	#	When signal peer_connected received, calls add player
@@ -13,7 +18,7 @@ func _ready() -> void:
 	multiplayer.connection_failed.connect(_connection_failed)
 
 
-func try_host_server(address : String, port : String) -> int:
+func try_host_server(address : String, port : int) -> int:
 	peer = ENetMultiplayerPeer.new()
 	# Por open on windows by default, check open ports with netstat -aon
 	var error = peer.create_server(port, MpGameManager.MAX_PLAYERS)
@@ -32,7 +37,7 @@ func try_host_server(address : String, port : String) -> int:
 	return OK
 
 
-func try_join_client_to_server(address : String, port : String) -> int:
+func try_join_client_to_server(address : String, port : int) -> int:
 	if MpGameManager.mp_players.size() == MpGameManager.MAX_PLAYERS:
 		AudioManager.play_decline_sfx()
 		print("[Client Error] Max players are connected!")
@@ -62,3 +67,72 @@ func try_start_game() -> bool:
 		start_game.rpc()
 		print("Game Start on Host with " + str(number_of_players_connected) + " players.")
 		return true
+
+func start_hosting() -> void:
+	MpGameManager.multiplayer_status = 1
+	_peer_connected()
+	
+func stop_hosting() -> void:
+	MpGameManager.multiplayer_status = -1
+	_peer_disconnected(MpGameManager.HOST_ID)
+
+
+@rpc("any_peer")
+func send_player_information(player_name, id) -> void:
+	if !MpGameManager.mp_players.has(id):
+		MpGameManager.mp_players[id] = {
+			"name" : player_name,
+			"id" : id,
+			"score" : 0
+		}
+		
+	if multiplayer.is_server():
+		for i in MpGameManager.mp_players:
+			send_player_information.rpc(MpGameManager.mp_players[i].name, i)
+	else:
+		emit_signal("update_connected_palyers")
+		#_update_client_ui_information()
+
+# any peer, everyone will call this rpc
+# call local, localling calling this function
+@rpc("any_peer","call_local")
+func start_game() -> void:
+	print("Game Start with " + str(number_of_players_connected) + " players.")
+	#get_tree().change_scene_to_packed(game_scene)
+	print("TODO START GAME")
+	
+#region NetworkingCalls
+	
+# Gets called on the server and clients, when someone connects
+func _peer_connected(id = 1) -> void:
+	print("Player Connected " + str(id))
+	number_of_players_connected += 1
+	
+	if id != 1: 
+		emit_signal("updates_player_id_status", MpGameManager.SECOND_PLAYER, VISIBLE)
+		#player_2.show()
+		
+		
+# Gets called on the server and clients, when someone disconnects
+func _peer_disconnected(id) -> void:
+	print("Player Disconnected " + str(id))
+	number_of_players_connected -= 1
+	
+	if id != 1: 
+		emit_signal("updates_player_id_status", MpGameManager.SECOND_PLAYER, HIDDEN)
+		#player_2.hide()
+	
+	
+# Gets fired only from client
+func _connected_to_server() -> void:
+	# Send information to server here
+	print("Connected to Server!")
+	# Keep track of everyone who is in the server
+	send_player_information.rpc_id(1, "", multiplayer.get_unique_id())
+
+
+# Gets fired only from client	
+func _connection_failed() -> void:
+	print("Could not connect!")
+
+#endregion
