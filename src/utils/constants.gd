@@ -1,5 +1,7 @@
 extends Node
 
+var IS_DEBUGGING : bool = true
+
 # dictionary with possible resolutions
 var resolutions: Dictionary = {"1920x1080[16:9]" : Vector2(1920, 1080),
 								"1600x900[16:9]" : Vector2(1600, 900),

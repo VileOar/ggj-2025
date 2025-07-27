@@ -1,81 +1,92 @@
-[gd_scene load_steps=52 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=53 format=3 uid="uid://c0hg2qdipp1uv"]
 
-[ext_resource type="Script" uid="uid://bpcsf32w3iyq4" path="res://src/player/player_body.gd" id="1_q1xob"]
-[ext_resource type="Script" uid="uid://cdo0de78ewkmp" path="res://src/player/player_state_machine.gd" id="2_036d8"]
-[ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_a4hdj"]
-[ext_resource type="Script" uid="uid://cegxghljy8boj" path="res://src/player/player_states/walk_state.gd" id="3_3ry0h"]
-[ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/spritesheet2.png" id="3_g50ld"]
-[ext_resource type="Script" uid="uid://b5el3myhlo34n" path="res://src/player/player_states/float_state.gd" id="4_7k5ks"]
-[ext_resource type="Shader" uid="uid://bc8vj4hrb0eps" path="res://assets/shaders/strength_indicator.gdshader" id="6_pxgoi"]
-[ext_resource type="Script" uid="uid://ca7cviah4ehce" path="res://src/player/player_states/lose_state.gd" id="6_rps7g"]
-[ext_resource type="AudioStream" uid="uid://d2gs55jhb72uk" path="res://assets/audio/sfx/crab_walk.mp3" id="7_lj2gh"]
-[ext_resource type="Texture2D" uid="uid://c58e05yiie8ir" path="res://assets/meter.png" id="8_1xndb"]
-[ext_resource type="AudioStream" uid="uid://b5klgo75mvhgh" path="res://assets/audio/sfx/crab_taunt.mp3" id="9_0mpk8"]
-[ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="9_i7ama"]
-[ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="10_i3f16"]
-[ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="12_j4nyf"]
+[ext_resource type="Script" uid="uid://bpcsf32w3iyq4" path="res://src/player/player_body.gd" id="1_6kfjl"]
+[ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_75kxf"]
+[ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/spritesheet2.png" id="3_i4yio"]
+[ext_resource type="Script" uid="uid://cdo0de78ewkmp" path="res://src/player/player_state_machine.gd" id="4_d70h0"]
+[ext_resource type="Script" uid="uid://cegxghljy8boj" path="res://src/player/player_states/walk_state.gd" id="5_lsn6m"]
+[ext_resource type="Script" uid="uid://b5el3myhlo34n" path="res://src/player/player_states/float_state.gd" id="6_kv3tb"]
+[ext_resource type="Script" uid="uid://ca7cviah4ehce" path="res://src/player/player_states/lose_state.gd" id="7_ecl2w"]
+[ext_resource type="Shader" uid="uid://bc8vj4hrb0eps" path="res://assets/shaders/strength_indicator.gdshader" id="8_3gdmx"]
+[ext_resource type="Texture2D" uid="uid://c58e05yiie8ir" path="res://assets/meter.png" id="9_r1ueu"]
+[ext_resource type="AudioStream" uid="uid://d2gs55jhb72uk" path="res://assets/audio/sfx/crab_walk.mp3" id="10_2slww"]
+[ext_resource type="AudioStream" uid="uid://b5klgo75mvhgh" path="res://assets/audio/sfx/crab_taunt.mp3" id="11_7h61v"]
+[ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="12_l4u41"]
+[ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="13_dj4j8"]
+[ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="14_uwkxd"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
 bounce = 0.7
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6kfjl"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Player1AnimatedSprite:animation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ngw4"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(0, 1600, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l4dyf"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(400, 1600, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2uxlm"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(800, 1600, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1pagh"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(0, 2800, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3stk5"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(0, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a2pjj"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(400, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ewby"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(800, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0fylq"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(1200, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uugtc"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(0, 400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnmcx"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(0, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3ra11"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(400, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e6k3v"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(800, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eqbsb"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(1200, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ka7te"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(0, 800, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_76ccf"]
-atlas = ExtResource("2_a4hdj")
+atlas = ExtResource("2_75kxf")
 region = Rect2(400, 800, 400, 400)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dcqy8"]
@@ -164,63 +175,63 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6l58f"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(0, 1600, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rygof"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(400, 1600, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5f00t"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(800, 1600, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7d8yf"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(0, 2800, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jcw8d"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(0, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sniyg"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(400, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ec7c2"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(800, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4k7mq"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(1200, 2400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_knbph"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(0, 400, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_87igq"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(0, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2xi8j"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(400, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m6r63"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(800, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6bg50"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(1200, 1200, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rdlnl"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(0, 800, 400, 400)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lyj02"]
-atlas = ExtResource("3_g50ld")
+atlas = ExtResource("3_i4yio")
 region = Rect2(400, 800, 400, 400)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_2laa3"]
@@ -318,11 +329,11 @@ size = Vector2(86, 20)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cquc"]
 resource_local_to_scene = true
-shader = ExtResource("6_pxgoi")
+shader = ExtResource("8_3gdmx")
 shader_parameter/percent = 0.0
 shader_parameter/low_alpha = 0.3
 
-[node name="PlayerScene" type="RigidBody2D"]
+[node name="MpPlayerScene" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 7
 mass = 15.0
@@ -330,7 +341,11 @@ physics_material_override = SubResource("PhysicsMaterial_vyeeb")
 freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 5
-script = ExtResource("1_q1xob")
+script = ExtResource("1_6kfjl")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_interval = 0.016
+replication_config = SubResource("SceneReplicationConfig_6kfjl")
 
 [node name="Player1AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
@@ -351,16 +366,16 @@ shape = SubResource("RectangleShape2D_piu2a")
 
 [node name="Controller" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("2_036d8")
+script = ExtResource("4_d70h0")
 
 [node name="WalkState" type="Node" parent="Controller"]
-script = ExtResource("3_3ry0h")
+script = ExtResource("5_lsn6m")
 
 [node name="FloatState" type="Node" parent="Controller"]
-script = ExtResource("4_7k5ks")
+script = ExtResource("6_kv3tb")
 
 [node name="LoseState" type="Node" parent="Controller"]
-script = ExtResource("6_rps7g")
+script = ExtResource("7_ecl2w")
 
 [node name="StaticBodyPin" type="StaticBody2D" parent="."]
 position = Vector2(0, -13)
@@ -394,7 +409,7 @@ z_index = 1
 material = SubResource("ShaderMaterial_2cquc")
 position = Vector2(226, 0)
 rotation = -3.14159
-texture = ExtResource("8_1xndb")
+texture = ExtResource("9_r1ueu")
 offset = Vector2(192, 0)
 
 [node name="AimMeterBg" type="Sprite2D" parent="MeterRB/AimMeter"]
@@ -402,33 +417,33 @@ modulate = Color(0.7, 0.7, 0.7, 1)
 z_index = -1
 scale = Vector2(1, 1.00001)
 skew = 0.0052948
-texture = ExtResource("8_1xndb")
+texture = ExtResource("9_r1ueu")
 offset = Vector2(192, 0)
 
 [node name="WalkStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("7_lj2gh")
+stream = ExtResource("10_2slww")
 bus = &"SFX"
 parameters/looping = true
 
 [node name="TauntStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("9_0mpk8")
+stream = ExtResource("11_7h61v")
 bus = &"SFX"
 
 [node name="DeathStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("9_i7ama")
+stream = ExtResource("12_l4u41")
 bus = &"SFX"
 
 [node name="FlailStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("10_i3f16")
+stream = ExtResource("13_dj4j8")
 bus = &"SFX"
 
 [node name="ChargeStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("12_j4nyf")
+stream = ExtResource("14_uwkxd")
 bus = &"Music"
 
 [connection signal="body_entered" from="." to="Controller" method="_on_player_scene_body_entered"]

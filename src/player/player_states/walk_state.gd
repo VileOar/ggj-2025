@@ -87,6 +87,10 @@ func _physics_process(delta: float) -> void:
 		mov_amount += Input.get_action_strength(get_action("mov_left"))
 		
 		if mov_amount != 0:
+			# GODOT MULTIPLAYER
+			# Stops from playing animation if not authority
+			if get_multiplayer_authority() != multiplayer.get_unique_id():
+				return
 			fsm().play_anim("walk")
 			if _was_walking == false:
 				fsm().play_audio("walk", true)
@@ -117,17 +121,22 @@ func integrate_forces(ph_state: PhysicsDirectBodyState2D) -> void:
 # manipulate the rigidbody's actual position so that it corresponds to the desired angle around the edge of the stage
 func _update_transform(ph_state: PhysicsDirectBodyState2D):
 	var target_pos = rigidbody().get_parent().global_position
+	#if multiplayer.is_server():
+		#print("[Host] " + rigidbody().name + " Position = " + str(rigidbody().global_position.x))
+		#print("_angle_pos = ", _angle_pos)
+	#if !multiplayer.is_server():
+		#print("[Client] " + rigidbody().name + " Position = " + str(rigidbody().global_position.x))
 	target_pos.x += Global.STAGE_RADIUS * cos(deg_to_rad(_angle_pos))
 	target_pos.y += Global.STAGE_RADIUS * (sin(deg_to_rad(_angle_pos)))
 	
 	var target_rot = _angle_pos - 90
-	
+		
 	ph_state.transform = Transform2D(deg_to_rad(target_rot), target_pos)
-
 
 # manipulate angle_position variable to correspond to the current angle to centre
 func _setup_angle_position():
 	_angle_pos = rad_to_deg(rigidbody().position.angle())
+	#print("Angle = ", _angle_pos)
 
 
 func _stop_walking():

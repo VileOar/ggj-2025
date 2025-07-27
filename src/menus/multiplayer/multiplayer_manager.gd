@@ -3,6 +3,7 @@ extends Node2D
 const VISIBLE := true
 const HIDDEN := false
 
+@onready var game_scene : PackedScene = preload("res://src/main_scenes/mp_stage.tscn")
 var peer
 var number_of_players_connected : int = 0
 
@@ -118,8 +119,7 @@ func send_player_information(player_name, id) -> void:
 @rpc("any_peer","call_local")
 func start_game() -> void:
 	print("Game Start with " + str(number_of_players_connected) + " players.")
-	#get_tree().change_scene_to_packed(game_scene)
-	print("TODO START GAME")
+	get_tree().change_scene_to_packed(game_scene)
 	
 	
 #region NetworkingCalls

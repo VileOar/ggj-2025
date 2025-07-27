@@ -9,7 +9,7 @@ func get_center_position_on_main_screen(screen_index: int, window_size: Vector2i
 	var centered_pos = screen_pos + (screen_size / 2) - (window_size / 2)
 	return centered_pos
 	
-	
+# --resolution=
 static func apply_commandline_args():
 	var args = OS.get_cmdline_args()
 	
@@ -52,7 +52,8 @@ static func _apply_window_position(arg : String) -> void:
 	if arg == "--position=right":
 		center_window_position.x += resolution.x * 0.6
 	
-	center_window_position.y = resolution.y * 0.05
+	#center_window_position.y = resolution.y * 0.05 # Desktop
+	center_window_position.y = resolution.y * 0.4 # Laptop
 	#print(center_window_position)
 	DisplayServer.window_set_position(center_window_position)
 		
