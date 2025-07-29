@@ -58,7 +58,7 @@ position = Vector2(232, -30)
 [node name="BubbleHolder" type="Node2D" parent="StageHolder"]
 unique_name_in_owner = true
 
-[node name="BubbleMultiplayerSpawner" type="MultiplayerSpawner" parent="StageHolder/BubbleHolder"]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="StageHolder/BubbleHolder"]
 _spawnable_scenes = PackedStringArray("uid://ck0kxlxtpq7wk")
 spawn_path = NodePath("..")
 

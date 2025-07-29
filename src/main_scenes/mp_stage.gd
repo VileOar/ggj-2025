@@ -22,9 +22,16 @@ func _ready() -> void:
 	Global.bubble_spawner = self
 	Global.winner = -1
 	AudioManager.instance.play_audio("Arena")
+	# TODO check stage unique id
+	#if_multiplayer_register_authority(multiplayer.get_unique_id())
 	_check_if_game_is_multiplayer()
 	
 	Signals.crab_lose.connect(_on_crab_lose)
+
+
+func if_multiplayer_register_authority(peer_id : int) -> void:
+	if MpGameManager.multiplayer_status == 1 || MpGameManager.multiplayer_status == 2 :
+		set_multiplayer_authority(peer_id)
 
 
 func _check_if_game_is_multiplayer() -> void:
@@ -68,15 +75,33 @@ func _notification(what: int) -> void:
 		Signals.crab_lose.disconnect(_on_crab_lose)
 
 
-func spawn_bubble(position: Vector2, impulse: Vector2, scale_percent: float):
+@rpc("any_peer", "call_remote")
+func spawn_bubble_in_server(position: Vector2, impulse: Vector2, scale_percent: float) -> void:
 	var new_bubble = BUBBLE.instantiate()
+	#new_bubble.setup_bubble_peer_id(multiplayer.get_unique_id())
 	new_bubble.position = position
-	_bubble_holder.call_deferred("add_child", new_bubble)
+	new_bubble.scale_percent = scale_percent
+	_bubble_holder.call_deferred("add_child", new_bubble, true)
 	
 	while !new_bubble.is_node_ready():
 		await new_bubble.ready
 	
 	new_bubble.setup_bubble(impulse, scale_percent)
+
+
+func spawn_bubble(position: Vector2, impulse: Vector2, scale_percent: float):
+	if multiplayer.is_server():
+		#print("[Host] Spawns Bubble in MP Stage")
+		#print("[Host] mp_id = " + str(get_multiplayer_authority()))
+		#print("[Host] get_unique_id = " + str(multiplayer.get_unique_id()))
+		spawn_bubble_in_server(position, impulse, scale_percent)
+		
+	if !multiplayer.is_server():
+		#print("[Client] Spawns Bubble in MP Stage")
+		#print("[Client] mp_id = " + str(get_multiplayer_authority()))
+		#print("[Client] get_unique_id = " + str(multiplayer.get_unique_id()))
+		spawn_bubble_in_server.rpc(position, impulse, scale_percent)
+
 
 
 func _on_crab_lose(player_index) -> void:

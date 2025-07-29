@@ -45,6 +45,17 @@ var _was_walking = false
 ## used to know when taunt state changes
 var _is_taunting = false
 
+@onready var mp_player_scene: Player = $"../.."
+
+
+func _ready() -> void:
+	register_authority(mp_player_scene.peer_id)
+
+
+func register_authority(peer_id : int) -> void:
+	if MpGameManager.multiplayer_status == 1 || MpGameManager.multiplayer_status == 2 :
+		set_multiplayer_authority(peer_id)
+
 
 func enter() -> void:
 	# setup angle_position
@@ -63,6 +74,10 @@ func exit() -> void:
 
 func _process(delta: float) -> void:
 	if _holding_button:
+		# GODOT MULTIPLAYER
+		if !_is_current_mp_peer_authority():
+			return
+			
 		_strength_percent += delta * _strength_inc_speed
 		if _strength_percent >= _max_strength_threshold: # reached full percent and over a little (invisible to user)
 			spawn_bubble()
@@ -89,7 +104,7 @@ func _physics_process(delta: float) -> void:
 		if mov_amount != 0:
 			# GODOT MULTIPLAYER
 			# Stops from playing animation if not authority
-			if get_multiplayer_authority() != multiplayer.get_unique_id():
+			if !_is_current_mp_peer_authority():
 				return
 			fsm().play_anim("walk")
 			if _was_walking == false:
@@ -173,16 +188,36 @@ func on_collision(body: Node) -> void:
 
 func _unhandled_input(event):
 	if event.is_action_pressed(get_action("shoot")):
+		if !_is_current_mp_peer_authority():
+			return
 		if !_is_taunting:
 			_holding_button = true
 			fsm().play_anim("charge")
 			fsm().play_audio("charge", true)
 	if event.is_action_released(get_action("shoot")):
+		if !_is_current_mp_peer_authority():
+			return
 		if _holding_button:
 			spawn_bubble()
 
+# GODOT MULTIPLAYER
+func _is_current_mp_peer_authority() -> bool:
+	#if multiplayer.is_server():
+		#print("[Host] mp_id = " + str(get_multiplayer_authority()))
+		#print("[Host] get_unique_id = " + str(multiplayer.get_unique_id()))
+	#if !multiplayer.is_server():
+		#print("[Client] mp_id = " + str(get_multiplayer_authority()))
+		#print("[Client] get_unique_id = " + str(multiplayer.get_unique_id()))
+	if get_multiplayer_authority() != multiplayer.get_unique_id():
+		return false
+	else:
+		return true
 
 func spawn_bubble():
+	#if multiplayer.is_server():
+		#print("[Host] Spawns Bubble in MP Stage")
+	#if !multiplayer.is_server():
+		#print("[Client] Spawns Bubble in MP Stage")
 	var launch_speed = MIN_BUBBLE_LAUNCH_SPEED + (MAX_BUBBLE_LAUNCH_SPEED - MIN_BUBBLE_LAUNCH_SPEED) * _strength_percent
 	
 	var pos = _meter_rb.global_position - rigidbody().get_parent().global_position

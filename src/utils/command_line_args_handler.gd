@@ -52,8 +52,8 @@ static func _apply_window_position(arg : String) -> void:
 	if arg == "--position=right":
 		center_window_position.x += resolution.x * 0.6
 	
-	#center_window_position.y = resolution.y * 0.05 # Desktop
-	center_window_position.y = resolution.y * 0.4 # Laptop
+	center_window_position.y = resolution.y * 0.05 # Desktop
+	#center_window_position.y = resolution.y * 0.4 # Laptop
 	#print(center_window_position)
 	DisplayServer.window_set_position(center_window_position)
 		

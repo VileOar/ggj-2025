@@ -52,8 +52,18 @@ func on_collision(body: Node) -> void:
 
 
 func spawn_bubble():
+	if !_is_current_mp_peer_authority():
+		return
 	var pos = rigidbody().position + rigidbody().transform.y * 48
 	var impulse = Vector2.from_angle(rigidbody().global_rotation) * 100
 	var bubble_scale_percent = 0
 	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
 	AudioManager.play_shoot_delay(0.07)
+	
+# GODOT MULTIPLAYER
+func _is_current_mp_peer_authority() -> bool:
+	# Stops from playing animation if not authority
+	if get_multiplayer_authority() != multiplayer.get_unique_id():
+		return false
+	else:
+		return true

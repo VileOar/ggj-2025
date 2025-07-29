@@ -1,13 +1,13 @@
-[gd_scene load_steps=53 format=3 uid="uid://c0hg2qdipp1uv"]
+[gd_scene load_steps=54 format=3 uid="uid://c0hg2qdipp1uv"]
 
 [ext_resource type="Script" uid="uid://bpcsf32w3iyq4" path="res://src/player/player_body.gd" id="1_6kfjl"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="2_75kxf"]
 [ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/spritesheet2.png" id="3_i4yio"]
 [ext_resource type="Script" uid="uid://cdo0de78ewkmp" path="res://src/player/player_state_machine.gd" id="4_d70h0"]
 [ext_resource type="Script" uid="uid://cegxghljy8boj" path="res://src/player/player_states/walk_state.gd" id="5_lsn6m"]
-[ext_resource type="Script" uid="uid://b5el3myhlo34n" path="res://src/player/player_states/float_state.gd" id="6_kv3tb"]
+[ext_resource type="Script" uid="uid://fisqcnvgu7w4" path="res://src/player/player_states/float_state.gd" id="6_kv3tb"]
 [ext_resource type="Script" uid="uid://ca7cviah4ehce" path="res://src/player/player_states/lose_state.gd" id="7_ecl2w"]
-[ext_resource type="Shader" uid="uid://bc8vj4hrb0eps" path="res://assets/shaders/strength_indicator.gdshader" id="8_3gdmx"]
+[ext_resource type="Shader" uid="uid://b1vc4fbpiff4c" path="res://assets/shaders/strength_indicator.gdshader" id="8_3gdmx"]
 [ext_resource type="Texture2D" uid="uid://c58e05yiie8ir" path="res://assets/meter.png" id="9_r1ueu"]
 [ext_resource type="AudioStream" uid="uid://d2gs55jhb72uk" path="res://assets/audio/sfx/crab_walk.mp3" id="10_2slww"]
 [ext_resource type="AudioStream" uid="uid://b5klgo75mvhgh" path="res://assets/audio/sfx/crab_taunt.mp3" id="11_7h61v"]
@@ -28,6 +28,12 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath("Player1AnimatedSprite:animation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("MeterRB:rotation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("MeterRB:position")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ngw4"]
 atlas = ExtResource("2_75kxf")
@@ -322,6 +328,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_piu2a"]
 size = Vector2(64, 48)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_75kxf"]
+properties/0/path = NodePath(".:_strength_percent")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k4l5k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_32vq0"]
@@ -370,6 +381,9 @@ script = ExtResource("4_d70h0")
 
 [node name="WalkState" type="Node" parent="Controller"]
 script = ExtResource("5_lsn6m")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="Controller/WalkState"]
+replication_config = SubResource("SceneReplicationConfig_75kxf")
 
 [node name="FloatState" type="Node" parent="Controller"]
 script = ExtResource("6_kv3tb")

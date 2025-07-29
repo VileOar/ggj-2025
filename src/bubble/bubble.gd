@@ -67,6 +67,11 @@ func _ready() -> void:
 	_sound_by_name["bounce"] = %BounceStream
 	_sound_by_name["thwop"] = %ThwopStream
 
+# TODO delete
+#func setup_bubble_peer_id(peer_id: int) -> void:
+	#if MpGameManager.multiplayer_status == 1 || MpGameManager.multiplayer_status == 2 :
+		#set_multiplayer_authority(peer_id)
+
 
 func setup_bubble(impulse: Vector2, _scale_percent: float) -> void:
 	apply_impulse(impulse)
@@ -143,7 +148,8 @@ func _physics_process(delta: float) -> void:
 			_is_bubble_ready_to_scale = false
 	
 	if position.length() >= Global.STAGE_RADIUS + 48:
-		queue_free()
+		if _is_own_authority():
+			queue_free()
 	
 	_can_trace = is_bubble_dangerous()
 
@@ -185,7 +191,8 @@ func _on_body_entered(body: Node2D) -> void:
 			play_audio("thwop")
 		else:
 			## PLAY ANIMATION 
-			queue_free()
+			if _is_own_authority():
+				queue_free()
 	
 	health -= 1
 	
@@ -197,16 +204,25 @@ func _on_body_entered(body: Node2D) -> void:
 		burst.position = position
 		burst.scale = _bubble_sprite.scale
 		get_parent().add_child(burst)
-		queue_free()
+		if _is_own_authority():
+			queue_free()
 	else:
 		play_audio("bounce")
 
 
 func _on_lifespan_timeout() -> void:
-	queue_free()
+	if _is_own_authority():
+		queue_free()
 
+
+func _is_own_authority() -> bool:
+	return get_multiplayer_authority() == multiplayer.get_unique_id()
+	#return true
 
 func is_bubble_dangerous() -> bool:
+	if scale_percent:
+		#print("[Bubble Error] Scale_percent is null on bubble.gd")
+		return false
 	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and !_is_slow_collision():
 	#if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
 		return true
