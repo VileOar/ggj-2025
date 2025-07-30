@@ -55,6 +55,11 @@ func _ready() -> void:
 func register_authority(peer_id : int) -> void:
 	if MpGameManager.multiplayer_status == 1 || MpGameManager.multiplayer_status == 2 :
 		set_multiplayer_authority(peer_id)
+		if multiplayer.is_server():
+			print("[Host] Walk State Set authority too: " + str(peer_id))
+			
+		if !multiplayer.is_server():
+			print("[Client] Walk State Set authority too: " + str(peer_id))
 
 
 func enter() -> void:
@@ -167,33 +172,26 @@ func _stop_sounds():
 
 
 # Change to rigid body state
-@rpc("call_remote")
 func _bounce_off(bounce_impulse: Vector2):
-	#if !_is_current_mp_peer_authority():
-		#return
-	#if multiplayer.is_server():
-		#print("[Host] mp_id = " + str(get_multiplayer_authority()))
-		#print("[Host] get_unique_id = " + str(multiplayer.get_unique_id()))
-		#
-	#if !multiplayer.is_server():
-		#print("[Client] mp_id = " + str(get_multiplayer_authority()))
-		#print("[Client] get_unique_id = " + str(multiplayer.get_unique_id()))
+	if multiplayer.is_server():
+		print("[Host] Bounce Off")
+	if !multiplayer.is_server():
+		print("[Client] Bounce Off")
+	
 	replace_state("FloatState") # todo: add delay to raycast
 	fsm().play_audio("walk", false)
 	await get_tree().physics_frame
 	apply_uncentred_impulse(bounce_impulse)
 	
+	
+@rpc("any_peer")
 func _bounce_off_in_server(bounce_impulse: Vector2):
+	print("[Host to client] Bounce Off In Server")
+	replace_state("FloatState") # todo: add delay to raycast
+	fsm().play_audio("walk", false)
+	await get_tree().physics_frame
+	apply_uncentred_impulse(bounce_impulse)
 
-	if multiplayer.is_server():
-		print("[Host] mp_id = " + str(get_multiplayer_authority()))
-		print("[Host] get_unique_id = " + str(multiplayer.get_unique_id()))
-		_bounce_off(bounce_impulse)
-		
-	if !multiplayer.is_server():
-		print("[Client] mp_id = " + str(get_multiplayer_authority()))
-		print("[Client] get_unique_id = " + str(multiplayer.get_unique_id()))
-		_bounce_off.rpc(bounce_impulse)
 		
 
 
@@ -211,12 +209,15 @@ func on_collision(body: Node) -> void:
 		
 		if body is Bubble:
 			var mag = body.get_mass_percentage() * (MAX_BUBBLE_BOUNCE - MIN_BUBBLE_BOUNCE) + MIN_BUBBLE_BOUNCE
-			#_bounce_off(-vec.normalized() * mag)
-			_bounce_off_in_server(-vec.normalized() * mag)
+			if is_multiplayer_authority():
+				_bounce_off(-vec.normalized() * mag)
+			elif multiplayer.is_server():
+				#_bounce_off(-vec.normalized() * mag)
+				_bounce_off_in_server.rpc(-vec.normalized() * mag)
 		elif body is Player:
 			var mag = randf_range(MIN_BUBBLE_BOUNCE, MAX_BUBBLE_BOUNCE)
 			_bounce_off(-vec.normalized() * mag)
-			_bounce_off_in_server(-vec.normalized() * mag)
+			#_bounce_off_in_server(-vec.normalized() * mag)
 
 
 func _unhandled_input(event):
