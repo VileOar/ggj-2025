@@ -21,6 +21,9 @@ func enter() -> void:
 func exit() -> void:
 	fsm().play_audio("flail", false)
 
+#@rpc("any_peer", "call_remote")
+#func sync_state(state: String):
+	#replace_state(state)
 
 func _physics_process(_delta: float) -> void:
 	# whether moving at low speed

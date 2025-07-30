@@ -40,5 +40,5 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 			
 	if get_multiplayer_authority() != multiplayer.get_unique_id():
 		return
-		
+	
 	controller.integrate_forces(state)
