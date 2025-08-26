@@ -27,7 +27,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 properties/2/path = NodePath("Player1AnimatedSprite:animation")
 properties/2/spawn = true
-properties/2/replication_mode = 1
+properties/2/replication_mode = 0
 properties/3/path = NodePath("MeterRB:rotation")
 properties/3/spawn = true
 properties/3/replication_mode = 1
@@ -356,6 +356,7 @@ freeze_mode = 1
 contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("1_6kfjl")
+player_index = null
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_interval = 0.016

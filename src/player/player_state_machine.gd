@@ -48,7 +48,11 @@ func _on_player_scene_body_entered(body: Node) -> void:
 	current_state().on_collision(body)
 
 
+@rpc("any_peer")
 func play_anim(anim_name) -> void:
+	_anim.play(anim_name)
+	
+func play_anim_local(anim_name) -> void:
 	_anim.play(anim_name)
 
 

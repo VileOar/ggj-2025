@@ -15,7 +15,9 @@ var _can_bubble = true
 func enter() -> void:
 	start_state_cooldown()
 	fsm().play_audio("flail", true)
-	fsm().play_anim("float")
+	if is_multiplayer_authority():
+		fsm().play_anim.rpc("float")
+		fsm().play_anim_local("float")
 
 
 func exit() -> void:

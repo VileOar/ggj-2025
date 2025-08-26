@@ -95,7 +95,10 @@ func _physics_process(delta: float) -> void:
 	if Input.get_action_strength(get_action("taunt")):
 		if !_is_taunting and !_holding_button:
 			_is_taunting = true
-			fsm().play_anim("taunt")
+			if is_multiplayer_authority():
+				fsm().play_anim.rpc("taunt")
+				fsm().play_anim_local("taunt")
+
 			fsm().play_audio("taunt", true)
 	else:
 		if _is_taunting:
@@ -111,12 +114,16 @@ func _physics_process(delta: float) -> void:
 			# Stops from playing animation if not authority
 			if !_is_current_mp_peer_authority():
 				return
-			fsm().play_anim("walk")
+			if is_multiplayer_authority():
+				fsm().play_anim.rpc("walk")
+				fsm().play_anim_local("walk")
 			if _was_walking == false:
 				fsm().play_audio("walk", true)
 			_was_walking = true
 		else:
-			fsm().play_anim("idle")
+			if is_multiplayer_authority():
+				fsm().play_anim.rpc("idle")
+				fsm().play_anim_local("idle")
 			_stop_walking()
 	else:
 		_stop_walking()
@@ -226,7 +233,9 @@ func _unhandled_input(event):
 			return
 		if !_is_taunting:
 			_holding_button = true
-			fsm().play_anim("charge")
+			if is_multiplayer_authority():
+				fsm().play_anim.rpc("charge")
+				fsm().play_anim_local("charge")
 			fsm().play_audio("charge", true)
 	if event.is_action_released(get_action("shoot")):
 		if !_is_current_mp_peer_authority():
