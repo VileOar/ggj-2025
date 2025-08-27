@@ -78,7 +78,6 @@ func _notification(what: int) -> void:
 @rpc("any_peer", "call_remote")
 func spawn_bubble_in_server(position: Vector2, impulse: Vector2, scale_percent: float) -> void:
 	var new_bubble = BUBBLE.instantiate()
-	#new_bubble.setup_bubble_peer_id(multiplayer.get_unique_id())
 	new_bubble.position = position
 	new_bubble.scale_percent = scale_percent
 	_bubble_holder.call_deferred("add_child", new_bubble, true)
@@ -86,6 +85,7 @@ func spawn_bubble_in_server(position: Vector2, impulse: Vector2, scale_percent: 
 	while !new_bubble.is_node_ready():
 		await new_bubble.ready
 	
+	print("Spawning bubble with scale = ", scale_percent)
 	new_bubble.setup_bubble(impulse, scale_percent)
 
 

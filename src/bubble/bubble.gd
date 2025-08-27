@@ -54,7 +54,7 @@ var new_mass = 1.0
 
 # num of hits before bursting
 var health = 1
-var scale_percent
+var scale_percent : float = 0.0
 
 var _sound_by_name : Dictionary = {}
 
@@ -220,11 +220,10 @@ func _is_own_authority() -> bool:
 	#return true
 
 func is_bubble_dangerous() -> bool:
-	if scale_percent:
+	if scale_percent == null:
 		#print("[Bubble Error] Scale_percent is null on bubble.gd")
 		return false
 	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and !_is_slow_collision():
-	#if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
 		return true
 	else:
 		return false
