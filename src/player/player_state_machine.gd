@@ -6,7 +6,7 @@ extends StackStateMachine
 @onready var _anim_player_1: AnimatedSprite2D = %Player1AnimatedSprite
 @onready var _anim_player_2: AnimatedSprite2D = %Player2AnimatedSprite
 
-var _sound_by_name : Dictionary = {}
+var _sound_by_name: Dictionary = {}
 var _anim: AnimatedSprite2D
 
 func _ready() -> void:
@@ -19,6 +19,7 @@ func _ready() -> void:
 	_sound_by_name["death"] = %DeathStream
 	_sound_by_name["flail"] = %FlailStream
 	_sound_by_name["charge"] = %ChargeStream
+	_sound_by_name["shoot"] = %ShootStream
 
 # Sets the animated sprite to be player 1 (orange) or player 2 (yellow)
 func _set_player_animation_sprite():
@@ -50,10 +51,17 @@ func play_anim(anim_name) -> void:
 	_anim.play(anim_name)
 
 
-func play_audio(audio_name:String, start:bool) -> void:
-	var audio_node : AudioStreamPlayer2D = _sound_by_name.get(audio_name)
+func play_audio(audio_name: String, start: bool) -> void:
+	var audio_node: AudioStreamPlayer2D = _sound_by_name.get(audio_name)
 	if audio_node != null:
 		if start and !audio_node.is_playing():
 			audio_node.play()
 		elif audio_node.is_playing():
 			audio_node.stop()
+
+## This version of audio play does not care if the audio is already playing.
+## Good for rapid fire sounds.
+func play_audio_one_shot(audio_name: String) -> void:
+	var audio_node: AudioStreamPlayer2D = _sound_by_name.get(audio_name)
+	if audio_node != null:
+		audio_node.play()

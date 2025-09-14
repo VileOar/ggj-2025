@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene load_steps=53 format=3 uid="uid://dcfxxbn8njgkj"]
 
 [ext_resource type="Script" uid="uid://bpcsf32w3iyq4" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" uid="uid://cdo0de78ewkmp" path="res://src/player/player_state_machine.gd" id="2_036d8"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://b5klgo75mvhgh" path="res://assets/audio/sfx/crab_taunt.mp3" id="9_0mpk8"]
 [ext_resource type="AudioStream" uid="uid://c6ymstec1yp04" path="res://assets/audio/sfx/crab_death.wav" id="9_i7ama"]
 [ext_resource type="AudioStream" uid="uid://xb0rj0cx3khq" path="res://assets/audio/sfx/crab_flailing.wav" id="10_i3f16"]
+[ext_resource type="AudioStream" uid="uid://brvkr6xjsn6ns" path="res://assets/audio/sfx/shoot_small.wav" id="11_2laa3"]
 [ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="12_j4nyf"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
@@ -408,8 +409,16 @@ offset = Vector2(192, 0)
 [node name="WalkStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_lj2gh")
+panning_strength = 3.0
 bus = &"SFX"
 parameters/looping = true
+
+[node name="ShootStream" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -1)
+stream = ExtResource("11_2laa3")
+max_polyphony = 10
+bus = &"SFX"
 
 [node name="TauntStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
@@ -429,6 +438,7 @@ bus = &"SFX"
 [node name="ChargeStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("12_j4nyf")
-bus = &"Music"
+max_polyphony = 4
+bus = &"SFX"
 
 [connection signal="body_entered" from="." to="Controller" method="_on_player_scene_body_entered"]

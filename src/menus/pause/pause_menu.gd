@@ -28,7 +28,7 @@ func _ready():
 	
 
 func _play_click_sfx() -> void:
-	AudioManager.instance.play_click_sfx()
+	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
 
 ## Deals with input to pause the game and show menu
 func _input(_event):
@@ -52,7 +52,7 @@ func _on_options_pressed() -> void:
 func _on_menu_pressed() -> void:
 	_play_click_sfx()
 	get_tree().paused = false
-	AudioManager.instance.stop_audio("Arena")
+	AudioManager.stop_audio(Global.Sounds.FIGHT_MUSIC)
 	get_tree().change_scene_to_packed(main_menu_scene)
 	
 	
@@ -63,4 +63,4 @@ func _on_exit_pressed() -> void:
 	
 	
 func _on_mouse_entered() -> void:
-	AudioManager.play_hover_sfx()
+	AudioManager.play_audio(Global.Sounds.HOVER_UI)

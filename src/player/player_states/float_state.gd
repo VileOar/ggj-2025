@@ -55,5 +55,6 @@ func spawn_bubble():
 	var pos = rigidbody().position + rigidbody().transform.y * 48
 	var impulse = Vector2.from_angle(rigidbody().global_rotation) * 100
 	var bubble_scale_percent = 0
-	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
-	AudioManager.play_shoot_delay(0.07)
+	Global.bubble_spawner_node.spawn_bubble(pos, impulse, bubble_scale_percent)
+	var lambda = func (): fsm().play_audio_one_shot("shoot")
+	AudioManager.play_with_delay(Global.Sounds.BUBBLE_SHOOT ,0.07, lambda)

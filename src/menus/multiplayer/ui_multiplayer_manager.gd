@@ -50,7 +50,7 @@ func _on_host_button_pressed():
 	if result == OK:
 		_start_hosting()
 	else:
-		AudioManager.play_decline_sfx()
+		AudioManager.play_audio(Global.Sounds.CANCEL_UI)
 
 
 
@@ -61,7 +61,7 @@ func _on_join_button_pressed() -> void:
 	
 func _on_start_game_button_pressed() -> void:
 	if multiplayer_logic.try_start_game() == false:
-		AudioManager.play_decline_sfx()
+		AudioManager.play_audio(Global.Sounds.CANCEL_UI)
 		print("[Client Error] Not Enough Players")
 		# TODO Display error message in UI
 	else:
@@ -73,6 +73,7 @@ func _on_back_button_pressed() -> void:
 	_stop_hosting()
 	_reset_client_ui_information()
 	get_parent().get_parent().start_menu_container.show()
+	AudioManager.play_audio(Global.Sounds.CANCEL_UI)
 	
 #endregion
 
@@ -123,4 +124,4 @@ func update_player_status(player_id : int, is_player_visible : bool) -> void:
 
 
 func _on_mouse_entered() -> void:
-	AudioManager.play_hover_sfx()
+	AudioManager.play_audio(Global.Sounds.HOVER_UI)

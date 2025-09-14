@@ -1,25 +1,26 @@
 class_name MainMenu
 extends Control
 
-@onready var start_game_button : Button = %PlayButton
+@onready var start_game_button: Button = %PlayButton
 @onready var multiplayer_button: Button = %MultiplayerButton
 @onready var options_button: Button = %OptionsButton
 @onready var credits_button = %CreditsButton
-@onready var exit_button : Button = %ExitButton
+@onready var exit_button: Button = %ExitButton
 
-@onready var start_menu_container: HBoxContainer = $MarginContainer/StartMenuContainer
+@onready var start_menu_container: VBoxContainer = $MarginContainer/StartMenuContainer
 @onready var multiplayer_container: HBoxContainer = $MarginContainer/MultiplayerContainer
-
 
 @onready var credits: Control = %Credits
 @onready var options_menu: OptionsMenu = %OptionsMenu
 
-@onready var game_scene : PackedScene = preload("res://src/main_scenes/stage.tscn")
+@onready var game_scene: PackedScene = preload("res://src/main_scenes/stage.tscn")
 
 
 func _ready():
 	CommandLineArgsHandler.apply_commandline_args()
+
 	_start_main_menu_music()
+
 	options_menu.visible = false
 	credits.visible = false
 	multiplayer_container.visible = false
@@ -32,26 +33,33 @@ func _ready():
 	credits_button.button_down.connect(_on_credits_pressed)
 	exit_button.button_down.connect(_on_exit_pressed)
 
+	start_game_button.mouse_entered.connect(_play_hover_sfx)
+	multiplayer_button.mouse_entered.connect(_play_hover_sfx)
+	options_button.mouse_entered.connect(_play_hover_sfx)
+	credits_button.mouse_entered.connect(_play_hover_sfx)
+	exit_button.mouse_entered.connect(_play_hover_sfx)
 
-#region Audio
+
+# --- || Audio || ---
 func _start_main_menu_music() -> void:
-	AudioManager.instance.play_audio("Ambience")
-	AudioManager.instance.play_audio("MainMenuMusic")
-	
+	AudioManager.play_audio(Global.Sounds.MAIN_MENU_MUSIC)
+	AudioManager.play_audio(Global.Sounds.MAIN_MENU_AMBIANCE)
+
+
 func _stop_main_menu_music() -> void:
-	AudioManager.instance.stop_audio("Ambience")
-	AudioManager.instance.stop_audio("MainMenuMusic")
+	AudioManager.stop_audio(Global.Sounds.MAIN_MENU_MUSIC)
+	AudioManager.stop_audio(Global.Sounds.MAIN_MENU_AMBIANCE)
+
 
 func _play_click_sfx() -> void:
-	AudioManager.instance.play_audio("ButtonAccept")
+	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
+
 
 func _play_hover_sfx() -> void:
-	AudioManager.play_audio("ButtonDecline")
+	AudioManager.play_audio(Global.Sounds.HOVER_UI)
 
-#endregion
 
-#region Button_Actions
-
+# --- || Button Functions || ---
 func _on_start_pressed() -> void:
 	_play_click_sfx()
 	_stop_main_menu_music()
@@ -77,16 +85,3 @@ func _on_credits_pressed():
 func _on_exit_pressed() -> void:
 	_play_click_sfx()
 	get_tree().quit()
-
-#endregion
-
-func _on_credits_button_mouse_entered():
-	_play_hover_sfx()
-
-
-func _on_play_button_mouse_entered():
-	_play_hover_sfx()
-
-
-func _on_exit_button_mouse_entered():
-	_play_hover_sfx()

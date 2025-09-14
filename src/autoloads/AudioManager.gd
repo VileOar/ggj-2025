@@ -1,84 +1,42 @@
-extends Node2D
+extends Node
 
-# Reference to the itself, ensuring only one exists
-var instance : Node
+## Dictionary to store each SoundPlayer nodes by its name
+var _sound_player_by_name: Dictionary = {}
 
-# Dictionary to store each SoundPlayer nodes by its name
-var _sound_player_by_name : Dictionary = {}
-var queues_by_name : Dictionary = {}
+## Dictionary to store sound cooldowns based on Global sound enum
+var _sound_cooldowns: Dictionary = {}
 
-var shoot_is_cooldown = false
-var bounce_is_cooldown = false
 
 func _ready():
-	# Store itself to be avaiable in instance. this is used to call functions
-	# of the script
-	instance = self
-	#add the sounds
-	add_to_sound_player_dictionary("ButtonAccept", $UI/ButtonAccept)
-	add_to_sound_player_dictionary("ButtonDecline", $UI/ButtonDecline)
-	
-	# Buble
-	add_to_sound_player_dictionary("Bounce", $Bubble/Bounce)
-	add_to_sound_player_dictionary("Charge", $Bubble/Charge)
-	add_to_sound_player_dictionary("Merge", $Bubble/Merge)
-	add_to_sound_player_dictionary("Pop", $Bubble/Pop)
+	_add_to_sound_player_dictionary(Global.Sounds.ACCEPT_UI, $UI/ButtonAccept)
+	_add_to_sound_player_dictionary(Global.Sounds.HOVER_UI, $UI/ButtonHover)
+	_add_to_sound_player_dictionary(Global.Sounds.CANCEL_UI, $UI/ButtonCancel)
 
-	# Crab
-	add_to_sound_player_dictionary("Death", $Crab/Death)	
-	add_to_sound_player_dictionary("Flailing", $Crab/Flailing)	
-	add_to_sound_player_dictionary("Taunt", $Crab/Taunt)	
-	add_to_sound_player_dictionary("Walk", $Crab/Walk)	
-	add_to_sound_player_dictionary("FinalImpact", $Crab/FinalImpact)	
-	add_to_sound_player_dictionary("ShootBig", $Crab/ShootBig)	
-	add_to_sound_player_dictionary("ShootSmall", $Crab/ShootSmall)	
-	
-	# Main Menu Music
-	add_to_sound_player_dictionary("MainMenuMusic", $MainMenuMusic/Music)
-	add_to_sound_player_dictionary("Ambience", $MainMenuMusic/Ambience)
-	
-	# Music
-	add_to_sound_player_dictionary("EndRound", $Music/EndRound)
-	add_to_sound_player_dictionary("Ambiance", $Music/Ambiance)
-	add_to_sound_player_dictionary("EndGame", $Music/EndGame)
-	add_to_sound_player_dictionary("Arena", $Music/Arena)
-	add_to_sound_player_dictionary("Menu", $Music/Menu)
+	_add_to_sound_player_dictionary(Global.Sounds.MAIN_MENU_MUSIC, $MainMenu/MainMenuMusic)
+	_add_to_sound_player_dictionary(Global.Sounds.MAIN_MENU_AMBIANCE, $MainMenu/MainMenuAmbience)
 
-	queues_by_name["shoot"] = $ShootAudioQueue
-	queues_by_name["bounce"] = $BounceAudioQueue
-	
-	
+	_add_to_sound_player_dictionary(Global.Sounds.FIGHT_MUSIC, $Fight/FightMusic)
+	_add_to_sound_player_dictionary(Global.Sounds.FIGHT_AMBIANCE, $Fight/FightAmbiance)
+	_add_to_sound_player_dictionary(Global.Sounds.FIGHT_CLASH, $Fight/FightClash)
+	_add_to_sound_player_dictionary(Global.Sounds.FINAL_IMPACT, $Fight/FinalImpact)
+
+	_add_to_sound_player_dictionary(Global.Sounds.END_JINGLE, $EndMenu/EndJingle)
+	_add_to_sound_player_dictionary(Global.Sounds.END_MUSIC, $EndMenu/EndMusic)
+
+	_sound_cooldowns[Global.Sounds.BUBBLE_SHOOT] = false
+	_sound_cooldowns[Global.Sounds.BUBBLE_BOUNCE] = false
+	_sound_cooldowns[Global.Sounds.BUBBLE_POP] = false
+
+
+func _add_to_sound_player_dictionary(node_name, node):
+	# This works as a list with a name to each sound, so you can get it later
+	_sound_player_by_name[node_name] = node
+
+
 func play_audio(audio_name):
-	# Get the "audio_name" node if it exists and is an AudioStreamPlayer
 	var audio_node = _sound_player_by_name.get(audio_name)
 	if audio_node != null:
-			audio_node.play()
-
-
-func play_audio_queue(audio_name):
-	var audio_queue : AudioQueue = queues_by_name.get(audio_name)	
-	if audio_queue != null:
-			audio_queue.play_sound()
-
-
-func play_shoot_delay(delay:float):
-	if !shoot_is_cooldown:
-		shoot_is_cooldown = true
-		var audio_queue : AudioQueue = queues_by_name.get("shoot")	
-		if audio_queue != null:
-			audio_queue.play_sound()
-			await get_tree().create_timer(delay).timeout
-			shoot_is_cooldown = false
-
-
-func play_bounce_delay(delay:float):
-	if !bounce_is_cooldown:
-		bounce_is_cooldown = true
-		var audio_queue : AudioQueue = queues_by_name.get("bounce")	
-		if audio_queue != null:
-			audio_queue.play_sound()
-			await get_tree().create_timer(delay).timeout
-			bounce_is_cooldown = false
+		audio_node.play()
 
 
 func stop_audio(audio_name):
@@ -87,32 +45,9 @@ func stop_audio(audio_name):
 		audio_node.stop()
 
 
-func play_audio_Restricted(audio_name):
-# Get the "audio_name" node if it exists and is an AudioStreamPlayer
-	var audio_node = _sound_player_by_name.get(audio_name)
-	
-	if audio_node != null:
-		# If audio_node exists and is not playing already, play audio
-		if !audio_node.is_playing():
-			audio_node.play()
-
-
-func add_to_sound_player_dictionary(node_name, node):
-	# Add the node to the sound player dictionary
-	# This works as a list with a name to each sound, so you can get it later
-	_sound_player_by_name[node_name] = node
-	
-	
-func set_master_volume(volume : float) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(volume))
-	
-	
-# UI Audio
-func play_click_sfx():
-	play_audio("ButtonAccept")
-	
-func play_hover_sfx():
-	play_audio("ButtonDecline")
-	
-func play_decline_sfx():
-	play_audio("ButtonNegative")
+func play_with_delay(cooldown_to_use, delay: float, shoot_func):
+	if !_sound_cooldowns.get(cooldown_to_use):
+		_sound_cooldowns[cooldown_to_use] = true
+		shoot_func.call()
+		await get_tree().create_timer(delay).timeout
+		_sound_cooldowns[cooldown_to_use] = false

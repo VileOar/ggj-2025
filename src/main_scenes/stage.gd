@@ -11,9 +11,9 @@ extends Node
 
 func _ready() -> void:
 	_pause_menu.visible = false
-	Global.bubble_spawner = self
-	Global.winner = -1
-	AudioManager.instance.play_audio("Arena")
+	Global.bubble_spawner_node = self
+	Global.winner_index = -1
+	AudioManager.play_audio(Global.Sounds.FIGHT_MUSIC)
 	
 	Signals.crab_lose.connect(_on_crab_lose)
 
@@ -36,9 +36,9 @@ func spawn_bubble(position: Vector2, impulse: Vector2, scale_percent: float):
 
 func _on_crab_lose(player_index) -> void:
 	win_interval.start(10)
-	Global.winner = player_index
+	Global.winner_index = player_index
 
 
 func _on_win_interval_timeout() -> void:
-	AudioManager.instance.stop_audio("Arena")
+	AudioManager.stop_audio("Arena")
 	get_tree().change_scene_to_packed(end_scene)

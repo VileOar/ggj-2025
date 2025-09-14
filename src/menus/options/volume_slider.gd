@@ -19,5 +19,5 @@ func _on_value_changed(new_value: float) -> void:
 	
 	
 func _on_drag_ended(_is_value_different : bool) -> void:
-	AudioManager.play_click_sfx()
+	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
 	

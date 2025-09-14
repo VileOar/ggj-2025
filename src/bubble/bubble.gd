@@ -176,7 +176,7 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is Bubble:
 		
 		if _is_scale_difference_small(body):
-			AudioManager.play_bounce_delay(BOUNCE_SOUND_DELAY)
+			#AudioManager.play_bounce_delay(BOUNCE_SOUND_DELAY)
 			return
 		
 		if _bubble_scale.x >= body._bubble_scale.x:

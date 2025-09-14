@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://pko3vu5mkndb"
-path="res://.godot/imported/UI_decline.wav-17d1c4d576ae6e0bd3f2c04f9baf1712.sample"
+path="res://.godot/imported/hover_ui.wav-58223f20986df2e665d860a688d7e9a6.sample"
 
 [deps]
 
-source_file="res://assets/audio/sfx/ui/UI_decline.wav"
-dest_files=["res://.godot/imported/UI_decline.wav-17d1c4d576ae6e0bd3f2c04f9baf1712.sample"]
+source_file="res://assets/audio/sfx/ui/hover_ui.wav"
+dest_files=["res://.godot/imported/hover_ui.wav-58223f20986df2e665d860a688d7e9a6.sample"]
 
 [params]
 

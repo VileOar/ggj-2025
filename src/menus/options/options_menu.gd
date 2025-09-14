@@ -47,7 +47,7 @@ func _input(_event):
 
 
 func _play_click_sfx() -> void:
-	AudioManager.instance.play_click_sfx()
+	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
 
 
 # Back to main menu
@@ -116,4 +116,4 @@ func _set_resolution(new_resolution: Vector2, resolution_text : String):
 
 
 func _on_mouse_entered() -> void:
-	AudioManager.play_hover_sfx()
+	AudioManager.play_audio(Global.Sounds.HOVER_UI)

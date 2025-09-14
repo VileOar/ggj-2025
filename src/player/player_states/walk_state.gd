@@ -180,9 +180,11 @@ func spawn_bubble():
 	var impulse = -Vector2.from_angle(_meter_rb.global_rotation) * launch_speed
 	var bubble_scale_percent = MAX_BUBBLE_SCALE_PERCENT * _strength_percent
 	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
+	Global.bubble_spawner_node.spawn_bubble(pos, impulse, bubble_scale_percent)
 
 	fsm().play_audio("charge", false)
-	AudioManager.play_audio_queue("shoot")
+	var lambda = func (): fsm().play_audio_one_shot("shoot")
+	AudioManager.play_with_delay(Global.Sounds.BUBBLE_SHOOT ,0.07, lambda)
 	
 	_strength_percent = 0.0
 	_holding_button = false
