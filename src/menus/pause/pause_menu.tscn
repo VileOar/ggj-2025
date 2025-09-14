@@ -1,17 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://comndc2e2crse"]
+[gd_scene load_steps=11 format=3 uid="uid://comndc2e2crse"]
 
 [ext_resource type="Script" uid="uid://bv8jd1iukbyy" path="res://src/menus/pause/pause_menu.gd" id="1_8deyu"]
 [ext_resource type="Texture2D" uid="uid://cxllaxx0ujnhh" path="res://assets/backgrounds/clean_background.png" id="2_r5mlc"]
-[ext_resource type="Texture2D" uid="uid://c5l3ihd1qrhts" path="res://assets/tmp/hollow-knight-game-menu.jpg" id="3_aqhcl"]
 [ext_resource type="Theme" uid="uid://bmvvasfgrxqll" path="res://assets/themes/button_theme.tres" id="3_m2q7w"]
 [ext_resource type="Theme" uid="uid://cnpdsm68c3wqg" path="res://assets/themes/titles_theme.tres" id="4_nulr0"]
 [ext_resource type="PackedScene" uid="uid://wg26fathbma7" path="res://src/menus/options/options_menu.tscn" id="5_aqhcl"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lkrvb"]
 texture = ExtResource("2_r5mlc")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nulr0"]
-texture = ExtResource("3_aqhcl")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_evhyb"]
 
@@ -37,13 +33,6 @@ layout_mode = 0
 offset_right = 1280.0
 offset_bottom = 720.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_lkrvb")
-
-[node name="BackgroundHelper" type="PanelContainer" parent="."]
-visible = false
-layout_mode = 2
-offset_right = 1280.0
-offset_bottom = 720.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_nulr0")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2

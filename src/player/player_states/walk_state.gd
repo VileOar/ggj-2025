@@ -179,7 +179,6 @@ func spawn_bubble():
 	var pos = _meter_rb.global_position - rigidbody().get_parent().global_position
 	var impulse = -Vector2.from_angle(_meter_rb.global_rotation) * launch_speed
 	var bubble_scale_percent = MAX_BUBBLE_SCALE_PERCENT * _strength_percent
-	Global.bubble_spawner.spawn_bubble(pos, impulse, bubble_scale_percent)
 	Global.bubble_spawner_node.spawn_bubble(pos, impulse, bubble_scale_percent)
 
 	fsm().play_audio("charge", false)
