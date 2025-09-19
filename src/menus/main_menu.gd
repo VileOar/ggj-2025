@@ -13,8 +13,6 @@ extends Control
 @onready var credits: Control = %Credits
 @onready var options_menu: OptionsMenu = %OptionsMenu
 
-@onready var game_scene: PackedScene = preload("res://src/main_scenes/stage.tscn")
-
 
 func _ready():
 	CommandLineArgsHandler.apply_commandline_args()
@@ -63,7 +61,7 @@ func _play_hover_sfx() -> void:
 func _on_start_pressed() -> void:
 	_play_click_sfx()
 	_stop_main_menu_music()
-	get_tree().change_scene_to_packed(game_scene)
+	Global.change_scene(Global.Scenes.STAGE)
 
 
 func _on_multiplayer_pressed() -> void:

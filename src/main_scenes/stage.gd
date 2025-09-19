@@ -2,8 +2,6 @@ extends Node
 
 @export var BUBBLE: PackedScene
 
-@export var end_scene: PackedScene
-
 @onready var _bubble_holder: Node2D = %BubbleHolder
 @onready var _pause_menu: PauseMenu = $PauseMenu
 
@@ -40,5 +38,5 @@ func _on_crab_lose(player_index) -> void:
 
 
 func _on_win_interval_timeout() -> void:
-	AudioManager.stop_audio("Arena")
-	get_tree().change_scene_to_packed(end_scene)
+	AudioManager.stop_audio(Global.Sounds.FIGHT_MUSIC)
+	Global.change_scene(Global.Scenes.END_SCREEN)

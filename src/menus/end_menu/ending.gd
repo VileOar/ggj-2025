@@ -1,37 +1,27 @@
 extends Control
 
-@onready var menu_button = %MenuButton
-
-var main_menu_scene : PackedScene
-
-@onready var orange_background: PanelContainer = $OrangeBackground
-@onready var yellow_background: PanelContainer = $YellowBackground
-
-
+@onready var menu_button: Button = %MenuButton
+@onready var winner_sprite_p1: TextureRect = $WinnerSprite1
+@onready var winner_sprite_p2: TextureRect = $WinnerSprite2
 
 func _ready():
-	main_menu_scene = load("res://src/menus/MainMenu.tscn")
-	menu_button.button_down.connect(_on_menu_pressed)
+	menu_button.button_down.connect(_on_button_pressed)
+	menu_button.mouse_entered.connect(_on_button_mouse_entered)
+
 	set_winner(Global.winner_index != 1)
+
 	AudioManager.play_audio(Global.Sounds.END_MUSIC)
-
-func set_winner(is_orange_winner: bool) -> void:
-	yellow_background.visible = !is_orange_winner
-	orange_background.visible = is_orange_winner
-
-func orange_wins() -> void:
-	yellow_background.visible = false
-	orange_background.visible = true
 	
-func yellow_wins() -> void:
-	yellow_background.visible = true
-	orange_background.visible = false
+	
+func set_winner(is_p1_winner: bool) -> void:
+	winner_sprite_p1.visible = is_p1_winner
+	winner_sprite_p2.visible = !is_p1_winner
+	
 
 # Buttons Actions
-
-func _on_menu_pressed() -> void:
+func _on_button_pressed() -> void:
 	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
-	get_tree().change_scene_to_packed(main_menu_scene)
+	Global.change_scene(Global.Scenes.MAIN_MENU)
 
-func _on_menu_button_mouse_entered() -> void:
+func _on_button_mouse_entered() -> void:
 	AudioManager.play_audio(Global.Sounds.HOVER_UI)

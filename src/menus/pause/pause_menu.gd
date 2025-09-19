@@ -8,11 +8,9 @@ extends Control
 
 @onready var _pause_menu = $"."
 @onready var _options_menu: OptionsMenu = %OptionsMenu
-var main_menu_scene : PackedScene 
 
 
 func _ready():
-	main_menu_scene = load("res://src/menus/MainMenu.tscn")
 	_options_menu.visible = false
 	
 	# Connects buttons to functions
@@ -53,7 +51,7 @@ func _on_menu_pressed() -> void:
 	_play_click_sfx()
 	get_tree().paused = false
 	AudioManager.stop_audio(Global.Sounds.FIGHT_MUSIC)
-	get_tree().change_scene_to_packed(main_menu_scene)
+	Global.change_scene(Global.Scenes.MAIN_MENU)
 	
 	
 # Exists game

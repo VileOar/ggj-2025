@@ -7,8 +7,8 @@
 [ext_resource type="FontFile" uid="uid://ga5mwkclh6ey" path="res://assets/fonts/Poppins-Medium.ttf" id="3_r5mld"]
 [ext_resource type="Texture2D" uid="uid://da7fg57m0ccu5" path="res://assets/buttons/empty.png" id="4_565s2"]
 [ext_resource type="Theme" uid="uid://diy3brf8nv5pc" path="res://assets/themes/main_menu_theme.tres" id="4_r5mld"]
-[ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/spritesheet.png" id="5_mqklj"]
-[ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/spritesheet2.png" id="6_w0051"]
+[ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/player/spritesheet.png" id="5_mqklj"]
+[ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/player/spritesheet2.png" id="6_w0051"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_neeb3"]
 

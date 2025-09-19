@@ -1,0 +1,10 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ddm5rpdkj0mi2"]
+
+[ext_resource type="FontFile" uid="uid://bmqrvoitwd85a" path="res://assets/fonts/Shizuru-Regular.ttf" id="1_agug1"]
+
+[resource]
+font = ExtResource("1_agug1")
+font_size = 100
+font_color = Color(0.211765, 0.47451, 0.741176, 1)
+outline_size = 1
+outline_color = Color(0.211765, 0.47451, 0.741176, 1)
