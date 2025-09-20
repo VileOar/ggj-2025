@@ -1,13 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://gkb307hkjv4f"]
+[gd_scene load_steps=22 format=3 uid="uid://gkb307hkjv4f"]
 
 [ext_resource type="Script" uid="uid://dvc7e0lyhw22r" path="res://src/menus/main_menu.gd" id="1_7kxne"]
 [ext_resource type="Texture2D" uid="uid://ddnkr6nevptpv" path="res://assets/bubbles/bubble_single.png" id="1_cq0gi"]
-[ext_resource type="Texture2D" uid="uid://c8gfxhk4cbamt" path="res://assets/backgrounds/main_menu.png" id="2_wihnr"]
-[ext_resource type="Texture2D" uid="uid://i7j8i4a8b8xa" path="res://assets/buttons/play.png" id="3_kcouq"]
-[ext_resource type="Texture2D" uid="uid://barm7xfkp7xa" path="res://assets/buttons/credits.png" id="4_onhry"]
+[ext_resource type="Texture2D" uid="uid://cxllaxx0ujnhh" path="res://assets/backgrounds/clean_background.png" id="2_f0376"]
+[ext_resource type="LabelSettings" uid="uid://ddm5rpdkj0mi2" path="res://assets/themes/title_label_settings.tres" id="4_5bqtv"]
 [ext_resource type="Theme" uid="uid://diy3brf8nv5pc" path="res://assets/themes/main_menu_theme.tres" id="4_uiish"]
-[ext_resource type="PackedScene" uid="uid://dxt4jp5jeoqvf" path="res://src/menus/credits/credits.tscn" id="5_3hhuv"]
-[ext_resource type="Texture2D" uid="uid://cjwg20o58mj40" path="res://assets/buttons/exit.png" id="5_h0u7a"]
+[ext_resource type="PackedScene" uid="uid://dxt4jp5jeoqvf" path="res://src/menus/credits/CreditsMenu.tscn" id="5_3hhuv"]
 [ext_resource type="Texture2D" uid="uid://5fn2ab5y0wk4" path="res://assets/website/wave_trial1.png" id="6_uai78"]
 [ext_resource type="Texture2D" uid="uid://ctj7sw7rnkmuk" path="res://assets/website/wave_trial1_v1.png" id="6_wh0ly"]
 [ext_resource type="PackedScene" uid="uid://uj0yeucmjc52" path="res://src/menus/multiplayer/multiplayer_container.tscn" id="7_3t5uj"]
@@ -16,14 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cbplfw5qkvhb6" path="res://assets/website/wave_trial3_v2.png" id="10_n67r5"]
 [ext_resource type="Texture2D" uid="uid://ddh21m7rbsqd2" path="res://assets/website/wave_trial4_v1.png" id="11_taltk"]
 [ext_resource type="Texture2D" uid="uid://q68m40tlrmm4" path="res://assets/website/wave_trial4_v2.png" id="12_s53xe"]
-[ext_resource type="PackedScene" uid="uid://wg26fathbma7" path="res://src/menus/options/options_menu.tscn" id="15_s53xe"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_36kx8"]
-texture = ExtResource("2_wihnr")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_67424"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oo7in"]
+[ext_resource type="PackedScene" uid="uid://wg26fathbma7" path="res://src/menus/options/OptionsMenu.tscn" id="15_s53xe"]
 
 [sub_resource type="Gradient" id="Gradient_nusui"]
 offsets = PackedFloat32Array(0, 0.436364, 1)
@@ -81,56 +72,53 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("4_uiish")
 script = ExtResource("1_7kxne")
 
-[node name="Background" type="PanelContainer" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_36kx8")
+texture = ExtResource("2_f0376")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="StartMenu" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -312.5
+offset_top = -220.0
+offset_right = 312.5
+offset_bottom = 285.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="StartMenuContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/separation = -4
+size_flags_vertical = 4
+theme_override_constants/separation = 2
 alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/StartMenuContainer"]
-modulate = Color(1, 1, 1, 0)
+[node name="TitleLabel" type="Label" parent="StartMenu"]
 layout_mode = 2
-theme_override_constants/separation = 280
+text = "Cut the Crab"
+label_settings = ExtResource("4_5bqtv")
 
-[node name="PlayButton" type="Button" parent="MarginContainer/StartMenuContainer"]
+[node name="HSeparator" type="HSeparator" parent="StartMenu"]
+layout_mode = 2
+theme_override_constants/separation = 55
+
+[node name="PlayButton" type="Button" parent="StartMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-theme_type_variation = &"FlatButton"
-theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
-theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
-theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-icon = ExtResource("3_kcouq")
+text = "Play"
 icon_alignment = 1
 
-[node name="MultiplayerButton" type="Button" parent="MarginContainer/StartMenuContainer"]
+[node name="MultiplayerButton" type="Button" parent="StartMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -139,60 +127,53 @@ theme_type_variation = &"FlatButton"
 text = "Multiplayer"
 icon_alignment = 1
 
-[node name="OptionsButton" type="Button" parent="MarginContainer/StartMenuContainer"]
+[node name="OptionsButton" type="Button" parent="StartMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-theme = ExtResource("4_uiish")
-theme_type_variation = &"FlatButton"
 text = "Options"
 icon_alignment = 1
 
-[node name="CreditsButton" type="Button" parent="MarginContainer/StartMenuContainer"]
+[node name="CreditsButton" type="Button" parent="StartMenu"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
-focus_neighbor_bottom = NodePath("../ExitButton")
-focus_next = NodePath("../ExitButton")
-theme_type_variation = &"FlatButton"
-theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
-theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
-theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_67424")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
-icon = ExtResource("4_onhry")
+text = "Credits"
 icon_alignment = 1
 
-[node name="ExitButton" type="Button" parent="MarginContainer/StartMenuContainer"]
+[node name="ExitButton" type="Button" parent="StartMenu"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 64)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
-focus_neighbor_top = NodePath("../CreditsButton")
-focus_neighbor_bottom = NodePath("../PlayButton")
-focus_next = NodePath("../PlayButton")
-focus_previous = NodePath("../CreditsButton")
-theme_type_variation = &"FlatButton"
-theme_override_colors/font_hover_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_hover_color = Color(1, 0.831373, 0, 1)
-theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
-theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_colors/font_focus_color = Color(1, 0.882353, 0, 1)
-theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_67424")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_oo7in")
-icon = ExtResource("5_h0u7a")
+text = "Exit"
 icon_alignment = 1
 
-[node name="MultiplayerContainer" parent="MarginContainer" instance=ExtResource("7_3t5uj")]
+[node name="MultiplayerMenu" parent="." instance=ExtResource("7_3t5uj")]
 visible = false
 layout_mode = 2
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 1264.0
+offset_bottom = 704.0
+
+[node name="OptionsMenu" parent="." instance=ExtResource("15_s53xe")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+grow_horizontal = 1
+grow_vertical = 1
+theme_override_constants/margin_left = 235
+theme_override_constants/margin_top = 145
+theme_override_constants/margin_right = 170
+theme_override_constants/margin_bottom = 90
+
+[node name="CreditsMenu" parent="." instance=ExtResource("5_3hhuv")]
+visible = false
+layout_mode = 1
+theme_override_constants/margin_left = 235
+theme_override_constants/margin_top = 145
+theme_override_constants/margin_right = 170
+theme_override_constants/margin_bottom = 80
 
 [node name="WaveFX" type="Control" parent="."]
 anchors_preset = 0
@@ -288,11 +269,5 @@ lifetime = 5.0
 randomness = 0.6
 process_material = SubResource("ParticleProcessMaterial_6f4xo")
 
-[node name="Credits" parent="." instance=ExtResource("5_3hhuv")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-
-[node name="OptionsMenu" parent="." instance=ExtResource("15_s53xe")]
-unique_name_in_owner = true
-visible = false
+[connection signal="on_options_back" from="OptionsMenu" to="." method="_on_options_menu_on_options_back"]
+[connection signal="on_credits_back" from="CreditsMenu" to="." method="_on_credits_menu_on_credits_back"]

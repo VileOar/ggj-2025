@@ -72,7 +72,7 @@ func _on_back_button_pressed() -> void:
 	hide()
 	_stop_hosting()
 	_reset_client_ui_information()
-	get_parent().get_parent().start_menu_container.show()
+	get_parent().start_menu_container.show()
 	AudioManager.play_audio(Global.Sounds.CANCEL_UI)
 	
 #endregion

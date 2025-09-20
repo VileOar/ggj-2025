@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxt4jp5jeoqvf"]
+
+[ext_resource type="Script" uid="uid://b80fys6ge0ok6" path="res://src/menus/credits/credits_menu.gd" id="1_8xwqx"]
+[ext_resource type="Theme" uid="uid://diy3brf8nv5pc" path="res://assets/themes/main_menu_theme.tres" id="2_31vl2"]
+[ext_resource type="LabelSettings" uid="uid://ddm5rpdkj0mi2" path="res://assets/themes/title_label_settings.tres" id="3_i2f8w"]
+[ext_resource type="LabelSettings" uid="uid://c2idig7g5uvd7" path="res://assets/themes/header_label_settings.tres" id="4_31vl2"]
+
+[node name="CreditsMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8xwqx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("2_31vl2")
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Credits"
+label_settings = ExtResource("3_i2f8w")
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="DevelopersHeaderLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Developers"
+label_settings = ExtResource("4_31vl2")
+
+[node name="DevelopersLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Francisco Pinto | Luis Chaves | Pedro Valério"
+
+[node name="HSeparator3" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SoundHeaderLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sound Design"
+label_settings = ExtResource("4_31vl2")
+
+[node name="SoundLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Luis Chaves"
+
+[node name="HSeparator4" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ArtHeaderLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Art and UI Design"
+label_settings = ExtResource("4_31vl2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ArtLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Inês Pinto"
+
+[node name="BackButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Back"
+icon_alignment = 1

@@ -1,11 +1,8 @@
-[gd_scene load_steps=45 format=3 uid="uid://uj0yeucmjc52"]
+[gd_scene load_steps=42 format=3 uid="uid://uj0yeucmjc52"]
 
 [ext_resource type="Script" uid="uid://djgmfmhnymodf" path="res://src/menus/multiplayer/ui_multiplayer_manager.gd" id="1_r5mld"]
-[ext_resource type="Theme" uid="uid://bmvvasfgrxqll" path="res://assets/themes/button_theme.tres" id="1_tc75a"]
 [ext_resource type="Script" uid="uid://cq3qlwc1mfupm" path="res://src/menus/multiplayer/multiplayer_manager.gd" id="2_565s2"]
 [ext_resource type="Script" uid="uid://dqs50gp734ay4" path="res://src/menus/multiplayer/hosting_label.gd" id="2_s2d3k"]
-[ext_resource type="FontFile" uid="uid://ga5mwkclh6ey" path="res://assets/fonts/Poppins-Medium.ttf" id="3_r5mld"]
-[ext_resource type="Texture2D" uid="uid://da7fg57m0ccu5" path="res://assets/buttons/empty.png" id="4_565s2"]
 [ext_resource type="Theme" uid="uid://diy3brf8nv5pc" path="res://assets/themes/main_menu_theme.tres" id="4_r5mld"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/player/spritesheet.png" id="5_mqklj"]
 [ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/player/spritesheet2.png" id="6_w0051"]
@@ -307,6 +304,7 @@ animations = [{
 }]
 
 [node name="MultiplayerContainer" type="HBoxContainer"]
+theme = ExtResource("4_r5mld")
 alignment = 1
 script = ExtResource("1_r5mld")
 
@@ -330,7 +328,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_neeb3")
 [node name="HostingIndicator" type="Label" parent="MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme = ExtResource("1_tc75a")
+theme = ExtResource("4_r5mld")
 text = "Hosting..."
 horizontal_alignment = 1
 script = ExtResource("2_s2d3k")
@@ -412,26 +410,8 @@ icon_alignment = 1
 
 [node name="BackButton" type="Button" parent="MarginContainer/VButtonsContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(400, 64)
 layout_mode = 2
-focus_neighbor_top = NodePath("../JoinButton")
-focus_neighbor_bottom = NodePath("../HostButton")
-focus_next = NodePath("../HostButton")
-focus_previous = NodePath("../JoinButton")
-theme_type_variation = &"FlatButton"
-theme_override_colors/font_hover_pressed_color = Color(0.211765, 0.309804, 0.54902, 1)
-theme_override_colors/font_hover_color = Color(0.211765, 0.309804, 0.54902, 1)
-theme_override_colors/icon_hover_color = Color(1, 0.654902, 0.741176, 1)
-theme_override_colors/icon_pressed_color = Color(1, 0.486275, 0.741176, 1)
-theme_override_colors/font_color = Color(0.211765, 0.47451, 0.741176, 1)
-theme_override_colors/font_focus_color = Color(0.211765, 0.309804, 0.54902, 1)
-theme_override_colors/font_pressed_color = Color(0.211765, 0.309804, 0.54902, 1)
-theme_override_fonts/font = ExtResource("3_r5mld")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/focus = SubResource("StyleBoxEmpty_duykc")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_brn6b")
 text = "Back"
-icon = ExtResource("4_565s2")
 icon_alignment = 1
 
 [node name="Player1" type="AnimatedSprite2D" parent="MarginContainer/VButtonsContainer"]

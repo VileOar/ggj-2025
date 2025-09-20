@@ -1,0 +1,141 @@
+[gd_scene load_steps=6 format=3 uid="uid://wg26fathbma7"]
+
+[ext_resource type="Theme" uid="uid://diy3brf8nv5pc" path="res://assets/themes/main_menu_theme.tres" id="1_v73es"]
+[ext_resource type="Script" uid="uid://c1ft85cgth13v" path="res://src/menus/options/options_menu.gd" id="2_osp8o"]
+[ext_resource type="LabelSettings" uid="uid://ddm5rpdkj0mi2" path="res://assets/themes/title_label_settings.tres" id="3_g2am4"]
+[ext_resource type="Texture2D" uid="uid://bgfkw2711lni1" path="res://assets/UIElements/arrow_ui.png" id="4_f7qx1"]
+[ext_resource type="Script" uid="uid://b5ondieb8w1gx" path="res://src/menus/options/volume_slider.gd" id="7_uiq27"]
+
+[node name="OptionsMenu" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_osp8o")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_v73es")
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Options"
+label_settings = ExtResource("3_g2am4")
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="ResolutionContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="ResolutionHeaderLabel" type="Label" parent="VBoxContainer/ResolutionContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Resolution"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ResolutionContainer"]
+layout_mode = 2
+
+[node name="ResolutionLeftBtn" type="Button" parent="VBoxContainer/ResolutionContainer/HBoxContainer"]
+unique_name_in_owner = true
+modulate = Color(0.211765, 0.47451, 0.741176, 1)
+layout_mode = 2
+icon = ExtResource("4_f7qx1")
+flat = true
+
+[node name="ResolutionLabel" type="Label" parent="VBoxContainer/ResolutionContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "1920x1080[16:9]"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/ResolutionContainer/HBoxContainer"]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+
+[node name="ResolutionRightBtn" type="Button" parent="VBoxContainer/ResolutionContainer/HBoxContainer/Control"]
+unique_name_in_owner = true
+modulate = Color(0.211765, 0.47451, 0.741176, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(-1, 1)
+pivot_offset = Vector2(24, 0)
+icon = ExtResource("4_f7qx1")
+flat = true
+
+[node name="MasterVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MasterVolumeHeaderLabel" type="Label" parent="VBoxContainer/MasterVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Master Volume"
+
+[node name="MasterSlider" type="HSlider" parent="VBoxContainer/MasterVolumeContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("7_uiq27")
+bus_name = "Master"
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="MusicVolumeHeaderLabel" type="Label" parent="VBoxContainer/MusicVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/MusicVolumeContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("7_uiq27")
+bus_name = "Music"
+
+[node name="SoundVolumeContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SoundVolumeHeaderLabel" type="Label" parent="VBoxContainer/SoundVolumeContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Sound Effects"
+
+[node name="SoundSlider" type="HSlider" parent="VBoxContainer/SoundVolumeContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(370, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+script = ExtResource("7_uiq27")
+bus_name = "SFX"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Back"
+icon_alignment = 1

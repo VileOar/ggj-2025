@@ -1,0 +1,7 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://d2syjynrxdgtm"]
+
+[ext_resource type="FontFile" uid="uid://cl5pwi2y7tvgr" path="res://assets/fonts/shizuru_regular.ttf" id="1_gk72d"]
+
+[resource]
+base_font = ExtResource("1_gk72d")
+spacing_space = -55

@@ -1,28 +1,25 @@
 class_name OptionsMenu
-extends Control
+extends MarginContainer
+
+signal on_options_back
 
 @onready var back_button: Button = %BackButton
 @onready var resolution_label: Label = %ResolutionLabel
 @onready var resolution_left_btn: Button = %ResolutionLeftBtn
 @onready var resolution_right_btn: Button = %ResolutionRightBtn
 
-@onready var master_slider: HSlider = $MarginContainer/VBoxContainer/MasterVolumeContainer/SliderContainer/MasterSlider
-@onready var music_slider: HSlider = $MarginContainer/VBoxContainer/MusicVolumeContainer3/SliderContainer/MusicSlider
-@onready var sound_slider: HSlider = $MarginContainer/VBoxContainer/SoundVolume/SliderContainer/SoundSlider
+@onready var master_slider: HSlider = %MasterSlider
+@onready var music_slider: HSlider = %MusicSlider
+@onready var sound_slider: HSlider = %SoundSlider
 
-
-var _current_window_position
-var _current_resolution_key : String 
-var _current_resolution_index : int 
+var _initial_resolution_key: String
+var _current_resolution_index: int
 
 
 func _ready():
-	# Saves initial center position of primary screen so that it can add up the new position to it 
-	# in the future
-	_current_window_position = DisplayServer.window_get_position()
-	_current_resolution_key = _get_closest_resolution_id()
-	_current_resolution_index = Constants.ordered_resolution_keys.find(_current_resolution_key)
-	resolution_label.text = _current_resolution_key
+	_initial_resolution_key = _get_closest_resolution_id()
+	_current_resolution_index = Constants.ordered_resolution_keys.find(_initial_resolution_key)
+	resolution_label.text = _initial_resolution_key
 	
 	# Connects to functions
 	back_button.pressed.connect(_on_back_pressed)
@@ -36,24 +33,6 @@ func _ready():
 	master_slider.mouse_entered.connect(_on_mouse_entered)
 	music_slider.mouse_entered.connect(_on_mouse_entered)
 	sound_slider.mouse_entered.connect(_on_mouse_entered)
-
-
-## Deals with input to pause the game and show menu
-func _input(_event):
-	if Input.is_action_just_pressed("pause_game"):
-		if visible:  
-			_play_click_sfx()
-		self.visible = false
-
-
-func _play_click_sfx() -> void:
-	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
-
-
-# Back to main menu
-func _on_back_pressed() -> void:
-	_play_click_sfx()
-	self.visible = false
 
 
 func _get_closest_resolution_id() -> String:
@@ -74,11 +53,23 @@ func _get_closest_resolution_id() -> String:
 	return closest_key
 
 
-# change resolution
-func _on_resolution_change(res_step : int) -> void:
-	_play_click_sfx()
-	_set_next_valid_resolution_index(res_step)
+## Returns the top left corner at which to place the window
+func _get_new_window_position(new_resolution: Vector2) -> Vector2i:
+	var screen_size: Vector2 = DisplayServer.screen_get_size()
+	var res_size: Vector2 = new_resolution
+
+	var window_x: float = (screen_size.x / 2) - (res_size.x / 2)
+	var window_y: float = (screen_size.y / 2) - (res_size.y / 2)
+
+	return Vector2i(int(window_x), int(window_y))
 	
+
+# --- || Resolution || ---
+
+func _on_resolution_change(res_step: int) -> void:
+	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
+
+	_current_resolution_index = (_current_resolution_index - res_step) % Constants.ordered_resolution_keys.size()	
 	var resolution_text = Constants.ordered_resolution_keys[_current_resolution_index]
 	resolution_label.text = resolution_text
 	
@@ -86,33 +77,27 @@ func _on_resolution_change(res_step : int) -> void:
 	_set_resolution(resolution_size, resolution_text)
 
 
-func _set_next_valid_resolution_index(res_step : int) -> void:
-	var next_id = res_step + _current_resolution_index
-	# If next number is higher than the array, resets
-	# If it is smaller than 0, it is the last resolution
-	if next_id >= Constants.ordered_resolution_keys.size(): 
-		next_id = 0
-	elif next_id < 0 :
-		next_id = Constants.ordered_resolution_keys.size() - 1
-	
-	_current_resolution_index = next_id
-
-
-# Change screen resolution and repositions Windows
-func _set_resolution(new_resolution: Vector2, resolution_text : String):
-	# adds up screen size of center of a screen to the new position
+## Change screen resolution and repositions Windows
+func _set_resolution(new_resolution: Vector2, resolution_text: String):
+	# Adds up screen size of center of a screen to the new position
 	DisplayServer.window_set_size(new_resolution)
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-	get_viewport().set_size(new_resolution) 
+	get_viewport().set_size(new_resolution)
 	
 	# Center the Window on current screen size
-	var center_window_position = Utils.get_new_window_position(new_resolution)
-	DisplayServer.window_set_position(_current_window_position + center_window_position)
+	var center_window_position = _get_new_window_position(new_resolution)
+	DisplayServer.window_set_position(center_window_position)
 	
-	if _current_resolution_key == resolution_text:
+	if _initial_resolution_key == resolution_text:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	#print("position = ", _current_window_position)
-	#print("position = ", center_window_position)
+
+
+# --- || Signals || ---
+
+func _on_back_pressed() -> void:
+	AudioManager.play_audio(Global.Sounds.CANCEL_UI)
+	self.visible = false
+	on_options_back.emit()
 
 
 func _on_mouse_entered() -> void:

@@ -1,10 +1,8 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ddm5rpdkj0mi2"]
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://c2idig7g5uvd7"]
 
-[ext_resource type="FontFile" uid="uid://bmqrvoitwd85a" path="res://assets/fonts/Shizuru-Regular.ttf" id="1_agug1"]
+[ext_resource type="FontFile" uid="uid://b3iqgpuvj2cyh" path="res://assets/fonts/poppins_bold.ttf" id="1_agug1"]
 
 [resource]
 font = ExtResource("1_agug1")
-font_size = 100
+font_size = 33
 font_color = Color(0.211765, 0.47451, 0.741176, 1)
-outline_size = 1
-outline_color = Color(0.211765, 0.47451, 0.741176, 1)

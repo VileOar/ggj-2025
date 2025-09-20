@@ -10,7 +10,7 @@ func _ready() -> void:
 	value_changed.connect(_on_value_changed)
 	drag_ended.connect(_on_drag_ended)
 	
-	# value => value from hSlider
+	# this var value comes from HSlider
 	value = db_to_linear(AudioServer.get_bus_volume_db(_bus_index))
 
 
@@ -18,6 +18,5 @@ func _on_value_changed(new_value: float) -> void:
 	AudioServer.set_bus_volume_db(_bus_index, linear_to_db(new_value))
 	
 	
-func _on_drag_ended(_is_value_different : bool) -> void:
+func _on_drag_ended(_is_value_different: bool) -> void:
 	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
-	

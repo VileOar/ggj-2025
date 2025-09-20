@@ -1,16 +1,17 @@
 class_name PauseMenu
 extends Control
 
-@onready var continue_button : Button = %ContinueButton
-@onready var options_button : Button = %OptionsButton
-@onready var menu_button : Button = %MenuButton
-@onready var exit_button : Button = %ExitButton
+@onready var continue_button: Button = %ContinueButton
+@onready var options_button: Button = %OptionsButton
+@onready var menu_button: Button = %MenuButton
+@onready var exit_button: Button = %ExitButton
 
-@onready var _pause_menu = $"."
+@onready var _pause_buttons = %PauseButtons
 @onready var _options_menu: OptionsMenu = %OptionsMenu
 
 
 func _ready():
+	_pause_buttons.visible = true
 	_options_menu.visible = false
 	
 	# Connects buttons to functions
@@ -28,23 +29,29 @@ func _ready():
 func _play_click_sfx() -> void:
 	AudioManager.play_audio(Global.Sounds.ACCEPT_UI)
 
+
 ## Deals with input to pause the game and show menu
 func _input(_event):
 	if Input.is_action_just_pressed("pause_game"):
-		_pause_menu.visible = not _pause_menu.visible
+		self.visible = not self.visible
+		var show_menu = self.visible
+		_pause_buttons.visible = show_menu
+		_options_menu.visible = !show_menu
 		get_tree().paused = not get_tree().paused
 
 
-# Starts game
+# --- || Button Signals || ---
+
 func _on_continue_pressed() -> void:
 	_play_click_sfx()
-	get_tree().paused = not get_tree().paused
 	self.visible = false
+	get_tree().paused = not get_tree().paused
 
 
 func _on_options_pressed() -> void:
 	_play_click_sfx()
 	_options_menu.visible = true
+	_pause_buttons.visible = false
 	
 	
 func _on_menu_pressed() -> void:
@@ -53,12 +60,14 @@ func _on_menu_pressed() -> void:
 	AudioManager.stop_audio(Global.Sounds.FIGHT_MUSIC)
 	Global.change_scene(Global.Scenes.MAIN_MENU)
 	
-	
-# Exists game
+
 func _on_exit_pressed() -> void:
-	_play_click_sfx()
 	get_tree().quit()
 	
 	
 func _on_mouse_entered() -> void:
 	AudioManager.play_audio(Global.Sounds.HOVER_UI)
+
+
+func _on_options_menu_on_options_back():
+	_pause_buttons.visible = true

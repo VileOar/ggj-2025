@@ -7,22 +7,21 @@ extends Control
 @onready var credits_button = %CreditsButton
 @onready var exit_button: Button = %ExitButton
 
-@onready var start_menu_container: VBoxContainer = $MarginContainer/StartMenuContainer
-@onready var multiplayer_container: HBoxContainer = $MarginContainer/MultiplayerContainer
-
-@onready var credits: Control = %Credits
-@onready var options_menu: OptionsMenu = %OptionsMenu
+@onready var start_menu: VBoxContainer = $StartMenu
+@onready var multiplayer_container: HBoxContainer = $MultiplayerMenu
+@onready var options_menu = $OptionsMenu
+@onready var credits_menu: Control = $CreditsMenu
 
 
 func _ready():
 	CommandLineArgsHandler.apply_commandline_args()
 
-	_start_main_menu_music()
+	AudioManager.play_audio(Global.Sounds.MAIN_MENU_MUSIC)
+	AudioManager.play_audio(Global.Sounds.MAIN_MENU_AMBIANCE)
 
-	options_menu.visible = false
-	credits.visible = false
 	multiplayer_container.visible = false
-	
+	options_menu.visible = false
+	credits_menu.visible = false
 	
 	# Connects buttons to functions
 	start_game_button.button_down.connect(_on_start_pressed)
@@ -39,10 +38,6 @@ func _ready():
 
 
 # --- || Audio || ---
-func _start_main_menu_music() -> void:
-	AudioManager.play_audio(Global.Sounds.MAIN_MENU_MUSIC)
-	AudioManager.play_audio(Global.Sounds.MAIN_MENU_AMBIANCE)
-
 
 func _stop_main_menu_music() -> void:
 	AudioManager.stop_audio(Global.Sounds.MAIN_MENU_MUSIC)
@@ -58,6 +53,7 @@ func _play_hover_sfx() -> void:
 
 
 # --- || Button Functions || ---
+
 func _on_start_pressed() -> void:
 	_play_click_sfx()
 	_stop_main_menu_music()
@@ -66,20 +62,29 @@ func _on_start_pressed() -> void:
 
 func _on_multiplayer_pressed() -> void:
 	_play_click_sfx()
-	start_menu_container.visible = false
+	start_menu.visible = false
 	multiplayer_container.visible = true
 
 
 func _on_options_pressed() -> void:
 	_play_click_sfx()
+	start_menu.visible = false
 	options_menu.visible = true
 
 
 func _on_credits_pressed():
 	_play_click_sfx()
-	credits.visible = true
+	start_menu.visible = false
+	credits_menu.visible = true
 	
 	
 func _on_exit_pressed() -> void:
-	_play_click_sfx()
 	get_tree().quit()
+
+
+func _on_options_menu_on_options_back():
+	start_menu.visible = true
+
+
+func _on_credits_menu_on_credits_back():
+	start_menu.visible = true
