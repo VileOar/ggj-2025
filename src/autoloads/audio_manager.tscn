@@ -25,7 +25,7 @@ bus = &"UI"
 
 [node name="ButtonCancel" type="AudioStreamPlayer" parent="UI"]
 stream = ExtResource("4_6l2il")
-volume_db = 7.0
+volume_db = 4.0
 max_polyphony = 3
 bus = &"UI"
 

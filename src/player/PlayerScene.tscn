@@ -151,7 +151,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"taunt",
-"speed": 8.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -296,7 +296,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"taunt",
-"speed": 8.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -338,14 +338,15 @@ script = ExtResource("1_q1xob")
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_dcqy8")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.574363
 
 [node name="Player2AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_2laa3")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -448,6 +449,7 @@ bus = &"SFX"
 unique_name_in_owner = true
 position = Vector2(-57, 19)
 rotation = -0.637839
+scale = Vector2(-1, 1)
 emitting = false
 
 [node name="SandEmitterRight" parent="." instance=ExtResource("16_kumbw")]
