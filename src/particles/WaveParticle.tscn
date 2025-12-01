@@ -1,0 +1,54 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxf5mmd3lb03h"]
+
+[ext_resource type="Texture2D" uid="uid://bc5siuq4gwgcy" path="res://assets/particles/waves_tile.png" id="1_0ud1q"]
+
+[sub_resource type="Curve" id="Curve_3ohb5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.394678, 1), 0.0, 0.0, 0, 0, Vector2(0.964523, 0.203859), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_0pw71"]
+curve = SubResource("Curve_3ohb5")
+
+[sub_resource type="Gradient" id="Gradient_gd78i"]
+colors = PackedColorArray(1, 1, 1, 0.917647, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gs6ai"]
+gradient = SubResource("Gradient_gd78i")
+
+[sub_resource type="Curve" id="Curve_wlos0"]
+_limits = [-0.7, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 0.199145), 0.0, 0.0, 0, 0, Vector2(0.43459, 1), 0.0, 0.0, 0, 0, Vector2(0.625277, 0.34182), -0.964807, -0.964807, 0, 0, Vector2(0.725055, 0.202768), -0.170646, -0.170646, 0, 0, Vector2(1, -0.7), -2.30337, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_soqpi"]
+curve_y = SubResource("Curve_wlos0")
+
+[sub_resource type="Curve" id="Curve_0pw71"]
+_limits = [0.0, 1.4, 0.0, 1.0]
+_data = [Vector2(0, 0.781879), 0.0, 0.307414, 0, 0, Vector2(0.232816, 0.82005), 0.17158, 0.17158, 0, 0, Vector2(1, 1.087), 0.252238, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_gd78i"]
+curve = SubResource("Curve_0pw71")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1uyfi"]
+lifetime_randomness = 0.1
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(0, -300, 0)
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 1)
+directional_velocity_min = 185.0
+directional_velocity_max = 190.0
+directional_velocity_curve = SubResource("CurveXYZTexture_soqpi")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.9
+scale_max = 1.1
+scale_curve = SubResource("CurveTexture_gd78i")
+color_initial_ramp = SubResource("GradientTexture1D_gs6ai")
+alpha_curve = SubResource("CurveTexture_0pw71")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+amount = 2
+texture = ExtResource("1_0ud1q")
+lifetime = 6.0
+process_material = SubResource("ParticleProcessMaterial_1uyfi")

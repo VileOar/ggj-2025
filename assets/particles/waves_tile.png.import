@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da7fg57m0ccu5"
-path="res://.godot/imported/button_bckgrnd.png-31b0a2f57ff0fda8cf8b50d16a30c818.ctex"
+uid="uid://bc5siuq4gwgcy"
+path="res://.godot/imported/waves_tile.png-57786ebf72d48b94adeefb5f344dd89b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/UIElements/button_bckgrnd.png"
-dest_files=["res://.godot/imported/button_bckgrnd.png-31b0a2f57ff0fda8cf8b50d16a30c818.ctex"]
+source_file="res://assets/particles/waves_tile.png"
+dest_files=["res://.godot/imported/waves_tile.png-57786ebf72d48b94adeefb5f344dd89b.ctex"]
 
 [params]
 
