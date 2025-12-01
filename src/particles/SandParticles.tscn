@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://b1xlo7ww5q0qs"]
+
+[ext_resource type="Texture2D" uid="uid://cqny434setmhf" path="res://assets/particles/sand_particle.png" id="1_35fud"]
+
+[sub_resource type="Curve" id="Curve_3ohb5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.578714, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_0pw71"]
+curve = SubResource("Curve_3ohb5")
+
+[sub_resource type="Gradient" id="Gradient_gd78i"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.799582, 0.687514, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gs6ai"]
+gradient = SubResource("Gradient_gd78i")
+
+[sub_resource type="Curve" id="Curve_35fud"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(0.208426, -1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_0g65y"]
+curve_y = SubResource("Curve_35fud")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1uyfi"]
+lifetime_randomness = 0.4
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 20.0
+angle_min = -45.0
+angle_max = 45.0
+angular_velocity_min = -100.0
+angular_velocity_max = 100.0
+directional_velocity_min = 150.0
+directional_velocity_max = 200.0
+directional_velocity_curve = SubResource("CurveXYZTexture_0g65y")
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 140.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.6
+color_initial_ramp = SubResource("GradientTexture1D_gs6ai")
+alpha_curve = SubResource("CurveTexture_0pw71")
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+amount = 5
+texture = ExtResource("1_35fud")
+lifetime = 0.4
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_1uyfi")

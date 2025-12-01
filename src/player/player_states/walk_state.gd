@@ -13,6 +13,9 @@ const MAX_BUBBLE_LAUNCH_SPEED = 400
 ## ref to the strength indicator rigidbody
 @onready var _meter_rb: RigidBody2D = %MeterRB
 
+@onready var _sand_emitter_left: GPUParticles2D = %SandEmitterLeft
+@onready var _sand_emitter_right: GPUParticles2D = %SandEmitterRight
+
 var _last_position = null
 
 # current angular position on the stage circle (deg)
@@ -59,6 +62,7 @@ func exit() -> void:
 	_strength_percent = 0
 
 	_stop_sounds()
+	_stop_emitters()
 
 
 func _process(delta: float) -> void:
@@ -88,6 +92,14 @@ func _physics_process(delta: float) -> void:
 		
 		if mov_amount != 0:
 			fsm().play_anim("walk")
+
+			if mov_amount > 0:
+				_sand_emitter_left.emitting = false
+				_sand_emitter_right.emitting = true
+			else:
+				_sand_emitter_left.emitting = true
+				_sand_emitter_right.emitting = false
+
 			if _was_walking == false:
 				fsm().play_audio("walk", true)
 			_was_walking = true
@@ -133,6 +145,7 @@ func _setup_angle_position():
 func _stop_walking():
 	if _was_walking:
 		fsm().play_audio("walk", false)
+		_stop_emitters()
 		_was_walking = false
 
 
@@ -140,6 +153,11 @@ func _stop_sounds():
 	fsm().play_audio("walk", false)
 	fsm().play_audio("charge", false)
 	fsm().play_audio("taunt", false)
+
+
+func _stop_emitters():
+	_sand_emitter_left.emitting = false
+	_sand_emitter_right.emitting = false
 
 
 # Change to rigid body state
