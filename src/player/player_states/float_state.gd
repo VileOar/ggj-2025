@@ -14,10 +14,12 @@ func enter() -> void:
 	start_state_cooldown()
 	fsm().play_audio("flail", true)
 	fsm().play_anim("float")
+	Signals.crab_floating.emit(true)
 
 
 func exit() -> void:
 	fsm().play_audio("flail", false)
+	Signals.crab_floating.emit(false)
 
 
 func _physics_process(_delta: float) -> void:

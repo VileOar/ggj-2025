@@ -1,8 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://dspiqnhvl2syt"]
+[gd_scene load_steps=40 format=3 uid="uid://dspiqnhvl2syt"]
 
 [ext_resource type="Script" uid="uid://d4npd7yowux4m" path="res://src/player/decorative_player.gd" id="1_ylcfc"]
+[ext_resource type="Texture2D" uid="uid://d22cuujr72oow" path="res://assets/player/crab_drop_shadow.png" id="2_h7av5"]
 [ext_resource type="Texture2D" uid="uid://c17qby1fcfg44" path="res://assets/player/spritesheet.png" id="2_qi3eb"]
 [ext_resource type="Texture2D" uid="uid://crtg14ur0tgb" path="res://assets/player/spritesheet2.png" id="3_ymgx6"]
+[ext_resource type="AudioStream" uid="uid://cfmu3e1d1eoc6" path="res://assets/audio/sfx/crab_taunt.wav" id="6_hh6al"]
 [ext_resource type="PackedScene" uid="uid://b1xlo7ww5q0qs" path="res://src/particles/SandParticles.tscn" id="16_edesr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ngw4"]
@@ -301,6 +303,11 @@ size = Vector2(65, 65)
 [node name="DecorativePlayer" type="Node2D"]
 script = ExtResource("1_ylcfc")
 
+[node name="Shadow" type="Sprite2D" parent="."]
+modulate = Color(0.12, 0.0792, 0.048, 0.447059)
+position = Vector2(0, 19)
+texture = ExtResource("2_h7av5")
+
 [node name="Player1AnimatedSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
@@ -333,3 +340,9 @@ emitting = false
 [node name="ClickableCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_ylcfc")
+
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_hh6al")
+max_polyphony = 2
+bus = &"SFX"

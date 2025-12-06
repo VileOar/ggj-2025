@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dbi430hooexen"]
+[gd_scene load_steps=12 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="Script" uid="uid://dv1cn6be77gnn" path="res://src/main_scenes/battle_stage.gd" id="1_vpqtk"]
 [ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="2_wjy34"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cgcjqcbfaj2iy" path="res://assets/instructions_close_menu.png" id="5_4addh"]
 [ext_resource type="PackedScene" uid="uid://dcfxxbn8njgkj" path="res://src/player/PlayerScene.tscn" id="6_8325l"]
 [ext_resource type="PackedScene" uid="uid://comndc2e2crse" path="res://src/menus/pause/PauseMenu.tscn" id="7_6271r"]
+[ext_resource type="Shader" uid="uid://bxa2fanm11kqo" path="res://assets/shaders/vignette.gdshader" id="7_wjy34"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8jwm"]
 size = Vector2(544, 544)
@@ -14,9 +15,17 @@ size = Vector2(544, 544)
 [sub_resource type="CircleShape2D" id="CircleShape2D_8h1qn"]
 radius = 272.118
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gctss"]
+shader = ExtResource("7_wjy34")
+shader_parameter/SMOOTH = 0.6
+shader_parameter/MIN = 0.294
+shader_parameter/MAX = 0.812
+shader_parameter/STRETCH = 0.34
+shader_parameter/MULTIPLIER = 0.7
+
 [node name="BattleStage" type="Node"]
 script = ExtResource("1_vpqtk")
-BUBBLE = ExtResource("2_wjy34")
+bubble_scene = ExtResource("2_wjy34")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -82,7 +91,24 @@ angular_damp = 10.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/MeterGravity"]
 shape = SubResource("CircleShape2D_8h1qn")
 
+[node name="Vignette" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(0.0432, 0.0432, 0.08, 1)
+z_index = 1
+material = SubResource("ShaderMaterial_gctss")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -360.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
 [node name="PauseMenu" parent="." instance=ExtResource("7_6271r")]
+unique_name_in_owner = true
 visible = false
 offset_left = -640.0
 offset_top = -360.0
@@ -90,5 +116,6 @@ offset_right = -640.0
 offset_bottom = -360.0
 
 [node name="WinInterval" type="Timer" parent="."]
+unique_name_in_owner = true
 
 [connection signal="timeout" from="WinInterval" to="." method="_on_win_interval_timeout"]

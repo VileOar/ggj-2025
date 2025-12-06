@@ -10,6 +10,7 @@ extends Node2D
 @onready var _emitter_left: GPUParticles2D = %SandEmitterLeft
 @onready var _emitter_right: GPUParticles2D = %SandEmitterRight
 @onready var _col_shape: CollisionShape2D = %ClickableCollisionShape2D
+@onready var _audio_player: AudioStreamPlayer2D = %AudioPlayer
 
 var _current_anim_player: AnimatedSprite2D
 var _cached_animation: String
@@ -18,16 +19,18 @@ var _cached_state_right := false
 
 var _animation_player: AnimationPlayer
 var _is_taunted := false
-var _taunted_cooldown := 1.0
+var _taunted_cooldown := 1.5
 
 
 func _ready():
 	if player_index == 0:
 		_current_anim_player = _anim_player_1
 		_anim_player_2.visible = false
+		_audio_player.pitch_scale = 0.9
 	else:
 		_current_anim_player = _anim_player_2
 		_anim_player_1.visible = false
+		_audio_player.pitch_scale = 1.1
 
 	_cached_animation = _current_animation
 	_current_anim_player.play(_current_animation)
@@ -66,6 +69,7 @@ func _handle_click():
 		_current_anim_player.play("taunt")
 		_emitter_left.emitting = false
 		_emitter_right.emitting = false
+		_audio_player.play()
 		await get_tree().create_timer(_taunted_cooldown).timeout
 
 		_animation_player.play()

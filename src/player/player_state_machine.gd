@@ -11,8 +11,6 @@ var _current_anim_sprite: AnimatedSprite2D
 
 func _ready() -> void:
 	super._ready()
-	_set_player_animation_sprite()
-	push_state("WalkState")
 
 	_sound_by_name["walk"] = %WalkStream
 	_sound_by_name["taunt"] = %TauntStream
@@ -21,15 +19,20 @@ func _ready() -> void:
 	_sound_by_name["charge"] = %ChargeStream
 	_sound_by_name["shoot"] = %ShootStream
 
+	_set_player_animation_sprite()
+	push_state("WalkState")
+
 
 ## Sets the animated sprite to be player 1 (orange) or player 2 (yellow)
 func _set_player_animation_sprite():
 	if _rigid_body.player_index == 1:
 		_current_anim_sprite = _anim_sprite_1
 		_anim_sprite_2.hide()
+		_sound_by_name.get("taunt").pitch_scale = 0.9
 	elif _rigid_body.player_index == 2:
 		_current_anim_sprite = _anim_sprite_2
 		_anim_sprite_1.hide()
+		_sound_by_name.get("taunt").pitch_scale = 1.1
 	else:
 		print("Error - Invalid player index, couldn't set animated sprite corretcly")
 		_current_anim_sprite = _anim_sprite_1
