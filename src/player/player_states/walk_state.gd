@@ -50,7 +50,6 @@ var _is_taunting = false
 
 
 func enter() -> void:
-	# setup angle_position
 	_setup_angle_position()
 	start_state_cooldown()
 	_meter_rb.show()
@@ -68,7 +67,7 @@ func exit() -> void:
 func _process(delta: float) -> void:
 	if _holding_button:
 		_strength_percent += delta * _strength_inc_speed
-		if _strength_percent >= _max_strength_threshold: # reached full percent and over a little (invisible to user)
+		if _strength_percent >= _max_strength_threshold:  # reached full percent and over a little (invisible to user)
 			spawn_bubble()
 
 
@@ -85,11 +84,11 @@ func _physics_process(delta: float) -> void:
 		if _is_taunting:
 			_is_taunting = false
 			fsm().play_audio("taunt", false)
-	
+
 	if !_holding_button and !_is_taunting:
 		mov_amount -= Input.get_action_strength(get_action("mov_right"))
 		mov_amount += Input.get_action_strength(get_action("mov_left"))
-		
+
 		if mov_amount != 0:
 			fsm().play_anim("walk")
 
@@ -108,12 +107,11 @@ func _physics_process(delta: float) -> void:
 			_stop_walking()
 	else:
 		_stop_walking()
-		
 
 	# amplify joint2d/drag effect by adding additional force
 	if mov_amount != 0:
 		_meter_rb.apply_force(rigidbody().transform.x * _meter_overlap_strength * mov_amount)
-	
+
 	_angle_pos += mov_amount * _angular_speed * delta
 
 
@@ -122,7 +120,7 @@ func integrate_forces(ph_state: PhysicsDirectBodyState2D) -> void:
 		return
 	ph_state.linear_velocity = Vector2.ZERO
 	ph_state.angular_velocity = 0.0
-	
+
 	_update_transform(ph_state)
 
 
@@ -131,9 +129,9 @@ func _update_transform(ph_state: PhysicsDirectBodyState2D):
 	var target_pos = rigidbody().get_parent().global_position
 	target_pos.x += Global.STAGE_RADIUS * cos(deg_to_rad(_angle_pos))
 	target_pos.y += Global.STAGE_RADIUS * (sin(deg_to_rad(_angle_pos)))
-	
+
 	var target_rot = _angle_pos - 90
-	
+
 	ph_state.transform = Transform2D(deg_to_rad(target_rot), target_pos)
 
 
@@ -162,7 +160,7 @@ func _stop_emitters():
 
 # Change to rigid body state
 func _bounce_off(bounce_impulse: Vector2):
-	replace_state("FloatState") # todo: add delay to raycast
+	replace_state("FloatState")  # todo: add delay to raycast
 	fsm().play_audio("walk", false)
 	await get_tree().physics_frame
 	apply_uncentred_impulse(bounce_impulse)
@@ -171,7 +169,7 @@ func _bounce_off(bounce_impulse: Vector2):
 func on_collision(body: Node) -> void:
 	if can_change_state() and not body is StaticBody2D:
 		var vec = body.position - rigidbody().position
-		
+
 		if body is Bubble:
 			var mag = body.get_mass_percentage() * (MAX_BUBBLE_BOUNCE - MIN_BUBBLE_BOUNCE) + MIN_BUBBLE_BOUNCE
 			_bounce_off(-vec.normalized() * mag)
@@ -193,15 +191,15 @@ func _unhandled_input(event):
 
 func spawn_bubble():
 	var launch_speed = MIN_BUBBLE_LAUNCH_SPEED + (MAX_BUBBLE_LAUNCH_SPEED - MIN_BUBBLE_LAUNCH_SPEED) * _strength_percent
-	
+
 	var pos = _meter_rb.global_position - rigidbody().get_parent().global_position
 	var impulse = -Vector2.from_angle(_meter_rb.global_rotation) * launch_speed
 	var bubble_scale_percent = MAX_BUBBLE_SCALE_PERCENT * _strength_percent
 	Global.bubble_spawner_node.spawn_bubble(pos, impulse, bubble_scale_percent)
 
 	fsm().play_audio("charge", false)
-	var lambda = func (): fsm().play_audio_one_shot("shoot")
-	AudioManager.play_with_delay(Global.Sounds.BUBBLE_SHOOT ,0.07, lambda)
-	
+	var lambda = func(): fsm().play_audio_one_shot("shoot")
+	AudioManager.play_with_delay(Global.Sounds.BUBBLE_SHOOT, 0.07, lambda)
+
 	_strength_percent = 0.0
 	_holding_button = false

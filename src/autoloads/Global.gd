@@ -35,7 +35,7 @@ enum Scenes {
 var bubble_spawner_node = null
 
 var main_menu_scene: PackedScene = preload("res://src/menus/MainMenu.tscn")
-var game_scene: PackedScene = preload("res://src/main_scenes/stage.tscn")
+var game_scene: PackedScene = preload("res://src/main_scenes/BattleStage.tscn")
 var end_scene: PackedScene = preload("res://src/menus/victory/VictoryScreen.tscn")
 
 

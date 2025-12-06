@@ -7,12 +7,13 @@ extends Node
 
 @onready var win_interval: Timer = $WinInterval
 
+
 func _ready() -> void:
 	_pause_menu.visible = false
 	Global.bubble_spawner_node = self
 	Global.winner_index = -1
 	AudioManager.play_audio(Global.Sounds.FIGHT_MUSIC)
-	
+
 	Signals.crab_lose.connect(_on_crab_lose)
 
 
@@ -25,10 +26,10 @@ func spawn_bubble(position: Vector2, impulse: Vector2, scale_percent: float):
 	var new_bubble = BUBBLE.instantiate()
 	new_bubble.position = position
 	_bubble_holder.call_deferred("add_child", new_bubble)
-	
+
 	while !new_bubble.is_node_ready():
 		await new_bubble.ready
-	
+
 	new_bubble.setup_bubble(impulse, scale_percent)
 
 

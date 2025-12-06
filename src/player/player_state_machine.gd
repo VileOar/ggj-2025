@@ -1,13 +1,13 @@
 class_name PlayerFSM
 extends StackStateMachine
 
-
 @onready var _rigid_body := get_parent() as Player
-@onready var _anim_player_1: AnimatedSprite2D = %Player1AnimatedSprite
-@onready var _anim_player_2: AnimatedSprite2D = %Player2AnimatedSprite
+@onready var _anim_sprite_1: AnimatedSprite2D = %Player1AnimatedSprite
+@onready var _anim_sprite_2: AnimatedSprite2D = %Player2AnimatedSprite
 
 var _sound_by_name: Dictionary = {}
-var _anim: AnimatedSprite2D
+var _current_anim_sprite: AnimatedSprite2D
+
 
 func _ready() -> void:
 	super._ready()
@@ -21,21 +21,27 @@ func _ready() -> void:
 	_sound_by_name["charge"] = %ChargeStream
 	_sound_by_name["shoot"] = %ShootStream
 
-# Sets the animated sprite to be player 1 (orange) or player 2 (yellow)
+
+## Sets the animated sprite to be player 1 (orange) or player 2 (yellow)
 func _set_player_animation_sprite():
-	if _rigid_body.name == "Player1":
-		_anim = _anim_player_1
-		_anim_player_2.hide()
-	elif _rigid_body.name == "Player2":
-		_anim = _anim_player_2
-		_anim_player_1.hide()
+	if _rigid_body.player_index == 1:
+		_current_anim_sprite = _anim_sprite_1
+		_anim_sprite_2.hide()
+	elif _rigid_body.player_index == 2:
+		_current_anim_sprite = _anim_sprite_2
+		_anim_sprite_1.hide()
 	else:
-		print("Error - Invalid player name, couldn't set animated sprite corretcly")
-		_anim = _anim_player_1
-		_anim_player_2.hide()
+		print("Error - Invalid player index, couldn't set animated sprite corretcly")
+		_current_anim_sprite = _anim_sprite_1
+		_anim_sprite_2.hide()
+
 
 func rigidbody() -> Player:
 	return _rigid_body
+
+
+func get_anim_sprite() -> AnimatedSprite2D:
+	return _current_anim_sprite
 
 
 ## Called by the RigidBody's _integrate_forces method
@@ -48,7 +54,7 @@ func _on_player_scene_body_entered(body: Node) -> void:
 
 
 func play_anim(anim_name) -> void:
-	_anim.play(anim_name)
+	_current_anim_sprite.play(anim_name)
 
 
 func play_audio(audio_name: String, start: bool) -> void:
@@ -58,6 +64,7 @@ func play_audio(audio_name: String, start: bool) -> void:
 			audio_node.play()
 		elif audio_node.is_playing():
 			audio_node.stop()
+
 
 ## This version of audio play does not care if the audio is already playing.
 ## Good for rapid fire sounds.
