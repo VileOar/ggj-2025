@@ -15,6 +15,7 @@ var _current_vignette_radius := 0.0
 @onready var _pause_menu: PauseMenu = %PauseMenu
 @onready var _vignette_rect: ColorRect = %Vignette
 @onready var _win_interval: Timer = %WinInterval
+@onready var _ambiance_player: AudioStreamPlayer = %FightAmbiance
 
 
 func _ready() -> void:
@@ -23,6 +24,7 @@ func _ready() -> void:
 	Global.bubble_spawner_node = self
 	Global.winner_index = -1
 	AudioManager.play_audio(Global.Sounds.FIGHT_MUSIC)
+	_ambiance_player.play()
 
 	Signals.crab_lose.connect(_on_crab_lose)
 	Signals.crab_floating.connect(_on_crab_float)
@@ -79,4 +81,5 @@ func _set_vignette_radius(new_radius: float):
 
 func _on_win_interval_timeout() -> void:
 	AudioManager.stop_audio(Global.Sounds.FIGHT_MUSIC)
+	_ambiance_player.stop()
 	Global.change_scene(Global.Scenes.END_SCREEN)

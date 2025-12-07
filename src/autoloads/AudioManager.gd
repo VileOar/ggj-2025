@@ -16,7 +16,6 @@ func _ready():
 	_add_to_sound_player_dictionary(Global.Sounds.MAIN_MENU_AMBIANCE, $MainMenu/MainMenuAmbience)
 
 	_add_to_sound_player_dictionary(Global.Sounds.FIGHT_MUSIC, $Fight/FightMusic)
-	_add_to_sound_player_dictionary(Global.Sounds.FIGHT_AMBIANCE, $Fight/FightAmbiance)
 	_add_to_sound_player_dictionary(Global.Sounds.FIGHT_CLASH, $Fight/FightClash)
 	_add_to_sound_player_dictionary(Global.Sounds.FINAL_IMPACT, $Fight/FinalImpact)
 
@@ -29,7 +28,6 @@ func _ready():
 
 
 func _add_to_sound_player_dictionary(node_name, node):
-	# This works as a list with a name to each sound, so you can get it later
 	_sound_player_by_name[node_name] = node
 
 

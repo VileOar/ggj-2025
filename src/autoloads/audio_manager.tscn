@@ -48,8 +48,6 @@ stream = ExtResource("18_re1ed")
 volume_db = -13.5
 bus = &"Music"
 
-[node name="FightAmbiance" type="AudioStreamPlayer" parent="Fight"]
-
 [node name="FightClash" type="AudioStreamPlayer" parent="Fight"]
 
 [node name="FinalImpact" type="AudioStreamPlayer" parent="Fight"]

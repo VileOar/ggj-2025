@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://dbi430hooexen"]
+[gd_scene load_steps=16 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="Script" uid="uid://dv1cn6be77gnn" path="res://src/main_scenes/battle_stage.gd" id="1_vpqtk"]
 [ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="2_wjy34"]
 [ext_resource type="Texture2D" uid="uid://dop0xojtu8rq7" path="res://assets/backgrounds/background.png" id="3_gctss"]
 [ext_resource type="Texture2D" uid="uid://batu2wgel67j8" path="res://assets/instructions.png" id="4_cws71"]
-[ext_resource type="Texture2D" uid="uid://cgcjqcbfaj2iy" path="res://assets/instructions_close_menu.png" id="5_4addh"]
 [ext_resource type="PackedScene" uid="uid://dcfxxbn8njgkj" path="res://src/player/PlayerScene.tscn" id="6_8325l"]
 [ext_resource type="PackedScene" uid="uid://comndc2e2crse" path="res://src/menus/pause/PauseMenu.tscn" id="7_6271r"]
 [ext_resource type="Shader" uid="uid://bxa2fanm11kqo" path="res://assets/shaders/vignette.gdshader" id="7_wjy34"]
+[ext_resource type="PackedScene" uid="uid://cxf5mmd3lb03h" path="res://src/particles/WaveParticle.tscn" id="8_wjy34"]
+[ext_resource type="AudioStream" uid="uid://bxf2nf2yxxbxb" path="res://assets/audio/music/ambiance.mp3" id="9_gctss"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8jwm"]
 size = Vector2(544, 544)
@@ -23,6 +24,43 @@ shader_parameter/MAX = 0.812
 shader_parameter/STRETCH = 0.34
 shader_parameter/MULTIPLIER = 0.7
 
+[sub_resource type="Animation" id="Animation_gctss"]
+resource_name = "Pan"
+length = 40.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 20, 40),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-250, -520), Vector2(250, -520), Vector2(-250, -520)]
+}
+
+[sub_resource type="Animation" id="Animation_cws71"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-250, -470)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4addh"]
+_data = {
+&"Pan": SubResource("Animation_gctss"),
+&"RESET": SubResource("Animation_cws71")
+}
+
 [node name="BattleStage" type="Node"]
 script = ExtResource("1_vpqtk")
 bubble_scene = ExtResource("2_wjy34")
@@ -34,10 +72,6 @@ texture = ExtResource("3_gctss")
 
 [node name="Instructions" type="Sprite2D" parent="."]
 texture = ExtResource("4_cws71")
-
-[node name="InstructionPause" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("5_4addh")
 
 [node name="StageHolder" type="Node2D" parent="."]
 position = Vector2(0, 32)
@@ -115,7 +149,26 @@ offset_top = -360.0
 offset_right = -640.0
 offset_bottom = -360.0
 
+[node name="WavesVFX" parent="." instance=ExtResource("8_wjy34")]
+process_mode = 3
+z_index = 11
+position = Vector2(-250, -470)
+visibility_rect = Rect2(-100, -100, 200, 300)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WavesVFX"]
+libraries = {
+&"": SubResource("AnimationLibrary_4addh")
+}
+autoplay = "Pan"
+
 [node name="WinInterval" type="Timer" parent="."]
 unique_name_in_owner = true
+
+[node name="FightAmbiance" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+process_mode = 3
+stream = ExtResource("9_gctss")
+volume_db = -35.0
+bus = &"SFX"
 
 [connection signal="timeout" from="WinInterval" to="." method="_on_win_interval_timeout"]
