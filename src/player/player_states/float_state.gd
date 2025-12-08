@@ -15,6 +15,7 @@ func enter() -> void:
 	fsm().play_audio("flail", true)
 	fsm().play_anim("float")
 	Signals.crab_floating.emit(true)
+	Signals.screen_shake.emit(0.5)
 
 
 func exit() -> void:

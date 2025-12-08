@@ -7,8 +7,9 @@ func enter():
 	fsm().play_anim("dead")
 	fsm().play_audio("dead", true)
 
-	var _drown_tween = create_tween()
-	_drown_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	_drown_tween.tween_property(fsm().get_anim_sprite(), "modulate", Color("6061a3d5"), 2)
+	var drown_tween = create_tween()
+	drown_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	drown_tween.tween_property(fsm().get_anim_sprite(), "modulate", Color("6061a3d5"), 2)
 
+	Signals.screen_shake.emit(1.0)
 	Signals.crab_lose.emit(rigidbody().player_index)

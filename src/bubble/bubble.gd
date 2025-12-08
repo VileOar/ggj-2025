@@ -19,7 +19,6 @@ const MIN_HEALTH = 2
 const LIFESPAN_PERCENT_THRESH = 0.2
 const LIFESPAN_TIME = 5
 
-
 @export var SPEED = 300.0
 
 @export var COLLISION_VELOCITY_THRESHOLD = 100.0
@@ -37,8 +36,7 @@ const LIFESPAN_TIME = 5
 
 var _can_trace = false
 
-
-var _bubble_scale : Vector2 = Vector2(1.0, 1.0)
+var _bubble_scale: Vector2 = Vector2(1.0, 1.0)
 @warning_ignore("unused_private_class_variable")
 var _rng = RandomNumberGenerator.new()
 
@@ -46,7 +44,7 @@ var _rng = RandomNumberGenerator.new()
 var _total_percentage_scale = MAX_SCALE_LIMIT - MIN_SCALE_LIMIT
 var _total_percentage_mass = MAX_MASS - MIN_MASS
 
-# scale up lerping 
+# scale up lerping
 var time = 0
 var _is_bubble_ready_to_scale = false
 var new_scale = Vector2(MAX_SCALE_LIMIT, MAX_SCALE_LIMIT)
@@ -56,7 +54,7 @@ var new_mass = 1.0
 var health = 1
 var scale_percent
 
-var _sound_by_name : Dictionary = {}
+var _sound_by_name: Dictionary = {}
 
 
 func _ready() -> void:
@@ -71,23 +69,21 @@ func _ready() -> void:
 func setup_bubble(impulse: Vector2, _scale_percent: float) -> void:
 	apply_impulse(impulse)
 	scale_percent = _scale_percent
-	
+
 	var scale_tmp = MIN_SCALE_LIMIT + (_total_percentage_scale * _scale_percent)
 	var mass_tmp = MIN_MASS + (_total_percentage_mass * _scale_percent)
 	_bubble_scale = Vector2(scale_tmp, scale_tmp)
-	
+
 	# Apply scale and mass to children
 	bubble.mass = mass_tmp
 	_bubble_sprite.scale = _bubble_scale
 	collision_shape_2d.scale = _bubble_scale
-	
+
 	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * _scale_percent
-	
-	#if is_bubble_dangerous():
-		#print("activate")
-		#animated_sprite_2d.activate_vfx_shine()
-		#trace_timer.start()
-	
+
+	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
+		Signals.screen_shake.emit(0.7)
+
 	if _scale_percent < LIFESPAN_PERCENT_THRESH:
 		lifespan.start(LIFESPAN_TIME)
 
@@ -103,35 +99,34 @@ func get_mass_percentage() -> float:
 	return bubble.mass / MAX_MASS
 
 
-func _update_size(new_body_scale) -> void: 
+func _update_size(new_body_scale) -> void:
 #	Gets percentage based on the current percentage of the the enemy
-	var percentage = (max(0, new_body_scale.mass - MIN_MASS) / _total_percentage_mass)
+	var percentage = max(0, new_body_scale.mass - MIN_MASS) / _total_percentage_mass
 #	Adds 1/3 of the mass to the current bubble
 	percentage = percentage / ON_JOIN_SCALE_DIVISION_FACTOR
-	
+
 	new_mass = bubble.mass + (MAX_MASS * percentage)
 
 	new_scale = abs(_bubble_scale) + abs(new_body_scale._bubble_scale / ON_JOIN_SCALE_DIVISION_FACTOR)
 	#print("Update Scale Ori: ", bubble_scale, " Add: ", (new_body_scale / 3), "Total:", new_scale)
-	
+
 	if new_scale.x >= MAX_SCALE_LIMIT:
 		new_scale = Vector2(MAX_SCALE_LIMIT, MAX_SCALE_LIMIT)
-	
+
 	if new_mass >= MAX_MASS:
 		new_mass = MAX_MASS
-	
+
 	health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * percentage
-	
+
 	if percentage < LIFESPAN_PERCENT_THRESH:
 		lifespan.start(LIFESPAN_TIME)
-	
+
 	# Apply scale to children
 	time = 0
 	_is_bubble_ready_to_scale = true
 
 
 func _physics_process(delta: float) -> void:
-
 # When bubble is ready to scale, applies scale over time
 	if _is_bubble_ready_to_scale:
 		time += delta * 0.1
@@ -141,10 +136,10 @@ func _physics_process(delta: float) -> void:
 		#print("new mass=", bubble.mass)
 		if _bubble_sprite.scale == new_scale:
 			_is_bubble_ready_to_scale = false
-	
+
 	if position.length() >= Global.STAGE_RADIUS + 48:
 		queue_free()
-	
+
 	_can_trace = is_bubble_dangerous()
 
 
@@ -161,7 +156,7 @@ func _is_scale_difference_small(body) -> bool:
 	#print("Myself = ", _bubble_scale.x)
 	#print("Other = ", body._bubble_scale.x)
 	#print("scale_difference = ", scale_difference)
-	
+
 #	Detects if SCALE_DIFFERENCE IS BIGGER than threshold
 	if scale_difference > COLLISION_SCALE_PERCENTAGE_THRESHOLD:
 		big_bubble_collision.emit()
@@ -174,24 +169,23 @@ func _on_body_entered(body: Node2D) -> void:
 	lifespan.start(LIFESPAN_TIME)
 	animation_player.play("bounce")
 	if body is Bubble:
-		
 		if _is_scale_difference_small(body):
 			#AudioManager.play_bounce_delay(BOUNCE_SOUND_DELAY)
 			return
-		
+
 		if _bubble_scale.x >= body._bubble_scale.x:
-			## PLAY ANIMATION 
+			## PLAY ANIMATION
 			_update_size(body)
 			play_audio("thwop")
 		else:
-			## PLAY ANIMATION 
+			## PLAY ANIMATION
 			queue_free()
-	
+
 	health -= 1
-	
+
 	# bursting
 	if body is Player or health <= 0:
-		## PLAY ANIMATION 
+		## PLAY ANIMATION
 		animation_player.stop()
 		var burst = BURST.instantiate()
 		burst.position = position
@@ -208,16 +202,16 @@ func _on_lifespan_timeout() -> void:
 
 func is_bubble_dangerous() -> bool:
 	if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and !_is_slow_collision():
-	#if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
+		#if scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
 		return true
 	else:
 		return false
 
 
 func play_audio(audio_name):
-	var audio_node : AudioStreamPlayer2D = _sound_by_name.get(audio_name)
+	var audio_node: AudioStreamPlayer2D = _sound_by_name.get(audio_name)
 	if audio_node != null:
-			audio_node.play()
+		audio_node.play()
 
 
 func _on_timer_timeout() -> void:

@@ -9,3 +9,6 @@ signal crab_lose(player_index)
 
 @warning_ignore("unused_signal")
 signal crab_floating(entered_state)
+
+@warning_ignore("unused_signal")
+signal screen_shake(amount)

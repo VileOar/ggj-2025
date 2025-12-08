@@ -1,6 +1,6 @@
 extends Node
 
-const MIN_VIGNETTE_RADIUS := 0.35
+const MIN_VIGNETTE_RADIUS := 0.3
 const MAX_VIGNETTE_RADIUS := 0.7
 
 @export var bubble_scene: PackedScene
@@ -64,13 +64,13 @@ func _on_crab_float(entered_state) -> void:
 		if _vignette_tween:
 			_vignette_tween.kill()
 
-		_vignette_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
-
 		var cached_radius = _current_vignette_radius
 		if _float_counter == 0 or _float_counter > 1:
+			_vignette_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 			_vignette_tween.tween_method(_set_vignette_radius, cached_radius, MAX_VIGNETTE_RADIUS, 1.0)
 		else:
 			if Global.winner_index < 0:
+				_vignette_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
 				_vignette_tween.tween_method(_set_vignette_radius, cached_radius, MIN_VIGNETTE_RADIUS, 0.5)
 
 
