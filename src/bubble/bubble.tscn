@@ -154,7 +154,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bubble/AnimProxy:scale")
+tracks/0/path = NodePath("SpriteHolder/AnimProxy:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -170,7 +170,7 @@ length = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("bubble/AnimProxy:scale")
+tracks/0/path = NodePath("SpriteHolder/AnimProxy:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -186,7 +186,7 @@ _data = {
 &"bounce": SubResource("Animation_5vkjb")
 }
 
-[node name="Bubble" type="RigidBody2D"]
+[node name="MainBubble" type="RigidBody2D"]
 z_index = 10
 collision_layer = 4
 collision_mask = 7
@@ -195,11 +195,11 @@ script = ExtResource("1_0kru2")
 BURST = ExtResource("2_5kfs1")
 BUBBLE_TRACE = ExtResource("3_imspv")
 
-[node name="bubble" type="Node2D" parent="."]
+[node name="SpriteHolder" type="Node2D" parent="."]
 
-[node name="AnimProxy" type="Node2D" parent="bubble"]
+[node name="AnimProxy" type="Node2D" parent="SpriteHolder"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="bubble/AnimProxy"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteHolder/AnimProxy"]
 material = ExtResource("3_4jc6o")
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_i5yeh")
@@ -215,22 +215,28 @@ libraries = {
 &"": SubResource("AnimationLibrary_vftgc")
 }
 
-[node name="Lifespan" type="Timer" parent="."]
-
 [node name="BounceStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("4_vgtea")
+volume_db = -4.0
+max_polyphony = 2
+panning_strength = 3.0
 bus = &"Bubbles"
 
 [node name="ThwopStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_ly8rw")
+volume_db = 3.0
+panning_strength = 3.0
 bus = &"Bubbles"
+
+[node name="LifespanTimer" type="Timer" parent="."]
+unique_name_in_owner = true
 
 [node name="TraceTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]
-[connection signal="timeout" from="TraceTimer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="LifespanTimer" to="." method="_on_lifespan_timer_timeout"]
+[connection signal="timeout" from="TraceTimer" to="." method="_on_trace_timer_timeout"]
