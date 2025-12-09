@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="Script" uid="uid://dv1cn6be77gnn" path="res://src/main_scenes/battle_stage.gd" id="1_vpqtk"]
-[ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/bubble.tscn" id="2_wjy34"]
+[ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/MainBubble.tscn" id="2_wjy34"]
 [ext_resource type="PackedScene" uid="uid://c5vpanpbtmx23" path="res://src/main_scenes/CameraController.tscn" id="3_cws71"]
 [ext_resource type="Texture2D" uid="uid://7qu3sgl4jsxs" path="res://assets/backgrounds/background_big.png" id="4_4addh"]
 [ext_resource type="Texture2D" uid="uid://batu2wgel67j8" path="res://assets/instructions.png" id="4_cws71"]

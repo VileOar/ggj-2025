@@ -36,12 +36,12 @@ animations = [{
 [node name="BubbleBurst" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_gg8m3")
 autoplay = "default"
-frame_progress = 0.209505
 script = ExtResource("2_xh7b3")
 
 [node name="PopStream" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_waum2")
 autoplay = true
+panning_strength = 3.0
 bus = &"Bubbles"
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

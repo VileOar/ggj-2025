@@ -24,8 +24,8 @@ const BUBBLE_IS_DANGEROUS_PERCENTAGE = 0.4
 const BOUNCE_SOUND_DELAY = 0.3
 const STRONG_BUBBLE_SCRN_SHAKE = 0.7
 
-@export var BURST: PackedScene
-@export var BUBBLE_TRACE: PackedScene
+@export var burst_scene: PackedScene
+@export var trace_scene: PackedScene
 
 ## Num of hits before bursting.
 var _health = 1
@@ -176,7 +176,7 @@ func _is_scale_difference_small(body) -> bool:
 
 func _burst_bubble() -> void:
 	_animation_player.stop()
-	var burst_scene_ref = BURST.instantiate()
+	var burst_scene_ref = burst_scene.instantiate()
 	burst_scene_ref.position = position
 	burst_scene_ref.scale = _bubble_sprite.scale
 	get_parent().add_child(burst_scene_ref)
@@ -184,7 +184,7 @@ func _burst_bubble() -> void:
 
 
 func _create_trace_effect() -> void:
-	var bubble_trace = BUBBLE_TRACE.instantiate()
+	var bubble_trace = trace_scene.instantiate()
 	bubble_trace.position = position
 	bubble_trace.scale = _bubble_sprite.scale * 0.5
 	get_parent().add_child(bubble_trace)
