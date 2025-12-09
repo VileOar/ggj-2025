@@ -157,7 +157,6 @@ libraries = {
 [node name="BounceStream" type="AudioStreamPlayer2D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_1haya")
-volume_db = -4.0
 max_polyphony = 2
 panning_strength = 3.0
 bus = &"Bubbles"
