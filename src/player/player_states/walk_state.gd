@@ -198,7 +198,13 @@ func spawn_bubble():
 	Global.bubble_spawner_node.spawn_bubble(pos, impulse, bubble_scale_percent)
 
 	fsm().play_audio("charge", false)
-	var lambda = func(): fsm().play_audio_one_shot("shoot")
+
+	var lambda
+	if bubble_scale_percent > Global.BUBBLE_IS_DANGEROUS_PERCENTAGE:
+		lambda = func(): fsm().play_audio_one_shot("shoot_big")
+	else:
+		lambda = func(): fsm().play_audio_one_shot("shoot")
+
 	AudioManager.play_with_delay(Global.Sounds.BUBBLE_SHOOT, 0.07, lambda)
 
 	_strength_percent = 0.0

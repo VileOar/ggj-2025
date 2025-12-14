@@ -3,9 +3,15 @@ extends Node
 ## Radius of the stage circle (px).
 const STAGE_RADIUS = 232
 
+## Bubble needs to be bigger than this percentage to be considered dangerous
+const BUBBLE_IS_DANGEROUS_PERCENTAGE = 0.4
+
 var _rng := RandomNumberGenerator.new()
 
 var winner_index = -1
+
+## Volume at which audio is considered inexistent
+const AUDIO_OFF_VOLUME := -80.0
 
 enum Sounds {
 	ACCEPT_UI,

@@ -2,6 +2,8 @@ extends Node
 
 const MIN_VIGNETTE_RADIUS := 0.3
 const MAX_VIGNETTE_RADIUS := 0.7
+const WIN_INTERVAL := 10
+const FIGHT_MUSIC_VOLUME := -13.5
 
 @export var bubble_scene: PackedScene
 
@@ -23,7 +25,7 @@ func _ready() -> void:
 	_pause_menu.visible = false
 	Global.bubble_spawner_node = self
 	Global.winner_index = -1
-	AudioManager.play_audio(Global.Sounds.FIGHT_MUSIC)
+	AudioManager.play_audio(Global.Sounds.FIGHT_MUSIC, FIGHT_MUSIC_VOLUME)
 	_ambiance_player.play()
 
 	Signals.crab_lose.connect(_on_crab_lose)
@@ -48,7 +50,7 @@ func spawn_bubble(position: Vector2, impulse: Vector2, scale_percent: float):
 
 
 func _on_crab_lose(player_index) -> void:
-	_win_interval.start(10)
+	_win_interval.start(WIN_INTERVAL)
 	Global.winner_index = player_index
 
 

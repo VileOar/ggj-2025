@@ -18,8 +18,6 @@ const COLLISION_VELOCITY_THRESHOLD = 100.0
 const COLLISION_SCALE_PERCENTAGE_THRESHOLD = 0.25
 ## On update size, the mass from the other bubble that is actually used depends on division by this value.
 const ON_JOIN_SCALE_DIVISION_FACTOR = 3
-## Bubble needs to be bigger than this percentage to be considered dangerous
-const BUBBLE_IS_DANGEROUS_PERCENTAGE = 0.4
 
 const BOUNCE_SOUND_DELAY = 0.3
 const STRONG_BUBBLE_SCRN_SHAKE = 0.7
@@ -73,7 +71,7 @@ func setup_bubble(impulse: Vector2, in_scale_percent: float) -> void:
 
 	_health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * _initial_scale_percent
 
-	if _initial_scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE:
+	if _initial_scale_percent > Global.BUBBLE_IS_DANGEROUS_PERCENTAGE:
 		Signals.screen_shake.emit(STRONG_BUBBLE_SCRN_SHAKE)
 
 	if _initial_scale_percent < LIFESPAN_PERCENT_THRESH:
@@ -162,7 +160,7 @@ func get_mass_percentage() -> float:
 
 
 func is_bubble_dangerous() -> bool:
-	return _initial_scale_percent > BUBBLE_IS_DANGEROUS_PERCENTAGE and _is_fast_collision()
+	return _initial_scale_percent > Global.BUBBLE_IS_DANGEROUS_PERCENTAGE and _is_fast_collision()
 
 
 func _is_fast_collision() -> bool:

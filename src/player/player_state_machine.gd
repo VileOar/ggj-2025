@@ -18,6 +18,7 @@ func _ready() -> void:
 	_sound_by_name["flail"] = %FlailStream
 	_sound_by_name["charge"] = %ChargeStream
 	_sound_by_name["shoot"] = %ShootStream
+	_sound_by_name["shoot_big"] = %ShootBigStream
 
 	_set_player_animation_sprite()
 	push_state("WalkState")

@@ -31,9 +31,12 @@ func _add_to_sound_player_dictionary(node_name, node):
 	_sound_player_by_name[node_name] = node
 
 
-func play_audio(audio_name):
+func play_audio(audio_name, volume = null):
 	var audio_node = _sound_player_by_name.get(audio_name)
 	if audio_node != null:
+		if volume != null:
+			audio_node.volume_db = volume
+
 		audio_node.play()
 
 
@@ -49,3 +52,16 @@ func play_with_delay(cooldown_to_use, delay: float, shoot_func):
 		shoot_func.call()
 		await get_tree().create_timer(delay).timeout
 		_sound_cooldowns[cooldown_to_use] = false
+
+
+func fade_audio(audio_name, fade_duration: float, target_volume: float):
+	var audio_node = _sound_player_by_name.get(audio_name)
+
+	if audio_node != null:
+		var audio_tween = create_tween()
+		audio_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		audio_tween.tween_property(audio_node, "volume_db", target_volume, fade_duration)
+
+		await audio_tween.finished
+		if audio_node.volume_db <= Global.AUDIO_OFF_VOLUME:
+			audio_node.stop()
