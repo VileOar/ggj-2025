@@ -78,16 +78,16 @@ func setup_bubble(impulse: Vector2, in_scale_percent: float) -> void:
 		_lifespan_timer.start(LIFESPAN_TIME)
 
 
-func _update_size(new_body_scale) -> void:
+func _update_size(col_body_ref) -> void:
 	# Gets percentage based on the current percentage of the the enemy
-	var percentage = max(0, new_body_scale.mass - MIN_MASS) / _total_percentage_mass
+	var percentage = max(0, col_body_ref.mass - MIN_MASS) / _total_percentage_mass
 
 	# Final percentage and mass calcs
 	percentage = percentage / ON_JOIN_SCALE_DIVISION_FACTOR
 	_new_mass = _self_rigidbody.mass + (MAX_MASS * percentage)
 
 	# Same but for scale
-	_new_scale = abs(_bubble_scale) + abs(new_body_scale._bubble_scale / ON_JOIN_SCALE_DIVISION_FACTOR)
+	_new_scale = abs(_bubble_scale) + abs(col_body_ref._bubble_scale / ON_JOIN_SCALE_DIVISION_FACTOR)
 
 	if _new_scale.x >= MAX_SCALE_LIMIT:
 		_new_scale = Vector2(MAX_SCALE_LIMIT, MAX_SCALE_LIMIT)
@@ -95,11 +95,9 @@ func _update_size(new_body_scale) -> void:
 	if _new_mass >= MAX_MASS:
 		_new_mass = MAX_MASS
 
-	# Health calc, resetting it from posssible previous decrements
-	_health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * percentage
-
-	if percentage < LIFESPAN_PERCENT_THRESH:
-		_lifespan_timer.start(LIFESPAN_TIME)
+	# Reset health and set it to half
+	_health = MIN_HEALTH + (MAX_HEALTH - MIN_HEALTH) * _initial_scale_percent
+	_health = _health / 2
 
 	_lerp_time_cache = 0
 	_is_bubble_ready_to_scale = true
@@ -154,6 +152,9 @@ func _on_body_entered(body: Node2D) -> void:
 		_bounce_stream.play()
 
 
+# --- || Utils || ---
+
+
 # Used by crab to calc stuff on collision
 func get_mass_percentage() -> float:
 	return _self_rigidbody.mass / MAX_MASS
@@ -186,6 +187,9 @@ func _create_trace_effect() -> void:
 	bubble_trace.position = position
 	bubble_trace.scale = _bubble_sprite.scale * 0.5
 	get_parent().add_child(bubble_trace)
+
+
+# --- || Timers || ---
 
 
 func _on_lifespan_timer_timeout() -> void:

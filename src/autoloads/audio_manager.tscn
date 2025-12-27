@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://djwk13ndrtnof"]
+[gd_scene load_steps=12 format=3 uid="uid://djwk13ndrtnof"]
 
 [ext_resource type="Script" uid="uid://dsptk602sergs" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
 [ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/accept_ui.wav" id="2_1dq0b"]
 [ext_resource type="AudioStream" uid="uid://pko3vu5mkndb" path="res://assets/audio/sfx/ui/hover_ui.wav" id="3_5qf1k"]
 [ext_resource type="AudioStream" uid="uid://crdocl5twh8ww" path="res://assets/audio/sfx/ui/cancel_ui.wav" id="4_6l2il"]
+[ext_resource type="AudioStream" uid="uid://bebd5v24piyd8" path="res://assets/audio/sfx/clash.wav" id="8_2fchl"]
 [ext_resource type="AudioStream" uid="uid://f10i6va7y17y" path="res://assets/audio/sfx/final_impact.wav" id="8_jemp3"]
 [ext_resource type="AudioStream" uid="uid://u3qdec6cdd50" path="res://assets/audio/music/end_jingle.wav" id="8_lmlq3"]
 [ext_resource type="AudioStream" uid="uid://bgk1xcia6h42y" path="res://assets/audio/music/after_round_loop.mp3" id="9_jemp3"]
@@ -52,6 +53,10 @@ volume_db = -13.5
 bus = &"Music"
 
 [node name="FightClash" type="AudioStreamPlayer" parent="Fight"]
+stream = ExtResource("8_2fchl")
+volume_db = -2.0
+max_polyphony = 3
+bus = &"SFX"
 
 [node name="FinalImpact" type="AudioStreamPlayer" parent="Fight"]
 stream = ExtResource("8_jemp3")

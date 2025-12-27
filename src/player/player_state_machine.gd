@@ -19,6 +19,7 @@ func _ready() -> void:
 	_sound_by_name["charge"] = %ChargeStream
 	_sound_by_name["shoot"] = %ShootStream
 	_sound_by_name["shoot_big"] = %ShootBigStream
+	_sound_by_name["sand_fall"] = %SandFallStream
 
 	_set_player_animation_sprite()
 	push_state("WalkState")

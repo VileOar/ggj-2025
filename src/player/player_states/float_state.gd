@@ -30,6 +30,7 @@ func _physics_process(_delta: float) -> void:
 	var close_to_ground = Global.STAGE_RADIUS - rigidbody().position.length() <= BORDER_DISTANCE_THRES
 
 	if can_change_state() and low_speed and close_to_ground:
+		fsm().play_audio_one_shot("sand_fall")
 		replace_state("WalkState")
 
 	# panic stray attack

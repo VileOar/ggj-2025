@@ -23,8 +23,6 @@ config/icon="uid://bn8iocu0hgiso"
 Signals="*res://src/autoloads/Signals.gd"
 Global="*res://src/autoloads/Global.gd"
 AudioManager="*res://src/autoloads/audio_manager.tscn"
-Utils="*res://src/utils/utils.gd"
-Constants="*res://src/utils/constants.gd"
 MpGameManager="*res://src/autoloads/MpGameManager.gd"
 
 [display]

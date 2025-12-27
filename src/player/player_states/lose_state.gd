@@ -7,7 +7,7 @@ const SPRITE_FADE_DURATION := 4.0
 func enter():
 	rigidbody().collision_layer = 0
 	fsm().play_anim("dead")
-	fsm().play_audio("dead", true)
+	fsm().play_audio("death", true)
 
 	AudioManager.play_audio(Global.Sounds.FINAL_IMPACT)
 	AudioManager.fade_audio(Global.Sounds.FIGHT_MUSIC, FIGHT_FADE_DURATION, Global.AUDIO_OFF_VOLUME)

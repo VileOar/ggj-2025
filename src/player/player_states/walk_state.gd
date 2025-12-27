@@ -58,6 +58,8 @@ func enter() -> void:
 func exit() -> void:
 	_meter_rb.hide()
 	_holding_button = false
+	_was_walking = false
+	_is_taunting = false
 	_strength_percent = 0
 
 	_stop_sounds()
@@ -67,7 +69,8 @@ func exit() -> void:
 func _process(delta: float) -> void:
 	if _holding_button:
 		_strength_percent += delta * _strength_inc_speed
-		if _strength_percent >= _max_strength_threshold:  # reached full percent and over a little (invisible to user)
+		# reached full percent and over a little (invisible to user)
+		if _strength_percent >= _max_strength_threshold:
 			spawn_bubble()
 
 
@@ -101,6 +104,7 @@ func _physics_process(delta: float) -> void:
 
 			if _was_walking == false:
 				fsm().play_audio("walk", true)
+
 			_was_walking = true
 		else:
 			fsm().play_anim("idle")
@@ -175,6 +179,10 @@ func on_collision(body: Node) -> void:
 			_bounce_off(-vec.normalized() * mag)
 		elif body is Player:
 			var mag = randf_range(MIN_BUBBLE_BOUNCE, MAX_BUBBLE_BOUNCE)
+
+			if body.controller.current_state().name == "WalkState":
+				AudioManager.play_audio(Global.Sounds.FIGHT_CLASH)
+
 			_bounce_off(-vec.normalized() * mag)
 
 
