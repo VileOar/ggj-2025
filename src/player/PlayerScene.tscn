@@ -16,7 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://bgi3pqkpp2noy" path="res://assets/audio/sfx/bubble_charge.wav" id="12_j4nyf"]
 [ext_resource type="AudioStream" uid="uid://cniff4iegi6ws" path="res://assets/audio/sfx/shoot_big.wav" id="12_v3qsk"]
 [ext_resource type="AudioStream" uid="uid://do2ejluyfhwqc" path="res://assets/audio/sfx/sand_fall.wav" id="15_gwovp"]
-[ext_resource type="AudioStream" uid="uid://d70yleovp4q1" path="res://assets/audio/sfx/crab_flailing.mp3" id="15_v3qsk"]
+[ext_resource type="AudioStream" uid="uid://crn6b6s3jdoro" path="res://assets/audio/sfx/crab_flailing.ogg" id="16_gwovp"]
 [ext_resource type="PackedScene" uid="uid://b1xlo7ww5q0qs" path="res://src/particles/SandParticles.tscn" id="16_kumbw"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyeeb"]
@@ -460,7 +460,8 @@ bus = &"SFX"
 
 [node name="FlailStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
 unique_name_in_owner = true
-stream = ExtResource("15_v3qsk")
+stream = ExtResource("16_gwovp")
+volume_db = -1.0
 panning_strength = 3.0
 bus = &"SFX"
 
