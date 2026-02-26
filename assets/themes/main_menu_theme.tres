@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://diy3brf8nv5pc"]
+[gd_resource type="Theme" format=3 uid="uid://diy3brf8nv5pc"]
 
 [ext_resource type="FontFile" uid="uid://d11v8uu25k3rf" path="res://assets/fonts/poppins_medium.ttf" id="1_khn6x"]
 [ext_resource type="Texture2D" uid="uid://3qc26for430m" path="res://assets/ui_elements/slider/slider_handle_texture_2d.tres" id="3_khn6x"]

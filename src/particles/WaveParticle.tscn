@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cxf5mmd3lb03h"]
+[gd_scene format=3 uid="uid://cxf5mmd3lb03h"]
 
 [ext_resource type="Texture2D" uid="uid://bc5siuq4gwgcy" path="res://assets/particles/waves_tile.png" id="1_0ud1q"]
 
@@ -15,13 +15,23 @@ colors = PackedColorArray(1, 1, 1, 0.917647, 1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gs6ai"]
 gradient = SubResource("Gradient_gd78i")
 
+[sub_resource type="Curve" id="Curve_0ud1q"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="Curve" id="Curve_wlos0"]
 _limits = [-0.7, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 0.199145), 0.0, 0.0, 0, 0, Vector2(0.43459, 1), 0.0, 0.0, 0, 0, Vector2(0.625277, 0.34182), -0.964807, -0.964807, 0, 0, Vector2(0.725055, 0.202768), -0.170646, -0.170646, 0, 0, Vector2(1, -0.7), -2.30337, 0.0, 0, 0]
 point_count = 5
 
+[sub_resource type="Curve" id="Curve_yjruo"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="CurveXYZTexture" id="CurveXYZTexture_soqpi"]
+curve_x = SubResource("Curve_0ud1q")
 curve_y = SubResource("Curve_wlos0")
+curve_z = SubResource("Curve_yjruo")
 
 [sub_resource type="Curve" id="Curve_0pw71"]
 _limits = [0.0, 1.4, 0.0, 1.0]
@@ -47,7 +57,7 @@ scale_curve = SubResource("CurveTexture_gd78i")
 color_initial_ramp = SubResource("GradientTexture1D_gs6ai")
 alpha_curve = SubResource("CurveTexture_0pw71")
 
-[node name="GPUParticles2D" type="GPUParticles2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" unique_id=798968518]
 amount = 2
 texture = ExtResource("1_0ud1q")
 lifetime = 6.0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bejtoe3wwm5hr"]
+[gd_scene format=3 uid="uid://bejtoe3wwm5hr"]
 
 [ext_resource type="Theme" uid="uid://diy3brf8nv5pc" path="res://assets/themes/main_menu_theme.tres" id="1_84nhx"]
 [ext_resource type="Script" uid="uid://unk5flav7ga4" path="res://src/menus/victory/victory_screen.gd" id="2_6dptg"]
@@ -47,7 +47,7 @@ _data = {
 &"RESET": SubResource("Animation_kll0p")
 }
 
-[node name="VictoryScreen" type="Control"]
+[node name="VictoryScreen" type="Control" unique_id=2083625793]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -57,7 +57,7 @@ grow_vertical = 2
 theme = ExtResource("1_84nhx")
 script = ExtResource("2_6dptg")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=923183724]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -66,16 +66,14 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_jah3o")
 
-[node name="WaveVFX" parent="." instance=ExtResource("4_84nhx")]
+[node name="WaveVFX" parent="." unique_id=1317038940 instance=ExtResource("4_84nhx")]
 position = Vector2(337, -74)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WaveVFX"]
-libraries = {
-&"": SubResource("AnimationLibrary_yaw7y")
-}
-autoplay = "HorizontalPan"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WaveVFX" unique_id=1036447]
+libraries/ = SubResource("AnimationLibrary_yaw7y")
+autoplay = &"HorizontalPan"
 
-[node name="WinnerSprite1" type="TextureRect" parent="."]
+[node name="WinnerSprite1" type="TextureRect" parent="." unique_id=811558880]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -93,7 +91,7 @@ scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(200, 200)
 texture = ExtResource("4_g2a80")
 
-[node name="WinnerSprite2" type="TextureRect" parent="."]
+[node name="WinnerSprite2" type="TextureRect" parent="." unique_id=671084288]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -112,7 +110,7 @@ scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(200, 200)
 texture = ExtResource("5_2hgmw")
 
-[node name="VButtonsContainer" type="VBoxContainer" parent="."]
+[node name="VButtonsContainer" type="VBoxContainer" parent="." unique_id=221888008]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -129,7 +127,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="VButtonsContainer"]
+[node name="TitleLabel" type="Label" parent="VButtonsContainer" unique_id=1135075781]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Winner!"
@@ -137,11 +135,11 @@ label_settings = ExtResource("6_smnqr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="VButtonsContainer"]
+[node name="HSeparator" type="HSeparator" parent="VButtonsContainer" unique_id=1000006589]
 layout_mode = 2
 theme_override_constants/separation = 245
 
-[node name="MenuButton" type="Button" parent="VButtonsContainer"]
+[node name="MenuButton" type="Button" parent="VButtonsContainer" unique_id=667357520]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
@@ -149,7 +147,7 @@ theme_override_font_sizes/font_size = 24
 text = "Back to Menu"
 icon_alignment = 1
 
-[node name="Ambiance" type="AudioStreamPlayer" parent="."]
+[node name="Ambiance" type="AudioStreamPlayer" parent="." unique_id=1292794975]
 unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("8_6dptg")

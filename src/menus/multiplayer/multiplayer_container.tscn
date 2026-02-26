@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://uj0yeucmjc52"]
+[gd_scene format=3 uid="uid://uj0yeucmjc52"]
 
 [ext_resource type="Script" uid="uid://djgmfmhnymodf" path="res://src/menus/multiplayer/ui_multiplayer_manager.gd" id="1_r5mld"]
 [ext_resource type="Script" uid="uid://cq3qlwc1mfupm" path="res://src/menus/multiplayer/multiplayer_manager.gd" id="2_565s2"]
@@ -9,9 +9,9 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_neeb3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_duykc"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_brn6b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_duykc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v3qsk"]
 atlas = ExtResource("5_tc75a")
@@ -303,29 +303,29 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="MultiplayerContainer" type="HBoxContainer"]
+[node name="MultiplayerContainer" type="HBoxContainer" unique_id=850932212]
 theme = ExtResource("4_r5mld")
 alignment = 1
 script = ExtResource("1_r5mld")
 
-[node name="MultiplayerLogic" type="Node2D" parent="."]
+[node name="MultiplayerLogic" type="Node2D" parent="." unique_id=1104310378]
 unique_name_in_owner = true
 script = ExtResource("2_565s2")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1282402686]
 layout_mode = 2
 
-[node name="VButtonsContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VButtonsContainer" type="VBoxContainer" parent="MarginContainer" unique_id=2081406538]
 layout_mode = 2
 theme_override_constants/separation = -6
 alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VButtonsContainer"]
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VButtonsContainer" unique_id=173653482]
 layout_mode = 2
 theme_override_constants/separation = 215
 theme_override_styles/separator = SubResource("StyleBoxEmpty_neeb3")
 
-[node name="HostingIndicator" type="Label" parent="MarginContainer/VButtonsContainer"]
+[node name="HostingIndicator" type="Label" parent="MarginContainer/VButtonsContainer" unique_id=2061219599]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("4_r5mld")
@@ -333,7 +333,7 @@ text = "Hosting..."
 horizontal_alignment = 1
 script = ExtResource("2_s2d3k")
 
-[node name="HostButton" type="Button" parent="MarginContainer/VButtonsContainer"]
+[node name="HostButton" type="Button" parent="MarginContainer/VButtonsContainer" unique_id=1948540885]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 64)
 layout_mode = 2
@@ -344,15 +344,15 @@ theme_type_variation = &"FlatButton"
 text = "Host"
 icon_alignment = 1
 
-[node name="HSeparator10" type="HSeparator" parent="MarginContainer/VButtonsContainer"]
+[node name="HSeparator10" type="HSeparator" parent="MarginContainer/VButtonsContainer" unique_id=829932673]
 layout_mode = 2
 theme_override_constants/separation = 12
 theme_override_styles/separator = SubResource("StyleBoxEmpty_neeb3")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VButtonsContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VButtonsContainer" unique_id=1769342475]
 layout_mode = 2
 
-[node name="IPTextEdit" type="LineEdit" parent="MarginContainer/VButtonsContainer/HBoxContainer"]
+[node name="IPTextEdit" type="LineEdit" parent="MarginContainer/VButtonsContainer/HBoxContainer" unique_id=1818829402]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(250, 54)
 layout_mode = 2
@@ -363,7 +363,7 @@ text = "127.0.0.1"
 placeholder_text = "127.0.0.1"
 alignment = 1
 
-[node name="PortTextEdit" type="LineEdit" parent="MarginContainer/VButtonsContainer/HBoxContainer"]
+[node name="PortTextEdit" type="LineEdit" parent="MarginContainer/VButtonsContainer/HBoxContainer" unique_id=492143540]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(150, 54)
 layout_mode = 2
@@ -374,12 +374,12 @@ text = "8910"
 placeholder_text = "25565"
 alignment = 1
 
-[node name="HSeparator11" type="HSeparator" parent="MarginContainer/VButtonsContainer"]
+[node name="HSeparator11" type="HSeparator" parent="MarginContainer/VButtonsContainer" unique_id=33638989]
 layout_mode = 2
 theme_override_constants/separation = 12
 theme_override_styles/separator = SubResource("StyleBoxEmpty_neeb3")
 
-[node name="JoinButton" type="Button" parent="MarginContainer/VButtonsContainer"]
+[node name="JoinButton" type="Button" parent="MarginContainer/VButtonsContainer" unique_id=1575916453]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(400, 64)
 layout_mode = 2
@@ -388,12 +388,12 @@ focus_next = NodePath("../BackButton")
 theme = ExtResource("4_r5mld")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_duykc")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_brn6b")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_duykc")
 text = "Join"
 icon_alignment = 1
 
-[node name="StartGameButton" type="Button" parent="MarginContainer/VButtonsContainer"]
+[node name="StartGameButton" type="Button" parent="MarginContainer/VButtonsContainer" unique_id=2066426000]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(400, 64)
@@ -403,18 +403,18 @@ focus_next = NodePath("../BackButton")
 theme = ExtResource("4_r5mld")
 theme_type_variation = &"FlatButton"
 theme_override_colors/font_pressed_color = Color(1, 0.882353, 0, 1)
-theme_override_styles/focus = SubResource("StyleBoxEmpty_duykc")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_brn6b")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_duykc")
 text = "Start Game"
 icon_alignment = 1
 
-[node name="BackButton" type="Button" parent="MarginContainer/VButtonsContainer"]
+[node name="BackButton" type="Button" parent="MarginContainer/VButtonsContainer" unique_id=2066790010]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Back"
 icon_alignment = 1
 
-[node name="Player1" type="AnimatedSprite2D" parent="MarginContainer/VButtonsContainer"]
+[node name="Player1" type="AnimatedSprite2D" parent="MarginContainer/VButtonsContainer" unique_id=1005968059]
 unique_name_in_owner = true
 visible = false
 position = Vector2(131, 615)
@@ -423,7 +423,7 @@ sprite_frames = SubResource("SpriteFrames_s2d3k")
 animation = &"walk"
 autoplay = "idle"
 
-[node name="Player2" type="AnimatedSprite2D" parent="MarginContainer/VButtonsContainer"]
+[node name="Player2" type="AnimatedSprite2D" parent="MarginContainer/VButtonsContainer" unique_id=1906819939]
 unique_name_in_owner = true
 visible = false
 position = Vector2(285, 615)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://comndc2e2crse"]
+[gd_scene format=3 uid="uid://comndc2e2crse"]
 
 [ext_resource type="Theme" uid="uid://diy3brf8nv5pc" path="res://assets/themes/main_menu_theme.tres" id="1_73x4t"]
 [ext_resource type="Script" uid="uid://bv8jd1iukbyy" path="res://src/menus/pause/pause_menu.gd" id="2_1bkq2"]
@@ -6,7 +6,7 @@
 [ext_resource type="LabelSettings" uid="uid://ddm5rpdkj0mi2" path="res://assets/themes/title_label_settings.tres" id="4_cu0tc"]
 [ext_resource type="PackedScene" uid="uid://wg26fathbma7" path="res://src/menus/options/OptionsMenu.tscn" id="5_cpyca"]
 
-[node name="PauseMenu" type="Control"]
+[node name="PauseMenu" type="Control" unique_id=896132348]
 process_mode = 3
 z_index = 11
 layout_mode = 3
@@ -18,7 +18,7 @@ grow_vertical = 2
 theme = ExtResource("1_73x4t")
 script = ExtResource("2_1bkq2")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=1852254877]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -27,7 +27,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_kycj1")
 
-[node name="PauseButtons" type="VBoxContainer" parent="."]
+[node name="PauseButtons" type="VBoxContainer" parent="." unique_id=860387435]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -46,38 +46,38 @@ size_flags_vertical = 4
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="PauseButtons"]
+[node name="TitleLabel" type="Label" parent="PauseButtons" unique_id=277739209]
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Pause"
 label_settings = ExtResource("4_cu0tc")
 
-[node name="HSeparator" type="HSeparator" parent="PauseButtons"]
+[node name="HSeparator" type="HSeparator" parent="PauseButtons" unique_id=385509655]
 layout_mode = 2
 theme_override_constants/separation = 25
 
-[node name="ContinueButton" type="Button" parent="PauseButtons"]
+[node name="ContinueButton" type="Button" parent="PauseButtons" unique_id=1159709656]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Continue"
 icon_alignment = 1
 
-[node name="OptionsButton" type="Button" parent="PauseButtons"]
+[node name="OptionsButton" type="Button" parent="PauseButtons" unique_id=933193871]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Options"
 icon_alignment = 1
 
-[node name="MenuButton" type="Button" parent="PauseButtons"]
+[node name="MenuButton" type="Button" parent="PauseButtons" unique_id=1685765368]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Menu"
 icon_alignment = 1
 
-[node name="OptionsMenu" parent="." instance=ExtResource("5_cpyca")]
+[node name="OptionsMenu" parent="." unique_id=1815833066 instance=ExtResource("5_cpyca")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

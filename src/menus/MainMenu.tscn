@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://gkb307hkjv4f"]
+[gd_scene format=3 uid="uid://gkb307hkjv4f"]
 
 [ext_resource type="Script" uid="uid://dvc7e0lyhw22r" path="res://src/menus/main_menu.gd" id="1_7kxne"]
 [ext_resource type="Texture2D" uid="uid://cxllaxx0ujnhh" path="res://assets/backgrounds/clean_background.png" id="2_f0376"]
@@ -316,7 +316,7 @@ _data = {
 &"RESET": SubResource("Animation_n67r5")
 }
 
-[node name="MainMenu" type="Control"]
+[node name="MainMenu" type="Control" unique_id=61785971]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -327,7 +327,7 @@ grow_vertical = 2
 theme = ExtResource("4_uiish")
 script = ExtResource("1_7kxne")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="." unique_id=421782738]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -337,26 +337,22 @@ grow_vertical = 2
 texture = ExtResource("2_f0376")
 metadata/_edit_lock_ = true
 
-[node name="WaveVFX" parent="." instance=ExtResource("16_uiish")]
+[node name="WaveVFX" parent="." unique_id=1399388955 instance=ExtResource("16_uiish")]
 position = Vector2(337, -74)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WaveVFX"]
-libraries = {
-&"": SubResource("AnimationLibrary_yaw7y")
-}
-autoplay = "HorizontalPan"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WaveVFX" unique_id=1319872052]
+libraries/ = SubResource("AnimationLibrary_yaw7y")
+autoplay = &"HorizontalPan"
 
-[node name="DecorativePlayer" parent="." instance=ExtResource("10_wh0ly")]
+[node name="DecorativePlayer" parent="." unique_id=149511124 instance=ExtResource("10_wh0ly")]
 position = Vector2(229, 480)
 scale = Vector2(0.75, 0.75)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DecorativePlayer"]
-libraries = {
-&"": SubResource("AnimationLibrary_nelm4")
-}
-autoplay = "Move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DecorativePlayer" unique_id=981868862]
+libraries/ = SubResource("AnimationLibrary_nelm4")
+autoplay = &"Move"
 
-[node name="DecorativePlayer2" parent="." instance=ExtResource("10_wh0ly")]
+[node name="DecorativePlayer2" parent="." unique_id=1981095285 instance=ExtResource("10_wh0ly")]
 position = Vector2(300, 480)
 rotation = -0.397935
 scale = Vector2(0.75, 0.75)
@@ -364,13 +360,11 @@ player_index = 1
 _current_animation = "idle"
 _emitter_left_state = true
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DecorativePlayer2"]
-libraries = {
-&"": SubResource("AnimationLibrary_taltk")
-}
-autoplay = "Move"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DecorativePlayer2" unique_id=1629176627]
+libraries/ = SubResource("AnimationLibrary_taltk")
+autoplay = &"Move"
 
-[node name="StartMenu" type="VBoxContainer" parent="."]
+[node name="StartMenu" type="VBoxContainer" parent="." unique_id=1944536779]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -388,23 +382,23 @@ size_flags_vertical = 4
 theme_override_constants/separation = 2
 alignment = 1
 
-[node name="TitleLabel" type="Label" parent="StartMenu"]
+[node name="TitleLabel" type="Label" parent="StartMenu" unique_id=1955440883]
 layout_mode = 2
 text = "Cut the Crab"
 label_settings = ExtResource("4_5bqtv")
 
-[node name="HSeparator" type="HSeparator" parent="StartMenu"]
+[node name="HSeparator" type="HSeparator" parent="StartMenu" unique_id=1616825133]
 layout_mode = 2
 theme_override_constants/separation = 55
 
-[node name="PlayButton" type="Button" parent="StartMenu"]
+[node name="PlayButton" type="Button" parent="StartMenu" unique_id=1303835519]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Play"
 icon_alignment = 1
 
-[node name="MultiplayerButton" type="Button" parent="StartMenu"]
+[node name="MultiplayerButton" type="Button" parent="StartMenu" unique_id=2144740722]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
@@ -414,39 +408,41 @@ theme_type_variation = &"FlatButton"
 text = "Multiplayer"
 icon_alignment = 1
 
-[node name="OptionsButton" type="Button" parent="StartMenu"]
+[node name="OptionsButton" type="Button" parent="StartMenu" unique_id=1505092021]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Options"
 icon_alignment = 1
 
-[node name="CreditsButton" type="Button" parent="StartMenu"]
+[node name="CreditsButton" type="Button" parent="StartMenu" unique_id=733902698]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Credits"
 icon_alignment = 1
 
-[node name="ExitButton" type="Button" parent="StartMenu"]
+[node name="ExitButton" type="Button" parent="StartMenu" unique_id=683816333]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Exit"
 icon_alignment = 1
 
-[node name="MultiplayerMenu" parent="." instance=ExtResource("7_3t5uj")]
+[node name="MultiplayerMenu" parent="." unique_id=713456952 instance=ExtResource("7_3t5uj")]
 visible = false
-layout_mode = 2
+layout_mode = 0
 offset_left = 16.0
 offset_top = 16.0
 offset_right = 1264.0
 offset_bottom = 704.0
 
-[node name="OptionsMenu" parent="." instance=ExtResource("15_s53xe")]
+[node name="OptionsMenu" parent="." unique_id=1692836645 instance=ExtResource("15_s53xe")]
 visible = false
-layout_mode = 2
+layout_mode = 0
 anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
 theme_override_constants/margin_left = 235
@@ -454,7 +450,7 @@ theme_override_constants/margin_top = 145
 theme_override_constants/margin_right = 170
 theme_override_constants/margin_bottom = 90
 
-[node name="CreditsMenu" parent="." instance=ExtResource("5_3hhuv")]
+[node name="CreditsMenu" parent="." unique_id=942659591 instance=ExtResource("5_3hhuv")]
 visible = false
 layout_mode = 1
 theme_override_constants/margin_left = 235

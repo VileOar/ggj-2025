@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://dcfxxbn8njgkj"]
+[gd_scene format=3 uid="uid://dcfxxbn8njgkj"]
 
 [ext_resource type="Script" uid="uid://bpcsf32w3iyq4" path="res://src/player/player_body.gd" id="1_q1xob"]
 [ext_resource type="Script" uid="uid://cdo0de78ewkmp" path="res://src/player/player_state_machine.gd" id="2_036d8"]
@@ -326,7 +326,7 @@ shader = ExtResource("6_pxgoi")
 shader_parameter/percent = 0.0
 shader_parameter/low_alpha = 0.3
 
-[node name="PlayerScene" type="RigidBody2D"]
+[node name="PlayerScene" type="RigidBody2D" unique_id=1023022669]
 collision_layer = 2
 collision_mask = 7
 mass = 15.0
@@ -336,63 +336,63 @@ contact_monitor = true
 max_contacts_reported = 5
 script = ExtResource("1_q1xob")
 
-[node name="Player1AnimatedSprite" type="AnimatedSprite2D" parent="."]
+[node name="Player1AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1384054502]
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_dcqy8")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Player2AnimatedSprite" type="AnimatedSprite2D" parent="."]
+[node name="Player2AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1171654355]
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_2laa3")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1731747782]
 shape = SubResource("RectangleShape2D_piu2a")
 
-[node name="Controller" type="Node" parent="."]
+[node name="Controller" type="Node" parent="." unique_id=338418811]
 unique_name_in_owner = true
 script = ExtResource("2_036d8")
 
-[node name="WalkState" type="Node" parent="Controller"]
+[node name="WalkState" type="Node" parent="Controller" unique_id=1858966943]
 script = ExtResource("3_3ry0h")
 
-[node name="FloatState" type="Node" parent="Controller"]
+[node name="FloatState" type="Node" parent="Controller" unique_id=1809959450]
 script = ExtResource("4_7k5ks")
 
-[node name="LoseState" type="Node" parent="Controller"]
+[node name="LoseState" type="Node" parent="Controller" unique_id=101086876]
 script = ExtResource("6_rps7g")
 
-[node name="StaticBodyPin" type="StaticBody2D" parent="."]
+[node name="StaticBodyPin" type="StaticBody2D" parent="." unique_id=452551151]
 position = Vector2(0, -13)
 collision_layer = 0
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyPin"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBodyPin" unique_id=1356397627]
 shape = SubResource("RectangleShape2D_k4l5k")
 
-[node name="PinJoint2D" type="PinJoint2D" parent="."]
+[node name="PinJoint2D" type="PinJoint2D" parent="." unique_id=1066336907]
 position = Vector2(7.40447e-05, -24)
 rotation = 1.5708
 node_a = NodePath("../StaticBodyPin")
 node_b = NodePath("../MeterRB")
 bias = 0.9
 
-[node name="MeterRB" type="RigidBody2D" parent="."]
+[node name="MeterRB" type="RigidBody2D" parent="." unique_id=313261639]
 unique_name_in_owner = true
 position = Vector2(0.000403925, -110)
 rotation = 1.5708
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MeterRB"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MeterRB" unique_id=1322296602]
 position = Vector2(38, 0)
 shape = SubResource("RectangleShape2D_32vq0")
 
-[node name="AimMeter" type="Sprite2D" parent="MeterRB"]
+[node name="AimMeter" type="Sprite2D" parent="MeterRB" unique_id=2016458847]
 unique_name_in_owner = true
 z_index = 1
 material = SubResource("ShaderMaterial_2cquc")
@@ -401,7 +401,7 @@ rotation = -3.14159
 texture = ExtResource("8_1xndb")
 offset = Vector2(192, 0)
 
-[node name="AimMeterBg" type="Sprite2D" parent="MeterRB/AimMeter"]
+[node name="AimMeterBg" type="Sprite2D" parent="MeterRB/AimMeter" unique_id=83404912]
 modulate = Color(0.7, 0.7, 0.7, 1)
 z_index = -1
 scale = Vector2(1, 1.00001)
@@ -409,9 +409,9 @@ skew = 0.0052948
 texture = ExtResource("8_1xndb")
 offset = Vector2(192, 0)
 
-[node name="SoundStreams" type="Node" parent="."]
+[node name="SoundStreams" type="Node" parent="." unique_id=628678453]
 
-[node name="WalkStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="WalkStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=241814481]
 unique_name_in_owner = true
 stream = ExtResource("7_lj2gh")
 max_polyphony = 2
@@ -419,7 +419,7 @@ panning_strength = 3.0
 bus = &"SFX"
 parameters/looping = true
 
-[node name="ShootStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="ShootStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=1201755514]
 unique_name_in_owner = true
 position = Vector2(0, -1)
 stream = ExtResource("11_2laa3")
@@ -427,7 +427,7 @@ max_polyphony = 10
 panning_strength = 3.0
 bus = &"SFX"
 
-[node name="ShootBigStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="ShootBigStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=819777183]
 unique_name_in_owner = true
 position = Vector2(0, -1)
 stream = ExtResource("12_v3qsk")
@@ -435,7 +435,7 @@ max_polyphony = 4
 panning_strength = 3.0
 bus = &"SFX"
 
-[node name="TauntStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="TauntStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=602465042]
 unique_name_in_owner = true
 stream = ExtResource("9_0mpk8")
 volume_db = 6.0
@@ -443,14 +443,14 @@ max_polyphony = 2
 panning_strength = 3.0
 bus = &"SFX"
 
-[node name="DeathStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="DeathStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=1754728312]
 unique_name_in_owner = true
 stream = ExtResource("9_i7ama")
 max_polyphony = 2
 panning_strength = 3.0
 bus = &"SFX"
 
-[node name="SandFallStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="SandFallStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=1894887445]
 unique_name_in_owner = true
 stream = ExtResource("15_gwovp")
 volume_db = 2.0
@@ -458,28 +458,28 @@ max_polyphony = 2
 panning_strength = 3.0
 bus = &"SFX"
 
-[node name="FlailStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="FlailStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=1252139851]
 unique_name_in_owner = true
 stream = ExtResource("16_gwovp")
 volume_db = -1.0
 panning_strength = 3.0
 bus = &"SFX"
 
-[node name="ChargeStream" type="AudioStreamPlayer2D" parent="SoundStreams"]
+[node name="ChargeStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=704163741]
 unique_name_in_owner = true
 stream = ExtResource("12_j4nyf")
 max_polyphony = 4
 panning_strength = 3.0
 bus = &"SFX"
 
-[node name="SandEmitterLeft" parent="." instance=ExtResource("16_kumbw")]
+[node name="SandEmitterLeft" parent="." unique_id=507488231 instance=ExtResource("16_kumbw")]
 unique_name_in_owner = true
 position = Vector2(-57, 19)
 rotation = -0.637839
 scale = Vector2(-1, 1)
 emitting = false
 
-[node name="SandEmitterRight" parent="." instance=ExtResource("16_kumbw")]
+[node name="SandEmitterRight" parent="." unique_id=871399566 instance=ExtResource("16_kumbw")]
 unique_name_in_owner = true
 position = Vector2(55, 19)
 rotation = 0.637045

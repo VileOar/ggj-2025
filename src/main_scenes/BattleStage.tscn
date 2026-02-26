@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dbi430hooexen"]
+[gd_scene format=3 uid="uid://dbi430hooexen"]
 
 [ext_resource type="Script" uid="uid://dv1cn6be77gnn" path="res://src/main_scenes/battle_stage.gd" id="1_vpqtk"]
 [ext_resource type="PackedScene" uid="uid://ck0kxlxtpq7wk" path="res://src/bubble/MainBubble.tscn" id="2_wjy34"]
@@ -62,45 +62,45 @@ _data = {
 &"RESET": SubResource("Animation_cws71")
 }
 
-[node name="BattleStage" type="Node"]
+[node name="BattleStage" type="Node" unique_id=711773721]
 script = ExtResource("1_vpqtk")
 bubble_scene = ExtResource("2_wjy34")
 
-[node name="CameraController" parent="." instance=ExtResource("3_cws71")]
+[node name="CameraController" parent="." unique_id=736209925 instance=ExtResource("3_cws71")]
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="." unique_id=199725734]
 texture = ExtResource("4_4addh")
 
-[node name="Instructions" type="Sprite2D" parent="."]
+[node name="Instructions" type="Sprite2D" parent="." unique_id=659186397]
 texture = ExtResource("4_cws71")
 
-[node name="StageHolder" type="Node2D" parent="."]
+[node name="StageHolder" type="Node2D" parent="." unique_id=1404536807]
 position = Vector2(0, 32)
 metadata/_edit_group_ = true
 
-[node name="Player1" parent="StageHolder" instance=ExtResource("6_8325l")]
+[node name="Player1" parent="StageHolder" unique_id=39109582 instance=ExtResource("6_8325l")]
 position = Vector2(-232, 0)
 player_index = 1
 metadata/_edit_group_ = true
 
-[node name="Player2" parent="StageHolder" instance=ExtResource("6_8325l")]
+[node name="Player2" parent="StageHolder" unique_id=2089415615 instance=ExtResource("6_8325l")]
 position = Vector2(232, 0)
 player_index = 2
 metadata/_edit_group_ = true
 
-[node name="BubbleHolder" type="Node2D" parent="StageHolder"]
+[node name="BubbleHolder" type="Node2D" parent="StageHolder" unique_id=1424590833]
 unique_name_in_owner = true
 
-[node name="walls" type="StaticBody2D" parent="StageHolder"]
+[node name="walls" type="StaticBody2D" parent="StageHolder" unique_id=458257134]
 visible = false
 collision_mask = 0
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StageHolder/walls"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StageHolder/walls" unique_id=1755640762]
 position = Vector2(7.82013e-05, -8.15392e-05)
 scale = Vector2(2.43164, 2.43164)
 polygon = PackedVector2Array(-170.667, -170.667, -170.667, -0.666664, -112, -0.666664, -110.667, -14, -109, -24, -105, -37.7, -95, -58.6, -88, -68.5, -84, -73.6, -73.3333, -84, -68.6667, -88, -64, -91.4, -58, -95.4, -42, -103.2, -23, -109.1, -10, -111, 10.7, -111, 23.8, -109, 34.8, -106, 58.5, -95, 68.5, -88, 73.6, -84, 83.6, -73, 91.4, -64, 95.4, -58, 103.2, -42, 105.2, -37, 111, -10.8, 111, 11, 108, 27.8, 103, 42.6, 95, 58.5, 88, 68.5, 84, 73.5, 73, 83.6, 64, 91.4, 58, 95.3, 37, 105.1, 10.8, 111, -10.8, 111, -27.8, 108, -42.7, 103, -58.5, 95, -68.5, 88, -73.6, 84, -83.6, 73, -87.6, 68, -91.4, 64, -95.4, 58, -105.2, 37, -111, 12.8, -112, 0, -170.667, 0, -170.667, 170.667, 170.667, 170.667, 170.667, -170.667)
 
-[node name="PlayerGravity" type="Area2D" parent="StageHolder"]
+[node name="PlayerGravity" type="Area2D" parent="StageHolder" unique_id=218400884]
 visible = false
 collision_layer = 0
 collision_mask = 2
@@ -108,10 +108,10 @@ gravity_space_override = 3
 gravity_point = true
 gravity = -50.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/PlayerGravity"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/PlayerGravity" unique_id=871095865]
 shape = SubResource("RectangleShape2D_p8jwm")
 
-[node name="MeterGravity" type="Area2D" parent="StageHolder"]
+[node name="MeterGravity" type="Area2D" parent="StageHolder" unique_id=1891351030]
 visible = false
 collision_layer = 8
 collision_mask = 8
@@ -123,10 +123,10 @@ gravity = 300.0
 angular_damp_space_override = 1
 angular_damp = 10.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/MeterGravity"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageHolder/MeterGravity" unique_id=1877725917]
 shape = SubResource("CircleShape2D_8h1qn")
 
-[node name="Vignette" type="ColorRect" parent="."]
+[node name="Vignette" type="ColorRect" parent="." unique_id=1400685928]
 unique_name_in_owner = true
 modulate = Color(0.0432, 0.0432, 0.08, 1)
 z_index = 1
@@ -144,7 +144,7 @@ scale = Vector2(1.15, 1.15)
 pivot_offset = Vector2(640, 360)
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseMenu" parent="." instance=ExtResource("7_6271r")]
+[node name="PauseMenu" parent="." unique_id=369536655 instance=ExtResource("7_6271r")]
 unique_name_in_owner = true
 visible = false
 offset_left = -640.0
@@ -152,22 +152,20 @@ offset_top = -360.0
 offset_right = -640.0
 offset_bottom = -360.0
 
-[node name="WavesVFX" parent="." instance=ExtResource("8_wjy34")]
+[node name="WavesVFX" parent="." unique_id=598004706 instance=ExtResource("8_wjy34")]
 process_mode = 3
 z_index = 11
 position = Vector2(-250, -470)
 visibility_rect = Rect2(-100, -100, 200, 300)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="WavesVFX"]
-libraries = {
-&"": SubResource("AnimationLibrary_4addh")
-}
-autoplay = "Pan"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WavesVFX" unique_id=1038990022]
+libraries/ = SubResource("AnimationLibrary_4addh")
+autoplay = &"Pan"
 
-[node name="WinInterval" type="Timer" parent="."]
+[node name="WinInterval" type="Timer" parent="." unique_id=451403809]
 unique_name_in_owner = true
 
-[node name="FightAmbiance" type="AudioStreamPlayer" parent="."]
+[node name="FightAmbiance" type="AudioStreamPlayer" parent="." unique_id=2032226866]
 unique_name_in_owner = true
 process_mode = 3
 stream = ExtResource("9_gctss")

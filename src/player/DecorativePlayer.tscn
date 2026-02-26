@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://dspiqnhvl2syt"]
+[gd_scene format=3 uid="uid://dspiqnhvl2syt"]
 
 [ext_resource type="Script" uid="uid://d4npd7yowux4m" path="res://src/player/decorative_player.gd" id="1_ylcfc"]
 [ext_resource type="Texture2D" uid="uid://d22cuujr72oow" path="res://assets/player/crab_drop_shadow.png" id="2_h7av5"]
@@ -300,48 +300,48 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylcfc"]
 size = Vector2(65, 65)
 
-[node name="DecorativePlayer" type="Node2D"]
+[node name="DecorativePlayer" type="Node2D" unique_id=1665253018]
 script = ExtResource("1_ylcfc")
 
-[node name="Shadow" type="Sprite2D" parent="."]
+[node name="Shadow" type="Sprite2D" parent="." unique_id=193319672]
 modulate = Color(0.12, 0.0792, 0.048, 0.447059)
 position = Vector2(0, 19)
 texture = ExtResource("2_h7av5")
 
-[node name="Player1AnimatedSprite" type="AnimatedSprite2D" parent="."]
+[node name="Player1AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=809258317]
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_blba5")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="Player2AnimatedSprite" type="AnimatedSprite2D" parent="."]
+[node name="Player2AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=1988468959]
 unique_name_in_owner = true
 scale = Vector2(0.4, 0.4)
 sprite_frames = SubResource("SpriteFrames_hayr4")
 animation = &"idle"
 autoplay = "idle"
 
-[node name="SandEmitterLeft" parent="." instance=ExtResource("16_edesr")]
+[node name="SandEmitterLeft" parent="." unique_id=1312898527 instance=ExtResource("16_edesr")]
 unique_name_in_owner = true
 position = Vector2(-57, 19)
 rotation = 2.50375
 scale = Vector2(1, -1)
 emitting = false
 
-[node name="SandEmitterRight" parent="." instance=ExtResource("16_edesr")]
+[node name="SandEmitterRight" parent="." unique_id=309385532 instance=ExtResource("16_edesr")]
 unique_name_in_owner = true
 position = Vector2(55, 19)
 rotation = 0.637045
 emitting = false
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=760185659]
 
-[node name="ClickableCollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="ClickableCollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2135410786]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_ylcfc")
 
-[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="." unique_id=784417055]
 unique_name_in_owner = true
 stream = ExtResource("6_hh6al")
 max_polyphony = 2

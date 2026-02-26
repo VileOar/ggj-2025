@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://djwk13ndrtnof"]
+[gd_scene format=3 uid="uid://djwk13ndrtnof"]
 
 [ext_resource type="Script" uid="uid://dsptk602sergs" path="res://src/autoloads/AudioManager.gd" id="1_asmxu"]
 [ext_resource type="AudioStream" uid="uid://dgxfealb1hbq5" path="res://assets/audio/sfx/ui/accept_ui.wav" id="2_1dq0b"]
@@ -12,65 +12,65 @@
 [ext_resource type="AudioStream" uid="uid://bxf2nf2yxxbxb" path="res://assets/audio/music/ambiance.mp3" id="16_1ktcv"]
 [ext_resource type="AudioStream" uid="uid://j3pl3wiefrhb" path="res://assets/audio/music/fight_loop.mp3" id="18_re1ed"]
 
-[node name="AudioMng" type="Node"]
+[node name="AudioMng" type="Node" unique_id=74663065]
 script = ExtResource("1_asmxu")
 
-[node name="UI" type="Node" parent="."]
+[node name="UI" type="Node" parent="." unique_id=267318717]
 
-[node name="ButtonAccept" type="AudioStreamPlayer" parent="UI"]
+[node name="ButtonAccept" type="AudioStreamPlayer" parent="UI" unique_id=1928478551]
 stream = ExtResource("2_1dq0b")
 max_polyphony = 3
 bus = &"UI"
 
-[node name="ButtonHover" type="AudioStreamPlayer" parent="UI"]
+[node name="ButtonHover" type="AudioStreamPlayer" parent="UI" unique_id=1486897652]
 stream = ExtResource("3_5qf1k")
 max_polyphony = 7
 bus = &"UI"
 
-[node name="ButtonCancel" type="AudioStreamPlayer" parent="UI"]
+[node name="ButtonCancel" type="AudioStreamPlayer" parent="UI" unique_id=329857559]
 stream = ExtResource("4_6l2il")
 volume_db = 4.0
 max_polyphony = 3
 bus = &"UI"
 
-[node name="MainMenu" type="Node" parent="."]
+[node name="MainMenu" type="Node" parent="." unique_id=2013809807]
 
-[node name="MainMenuMusic" type="AudioStreamPlayer" parent="MainMenu"]
+[node name="MainMenuMusic" type="AudioStreamPlayer" parent="MainMenu" unique_id=1223353062]
 stream = ExtResource("15_jtyui")
 volume_db = -10.0
 bus = &"Music"
 
-[node name="MainMenuAmbience" type="AudioStreamPlayer" parent="MainMenu"]
+[node name="MainMenuAmbience" type="AudioStreamPlayer" parent="MainMenu" unique_id=576540142]
 stream = ExtResource("16_1ktcv")
 volume_db = -27.0
 bus = &"Music"
 
-[node name="Fight" type="Node" parent="."]
+[node name="Fight" type="Node" parent="." unique_id=1759417569]
 
-[node name="FightMusic" type="AudioStreamPlayer" parent="Fight"]
+[node name="FightMusic" type="AudioStreamPlayer" parent="Fight" unique_id=1908007693]
 stream = ExtResource("18_re1ed")
 volume_db = -13.5
 bus = &"Music"
 
-[node name="FightClash" type="AudioStreamPlayer" parent="Fight"]
+[node name="FightClash" type="AudioStreamPlayer" parent="Fight" unique_id=496827424]
 stream = ExtResource("8_2fchl")
 volume_db = -2.0
 max_polyphony = 3
 bus = &"SFX"
 
-[node name="FinalImpact" type="AudioStreamPlayer" parent="Fight"]
+[node name="FinalImpact" type="AudioStreamPlayer" parent="Fight" unique_id=1750591395]
 stream = ExtResource("8_jemp3")
 volume_db = -8.0
 bus = &"SFX"
 
-[node name="EndMenu" type="Node" parent="."]
+[node name="EndMenu" type="Node" parent="." unique_id=974194029]
 
-[node name="EndJingle" type="AudioStreamPlayer" parent="EndMenu"]
+[node name="EndJingle" type="AudioStreamPlayer" parent="EndMenu" unique_id=263181963]
 stream = ExtResource("8_lmlq3")
 volume_db = -8.0
 bus = &"Music"
 
-[node name="EndMusic" type="AudioStreamPlayer" parent="EndMenu"]
+[node name="EndMusic" type="AudioStreamPlayer" parent="EndMenu" unique_id=1935894218]
 stream = ExtResource("9_jemp3")
 volume_db = -10.0
 bus = &"Music"

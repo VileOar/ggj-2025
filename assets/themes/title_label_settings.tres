@@ -1,4 +1,4 @@
-[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://ddm5rpdkj0mi2"]
+[gd_resource type="LabelSettings" format=3 uid="uid://ddm5rpdkj0mi2"]
 
 [ext_resource type="FontVariation" uid="uid://d2syjynrxdgtm" path="res://assets/fonts/shizuru_spacing.tres" id="1_7aeq1"]
 

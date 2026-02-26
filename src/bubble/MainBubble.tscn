@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ck0kxlxtpq7wk"]
+[gd_scene format=3 uid="uid://ck0kxlxtpq7wk"]
 
 [ext_resource type="Script" uid="uid://ceyt2dpuwlta4" path="res://src/bubble/main_bubble.gd" id="1_k5tnb"]
 [ext_resource type="PackedScene" uid="uid://cmdducucqdn0e" path="res://src/bubble/BubbleBurst.tscn" id="2_uphgt"]
@@ -128,7 +128,7 @@ _data = {
 &"bounce": SubResource("Animation_5vkjb")
 }
 
-[node name="MainBubble" type="RigidBody2D"]
+[node name="MainBubble" type="RigidBody2D" unique_id=58333182]
 z_index = 10
 collision_layer = 4
 collision_mask = 7
@@ -137,24 +137,22 @@ script = ExtResource("1_k5tnb")
 burst_scene = ExtResource("2_uphgt")
 trace_scene = ExtResource("3_ltuak")
 
-[node name="SpriteHolder" type="Node2D" parent="."]
+[node name="SpriteHolder" type="Node2D" parent="." unique_id=2046665283]
 
-[node name="AnimProxy" type="Node2D" parent="SpriteHolder"]
+[node name="AnimProxy" type="Node2D" parent="SpriteHolder" unique_id=594066388]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteHolder/AnimProxy"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="SpriteHolder/AnimProxy" unique_id=117399317]
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_i5yeh")
 autoplay = "default"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=585722229]
 shape = SubResource("CircleShape2D_hsqk6")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_vftgc")
-}
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2007155467]
+libraries/ = SubResource("AnimationLibrary_vftgc")
 
-[node name="BounceStream" type="AudioStreamPlayer2D" parent="."]
+[node name="BounceStream" type="AudioStreamPlayer2D" parent="." unique_id=120015794]
 unique_name_in_owner = true
 stream = ExtResource("6_1haya")
 volume_db = -2.0
@@ -162,17 +160,17 @@ max_polyphony = 3
 panning_strength = 3.0
 bus = &"Bubbles"
 
-[node name="ThwopStream" type="AudioStreamPlayer2D" parent="."]
+[node name="ThwopStream" type="AudioStreamPlayer2D" parent="." unique_id=1886410357]
 unique_name_in_owner = true
 stream = ExtResource("7_76job")
 volume_db = 3.0
 panning_strength = 3.0
 bus = &"Bubbles"
 
-[node name="LifespanTimer" type="Timer" parent="."]
+[node name="LifespanTimer" type="Timer" parent="." unique_id=210506161]
 unique_name_in_owner = true
 
-[node name="TraceTimer" type="Timer" parent="."]
+[node name="TraceTimer" type="Timer" parent="." unique_id=935964477]
 wait_time = 0.1
 autostart = true
 
