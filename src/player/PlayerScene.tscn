@@ -414,6 +414,7 @@ offset = Vector2(192, 0)
 [node name="WalkStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=241814481]
 unique_name_in_owner = true
 stream = ExtResource("7_lj2gh")
+volume_db = -4.0
 max_polyphony = 2
 panning_strength = 3.0
 bus = &"SFX"
@@ -461,13 +462,14 @@ bus = &"SFX"
 [node name="FlailStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=1252139851]
 unique_name_in_owner = true
 stream = ExtResource("16_gwovp")
-volume_db = -1.0
+volume_db = -9.0
 panning_strength = 3.0
 bus = &"SFX"
 
 [node name="ChargeStream" type="AudioStreamPlayer2D" parent="SoundStreams" unique_id=704163741]
 unique_name_in_owner = true
 stream = ExtResource("12_j4nyf")
+volume_db = -2.0
 max_polyphony = 4
 panning_strength = 3.0
 bus = &"SFX"

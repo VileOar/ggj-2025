@@ -54,13 +54,14 @@ bus = &"Music"
 
 [node name="FightClash" type="AudioStreamPlayer" parent="Fight" unique_id=496827424]
 stream = ExtResource("8_2fchl")
-volume_db = -2.0
+volume_db = -12.0
 max_polyphony = 3
 bus = &"SFX"
 
 [node name="FinalImpact" type="AudioStreamPlayer" parent="Fight" unique_id=1750591395]
 stream = ExtResource("8_jemp3")
-volume_db = -8.0
+volume_db = -10.0
+pitch_scale = 1.1
 bus = &"SFX"
 
 [node name="EndMenu" type="Node" parent="." unique_id=974194029]
