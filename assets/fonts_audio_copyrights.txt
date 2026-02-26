@@ -1,0 +1,17 @@
+Fonts
+
+Poppins - Designed by Indian Type Foundry, Jonny Pinhorn, Ninad Kale (Google Fonts)
+Shizuru - Designed by Shibuya Font (Google Fonts)
+
+
+Audio SFX
+UI Accept, decline, Hover SFX, Shoot SFX, Shoot Big SFX - Humble Bundle Audio Odyssey (royalty-free license)
+Fight Clash SFX, FinalImpact SFX - Humble Bundle Audio Odyssey (royalty-free license)
+Ambience Beach - by Carlvus from freesound.org (https://freesound.org/people/Carlvus/sounds/182617/)
+Charge Stream - Personal Edit from bubbles and Charge Up
+Walk SFX, Sand Walk SFX, Taunt SFX , Death SFX - Sound effects sourced from a royalty-free audio library
+
+Audio Music
+Main Menu Music - from fesliyanstudios - (https://www.fesliyanstudios.com/royalty-free-music/)
+Fight Game Music - from fesliyanstudios - (https://www.fesliyanstudios.com/royalty-free-music/)
+End Game Music, End Game Jingle - Humble Bundle Game Audio Collection (royalty-free license)
