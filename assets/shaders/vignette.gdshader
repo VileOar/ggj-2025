@@ -8,7 +8,7 @@ uniform float MULTIPLIER : hint_range(0.0, 1.0) = 0.1;
 
 void fragment() {
 	vec2 uv = UV;
-	vec2 deriv = fwidthFine(uv); // not available with compatibility renderer
+	vec2 deriv = fwidth(uv); // not available with compatibility renderer
 	float aspect_ratio = deriv.y / deriv.x;
 
 	float dist = distance(vec2(UV.x , UV.y* aspect_ratio * STRETCH), vec2(0.5 , 0.5  * aspect_ratio * STRETCH));
