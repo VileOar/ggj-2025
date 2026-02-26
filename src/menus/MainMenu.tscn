@@ -406,6 +406,7 @@ icon_alignment = 1
 
 [node name="MultiplayerButton" type="Button" parent="StartMenu"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 theme = ExtResource("4_uiish")
